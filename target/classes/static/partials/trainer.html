@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row" >
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Trianer</div>
+            </h2>
+        </div>
+        <div class="col-md-2 col-sm-5 col-xs-5">
+            <input id="textinput" name="textinput" type="text"
+                   placeholder="Search For Designation" ng-model="searchText" class="form-control input-md"
+                   ng-keyup="$event.keyCode == 13 ? getTrainerPaginatedList(searchText) : null"/>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel">
+                    <div class="panel-body" style="height: 65px;">
+                        <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                            <form class="form-horizontal ng-pristine ng-valid">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-lg-7 col-md-9 col-sm-9">
+
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <button type="button" class="btn btn-default hi_btn"  ng-click="addtrainer()">Add</button>
+                                </div>
+
+                            <div class="col-sm-3">
+                                <button type="submit" id="colButn" class="btn btn-default" data-toggle="modal"
+                                        ng-model="inactiveStatus" data-target=".print-me"
+                                        ng-click="inactive()">{{ButtonStatus}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="fixed-table-container">
+                        <div class="table_wrap fixed-table-container-inner">
+                            <div class="header-background"> </div>
+                            <table data-toggle="table" data-cache="false" data-height="299" style="margin-bottom: 0;" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                                <thead>
+                                <th data-field="cntryname"><div class="th-inner">Name</div></th>
+                                <th data-field="cntryname"><div class="th-inner">Code</div></th>
+                                <th data-field="cntryname"><div class="th-inner">Type</div></th>
+                                <th data-field="cntryname"><div class="th-inner">Charges</div></th>
+                                <th data-field="cntryname"><div class="th-inner">Phone</div></th>
+                                <th data-field="cntryname"><div class="th-inner">Email</div></th>
+                                <th data-field="cntryname"><div class="th-inner">Remarks</div></th>
+                                <th data-field="cntryname"><div class="th-inner">Status</div></th>
+                                <th data-field="cntryname"><div class="th-inner">Actions</div></th>
+
+                                </tr></thead>
+                                <tbody id="parentTable">
+                                <tr ng-repeat="trainer in trainerList| filter:searchText">
+                                    <td>{{trainer.name}}</td>
+                                    <td>{{trainer.code}}</td>
+                                    <td>{{trainer.type}}</td>
+                                    <td>{{trainer.charges}}</td>
+                                    <td>{{trainer.phone}}</td>
+                                    <td>{{trainer.email}}</td>
+                                    <td>{{trainer.remarks}}</td>
+                                    <td>{{trainer.status}}</td>
+                                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editTrainer(trainer)">Edit</button>
+                                    <button type="button" class="btn btn-primary hi_btn"  ng-click="deleteTrainer(trainer)">Delete</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12 pagination_">
+                        <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"
+                                ng-disabled="first"
+                                ng-click="getTrainerPaginatedList('firstPage')" ng-model="first">First
+                        </button>
+                        <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"
+                                ng-disabled="prev"
+                                ng-click="getTrainerPaginatedList('prevPage')" ng-model="prev">Prev
+                        </button>
+                        <button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"
+                                ng-click="getTrainerPaginatedList('nextPage')" value="next" ng-class="{'diabled-class': next}"
+                                ng-model="next">Next
+                        </button>
+                        <button type="button" class="btn btn-default hi_btn"
+                                ng-click="getTrainerPaginatedList('lastPage')" ng-class="{'diabled-class': last}" ng-disabled="last"
+                                ng-model="last">Last
+                        </button>
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
+
+                <div class="modal fade addCustomer" tabindex="-1" id="add_user_trainer" role="dialog" data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Add Trainer</h4>
+
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="mail">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" >Branch</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="branchid" name="branchid" ng-model="branchid" ng-options="branch.branchesId as
+											branch.branchName for branch in bran" class="form-control input-md" >
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Name</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input id="trainerName" name="trainerName"
+                                                                   type="text" placeholder="Trainer Name"
+                                                                   ng-model="name" alpha-with-space
+                                                                   class="form-control input-md" autocomplete="off" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Code</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input id="code" name="code"
+                                                                   type="text" placeholder="Code"
+                                                                   ng-model="code" alphanum-with-out-space
+                                                                   class="form-control input-md" autocomplete="off" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">Type </label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="type" name="type"
+                                                                    ng-model="type"  class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                                <option value="perhour">PerHour</option>
+                                                                <option value="halfday">Half Day</option>
+                                                                <option value="day">Day</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Charges</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input id="charges" name="charges"
+                                                                   type="text" placeholder="charges" maxlength="8"
+                                                                   ng-model="charges" num-with-out-space
+                                                                   class="form-control input-md" autocomplete="off" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Phone</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input id="phone" name="phone"
+                                                                   type="text" placeholder="phone" maxlength="13"
+                                                                   ng-model="phone" num-with-out-space
+                                                                   class="form-control input-md" autocomplete="off" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label"
+                                                               for="">Email </label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input id="email" name="email"
+                                                                   type="email" placeholder="Email" maxlength="30"
+                                                                   ng-model="email" ng-pattern="word"
+                                                                   class="form-control input-md">
+                                                            <p class="error" ng-show="mail.email.$error.pattern">Enter Valid MailID</p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Remarks</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input id="remarks" name="remarks"
+                                                                   type="text" placeholder="remarks"
+                                                                   ng-model="remarks"
+                                                                   class="form-control input-md" autocomplete="off" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">Status </label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="statusId" name="status"
+                                                                    ng-model="status" ng-init="status='Active'"  class="form-control input-md">
+                                                                <option value="Active">Active</option>
+                                                                <option value="InActive">InActive</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-click="saveTrainer()">Save
+                                </button>
+                                <button type="button" class="btn btn-default" ng-click="removeTrainerDetails()"data-dismiss="modal">
+                                    Close
+                                </button>                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

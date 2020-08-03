@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row" >
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Holiday</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel">
+                    <div class="panel-body" style="height: 65px;">
+                        <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                            <form class="form-horizontal ng-pristine ng-valid">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <p class="input-group" style="display: block;">
+                                            <input id="search_grade" name="textinput"  type="text"
+                                                   placeholder="search" ng-model="searchText" class="form-control input-md"
+                                            />
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-lg-7 col-md-9 col-sm-9">
+
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <button type="button" class="btn btn-primary hi_btn"  ng-click="addholiday()">Add</button>
+                                </div>
+
+                                <div class="col-lg-1 col-md-2 col-sm-2">
+                                    <button type="submit" id="colButn" class="btn btn-primary hi_btn" data-toggle="modal"
+                                            ng-model="inactiveStatus" data-target=".print-me"
+                                            ng-click="inactiveholiday()">{{ButtonStatus}}
+                                    </button>
+                                </div>
+                            </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="fixed-table-container">
+                        <div class="table_wrap fixed-table-container-inner">
+                            <div class="header-background"> </div>
+                            <table data-toggle="table" data-cache="false" data-height="299" style="margin-bottom: 0;" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                                <thead>
+                                <th data-field="cntryname"><div class="th-inner">Employee Type</div></th>
+                                <th data-field="cntryname"><div class="th-inner">Type Of Employee</div></th>
+                                <th data-field="cntryname"><div class="th-inner">Holiday Name </div></th>
+                                <th data-field="cntryname"><div class="th-inner">From Date</div></th>
+                                <th data-field="cntryname"><div class="th-inner">To Date</div></th>
+                                <th data-field="cntryname"><div class="th-inner">No Of Days</div></th>
+                                <th data-field="cntryname"><div class="th-inner">Actions</div></th>
+
+                                </tr></thead>
+                                <tbody id="parentTable">
+                                <tr ng-repeat="holiday in holidayList| filter:searchText">
+                                    <td>{{holiday.employeeType}}</td>
+                                    <td>{{holiday.typeOfEmployee}}</td>
+                                    <td>{{holiday.holidayName}}</td>
+                                    <td>{{holiday.fromdate|date:'dd/MM/yyyy'}}</td>
+                                    <td>{{holiday.todate|date:'dd/MM/yyyy'}}</td>
+                                    <td>{{holiday.noOfDays}}</td>
+                                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editHoliday(holiday)">Edit</button>
+                                    <button type="button" class="btn btn-primary hi_btn"  ng-click="deleteHoliday(holiday)">Delete</button></td>
+                                </tr>
+                                <tr ng-if="searchText!=''&&(holidayList|filter:searchText).length==0">
+                                    <td colspan="5" style="color: red; font-weight: bold">No Records Found</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-12 pagination_">
+                            <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"
+                                    ng-disabled="first"
+                                    ng-click="getPaginationList('firstPage')" ng-model="first">First
+                            </button>
+                            <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"
+                                    ng-disabled="prev"
+                                    ng-click="getPaginationList('prevPage')" ng-model="prev">Prev
+                            </button>
+                            <button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"
+                                    ng-click="getPaginationList('nextPage')" value="next"
+                                    ng-class="{'diabled-class': next}" ng-model="next">Next
+                            </button>
+                            <button type="button" class="btn btn-default hi_btn"
+                                    ng-click="getPaginationList('lastPage')" ng-class="{'diabled-class': last}"
+                                    ng-disabled="last"
+                                    ng-model="last">Last
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" id="add_user_holiday" role="dialog" data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Add Holiday</h4>
+
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="mail">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" >Branch</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="branchid" name="branchid" ng-model="branchid" ng-options="branch.branchesId as
+											branch.branchName for branch in bran" class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Holiday Name</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input id="holidayname" name="holidayname"
+                                                                   type="text" placeholder="Holiday Name"
+                                                                   ng-model="holidayname" alpha-with-space
+                                                                   class="form-control input-md" autocomplete="off" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">Employee Type </label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="employeetype" name="employeetype"
+                                                                    ng-model="employeetype"   class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                                <option value="Teaching">Teaching</option>
+                                                                <option value="Non-Teaching">Non-Teaching</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">Type Of Employee </label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="typeOfEmployee" name="typeOfEmployee"
+                                                                    ng-model="typeOfEmployee" class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                                <option value="Fulltime">Full Time</option>
+                                                                <option value="FixedPartTime">Fixed PartTime</option>
+                                                                <option value="FlexyPartTime">Flexy PartTime</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">From Date:</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <p class="input-group">
+                                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt"
+                                                                   is-open="popup1.opened" datepicker-options="dateOptions" readonly ng-required="true" close-text="Close"
+                                                                   alt-input-formats="altInputFormats"/>
+                                                            <span class="input-group-btn">
+                             <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                     class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                                                        </p>
+                                                    </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">To Date:</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <p class="input-group">
+                                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt1"
+                                                                   is-open="popup2.opened" datepicker-options="dateOptions" readonly ng-required="true" close-text="Close"
+                                                                   alt-input-formats="altInputFormats"/>
+                                                            <span class="input-group-btn">
+                             <button type="button" class="btn btn-default" ng-click="open2()"><i
+                                     class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                                                        </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">No Of Days</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input id="noofdays" name="noofdays"
+                                                                   type="text" placeholder="No.Of Days"
+                                                                   ng-model="noofdays" alphanum-with-space
+                                                                   class="form-control input-md" autocomplete="off" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Status</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select name="Status" id="Status" ng-model="statusText" class="form-control input-md" required>
+                                                                <option value="Active">Active</option>
+                                                                <option value="InActive">InActive</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-click="saveholiday()">Save
+                                </button>
+
+                                <button type="button" class="btn btn-primary hi_btn" ng-click="removeholiday()"
+                                        data-dismiss="modal">Close
+                                </button>
+                                <!--<button type="button" class="btn btn-default"  data-dismiss="modal">Close</button>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

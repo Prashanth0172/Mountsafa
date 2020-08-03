@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<div class="modal-header">
+    <h3 id = "student-title" class="modal-title">Organization Settings</h3><br><br>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-10 col-sm-10">
+                <form class="form-horizontal" name="school">
+
+                    <fieldset>
+                        <div class="tab-content">
+                            <div class="col-md-6">
+                                <input type="hidden" id="id" ng-model="id">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="">Organization Name<span style="color:red;">*</span></label>
+                                    <div class="col-md-6" style="position:relative;">
+                                        <input id="companyName" name="companyName"  maxlength="60"
+                                               type="text" alpha-with-space
+                                               ng-model="CompanyName"  placeholder="Organization Name"
+                                               class="form-control input-md" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for=""> Organization Email<span style="color:red;">*</span> </label>
+                                    <div class="col-md-6" style="position:relative;">
+                                        <input id="companyEmail" name="companyEmail"  maxlength="45"
+                                               ng-pattern="word"
+                                               type="email" placeholder=" Email"
+                                               ng-model="CompanyEmail"
+                                               class="form-control input-md" >
+                                        <p class="error" ng-show="school.emailId.$error.pattern">Enter Valid EmailId</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for=""> Organization Link<span style="color:red;">*</span></label>
+                                    <div class="col-md-6" style="position:relative;">
+                                        <input id="companyLink" name="companyLink"  maxlength="50"
+                                               type="url" placeholder="https://www.example.com"
+                                               ng-model="CompanyLink"
+                                               class="form-control input-md" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="">Organization Address<span style="color:red;">*</span></label>
+                                    <div class="col-md-6" style="position:relative;">
+                                        <textarea id="address" name="address"
+                                                  type="address" maxlength="500"
+                                                  ng-model="address"
+                                                  class="form-control input-md" >
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for=""> Organization GSTIN<span style="color:red;">*</span></label>
+                                    <div class="col-md-6" style="position:relative;">
+                                        <input id="gst" name="gst" maxlength="11"
+                                               type="gst"
+                                               ng-model="gst"
+                                               class="form-control input-md" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h4 class="col-md-4 col-sm-4 control-label" for="">Attach File :</h4>
+                                    <input type='file' accept='image/*' id="imageLoad" ng-model-instant
+                                           onchange="angular.element(this).scope().imageUpload(event)"><br>
+                                    <img class="image-preview"
+                                         style="width: 61px;height:50px;margin-left: 275px;" src={{fileName}}>
+                                    <br>
+                                </div>
+
+
+
+
+                                <!--<div class="col-md-6">-->
+
+                                <!--<div class="form-group">-->
+                                <!--<label class="col-md-4 control-label" for=""> Google Analytics ID</label>-->
+                                <!--<div class="col-md-6" style="position:relative;">-->
+                                <!--<input id="googleAnalysticsId" name="googleAnalysticsId" maxlength="25"-->
+                                <!--type="text" placeholder="Google Analytics ID"-->
+                                <!--ng-model="GoogleAnalyticsID" ng-required="false"-->
+                                <!--class="form-control input-md" required>-->
+
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="form-group">-->
+                                <!--<label class="col-md-4 control-label" for="">Date Format</label>-->
+                                <!--<div class="col-md-6" style="position:relative;">-->
+                                <!--<select class="form-control input-md"-->
+                                <!--ng-model="DateFormat" id="flag">-->
+                                <!--<option value="">Select Format</option>-->
+                                <!--<option value="DMY"> DMY</option>-->
+                                <!--<option value="MDY"> MDY</option>-->
+                                <!--<option value="YMD"> YMD</option>-->
+                                <!--</select>-->
+                                <!--</div>-->
+                                <!--</div>-->
+
+                                <!--<button type="submit" class="btn btn-primary hi_btn" data-toggle="modal"-->
+                                <!--data-target=".print-me" ng-click="feeconfigurationList()">Back-->
+                                <!--</button>-->
+
+                                <!--</div>-->
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal"
+                                        data-target=".print-me" ng-click="saveGeneralSettingDetails()">Save
+                                </button>
+                                <!--<div class="col-sm-2">-->
+                                <button type="button" class="btn btn-primary hi_btn"  ng-click="BackGeneral()">Close</button>
+
+                                <!--</div>-->
+                                <!--</div>-->
+                            </div>
+
+                        </div>
+                    </fieldset>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</html>

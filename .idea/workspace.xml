@@ -1,0 +1,1550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" readonly="true" id="d67a5397-cd1a-4c02-99a5-b511717f8574" name="Default" comment="bugs">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_tomcat_jdbc_8_5_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_tomcat_juli_8_5_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bspojo/StudentAttendencePojo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bspojo/StudentAttendencePojo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/controller/admissionDirective.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/controller/admissionDirective.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/controller/fee.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/controller/fee.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/controller/subject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/controller/subject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/controller/subjectCategory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/controller/subjectCategory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/partials/state.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/partials/state.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/partials/subject.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/partials/subject.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/partials/subjectCategory.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/partials/subjectCategory.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/banner.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/banner.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/Interceptor/UserInterceptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/Interceptor/UserInterceptor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsendpoints/BsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsendpoints/BsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsentities/DiscountType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsentities/DiscountType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsentities/SchoolBranchDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsentities/SchoolBranchDetails.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsentities/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsentities/Student.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsmapper/BsDiscountMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsmapper/BsDiscountMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsmapper/BsStudentMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsmapper/BsStudentMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsmapper/BsUserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsmapper/BsUserMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bspojo/DiscountTypePojo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bspojo/DiscountTypePojo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bspojo/FeeTypeMasterPojo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bspojo/FeeTypeMasterPojo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bspojo/StudentPojo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bspojo/StudentPojo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsrespositories/BsDiscountTypeRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsrespositories/BsDiscountTypeRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsrespositories/BsStudentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsrespositories/BsStudentRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsrespositories/BsUserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsrespositories/BsUserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsservice/BasicDataService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsservice/BasicDataService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsservice/BsUserService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsservice/BsUserService$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsservice/BsUserService$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsservice/BsUserService$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsservice/BsUserService$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsservice/BsUserService$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsservice/BsUserService$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsservice/BsUserService$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsservice/BsUserService$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsservice/BsUserService$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsservice/BsUserService$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsservice/BsUserService$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsservice/BsUserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/bs/bsservice/BsUserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/pusher/PusherService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hyva/bsfms/pusher/PusherService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/controller/academicyearmaster.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/controller/academicyearmaster.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/controller/discounttype.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/controller/discounttype.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/controller/fee.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/controller/fee.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/controller/feeCollectedReports.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/controller/feeCollectedReports.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/controller/feeDueReports.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/controller/feeDueReports.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/controller/feeReceiptNoReport.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/controller/feeReceiptNoReport.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/controller/feetypemaster.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/controller/feetypemaster.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/controller/grademaster.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/controller/grademaster.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/controller/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/controller/header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/controller/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/controller/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/controller/remainder.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/controller/remainder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/controller/student.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/controller/student.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/controller/studentschooldetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/controller/studentschooldetails.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/controller/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/controller/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/partials/SmsServer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/partials/SmsServer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/partials/academicyearmaster.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/partials/academicyearmaster.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/partials/configuration.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/partials/configuration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/partials/discounttype.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/partials/discounttype.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/partials/fee.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/partials/fee.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/partials/feeCollectedReports.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/partials/feeCollectedReports.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/partials/feeDueReports.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/partials/feeDueReports.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/partials/feeReceipt.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/partials/feeReceipt.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/partials/feeReceiptNoReport.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/partials/feeReceiptNoReport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/partials/feetypemaster.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/partials/feetypemaster.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/partials/grademaster.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/partials/grademaster.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/partials/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/partials/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/partials/pvtLtdFee.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/partials/pvtLtdFee.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/partials/remainder.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/partials/remainder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/partials/reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/partials/reports.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/partials/student.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/partials/student.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/partials/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/partials/user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/resource/ImpotSheets/Student.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/resource/ImpotSheets/Student.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="BsUserService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="186">
+              <caret line="8472" selection-start-line="8472" selection-end-line="8472" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileSystemOperations.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/util/FileSystemOperations.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-394">
+              <caret line="29" column="74" selection-start-line="29" selection-start-column="65" selection-end-line="29" selection-end-column="74" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BsUserMapper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsmapper/BsUserMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="141">
+              <caret line="172" selection-start-line="172" selection-end-line="172" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LessonPlanPojo.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bspojo/LessonPlanPojo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="141">
+              <caret line="115" column="18" selection-start-line="115" selection-start-column="18" selection-end-line="115" selection-end-column="18" />
+              <folding>
+                <element signature="e#3282#3283#0" expanded="true" />
+                <element signature="e#3315#3316#0" expanded="true" />
+                <element signature="e#6737#6738#0" expanded="true" />
+                <element signature="e#6765#6766#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="newLessonPlan.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/static/partials/newLessonPlan.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="482" column="100" selection-start-line="482" selection-start-column="100" selection-end-line="482" selection-end-column="100" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="assesmentSubmissionDirective.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/controller/assesmentSubmissionDirective.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="291" column="45" selection-start-line="291" selection-start-column="19" selection-end-line="291" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="assesmentSubmissionDirective.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/static/partials/assesmentSubmissionDirective.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="99" column="107" selection-start-line="99" selection-start-column="81" selection-end-line="99" selection-end-column="107" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BsController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="211">
+              <caret line="2040" column="81" selection-start-line="2040" selection-start-column="81" selection-end-line="2040" selection-end-column="81" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>checkBox</find>
+      <find>checkbox</find>
+      <find>getCountryList</find>
+      <find>getCountryState</find>
+      <find>saveState</find>
+      <find>val</find>
+      <find>multipleChoiceList</find>
+      <find>rubicsList</find>
+      <find>assessmentQuestionDetailsPojos</find>
+      <find>editAssessmentQuestions</find>
+      <find>fileToUpload</find>
+      <find>fileName</find>
+      <find>edit</find>
+      <find>/saveAdmission</find>
+      <find>FileSystemOperations</find>
+      <find>fileSystemOperations</find>
+      <find>/saveLessonPlan</find>
+      <find>/getpaginatedLesssonPlan</find>
+      <find>imageUpload</find>
+      <find>lessonPlanValueId</find>
+      <find>save</find>
+      <find>topicList</find>
+      <find>getMakrs</find>
+      <find>/getMarksBasedOnSimpleAssesment</find>
+      <find>saveLessonPlan</find>
+      <find>topicsList</find>
+      <find>ASSList</find>
+      <find>getStudentList</find>
+      <find>getStudentListBasedOnClass</find>
+      <find>studentName</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+    </replaceStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/controller/student.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/controller/feeCollectedReports.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/partials/feeCollectedReports.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/partials/feeDueReports.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bspojo/ReportPojo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsmapper/BsStudentAttendenceMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bspojo/StudentAttendencePojo.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/controller/settings.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/partials/studentAffairs.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsrespositories/BsStudentRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsentities/EnquiryForm.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bspojo/EnquiryFormPOJO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsmapper/EnquiryFormMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/partials/EnquiryForm.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/controller/EnquiryForm.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/partials/student.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bspojo/StudentPojo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bspojo/StudentDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsentities/Student.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsmapper/BsUserMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/controller/admissionDirective.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/partials/addmissionDirective.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/partials/fee.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/controller/fee.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/partials/subjectCategory.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/controller/subjectCategory.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/partials/subject.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/controller/subject.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/partials/assessmentQuestions.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/partials/gradingMaster.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/partials/studentAssesmentMarks.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/partials/hr.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/controller/user.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/partials/login.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/partials/city.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/partials/admission.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/partials/sourav.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/main.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/index.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/partials/admin.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsmapper/BsCityMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsmapper/BsCustomApproverMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/controller/sourav.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/controller/city.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bspojo/StateDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsentities/State.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/controller/assessmentQuestions.js" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/controller/newLessonPlan.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="BSFMS" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="BSFMS" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="204" />
+    <option name="y" value="169" />
+    <option name="width" value="1299" />
+    <option name="height" value="671" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="spring-data-rest-angular" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MountSafa" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-data-rest-angular" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MountSafa" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-data-rest-angular" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MountSafa" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-data-rest-angular" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MountSafa" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-data-rest-angular" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MountSafa" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bsfms" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-data-rest-angular" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MountSafa" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bsfms" type="462c0819:PsiDirectoryNode" />
+              <item name="bs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="spring-data-rest-angular" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MountSafa" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="bsfms" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelOrder2" value="2" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RequestMappingsPanelWidth2" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
+    <property name="settings.editor.selected.configurable" value="vcs.Subversion" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="BSFMS" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.hyva.bsfms.Application" />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\SOURAV\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+    <option name="FORCE_UPDATE" value="true" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d67a5397-cd1a-4c02-99a5-b511717f8574" name="Default" comment="" />
+      <created>1544184088192</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1544184088192</updated>
+      <workItem from="1544184090193" duration="686000" />
+      <workItem from="1544186812287" duration="3598000" />
+      <workItem from="1544191023797" duration="513000" />
+      <workItem from="1544192515730" duration="2852000" />
+      <workItem from="1544243017911" duration="253000" />
+      <workItem from="1544248742190" duration="31347000" />
+      <workItem from="1544417318033" duration="680000" />
+      <workItem from="1544418162951" duration="234000" />
+      <workItem from="1548673714795" duration="1069000" />
+      <workItem from="1548735810988" duration="1014000" />
+      <workItem from="1548736856062" duration="4646000" />
+      <workItem from="1548759417148" duration="477000" />
+      <workItem from="1548829593257" duration="2000" />
+      <workItem from="1548829610458" duration="17135000" />
+      <workItem from="1548907982274" duration="1047000" />
+      <workItem from="1549020451038" duration="3000" />
+      <workItem from="1549020466217" duration="4916000" />
+      <workItem from="1549081122573" duration="22234000" />
+      <workItem from="1549113117696" duration="223000" />
+      <workItem from="1549253643586" duration="1927000" />
+      <workItem from="1549255821538" duration="4621000" />
+      <workItem from="1549432400466" duration="222000" />
+      <workItem from="1549860418066" duration="534000" />
+      <workItem from="1550119025996" duration="180000" />
+      <workItem from="1550129813398" duration="1138000" />
+      <workItem from="1550562079067" duration="1712000" />
+      <workItem from="1550564818767" duration="4456000" />
+      <workItem from="1551243119813" duration="514000" />
+      <workItem from="1551244311078" duration="1613000" />
+      <workItem from="1551355602565" duration="2333000" />
+      <workItem from="1551437702442" duration="5275000" />
+      <workItem from="1551522553304" duration="44000" />
+      <workItem from="1551523226995" duration="7132000" />
+      <workItem from="1551676258819" duration="64000" />
+      <workItem from="1551676903576" duration="19000" />
+      <workItem from="1551765349393" duration="684000" />
+      <workItem from="1551766095542" duration="138000" />
+      <workItem from="1551766267306" duration="3281000" />
+      <workItem from="1551782071152" duration="85000" />
+      <workItem from="1551782205977" duration="870000" />
+      <workItem from="1551847194919" duration="262000" />
+      <workItem from="1551865389187" duration="4180000" />
+      <workItem from="1551943696915" duration="3531000" />
+      <workItem from="1552026885938" duration="116000" />
+      <workItem from="1552027850991" duration="730000" />
+      <workItem from="1552041083144" duration="688000" />
+      <workItem from="1552046826139" duration="267000" />
+      <workItem from="1552295146236" duration="641000" />
+      <workItem from="1552296053378" duration="1678000" />
+      <workItem from="1552307438217" duration="441000" />
+      <workItem from="1552547497261" duration="435000" />
+      <workItem from="1560593943328" duration="104000" />
+      <workItem from="1560596078122" duration="4603000" />
+      <workItem from="1560746935539" duration="29000" />
+      <workItem from="1560748727804" duration="2282000" />
+      <workItem from="1560754585489" duration="5703000" />
+      <workItem from="1560834004071" duration="16390000" />
+      <workItem from="1560919408585" duration="5314000" />
+      <workItem from="1560939281825" duration="2393000" />
+      <workItem from="1561005133263" duration="4850000" />
+      <workItem from="1561094960001" duration="8193000" />
+      <workItem from="1561351535606" duration="1190000" />
+      <workItem from="1561437392519" duration="1234000" />
+      <workItem from="1561524663892" duration="600000" />
+      <workItem from="1561553431035" duration="1613000" />
+      <workItem from="1561610913565" duration="3243000" />
+      <workItem from="1561701032109" duration="1190000" />
+      <workItem from="1562127806306" duration="27471000" />
+      <workItem from="1562215719846" duration="25747000" />
+      <workItem from="1562302426035" duration="21985000" />
+      <workItem from="1562387803372" duration="207000" />
+      <workItem from="1563113615722" duration="4377000" />
+      <workItem from="1563554334675" duration="1885000" />
+      <workItem from="1563990926907" duration="132000" />
+      <workItem from="1564331945943" duration="1071000" />
+      <workItem from="1567960701592" duration="2091000" />
+      <workItem from="1568134150919" duration="4647000" />
+      <workItem from="1568220393515" duration="1278000" />
+      <workItem from="1575914275868" duration="2033000" />
+      <workItem from="1577612091658" duration="5724000" />
+      <workItem from="1578075222103" duration="380000" />
+      <workItem from="1578231437232" duration="2273000" />
+      <workItem from="1585111130374" duration="155000" />
+      <workItem from="1586249994121" duration="2273000" />
+      <workItem from="1586253633345" duration="6417000" />
+      <workItem from="1587457695762" duration="470000" />
+      <workItem from="1587713506787" duration="652000" />
+      <workItem from="1587810745553" duration="1444000" />
+      <workItem from="1588144257223" duration="638000" />
+      <workItem from="1588316639850" duration="234000" />
+      <workItem from="1589519009017" duration="24505000" />
+      <workItem from="1589628384811" duration="832000" />
+      <workItem from="1595334010819" duration="15371000" />
+    </task>
+    <task id="LOCAL-00001" summary="bugs">
+      <created>1544418387139</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1544418387139</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added student type in print">
+      <created>1548843806376</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1548843806377</updated>
+    </task>
+    <task id="LOCAL-00003" summary="bug">
+      <created>1548847789628</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1548847789628</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fee type filter in feedue report">
+      <created>1549260343940</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1549260343940</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feetype filter in export">
+      <created>1551532113467</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1551532113467</updated>
+    </task>
+    <task id="LOCAL-00006" summary="UI Changes in Enquiry and  Index">
+      <created>1562138263525</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1562138263525</updated>
+    </task>
+    <task id="LOCAL-00007" summary="bugs">
+      <created>1562139062164</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1562139062164</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Add Class in Enquiry Form">
+      <created>1562148159322</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1562148159322</updated>
+    </task>
+    <task id="LOCAL-00009" summary="bugs">
+      <created>1562157789968</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1562157789968</updated>
+    </task>
+    <task id="LOCAL-00010" summary="bugs">
+      <created>1562223584764</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1562223584764</updated>
+    </task>
+    <task id="LOCAL-00011" summary="bugs">
+      <created>1562226182046</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1562226182047</updated>
+    </task>
+    <task id="LOCAL-00012" summary="bugs">
+      <created>1562239109038</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1562239109038</updated>
+    </task>
+    <task id="LOCAL-00013" summary="import in student">
+      <created>1562311254188</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1562311254188</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="355753000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" order="9" weight="0.3291239" />
+      <window_info anchor="bottom" id="Database Changes" order="12" weight="0.32970452" />
+      <window_info id="Capture Tool" order="1" />
+      <window_info id="Designer" order="2" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info id="Structure" order="7" side_tool="true" weight="0.24940239" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.24962178" />
+      <window_info id="UI Designer" order="3" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.22112212" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32868218" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.3250825" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info id="Image Layers" order="4" />
+      <window_info anchor="bottom" id="Java Enterprise" order="9" weight="0.3281493" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.47900465" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.49457365" />
+      <window_info anchor="bottom" id="Spring" order="7" weight="0.32868218" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.17549168" />
+      <window_info anchor="right" id="Bean Validation" order="8" />
+      <window_info id="Web" order="5" side_tool="true" weight="0.32988048" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="Theme Preview" order="7" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Designer" order="2" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.49457365" />
+      <window_info anchor="bottom" id="Spring" order="7" weight="0.32868218" />
+      <window_info id="Image Layers" order="4" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.24962178" />
+      <window_info id="UI Designer" order="3" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info id="Capture Tool" order="1" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.3250825" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32868218" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Java Enterprise" order="9" weight="0.3281493" />
+      <window_info anchor="bottom" id="Database Changes" order="12" weight="0.32970452" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.47900465" />
+      <window_info anchor="right" id="Maven Projects" order="9" weight="0.3291239" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.17549168" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Web" order="5" side_tool="true" weight="0.32988048" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Theme Preview" order="7" />
+      <window_info id="Structure" order="7" side_tool="true" weight="0.24940239" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.17161717" />
+      <window_info anchor="right" id="Bean Validation" order="8" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Added student type in print" />
+    <MESSAGE value="bug" />
+    <MESSAGE value="fee type filter in feedue report" />
+    <MESSAGE value="feetype filter in export" />
+    <MESSAGE value="Html changes in enquiry and Index" />
+    <MESSAGE value="UI Changes in Enquiry and  Index" />
+    <MESSAGE value="Add Class in Enquiry Form" />
+    <MESSAGE value="bugs" />
+    <MESSAGE value="import in student" />
+    <option name="LAST_COMMIT_MESSAGE" value="import in student" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>5889</line>
+          <properties />
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>1767</line>
+          <properties />
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>1195</line>
+          <properties />
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>1197</line>
+          <properties />
+          <option name="timeStamp" value="71" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>1200</line>
+          <properties />
+          <option name="timeStamp" value="73" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>1555</line>
+          <properties />
+          <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>1568</line>
+          <properties />
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>1577</line>
+          <properties />
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>1615</line>
+          <properties />
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>1455</line>
+          <properties />
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>4445</line>
+          <properties />
+          <option name="timeStamp" value="79" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>4452</line>
+          <properties />
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>4554</line>
+          <properties />
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>4586</line>
+          <properties />
+          <option name="timeStamp" value="82" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsmapper/BsUserMapper.java</url>
+          <line>146</line>
+          <properties />
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsmapper/BsUserMapper.java</url>
+          <line>152</line>
+          <properties />
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsmapper/BsUserMapper.java</url>
+          <line>172</line>
+          <properties />
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>4555</line>
+          <properties />
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>1286</line>
+          <properties />
+          <option name="timeStamp" value="88" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>1298</line>
+          <properties />
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>1357</line>
+          <properties />
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>10740</line>
+          <properties />
+          <option name="timeStamp" value="91" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>10777</line>
+          <properties />
+          <option name="timeStamp" value="92" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>10766</line>
+          <properties />
+          <option name="timeStamp" value="93" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>904</line>
+          <properties />
+          <option name="timeStamp" value="94" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>305</line>
+          <properties />
+          <option name="timeStamp" value="98" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>264</line>
+          <properties />
+          <option name="timeStamp" value="104" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>265</line>
+          <properties />
+          <option name="timeStamp" value="105" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>303</line>
+          <properties />
+          <option name="timeStamp" value="106" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>351</line>
+          <properties />
+          <option name="timeStamp" value="107" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>312</line>
+          <properties />
+          <option name="timeStamp" value="108" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>343</line>
+          <properties />
+          <option name="timeStamp" value="109" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>10406</line>
+          <properties />
+          <option name="timeStamp" value="111" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>10436</line>
+          <properties />
+          <option name="timeStamp" value="112" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>10409</line>
+          <properties />
+          <option name="timeStamp" value="113" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>10446</line>
+          <properties />
+          <option name="timeStamp" value="114" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>5178</line>
+          <properties />
+          <option name="timeStamp" value="121" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>5186</line>
+          <properties />
+          <option name="timeStamp" value="122" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>1479</line>
+          <properties />
+          <option name="timeStamp" value="123" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>442</line>
+          <properties />
+          <option name="timeStamp" value="124" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>444</line>
+          <properties />
+          <option name="timeStamp" value="125" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>446</line>
+          <properties />
+          <option name="timeStamp" value="126" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>449</line>
+          <properties />
+          <option name="timeStamp" value="127" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>451</line>
+          <properties />
+          <option name="timeStamp" value="128" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>452</line>
+          <properties />
+          <option name="timeStamp" value="129" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>460</line>
+          <properties />
+          <option name="timeStamp" value="130" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>464</line>
+          <properties />
+          <option name="timeStamp" value="131" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>466</line>
+          <properties />
+          <option name="timeStamp" value="132" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>497</line>
+          <properties />
+          <option name="timeStamp" value="133" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>385</line>
+          <properties />
+          <option name="timeStamp" value="134" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>173</line>
+          <properties />
+          <option name="timeStamp" value="135" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>388</line>
+          <properties />
+          <option name="timeStamp" value="140" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>106</line>
+          <properties />
+          <option name="timeStamp" value="142" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>434</line>
+          <properties />
+          <option name="timeStamp" value="143" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>1580</line>
+          <properties />
+          <option name="timeStamp" value="144" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>5177</line>
+          <properties />
+          <option name="timeStamp" value="148" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>8472</line>
+          <properties />
+          <option name="timeStamp" value="150" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>8494</line>
+          <properties />
+          <option name="timeStamp" value="151" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java</url>
+          <line>8483</line>
+          <properties />
+          <option name="timeStamp" value="152" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java</url>
+          <line>105</line>
+          <properties class="com.hyva.bsfms.bs.bsendpoints.BsController" method="saveLoginDetails">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="141" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="153" />
+    </breakpoint-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>saveStudentDetails.getAcdYearId()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>saveStudentDetails.getGradeId()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>bsUserPojo.getBranchCode()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>bsUserPojo.getPasswordUser()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>admissionNo</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>studentDTO.getStudentName()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>studentDTO.getGradeId()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>stud.getStudentId()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>gradeMaster1</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsentities/SchoolBranchDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/pusher/pusherPojo/MasterPojo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bspojo/StudentPojo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="49" column="42" selection-start-line="49" selection-start-column="42" selection-end-line="49" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bspojo/FeeTypeMasterPojo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="40" column="27" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/partials/student.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="1138" column="34" lean-forward="true" selection-start-line="1138" selection-start-column="34" selection-end-line="1138" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/controller/assignment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="197" column="16" selection-start-line="197" selection-start-column="16" selection-end-line="197" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/controller/class.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="287" column="16" selection-start-line="287" selection-start-column="16" selection-end-line="287" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/HomeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/controller/chapter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3472">
+          <caret line="234" column="16" selection-start-line="234" selection-start-column="16" selection-end-line="234" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="44" column="30" selection-start-line="44" selection-start-column="23" selection-end-line="44" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsentities/City.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsmapper/BsComponentMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="35" lean-forward="true" selection-start-column="35" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/partials/hr.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1115">
+          <caret line="1265" column="130" selection-start-line="1265" selection-start-column="125" selection-end-line="1265" selection-end-column="130" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/vendors/Chart.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="10" column="29022" selection-start-line="10" selection-start-column="29022" selection-end-line="10" selection-end-column="29022" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/partials/feetypemaster.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="238" column="146" selection-start-line="238" selection-start-column="136" selection-end-line="238" selection-end-column="146" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/partials/leave.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="150" column="55" selection-start-line="150" selection-start-column="55" selection-end-line="150" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/controller/feetypemaster.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="285" column="50" lean-forward="true" selection-start-line="285" selection-start-column="50" selection-end-line="285" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/controller/TeachingObservationForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="455" column="28" selection-start-line="455" selection-start-column="20" selection-end-line="455" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/partials/TeachingObservationForm.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="336" column="50" lean-forward="true" selection-start-line="331" selection-start-column="44" selection-end-line="336" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsmapper/BsCustomApproverMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsmapper/BsCityMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/partials/sourav.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/partials/city.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="166" column="87" selection-start-line="166" selection-start-column="75" selection-end-line="166" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/partials/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2788">
+          <caret line="419" column="18" lean-forward="true" selection-start-line="419" selection-start-column="18" selection-end-line="419" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="282" column="62" selection-start-line="282" selection-start-column="62" selection-end-line="282" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/controller/sourav.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/controller/state.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="165" column="46" lean-forward="true" selection-start-line="165" selection-start-column="46" selection-end-line="165" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsentities/State.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="38" column="34" selection-start-line="38" selection-start-column="34" selection-end-line="38" selection-end-column="34" />
+          <folding>
+            <element signature="e#945#946#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bspojo/StateDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="36" column="34" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="34" />
+          <folding>
+            <element signature="e#786#787#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/controller/city.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1037">
+          <caret line="61" column="30" selection-start-line="61" selection-start-column="30" selection-end-line="61" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/controller/AssessmentType.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/controller/assessmentQuestions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4964">
+          <caret line="292" column="70" selection-start-line="292" selection-start-column="47" selection-end-line="292" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bspojo/AssessmentQuestionDetailsPojo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/partials/admission.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-10">
+          <caret line="950" column="27" lean-forward="true" selection-start-line="950" selection-start-column="27" selection-end-line="950" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/controller/admission.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="422" column="20" selection-start-line="422" selection-start-column="16" selection-end-line="422" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/controller/admissionDirective.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="519" column="70" selection-start-line="519" selection-start-column="57" selection-end-line="519" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/Quartz/TenantContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="68" selection-start-line="1" selection-start-column="52" selection-end-line="1" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/Quartz/QuartzConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/util/FileSystemOperations.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-394">
+          <caret line="29" column="74" selection-start-line="29" selection-start-column="65" selection-end-line="29" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/partials/addmissionDirective.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="1200" column="100" selection-start-line="1200" selection-start-column="100" selection-end-line="1200" selection-end-column="100" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bspojo/LessonPlanPojo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="115" column="18" selection-start-line="115" selection-start-column="18" selection-end-line="115" selection-end-column="18" />
+          <folding>
+            <element signature="e#3282#3283#0" expanded="true" />
+            <element signature="e#3315#3316#0" expanded="true" />
+            <element signature="e#6737#6738#0" expanded="true" />
+            <element signature="e#6765#6766#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/controller/studentAssesmentMarks.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-878">
+          <caret line="81" column="24" lean-forward="true" selection-start-line="81" selection-start-column="24" selection-end-line="81" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/partials/newLessonPlan.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="482" column="100" selection-start-line="482" selection-start-column="100" selection-end-line="482" selection-end-column="100" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/controller/newLessonPlan.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="383" column="40" selection-start-line="383" selection-start-column="23" selection-end-line="383" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsmapper/BsUserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="172" selection-start-line="172" selection-end-line="172" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsendpoints/BsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="2040" column="81" selection-start-line="2040" selection-start-column="81" selection-end-line="2040" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/partials/assesmentSubmissionDirective.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="99" column="107" selection-start-line="99" selection-start-column="81" selection-end-line="99" selection-end-column="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/controller/assesmentSubmissionDirective.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="291" column="45" selection-start-line="291" selection-start-column="19" selection-end-line="291" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hyva/bsfms/bs/bsservice/BsUserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="8472" selection-start-line="8472" selection-end-line="8472" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

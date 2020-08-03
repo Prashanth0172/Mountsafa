@@ -1,0 +1,21 @@
+package com.hyva.bsfms.bs.bsrespositories;
+
+import com.hyva.bsfms.bs.bsentities.AssessmentQuestions;
+import com.hyva.bsfms.bs.bsentities.LessonPlan;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface BsAssessmentQuestionsRepository extends JpaRepository<AssessmentQuestions,Long> {
+
+    List<AssessmentQuestions> findAllBySubjectIdContainingOrLevelIdContainingOrClassIdContaining(String subject, String level, String classes);
+    AssessmentQuestions findBySubjectIdContainingOrLevelIdContainingOrClassIdContaining(Sort sort, String subject, String level, String classes);
+    List<AssessmentQuestions> findBySubjectIdContainingOrLevelIdContainingOrClassIdContaining(Pageable pageable, String subject, String level, String classes);
+    List<AssessmentQuestions> findAllBy(Pageable pageable);
+    AssessmentQuestions findFirstBy(Sort sort);
+    List<AssessmentQuestions> findAllByTopicId(Long topicId);
+    List<AssessmentQuestions> findAllBySubjectId(Long subjectId);
+    List<AssessmentQuestions> findAllByAssessmentQuestionsId(Long subjectId);
+}

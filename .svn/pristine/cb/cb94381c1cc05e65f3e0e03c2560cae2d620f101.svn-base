@@ -1,0 +1,185 @@
+<style>
+    .modal-content {
+        width: 696px;
+    }
+
+    .modal-footer {
+        padding: 5px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    fieldset {
+        min-width: 0;
+        padding: 10px;
+        margin: 0;
+        border: 0;
+    }
+
+    .form-control {
+        display: block;
+        width: 171px;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shaccountGroupadow ease-in-out .15s;
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row">
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Permission</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel-body" style="height: 65px;">
+                            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                                <form class="form-horizontal ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <p class="input-group" style="display: block;">
+                                                <input id="search_academic" name="textinput" type="text"
+                                                       placeholder="Search" ng-model="searchText"
+                                                       class="form-control input-md"
+                                                       ng-keyup="$event.keyCode == 13 ? getPaginationPermission(searchText) : null"/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-7">
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary hi_btn" ng-click="addPermissionRep()">
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="fixed-table-container">
+                        <div class="table_wrapfixed-table-container-inner">
+                            <div class="header-background"></div>
+                            <table data-toggle="table" data-cache="false" data-height="299"
+                                   class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                                <thead>
+                                <tr>
+                                    <th data-field="cntryname">
+                                        <div class="th-inner" align="center">Permission</div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody id="parentTable">
+                                <input type="hidden" ng-model="permissionId" value="{{permissionList.permissionId}}"/>
+                                <tr ng-repeat="permission in permissionRepList|filter:searchText">
+                                    <td>{{permission.permissionName}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" id="add_new_permission_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 id="per-title" class="modal-title">Add Permission</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label"
+                                                           for=>Permission Name<span style="color: red">*</span> </label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <input id="account" name="account"
+                                                               type="text" placeholder="Permission Name" maxlength="30"
+                                                               ng-model="permissionName" alphanum-with-space=""
+                                                               ng-click="getPermissionLevelsList(permissionName)"
+                                                               class="form-control input-md">
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal"
+                                        ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                        ng-click="savePermission('add_new_permission_modal')">Save
+                                </button>
+                                <button type="button" class="btn btn-primary hi_btn" ng-click="removePermissionRep()"
+                                        data-dismiss="modal">Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade permissionLevels" tabindex="-1" id="permissionLevels" role="dialog" data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="table-responsive" id="htmldata">
+                                            <table class="sub_menu_acc">
+                                                <tr data-toggle="collapse" data-target="#text-11{{$index}}"
+                                                    class="accordion-toggle collapsed"
+                                                    ng-repeat-start="val in perList">
+                                                    <td id="left" style="margin-left: 100px">{{val.permissionName}}</td>
+                                                </tr>
+                                                <tr ng-repeat-end></tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

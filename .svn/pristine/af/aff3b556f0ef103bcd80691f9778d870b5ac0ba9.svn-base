@@ -1,0 +1,354 @@
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+    <div class="container cus_main_row">
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Exit Interview Form</div>
+            </h2>
+        </div>
+
+        <!--// TO ADD GOLD//-->
+        <div class="col-md-2 col-sm-5 col-xs-5">
+            <input id="textinput" name="textinput" type="text"
+                   placeholder="Search For Employee" ng-model="searchText" class="form-control input-md"
+                   ng-keyup="$event.keyCode == 13 ? getEInterviewList(searchText) : null"/>
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <button type="button" class="btn btn-default hi_btn"
+                    ng-click="addExitInterview()" style="width: 100%;">Add
+            </button>
+        </div>
+        <!--<div class="col-lg-2 col-md-3 col-sm-4">-->
+            <!--<button type="submit" id="colButn" class="btn btn-default" data-toggle="modal"-->
+                    <!--ng-model="inactiveStatus" data-target=".print-me"-->
+                    <!--ng-click="inactive()">{{ButtonStatus}}-->
+            <!--</button>-->
+        <!--</div>-->
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="fixed-table-container">
+                <div class="table_wrap fixed-table-container-inner">
+                    <table class=" hi_table table table_option2 table-hover table-striped table-fixed-header list_table"
+                           id="" style="margin-bottom: 0;">
+                        <thead>
+
+                        <tr>
+                            <th data-field="desc">
+                                <div class="th-inner">Employee Name</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Employee Position</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Date Start</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner"> Status</div>
+                            </th>
+                            <!--<th data-field="desc">-->
+                                <!--<div class="th-inner">Edit</div>-->
+                            <!--</th>-->
+                            <th data-field="desc">
+                                <div class="th-inner">Actions</div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="parentTable">
+
+                        <tr ng-repeat="exitInterview in exitInterviewList| filter:searchText">
+                            <td>{{exitInterview.eEmployeeName}}</td>
+                            <td>{{exitInterview.ePosition}}</td>
+                            <td>{{exitInterview.eDateStart}}</td>
+                            <td>{{exitInterview.estatus}}</td>
+
+                            <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editExit(exitInterview)">Edit</button>
+                            <button type="button" class="btn btn-primary hi_btn" ng-click="deleteExit(exitInterview.einterviewFormId)">Delete</button></td>
+
+                        </tr>
+                        <tr ng-if="searchText!=''&&(exitInterviewList|filter:searchText).length==0">
+                            <td colspan="4" style="color: red; font-weight: bold">No Records Found</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade Add Desig" tabindex="-1" id="add_new_Exit_modal" role="dialog"
+             data-backdrop="static"
+             aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content checkout">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="modelName"></h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <form class="form-horizontal">
+                                    <fieldset>
+                                        <input type="hidden" ng-model="einterviewFormId"
+                                               value="{{einterviewFormId}}">
+
+                                        <div class="form-group" style="margin-top: 20px;">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Employee Name<span style="color:red;">*</span></label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <select id="eEmployeeName" name="eEmployeeName"
+                                                        ng-model="eEmployeeName"
+                                                        ng-change="getDetailsByName(eEmployeeName)"
+
+                                                        ng-options="Branches.employeeName as Branches.employeeName for Branches in employeeList"
+                                                        class="form-control input-md">
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Employee Code<span style="color:red;">*</span></label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="eEmployeeCode" id="eEmployeeCode" alpha-with-space
+                                                       class="form-control input-md"
+                                                       ng-model="eEmployeeCode">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Employee Position<span style="color:red;">*</span></label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="ePosition" id="ePosition" alpha-with-space
+                                                       class="form-control input-md"
+                                                       ng-model="ePosition">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4" for="">Employee StartDate</label>
+                                            <div class="col-sm-6">
+                                                <p class="input-group">
+                                                    <input type="text" id="eDateStart" class="form-control" uib-datepicker-popup="{{format}}"  ng-model="eDateStart"  is-open="popupp4.opened" datepicker-options="dateOptions"  close-text="Close" alt-input-formats="altInputFormats" />
+                                                    <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="openn4()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Voluntary</label>
+                                            <div class="col-md-1">
+                                                <input type="radio" onclick="hideblock();" name="eVolutary" ng-model="eVolutary" value="voluntry" id="eVolutary" />
+                                            </div>
+
+
+                                                <label class="col-md-4 col-sm-4 control-label">InVoluntary</label>
+                                            <div class="col-md-1">
+                                            <input type="radio" onclick="hideblock();" name="eVolutary" ng-model="eVolutary" value="involuntry" id="eVolutary" />
+                                            </div>
+
+                                        </div>
+                                        <div id="voluntryblock">
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Other Job Offer</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input type="checkbox" name="eOtherJob" id="eOtherJob"
+                                                       ng-model="eOtherJob">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Personal Reason</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input type="checkbox" name="ePersonalReason" id="ePersonalReason"
+                                                       ng-model="ePersonalReason">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Relocation</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input type="checkbox" name="eRelocation" id="eRelocation"
+                                                       ng-model="eRelocation">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Retirement</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input type="checkbox" name="eRetirement" id="eRetirement"
+                                                       ng-model="eRetirement">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Other</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input type="checkbox" name="eVoluntaryOther" id="eVoluntaryOther"
+                                                       ng-model="eVoluntaryOther">
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                        <div id="involuntryblock">
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Non-Continuation Of Contract</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input type="checkbox" name="eNonContract" id="eNonContract"
+                                                       ng-model="eNonContract">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">End Of Probabtion Period</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input type="checkbox" name="eEndOfP" id="eEndOfP"
+                                                       ng-model="eEndOfP">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Attendance</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input type="checkbox" name="eAttendance" id="eAttendance"
+                                                       ng-model="eAttendance">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Viloation Of Company Policy</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input type="checkbox" name="eViolation" id="eViolation"
+                                                       ng-model="eViolation">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Other</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input type="checkbox" name="eInVoluntaryOther" id="eInVoluntaryOther"
+                                                       ng-model="eInVoluntaryOther">
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Supervisor Comment</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="eSupervisorComment" id="eSupervisorComment"
+                                                       class="form-control input-md"
+                                                       ng-model="eSupervisorComment">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Mudir's Comment</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="eMudirsComment" id="eMudirsComment"
+                                                       class="form-control input-md"
+                                                       ng-model="eMudirsComment">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Employee's Comment</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="eEmployeesComment" id="eEmployeesComment"
+                                                       class="form-control input-md"
+                                                       ng-model="eEmployeesComment">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Supervisor Signature</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="eSupervisorSign" id="eSupervisorSign"
+                                                       class="form-control input-md"
+                                                       ng-model="eSupervisorSign">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Employee Signature</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="eEmployeesSign" id="eEmployeesSign"
+                                                       class="form-control input-md"
+                                                       ng-model="eEmployeesSign">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Mudirs Signature</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="eMudirsSign" id="eMudirsSign"
+                                                       class="form-control input-md"
+                                                       ng-model="eMudirsSign">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4" for="">Supervisor's Sign Date</label>
+                                            <div class="col-sm-4">
+                                                <p class="input-group">
+                                                    <input type="text" id="eSupervisorDate" class="form-control" uib-datepicker-popup="{{format}}"  ng-model="eSupervisorDate"  is-open="popupp1.opened" datepicker-options="dateOptions"  readonly close-text="Close" alt-input-formats="altInputFormats" />
+                                                    <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="openn1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4" for="">Employee's Sign Date</label>
+                                            <div class="col-sm-4">
+                                                <p class="input-group">
+                                                    <input type="text" id="eEmployeesDate" class="form-control" uib-datepicker-popup="{{format}}"  ng-model="eEmployeesDate"  is-open="popupp2.opened" datepicker-options="dateOptions" readonly close-text="Close" alt-input-formats="altInputFormats" />
+                                                    <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="openn2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4" for="">Mudir's Sign Date</label>
+                                            <div class="col-sm-4">
+                                                <p class="input-group">
+                                                    <input type="text" id="eMudirsDate" class="form-control" uib-datepicker-popup="{{format}}"  ng-model="eMudirsDate"  is-open="popupp3.opened" datepicker-options="dateOptions"  close-text="Close" readonly alt-input-formats="altInputFormats" />
+                                                    <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="openn3()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Status</label>
+                                            <div class="col-md-6 col-sm-6" >
+                                                <select name="estatus" id="estatus" ng-model="estatus" ng-init="estatus='Active'"class="form-control input-md">
+                                                    <option value="Active">Active</option>
+                                                    <option value="InActive">InActive</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" id="submit"
+                                                    ng-click="saveExitInterview()">Save
+                                            </button>
+                                            <button type="button" class="btn btn-default" ng-click="removeExitInterviewDetails()"data-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#voluntryblock").hide();
+    $("#involuntryblock").hide();
+    function  hideblock() {
+
+
+
+        if($("input[name='eVolutary']:checked").val()=="voluntry"){
+    $("#voluntryblock").show();
+            $("#involuntryblock").hide();
+        }
+
+        if($("input[name='eVolutary']:checked").val()=="involuntry"){
+            $("#voluntryblock").hide();
+            $("#involuntryblock").show();
+        }
+
+
+    }
+</script>

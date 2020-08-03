@@ -1,0 +1,8 @@
+package com.hyva.bsfms.bs.bsrespositories;
+import com.hyva.bsfms.bs.bsentities.MarksSubmission;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+public interface MarksSubmissionRepository extends JpaRepository<MarksSubmission,Long> {
+
+}

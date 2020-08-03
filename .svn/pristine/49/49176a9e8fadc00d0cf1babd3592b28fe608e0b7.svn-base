@@ -1,0 +1,539 @@
+<style>
+    .modal-content{
+        width:696px;
+    }
+    .modal-footer {
+        padding: 5px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    fieldset {
+        min-width: 0;
+        padding: 10px;
+        margin: 0;
+        border: 0;
+    }
+    .form-control {
+        display: block;
+        width: 171px;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+</style>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row" >
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Schema of work</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel-body" style="height: 65px;">
+                            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                                <form class="form-horizontal ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <p class="input-group" style="display: block;">
+                                                <input id="search_academic" name="textinput" type="text"
+                                                       placeholder="Search" ng-model="searchText" class="form-control input-md"
+                                                       ng-keyup="$event.keyCode == 13 ? getSowList() : null"/>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-7">
+
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addSow()">Add</button>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-default hi_btn"  ng-click="importSow()">Import</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="fixed-table-container">
+                        <div class="table_wrapfixed-table-container-inner">
+                            <div class="header-background"></div>
+                            <table data-toggle="table" data-cache="false" data-height="299" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                                <thead>
+                                <tr>
+                                    <th data-field="cntryname">
+                                        <div class="th-inner" align="center">Level</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Class</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Semester</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Subject</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Chapter</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Actions</div></th>
+                                </tr>
+                                </thead>
+                                <tbody id="parentTable">
+                                <input type="hidden" ng-model="sowId" value="{{sowList.sowId}}"/>
+                                <tr ng-repeat="sow in sowList|filter:searchText">
+                                    <td>{{sow.levelValue}}</td>
+                                    <td>{{sow.classesValue}}</td>
+                                    <td>{{sow.semesterValue}}</td>
+                                    <td>{{sow.subjectValue}}</td>
+                                    <td>{{sow.chapterValue}}</td>
+                                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editSow(sow)">Edit</button>
+                                    <button type="button" class="btn btn-primary hi_btn"  ng-click="deleteSow(sow)">Delete</button></td>
+                                </tr>
+                                <tr ng-if="searchText!=''&&(sowList|filter:searchText).length==0">
+                                    <td colspan="4" style="color: red; font-weight: bold">No Records Found</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-12 pagination_">
+                            <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"
+                                    ng-disabled="first"
+                                    ng-click="getSowList('firstPage')" ng-model="first">First
+                            </button>
+                            <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"
+                                    ng-disabled="prev"
+                                    ng-click="getSowList('prevPage')" ng-model="prev">Prev
+                            </button>
+                            <button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"
+                                    ng-click="getSowList('nextPage')" value="next"
+                                    ng-class="{'diabled-class': next}" ng-model="next">Next
+                            </button>
+                            <button type="button" class="btn btn-default hi_btn"
+                                    ng-click="getSowList('lastPage')" ng-class="{'diabled-class': last}"
+                                    ng-disabled="last"
+                                    ng-model="last">Last
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" id="add_new_plan_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout" style="width: 805px;">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true" ng-click="removeSow()">&times;</span></button>
+                                <h4 id="plan-title" class="modal-title">ADD SOW</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                    <div class="col-md-6 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Level<span style="color: red">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="levelId" name="levelId" ng-model="levelId"
+                                                                ng-change="levelClass(levelId)"
+                                                                ng-options="grade.gradeId as
+											grade.gradeName for grade in gradeList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+
+                                                        <input type="hidden" class="form-control" id="sowid" name="sowid" ng-model="sowid">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Semester<span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="semesterId" name="semesterId" ng-model="semesterId"  ng-change="getTermList(semesterId)"
+                                                                ng-options="semester.semesterId as
+											semester.semesterName for semester in semesterList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Term<span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="termId" name="termId" ng-model="termId"
+                                                                ng-options="term.termId as
+											term.termName for term in termList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Class<span style="color: red">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="classId" name="classId" ng-model="classId"
+                                                                ng-change="classSubject(classId)"
+                                                                ng-options="class.classId as
+											class.className for class in classList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Subject<span style="color: red">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="subjectId" name="subjectId" ng-model="subjectId"
+                                                                ng-change="subjectChapter(subjectId)"
+                                                                ng-options="sub.subjectId as
+											sub.subjectName for sub in subjectList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Chapter<span style="color: red">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="chapterId" name="chapterId" ng-model="chapterId" ng-change="getTopicList(chapterId)"
+                                                                ng-options="chapter.chapterId as
+											chapter.chapterName for chapter in chapterList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+
+                                    </div>
+                                    <div class="col-md-12 col-sm-8">
+                                        <table>
+
+                                         <thead>
+                                                <tr>
+                                                <th>Topic Name</th>
+                                                <th>From Week</th>
+                                                <th>To Week</th>
+                                                <th>Page No</th>
+                                                <th>Total Pages</th>
+                                                <th>Workbook Activity</th>
+                                                <th>&nbsp;</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="topicAdd" class="topicAdd">
+                                                <tr id="topic" ng-repeat="topic in topicList">
+                                                    <td><select style="width: 110px" ng-model="topic.topicId"  ng-click="openTopic(topic.topicId)" ng-options="topic.id as topic.topicName for topic in topicLists"  class="form-control"><option value="">Addnew</option></select>
+                                                    </td>
+                                                    <td>
+                                                        <select style="width: 110px" name="week" id="week" ng-model="topic.fromweek"  class="form-control input-md">
+                                                                    <option value="">Select</option>
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="6">6</option>
+                                                                    <option value="7">7</option>
+                                                                    <option value="8">8</option>
+                                                                    <option value="9">9</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="11">11</option>
+                                                                    <option value="12">12</option>
+                                                                    <option value="13">13</option>
+                                                                    <option value="14">14</option>
+                                                                    <option value="15">15</option>
+                                                                    <option value="16">16</option>
+                                                                    <option value="17">17</option>
+                                                                    <option value="18">18</option>
+                                                                    <option value="19">19</option>
+                                                                    <option value="20">20</option>
+                                                                    <option value="21">21</option>
+                                                                    <option value="22">22</option>
+                                                                    <option value="23">23</option>
+                                                                    <option value="24">24</option>
+                                                                    <option value="25">25</option>
+                                                                    <option value="26">26</option>
+                                                                    <option value="27">27</option>
+                                                                    <option value="28">28</option>
+                                                                    <option value="29">29</option>
+                                                                    <option value="30">30</option>
+                                                                    <option value="31">31</option>
+                                                                    <option value="32">32</option>
+                                                                    <option value="33">33</option>
+                                                                    <option value="34">34</option>
+                                                                    <option value="35">35</option>
+                                                                    <option value="36">36</option>
+                                                                    <option value="37">37</option>
+                                                                    <option value="38">38</option>
+                                                                    <option value="39">39</option>
+                                                                    <option value="40">40</option>
+                                                                    <option value="41">41</option>
+                                                                    <option value="42">42</option>
+                                                                    <option value="43">43</option>
+                                                                    <option value="44">44</option>
+                                                                    <option value="45">45</option>
+                                                                    <option value="46">46</option>
+                                                                    <option value="47">47</option>
+                                                                    <option value="48">48</option>
+                                                                    <option value="49">49</option>
+                                                                    <option value="50">50</option>
+                                                                    <option value="51">51</option>
+                                                                    <option value="52">52</option>
+                                                                </select>
+                                                    </td>
+                                                    <td >
+                                                                <select style="width: 110px" name="week" id="week" ng-model="topic.toweek"  ng-change="checkweek(topic.toweek,topic.fromweek,$index)" class="form-control input-md">
+                                                                    <option value="">Select</option>
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="6">6</option>
+                                                                    <option value="7">7</option>
+                                                                    <option value="8">8</option>
+                                                                    <option value="9">9</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="11">11</option>
+                                                                    <option value="12">12</option>
+                                                                    <option value="13">13</option>
+                                                                    <option value="14">14</option>
+                                                                    <option value="15">15</option>
+                                                                    <option value="16">16</option>
+                                                                    <option value="17">17</option>
+                                                                    <option value="18">18</option>
+                                                                    <option value="19">19</option>
+                                                                    <option value="20">20</option>
+                                                                    <option value="21">21</option>
+                                                                    <option value="22">22</option>
+                                                                    <option value="23">23</option>
+                                                                    <option value="24">24</option>
+                                                                    <option value="25">25</option>
+                                                                    <option value="26">26</option>
+                                                                    <option value="27">27</option>
+                                                                    <option value="28">28</option>
+                                                                    <option value="29">29</option>
+                                                                    <option value="30">30</option>
+                                                                    <option value="31">31</option>
+                                                                    <option value="32">32</option>
+                                                                    <option value="33">33</option>
+                                                                    <option value="34">34</option>
+                                                                    <option value="35">35</option>
+                                                                    <option value="36">36</option>
+                                                                    <option value="37">37</option>
+                                                                    <option value="38">38</option>
+                                                                    <option value="39">39</option>
+                                                                    <option value="40">40</option>
+                                                                    <option value="41">41</option>
+                                                                    <option value="42">42</option>
+                                                                    <option value="43">43</option>
+                                                                    <option value="44">44</option>
+                                                                    <option value="45">45</option>
+                                                                    <option value="46">46</option>
+                                                                    <option value="47">47</option>
+                                                                    <option value="48">48</option>
+                                                                    <option value="49">49</option>
+                                                                    <option value="50">50</option>
+                                                                    <option value="51">51</option>
+                                                                    <option value="52">52</option>
+                                                                </select>
+                                                    </td>
+                                                <td><input style="width: 110px" type="text" num-with-space  maxlength="20" ng-model="topic.pageNo"  name="no[]" number="" class="form-control"></td>
+                                                <td><input style="width: 110px" type="text" num-with-space maxlength="20" ng-model="topic.totalPages"  name="pages[]" number=""  class="form-control"></td>
+                                                <td><input  style="width: 110px" type="text"  ng-model="topic.activity" name="workActivity[]" class="form-control">
+                                                 </td>
+                                                    <td><button class="btn btn-danger remove" ng-click="removePreviousDetails($index)">X</button></td>
+                                            </tr>
+                                                </tbody>
+                                            </table>
+
+                                        <button type="button" class="btn btn-primary hi_btn pull-right" ng-click="addnewrowtopic()">Add New
+                                        </button>
+                                    </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                        ng-click="saveSow('add_new_plan_modal')">Save
+                                </button>
+
+                                <button type="button" class="btn btn-primary hi_btn" ng-click="removeSow()"
+                                        data-dismiss="modal">Close
+                                </button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" id="add_new_plan_import_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout" style="width: 805px;">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true" ng-click="removeSow()">&times;</span></button>
+                                <h4 id="plan-title" class="modal-title">Import Statement of work</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                    <div class="col-md-6 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Level<span style="color: red">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="levelId" name="levelId" ng-model="levelId"
+                                                                ng-change="levelClass(levelId)"
+                                                                ng-options="grade.gradeId as
+											grade.gradeName for grade in gradeList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+
+                                                        <input type="hidden" class="form-control" id="sowid" name="sowid" ng-model="sowid">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Semester<span style="color: red">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="semesterId" name="semesterId" ng-model="semesterId" ng-change="getTermList(semesterId)"
+                                                                ng-options="semester.semesterId as
+											semester.semesterName for semester in semesterList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Term<span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="termId" name="termId" ng-model="termId"
+                                                                ng-options="term.termId as
+											term.termName for term in termList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Class<span style="color: red">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="classId" name="classId" ng-model="classId"
+                                                                ng-change="classSubject(classId)"
+                                                                ng-options="class.classId as
+											class.className for class in classList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Subject<span style="color: red">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="subjectId" name="subjectId" ng-model="subjectId"
+                                                                ng-change="subjectChapter(subjectId)"
+                                                                ng-options="sub.subjectId as
+											sub.subjectName for sub in subjectList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Chapter<span style="color: red">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="chapterId" name="chapterId" ng-model="chapterId"
+                                                                ng-options="chapter.chapterId as
+											chapter.chapterName for chapter in chapterList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+
+                                    </div>
+                                    <div class="col-md-12 col-sm-8">
+                                        <form class="form-horizontal" id="details" method="post" >
+
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <a href="resource/ImpotSheets/SOW.xlsx" download>Download ExcelSheet</a>
+                                                        <div class="modal-body checkout-body">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <div class="col-xs-5">
+                                                                        <input type="file" name="myFile"
+                                                                               id="myFile"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-default" data-toggle="modal" ng-click="saveSowImportMaster(subjectId,classId,termId,semesterId,levelId,chapterId)" ng-disabled="isDisabled">Save</button>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="removeSow()">Close</button>
+                                                        </div>
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                        </form>
+
+                                    </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <add-new-topic></add-new-topic>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

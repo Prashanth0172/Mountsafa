@@ -1,0 +1,157 @@
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+    <div class="container cus_main_row">
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Deduction</div>
+            </h2>
+        </div>
+
+        <!--// TO ADD GOLD//-->
+        <div class="col-md-2 col-sm-5 col-xs-5">
+            <input class="form-control input-md" id="textinput" name="textinput"
+                   ng-keyup="$event.keyCode == 13 ? getPaginatedDeductionList(searchText) : null" ng-model="searchText" placeholder="Search"
+                   type="text"/>
+
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <button class="btn btn-primary hi_btn" ng-click="addDeduction()"
+                   type="button">Add
+            </button>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-4">
+            <button type="submit" id="colButn" class="btn btn-primary hi_btn" data-toggle="modal"
+                    ng-model="inactiveStatus" data-target=".print-me"
+                    ng-click="inactiveDeduction()">{{ButtonStatus}}
+            </button>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="fixed-table-container">
+                <div class="table_wrap fixed-table-container-inner">
+                    <table class=" hi_table table table_option2 table-hover table-striped table-fixed-header list_table"
+                           id="" style="margin-bottom: 0;">
+                        <thead>
+                        <tr>
+                            <th data-field="desc">
+                                <div class="th-inner">Deduction Name</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Deduction Description</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Deduction Status</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Actions</div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="parentTable">
+
+                        <tr ng-repeat="deduction in deductionList | filter:searchText">
+                            <td>{{deduction.deductionName}}</td>
+                            <td>{{deduction.deductionDesc}}</td>
+                            <td>{{deduction.status}}</td>
+                            <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editDeduction(deduction)">Edit</button>
+                                <button class="btn btn-primary hi_btn" ng-click="deleteDeduction(deduction.deductionId)" type="button">Delete</button>
+                            </td>
+
+                        </tr>
+                        <tr ng-if="searchText!=''&&(deductionList|filter:searchText).length==0">
+                            <td colspan="4" style="color: red; font-weight: bold">No Records Found</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-12 pagination_">
+                <button class="btn btn-default hi_btn" ng-class="{'diabled-class': first}" ng-click="getPaginatedDeductionList('firstPage')"
+                        ng-disabled="first"
+                        ng-model="first" type="button">First
+                </button>
+                <button class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}" ng-click="getPaginatedDeductionList('prevPage')"
+                        ng-disabled="prev"
+                        ng-model="prev" type="button">Prev
+                </button>
+                <button class="btn btn-default hi_btn" name="next" ng-class="{'diabled-class': next}" ng-click="getPaginatedDeductionList('nextPage')"
+                        ng-disabled="next" ng-model="next" type="button"
+                        value="next">Next
+                </button>
+                <button class="btn btn-default hi_btn" ng-class="{'diabled-class': last}"
+                        ng-click="getPaginatedDeductionList('lastPage')" ng-disabled="last" ng-model="last"
+                        type="button">Last
+                </button>
+            </div>
+            <div>
+
+            </div>
+        </div>
+
+
+        <div aria-labelledby="mySmallModalLabel" class="modal fade Add Deduction" data-backdrop="static" id="add_new_Deduction_modal"
+             role="dialog"
+             tabindex="-1">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content checkout">
+                    <div class="modal-header">
+                        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="modelName"></h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <form class="form-horizontal">
+                                    <fieldset>
+                                        <input ng-model="DedObj.deductionId" type="hidden"
+                                               value="{{DedObj.deductionId}}">
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Deduction Name<span style="color: red">*</span> </label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input id="deductionName" name="deductionName"class="form-control input-md" alpha-with-space=""
+                                                       ng-model="deductionName">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Deduction Description</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input id="deductionDescription" name="deductionDescription" class="form-control input-md"
+                                                       ng-model="deductionDescription">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Status</label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <select class="form-control input-md" id="status"
+                                                        name="status" ng-model="status"
+                                                        required>
+                                                    <!--<option value="">Select</option>-->
+                                                    <option value="Active">Active</option>
+                                                    <option value="InActive">InActive</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-default" id="submit" ng-click="saveDeduction()"
+                                                    ng-disabled="isDisabled"
+                                                    type="button">Save
+                                            </button>
+                                            <button class="btn btn-default" data-dismiss="modal"
+                                                    ng-click="removeDeductionDetails()" type="button">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

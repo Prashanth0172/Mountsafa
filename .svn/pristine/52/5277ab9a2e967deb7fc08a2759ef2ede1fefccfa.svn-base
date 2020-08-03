@@ -1,0 +1,486 @@
+app.controller('admissionController',
+    function ($scope, $timeout, $http, $location, $filter, Notification) {
+        $scope.bshimServerURL = "/bs";
+        $scope.operation = 'Create';
+        $scope.AgreeDate =new Date();
+
+        $scope.inactiveStatus = "Active";
+
+        $scope.companyLogoPath = "";
+
+        $scope.importPopup = function(){
+            $("#import_Country").modal('show');
+        }
+
+        $scope.format = 'dd/MM/yyyy';
+        $scope.open1 = function () {
+            $scope.popup1.opened = true;
+        };
+
+        $scope.popup1 = {
+            opened: false
+        };
+        $scope.open2 = function () {
+            $scope.popup2.opened = true;
+        };
+
+        $scope.popup2 = {
+            opened: false
+        };
+        $scope.open3 = function () {
+            $scope.popup3.opened = true;
+        };
+
+        $scope.popup3 = {
+            opened: false
+        };
+
+
+
+
+        $scope.getDiscountTypeList = function (val) {
+            if (angular.isUndefined(val)) {
+                val = "";
+            }
+
+            $(".loader").css("display", "block");
+            $http.post($scope.bshimServerURL  + '/getDiscountTypeList?searchText=' + val).then(function (response) {
+                var data = response.data;
+                $scope.discountTypeList= data;
+                $scope.searchText = val;
+
+            }, function (error) {
+                Notification.error({
+                    message: 'Something went wrong, please try again',
+                    positionX: 'center',
+                    delay: 2000
+                });
+            })
+
+        };
+
+        $scope.getDiscountTypeList();
+
+
+          $scope.addNewFee = function (academic,gradeId,data) {
+            $('#fee-title').text("Add FeeDetails");
+            $("#add_new_fee_modal").modal('show');
+            $http.post($scope.bshimServerURL  + "/getStudentDetails?studentId=" + data.studentId + "&type=" + 'student' + "&receiptId=" + "" + "&feeType=" + "" ).then(function (response) {
+                var data = response.data;
+                $scope.feeAdmissionList= data.studentFeeDetailsPojoList;
+                if($scope.feeAdmissionList.length>0) {
+                    $scope.selectedFeeList = [];
+                    angular.forEach($scope.feeAdmissionList, function (val, key) {
+                        $scope.list = [];
+                        angular.forEach(val.installmentsPojos, function (val1, key) {
+                            $scope.list.push({
+                                checkBox: val1.checkBox,
+                                dueDate: new Date(val1.dueDate),
+                                paidAmt: parseInt(val1.paidAmt),
+                                installmentsAmount: parseInt(val1.dueAmt),
+                                discountRemarks: val1.discountRemarks
+                            })
+                        })
+                        $scope.selectedFeeList.push({
+                            feeTypeId: val.feeTypeId,
+                            studentFeeDetailsId: val.studentFeeDetailsId,
+                            feeTypeName: val.feeTypeName,
+                            feeAmount: val.feeTypeAmount,
+                            status: val.status,
+                            installmentsAmount: val.installmentsAmount,
+                            installments: val.noOfInstallments,
+                            acdyrmaster: val.acdyrmaster,
+                            discountRemarks: val.discountRemarks,
+                            discountType: val.discountType,
+                            dueDate: val.dueDate,
+                            payable: val.payable,
+                            discount: val.discount,
+                            gradeMaster: val.gradeMaster,
+                            paidAmt: val.paidAmount,
+                            value: val.value,
+                            payingFee: val.payable,
+                            installmentsPojosList: $scope.list,
+                            checkBox: val.checkBox,
+                            feeTypeStatus: val.feeTypeStatus
+                        });
+                    });
+                    angular.forEach($scope.selectedFeeList, function (val, key) {
+                        if (val.checkBox == false) {
+                            val.check = false;
+                        } else {
+                            val.check = true;
+                        }
+                        if (val.installments > 1 && val.value == "false") {
+                            val.value = "true";
+                        }
+                    })
+                    if ($scope.selectedFeeList.length == 0) {
+                        $scope.getFeeTypeMasterList($scope.acdYearId, $scope.gradeId, $scope.stuId);
+                    }
+                    $scope.getTotal();
+                }
+            });
+            $scope.setAllDetails(data);
+            $scope.getFeeTypeMasterList (academic,gradeId);
+        };
+        $scope.countryState = function(country,type){
+            var url = "/bs/getCountryState?countryId=" + country;
+            $http.post(url).then(function (response) {
+                var data = response.data;
+                if(type=='CorrespondanceAdr'){
+                    $scope.stateList = angular.copy(data);
+
+                }
+                else if(type=='PerAdr'){
+                    $scope.statePerList = angular.copy(data);
+                }
+                else if(type=='FatherAdr'){
+                    $scope.stateFatherList = angular.copy(data);
+                }
+                else if(type=='MotherAdr'){
+                    $scope.stateMotherList = angular.copy(data);
+                }
+                else if(type=='GuarCorAdr'){
+                    $scope.stateGuarList = angular.copy(data);
+                }
+                else if(type=='GuarPerAdr'){
+                    $scope.stateGuarPerList = angular.copy(data);
+                }
+            })
+        }
+        $scope.stateCity = function(state,type){
+            if (angular.isUndefined(state)|| state==null) {
+                state = "";
+            }
+            var url = "/bs/getStateCity?stateId=" + state;
+            $http.post(url).then(function (response) {
+                var data = response.data;
+                if(type=='CorrespondanceAdr'){
+                    $scope.cityList = angular.copy(data);
+
+                }
+                else if(type=='PerAdr'){
+                    $scope.cityPerList = angular.copy(data);
+                }
+                else if(type=='FatherAdr'){
+                    $scope.cityFatherList = angular.copy(data);
+                }
+                else if(type=='MotherAdr'){
+                    $scope.cityMotherList = angular.copy(data);
+                }
+                else if(type=='GuarCorAdr'){
+                    $scope.cityGuarList = angular.copy(data);
+                }
+                else if(type=='GuarPerAdr'){
+                    $scope.cityGuarPerList = angular.copy(data);
+                }
+            })
+        }
+        $scope.getClassList = function () {
+            $http.post($scope.bshimServerURL + '/getClassList').then(function (response) {
+                var data = response.data;
+                $scope.classList = data;
+            }, function (error) {
+                Notification.error({
+                    message: 'Something went wrong, please try again',
+                    positionX: 'center',
+                    delay: 2000
+                });
+            });
+        };
+        $scope.getClassList();
+        $scope.setAllDetails=function (data) {
+            $scope.studentId = data.studentId;
+            $scope.countryId = data.countryId;
+            $scope.CountryNameText = data.countryName;
+            $scope.branchId = data.branchId;
+            $scope.levelId = parseInt(data.gradeId);
+            $scope.classId = parseInt(data.classId);
+            $scope.admindt = new Date(data.admissionDate);
+            $scope.genderText = data.gender;
+            $scope.PassportNoNameText = data.passportNo;
+            $scope.birthcertificateText = data.birthCertificate;
+            $scope.age = data.age;
+            $scope.phone = data.telNo;
+            $scope.semester = data.semester;
+            $scope.acdYearId=parseInt(data.acdYearId);
+            $scope.stdname = data.studentName;
+            $scope.nationality = data.nationality;
+            $scope.fatheroccupation=data.fatheroccupation;
+            $scope.dateofbirth = new Date(data.dateofbirth);
+            $scope.placeOfBirth = data.placeOfBirth;
+            $scope.launguage = data.language;
+            $scope.medicine = data.medicine== "true";
+            $scope.emailid=data.email;
+            $scope.corresponding = angular.fromJson(data.corresponding);
+            if($scope.corresponding!=null) {
+                $scope.countryState($scope.corresponding.correscountryId, 'CorrespondanceAdr');
+                $scope.stateCity($scope.corresponding.corresstateId,'CorrespondanceAdr');
+            }
+
+            $scope.previousSchoolsDetails = angular.fromJson(data.previousSchoolsDetails);
+            $scope.spokenList = angular.fromJson(data.spokenlang);
+            $scope.permanent = angular.fromJson(data.permanent);
+            if($scope.permanent!=null) {
+                $scope.countryState($scope.permanent.pcountryId, 'PerAdr');
+                $scope.stateCity($scope.permanent.pstateId, 'PerAdr');
+            }
+            $scope.sameascorresponding=data.sameascorresponding== "true";
+            $scope.guarSameAsCorresAdd=data.guarSameAsCorresAdd== "true";
+            $scope.motherOfficeAddress=angular.fromJson(data.motherOfficeAddress);
+            if($scope.motherOfficeAddress!=null) {
+                $scope.countryState($scope.motherOfficeAddress.mothercountryId, 'MotherAdr');
+                $scope.stateCity($scope.motherOfficeAddress.motherstateId, 'MotherAdr');
+            }
+            $scope.fatherOfficeAddress =angular.fromJson(data.fatherOfficeAddress);
+            if($scope.fatherOfficeAddress!=null) {
+                $scope.countryState($scope.fatherOfficeAddress.fathercountryId, 'FatherAdr');
+                $scope.stateCity($scope.fatherOfficeAddress.fatherstateId, 'FatherAdr');
+            }
+            $scope.guardPerAddress=angular.fromJson(data.gaurdianPermanentAddress);
+            if($scope.guardPerAddress!=null) {
+                $scope.countryState($scope.guardPerAddress.guarpermcountryId, 'GuarPerAdr');
+                $scope.stateCity($scope.guardPerAddress.guarpermstateId, 'GuarPerAdr');
+            }
+            $scope.guardCorrAddress=angular.fromJson(data.gaurdianCorrespondenceAddress);
+            if($scope.guardCorrAddress!=null) {
+                $scope.countryState($scope.guardCorrAddress.guarcorrescountryId, 'GuarCorAdr');
+                $scope.stateCity($scope.guardCorrAddress.guarcorresstateId, 'GuarCorAdr');
+            }
+            $scope.immunization = data.immunization== "true";
+            $scope.food = data.food== "true";
+            $scope.others = data.others== "true";
+            $scope.asthma = data.asthma== "true";
+            $scope.epilepsy = data.epilepsy== "true";
+            $scope.illnessOthers = data.illnessOthers=="true";
+            $scope.medicineState = data.medicineState;
+            $scope.immunizationState = data.immunizationState;
+            $scope.foodState = data.foodState;
+            $scope.othersState = data.othersState;
+            $scope.asthmaState = data.asthmaState;
+            $scope.epilepsyState = data.epilepsyState;
+            $scope.illnessOthersState = data.illnessOthersState;
+            $scope.fatherName = data.fatherName;
+            $scope.fatherPassNo = data.fatherPassportNo;
+            $scope.fatherICNO = data.fatherICNO;
+            $scope.fatherFax = data.faxNo;
+            $scope.fathernationality = data.fatherNationality;
+            $scope.fatherDOB = new Date(data.fathersDOB);
+            $scope.fathereducation = data.fatherEducation;
+            $scope.fatherincome = data.incomePerAnnum;
+            $scope.fatherEmployer = data.fatherEmployer;
+            $scope.fatherBusiness = data.natureofbusiness;
+            $scope.fatherTelNo = data.fatherContactNo;
+            $scope.fatherMobileNo = data.fatherMobileNo;
+            $scope.fatherEmail = data.fatherEmailId;
+            $scope.motherPassNo = data.motherPassportNo;
+            $scope.motherName = data.motherName;
+            $scope.motherICNO = data.motherICNO;
+            $scope.motherFax = data.motherfaxNo;
+            $scope.mothernationality = data.motherNationality;
+            $scope.motherDOB = new Date(data.motherDOB);
+            $scope.motheroccupation = data.motherOccupation;
+            $scope.mothereducation = data.motherEducation;
+            $scope.motherincome = data.motherincomePerAnnum;
+            $scope.motherEmployer = data.motherEmployer;
+            $scope.motherBusiness = data.mothernatureofbusiness;
+            $scope.motherTelNo = data.motherContactNo;
+            $scope.motherMobileNo = data.motherMobileNo;
+            $scope.motherEmail = data.motherEmailId;
+            $scope.guardianName = data.gaurdianName;
+            $scope.guardiannationality = data.gaurdianNationality;
+            $scope.guardianRelation = data.gaurdianRelation;
+            $scope.guardianPassNo = data.gaurdianPassportNo;
+            $scope.guardianoccupation = data.gaurdianOccupation;
+            $scope.guardianEmployer = data.gaurdianEmployeer;
+            $scope.guardianICNO = data.gaurdianICNO;
+            $scope.guardianMobileNo = data.gaurdianMobileNo;
+            $scope.guardianTelNo = data.guardianTelNo;
+            $scope.profileId=data.studentProfileId;
+            $scope.fileName=data.studentPhoto;
+            $scope.fileName1=data.studBirthCer;
+            $scope.fileName2=data.studIdentityCard;
+            $scope.fileName3=data.parentIdentityCard;
+            $scope.fileName4=data.parentMarrCer;
+            $scope.fileName5=data.prevSchoolCer;
+            $scope.fileName6=data.studOtherDoc;
+            $scope.sbillingDetailsList = angular.fromJson(data.siblingsInformation);
+            $scope.formDetails = [];
+            angular.forEach($scope.sbillingDetailsList,function (datas) {
+                $scope.formDetails.push({
+                    sbillDOB :new Date(datas.sbillDOB),
+                    sbillName :datas.sbillName,
+                    sbillPrevSchool :datas.sbillPrevSchool,
+                    sbilladminNo :datas.sbilladminNo
+
+                })
+            })
+            $scope.sbillingDetailsList = $scope.formDetails;
+        }
+
+        $scope.installmentList = function (data, len, discount) {
+            $scope.selectedFeeList[len].installmentsPojosList = [];
+            if (discount == null) {
+                discount = 0;
+            }
+            if(data==""){
+                data=1;
+                $scope.selectedFeeList[len].installments=data;
+            }
+            var amt= ($scope.selectedFeeList[len].feeAmount - parseInt(discount)) % parseInt(data);
+            for (var i = 0; i < data; i++) {
+                $scope.selectedFeeList[len].installmentsPojosList.push({'installmentsAmount': '', 'dueDate': ''});
+                $scope.selectedFeeList[len].installmentsPojosList[i].installmentsAmount = parseInt(($scope.selectedFeeList[len].feeAmount - parseInt(discount)) / parseInt(data));
+                if ($scope.selectedFeeList[len].installmentsPojosList[i].dueDate == null || $scope.selectedFeeList[len].installmentsPojosList[i].dueDate == "") {
+                    $scope.selectedFeeList[len].installmentsPojosList[i].dueDate = new Date();
+                }
+            }
+            $scope.selectedFeeList[len].installmentsPojosList[0].installmentsAmount=$scope.selectedFeeList[len].installmentsPojosList[0].installmentsAmount+amt;
+            $scope.editSelectedFeeList($scope.selectedFeeList[len], len, 0);
+        };
+        $scope.editSelectedFeeList = function (data, index, index1) {
+            $scope.selectedFeeList[index].feeAmount = parseInt(data.feeAmount);
+            $scope.selectedFeeList[index].installments = data.installments;
+            $scope.selectedFeeList[index].installmentsAmount = parseInt(data.installmentsAmount);
+            $scope.selectedFeeList[index].acdyrmaster = data.acdyrmaster;
+            $scope.selectedFeeList[index].dueDate = data.dueDate;
+            $scope.selectedFeeList[index].feeTypeId = data.feeTypeId;
+            $scope.selectedFeeList[index].feeTypeName = data.feeTypeName;
+            $scope.selectedFeeList[index].gradeMaster = data.gradeMaster;
+            $scope.selectedFeeList[index].status = data.status;
+            $scope.selectedFeeList[index].discount = data.discount;
+            $scope.instalmentAmt = parseInt(0);
+            angular.forEach($scope.selectedFeeList[index].installmentsPojosList, function (val, key) {
+                if(val.installmentsAmount!="")
+                    $scope.instalmentAmt = parseInt(val.installmentsAmount) + $scope.instalmentAmt;
+                else
+                    val.installmentsAmount=0;
+            })
+            if ($scope.instalmentAmt > $scope.selectedFeeList[index].payingFee + 1) {
+                Notification.error({
+                    message: 'Installment Amt should not exceed Total Payable',
+                    positionX: 'center',
+                    delay: 2000
+                })
+                angular.forEach($scope.selectedFeeList[index].installmentsPojosList, function (val, key) {
+                    if(index1!=key){
+                        val.installmentsAmount=0;
+                    }else {
+                        if(val.installmentsAmount>parseInt($scope.selectedFeeList[index].payingFee)){
+                            val.installmentsAmount = parseInt($scope.selectedFeeList[index].payingFee);
+                        }
+                    }
+                })
+                // $scope.installmentList($scope.selectedFeeList[index].installments,index,$scope.selectedFeeList[index].discount);
+                // $scope.selectedFeeList[index].installmentsPojosList[index1].installmentsAmount = parseInt($scope.selectedFeeList[index].payingFee / $scope.selectedFeeList[index].installments);
+            }
+            $scope.getTotal();
+        };
+        $scope.discount = parseInt(0);
+        $scope.configDiscount = function (disConfig, index) {
+            if (disConfig != null && disConfig != "") {
+                $scope.discType = disConfig.toString().slice(-1);
+                if ($scope.discType == "%") {
+                    $scope.selectedFeeList[index].discPercent = parseInt(disConfig.toString().slice(0, -1));
+                    $scope.selectedFeeList[index].discount = parseInt((($scope.selectedFeeList[index].feeAmount * $scope.selectedFeeList[index].discPercent) / 100));
+                    $scope.selectedFeeList[index].payable = parseInt(($scope.selectedFeeList[index].feeAmount - $scope.selectedFeeList[index].discount));
+                    $scope.selectedFeeList[index].payingFee = parseInt(($scope.selectedFeeList[index].feeAmount - $scope.selectedFeeList[index].discount));
+                }
+                else {
+                    $scope.feeAmt = parseInt($scope.selectedFeeList[index].feeAmount);
+                    $scope.discountAmt = parseInt(disConfig);
+                    if ($scope.discountAmt > $scope.feeAmt) {
+                        Notification.error({
+                            message: 'Discount should not be Greater than Fee amount',
+                            positionX: 'center',
+                            delay: 2000
+                        })
+                        disConfig = parseInt(0);
+                    }
+                    $scope.selectedFeeList[index].discount = parseInt(disConfig);
+                    $scope.selectedFeeList[index].payable = parseInt($scope.selectedFeeList[index].feeAmount - disConfig);
+                    $scope.selectedFeeList[index].payingFee = parseInt($scope.selectedFeeList[index].feeAmount - disConfig);
+                }
+            } else {
+                $scope.selectedFeeList[index].discount = parseInt(0);
+                $scope.selectedFeeList[index].payable = parseInt($scope.selectedFeeList[index].feeAmount);
+                $scope.selectedFeeList[index].payingFee = parseInt($scope.selectedFeeList[index].feeAmount);
+
+            }
+            $scope.installmentList($scope.selectedFeeList[index].installments, index, $scope.selectedFeeList[index].discount);
+            $scope.getTotal();
+        }
+
+
+
+        $scope.editAdmission = function (data) {
+            $scope.setAllDetails(data);
+            $scope.operation = 'Edit';
+            $("#sub_step25").removeClass("in active");
+            $("#sub_step12").addClass("in active");
+            $("#back1").hide();
+            $("#next").show();
+            $("#saveId").hide();
+            $('#admission-title').text("Edit Admission");
+            $("#add_new_admission_modal").modal('show');
+        }, function (error) {
+            Notification.error({
+                message: 'Something went wrong, please try again',
+                positionX: 'center',
+                delay: 2000
+            });
+        };
+
+
+
+        $scope.viewAdmission = function (data) {
+            $scope.setAllDetails(data);
+            $("#lessionPlanMain_row").modal('show');
+        };
+        $scope.admissionprintDivA5 = function (divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var popupWin = window.open('', '_blank', 'width=300,height=300');
+            popupWin.document.open();
+            $("#closebtn").modal('hide');
+            $("#printbuttonbtn").modal('hide');
+            popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" media="print" href="poscss/recept_print.css"><link href="css/bootstrap.css" rel="stylesheet"></head><body style="width:595px;" onload="window.print()">' + printContents + '</body></html>');
+            popupWin.document.close();
+        };
+
+        $scope.stdlist=[];
+        $scope.addnew = function () {
+            $scope.stdlist.push({
+
+            })
+        };
+
+        $scope.schoolAttendedList=[];
+        $scope.addnewStudentAttended = function () {
+            $scope.schoolAttendedList.push({
+
+            })
+        }
+
+        $scope.siblingsList=[];
+        $scope.siblingsList = function () {
+            $scope.siblingsList.push({
+
+            })
+        }
+
+        $scope.AddNewRowForSpoken = function () {
+            var n =($('.spokenadd tr').length-0)+1;
+            var tr = '<tr>'+
+                '<td>'+
+                '<input type="text" name="spoken_languages[]" value="" id="spoken_languages" required="true">'+
+                '<button type="button" class="btn btn-danger remove" id="spoken0" >X</button><span style="color: black"></span></td>'+
+            '</tr>';
+            $('.spokenadd').append(tr);
+
+        }
+
+
+
+
+    }
+);

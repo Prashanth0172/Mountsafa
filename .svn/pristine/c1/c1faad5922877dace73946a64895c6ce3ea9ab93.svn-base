@@ -1,0 +1,2204 @@
+<style>
+    .form-horizontal .control-label {
+        padding-top: 7px;
+        margin-bottom: 0;
+        text-align: left !important;
+        padding: 10px 0 0 10px !important;
+    }
+
+    .modal-footer .btn + .btn {
+        margin-bottom: 0;
+        margin-left: 4px !important;
+        margin-right: 0px !important;
+    }
+
+    .modal-title {
+        margin: 0;
+        line-height: -31.571429 !important;
+    }
+
+    .form-horizontal .form-group {
+        margin-right: -5px;
+        margin-left: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 5px;
+    }
+
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .modal-footer {
+        padding: 23px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 100;
+    }
+
+    .btn btn-primary back {
+        padding: 5px;
+    }
+
+    table>tbody>tr>td {
+    text-align: left !important;
+    }
+
+
+</style>
+<div class="container-fluid">
+    <div class="container cus_main_row">
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>HR Application Form</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel-body" style="height: 65px;">
+                            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                                <form class="form-horizontal ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <p class="input-group" style="display: block;">
+                                                <input id="search_academic" name="textinput" type="text"
+                                                       placeholder="Search" ng-model="searchText" class="form-control input-md"
+                                                       ng-keyup="$event.keyCode == 13 ? getHrList(searchText) : null"/>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-7">
+
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addNewAdmission()">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="fixed-table-container">
+                        <div class="table_wrapfixed-table-container-inner">
+                            <div class="header-background"></div>
+                            <table data-toggle="table" data-cache="false" data-height="299" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                                <thead>
+                                <tr>
+                                    <th data-field="cntryname">
+                                        <div class="th-inner">Admin. No</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Name</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Position Applied</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Application Date</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Age</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Nationality</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Gender</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Phone No</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Email</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Status</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner"></div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner"></div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Actions</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner"></div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner"></div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner"></div></th>
+
+                                </tr>
+                                </thead>
+                                <tbody id="parentTable">
+                                <input type="hidden" ng-model="hrId" value="{{admissionList.hrId}}"/>
+                                <tr ng-repeat="hr in hrlist|filter:searchText">
+                                    <td >{{hr.hrId}}</td>
+                                    <td>{{hr.hrFullName}}</td>
+                                    <td>{{hr.positionText}}</td>
+                                    <td>{{hr.applicationDate |date:'dd/MM/yyyy'}}</td>
+                                    <td>{{hr.hrage}}</td>
+                                    <td>{{hr.hrNationality}}</td>
+                                    <td>{{hr.hrSex}}</td>
+                                    <td>{{hr.hrphoneNo}}</td>
+                                    <td>{{hr.hrEmailAddress}}</td>
+
+                                    <td ng-show="hr.interviewerSchedStatus">{{hr.interviewerSchedStatus}}</td>
+                                    <td ng-hide="hr.interviewerSchedStatus||hr.status">{{hr.interviewerStatus}}</td>
+                                    <td ng-hide="hr.interviewerSchedStatus||hr.interviewerStatus">{{hr.status}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary hi_btn"
+                                                ng-click="editAdmission(hr)">Edit
+                                        </button>
+                                    </td>
+                                    <td>
+
+                                    <button type="button" class="btn btn-primary hi_btn"
+                                    ng-click="viewAdmission(hr)">View
+                                    </button>
+                                    </td>
+                                    <td ng-show="hr.interviewerStatus != 'accepted'" style="border:none;">
+
+                                    <button type="button" class="btn btn-primary hi_btn"
+                                            ng-click="deleteAdmission(hr)">Delete
+                                    </button>
+                                    </td>
+                                    <td>
+                                    <!--<button type="button" class="btn btn-primary hi_btn" data-toggle="modal" data-target="#exampleModal">Mome-->
+                                    <!--</button>-->
+                                        <div class="dropdown">
+                                            <button ng-click="myFunction(hr)" class="dropbtn btn btn-primary hi_btn">More</button>
+                                            <div id="myDropdown" class="dropdown-content">
+                                                <table style="border:none; width:100%;" >
+                                                    <tr>
+                                                        <td style="border:none;" ng-if="moreid.status == 'KIV'">
+                                                            <button type="button" class="btn btn-default" ng-click="addKIVModal(moreid.hrId)"><i class="fa fa-eye" aria-hidden="true"></i> KIV</button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border:none;" ng-if="moreid.status == 'Accepted'">
+                                                            <button type="button" class="btn btn-default" ng-click="addInterviewModal(moreid.hrId)"><i class="fa fa-eye" aria-hidden="true"></i> Schedule Interview</button>
+                                                        </td>
+                                                    </tr> <tr>
+                                                        <td style="border:none;" ng-if="moreid.interviewtime">
+                                                            <button type="button" class="btn btn-default" ng-click="addInterviewscheModal(moreid.hrId)"><i class="fa fa-eye" aria-hidden="true"></i> Interview</button>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td style="border:none;" ng-if="moreid.interviewerSchedStatus == '2nd Interview'">
+                                                            <button type="button" class="btn btn-default" ng-click="add2InterviewModal(moreid.hrId)"><i class="fa fa-eye" aria-hidden="true"></i> Second Interview</button>
+                                                        </td>
+                                                    </tr> <tr>
+                                                        <td style="border:none;" ng-if="moreid.interviewerSchedStatus == 'Microteaching'">
+                                                            <button type="button" class="btn btn-default" ng-click="access(moreid)"><i class="fa fa-eye" aria-hidden="true"></i> Micro Teaching</button>
+                                                        </td>
+                                                    </tr> <tr>
+                                                        <td style="border:none;" ng-if="moreid.interviewerSchedStatus == 'Accepted'||moreid.secondInteviewStatus=='Accepted'">
+                                                            <button type="button" class="btn btn-default" ng-click="offerLetter(moreid.hrId)"><i class="fa fa-eye" aria-hidden="true"></i> Offer Letter</button>
+                                                        </td>
+                                                    </tr> <tr>
+                                                        <td style="border:none;" ng-if="moreid.interviewerSchedStatus == 'Accepted'||moreid.secondInteviewStatus=='Accepted'">
+                                                            <button type="button" class="btn btn-default" ng-click="acceptanceLetter(moreid.hrId)"><i class="fa fa-eye" aria-hidden="true"></i> Acceptance Letter</button>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <!--<td ng-show="hr.interviewerStatus != 'accepted'">-->
+                                        <!--<button type="button" class="btn btn-primary hi_btn"-->
+                                                <!--ng-click="deleteAdmission(hr)">Delete-->
+                                        <!--</button>-->
+                                    <!--</td>-->
+                                    <!--<td ng-if="hr.status == 'KIV'">-->
+                                        <!--<button type="button" class="btn btn-primary hi_btn"-->
+                                                <!--ng-click="addKIVModal(hr.hrId)">KIV-->
+                                        <!--</button>-->
+                                    <!--</td>-->
+                                    <!--<td ng-if="hr.status == 'Accepted'">-->
+                                        <!--<button type="button" class="btn btn-primary hi_btn"-->
+                                                <!--ng-click="addInterviewModal(hr.hrId)">Schedule Interview-->
+                                        <!--</button>-->
+                                    <!--</td>-->
+                                    <!--<td ng-if="hr.interviewtime">-->
+                                        <!--<button type="button" class="btn btn-primary hi_btn"-->
+                                                <!--ng-click="addInterviewscheModal(hr.hrId)">Interview-->
+                                        <!--</button>-->
+                                    <!--</td>-->
+                                    <!--<td ng-if="hr.interviewerSchedStatus == '2nd Interview'">-->
+                                        <!--<button type="button" class="btn btn-primary hi_btn"-->
+                                                <!--ng-click="add2InterviewModal(hr.hrId)">Second Interview-->
+                                        <!--</button>-->
+                                    <!--</td>-->
+                                    <!--<td ng-if="hr.interviewerSchedStatus == 'Microteaching'">-->
+                                        <!--<button type="button" class="btn btn-primary hi_btn"-->
+                                                <!--ng-click="access(hr)">Micro Teaching-->
+                                        <!--</button>-->
+                                    <!--</td>-->
+                                    <!--<td ng-if="hr.interviewerSchedStatus == 'Accepted'||hr.secondInteviewStatus=='Accepted'">-->
+                                        <!--<button type="button" class="btn btn-primary hi_btn"-->
+                                                <!--ng-click="offerLetter(hr.hrId)">Offer Letter-->
+                                        <!--</button>-->
+                                    <!--</td>-->
+                                    <!--<td ng-if="hr.interviewerSchedStatus == 'Accepted'||hr.secondInteviewStatus=='Accepted'">-->
+                                        <!--<button type="button" class="btn btn-primary hi_btn"-->
+                                                <!--ng-click="acceptanceLetter(hr.hrId)">Acceptance Letter-->
+                                        <!--</button>-->
+                                    <!--</td>-->
+                                </tr>
+                                <tr ng-if="searchText!=''&&(hrlist|filter:searchText).length==0">
+                                    <td colspan="5" style="color: red; font-weight: bold">No Records Found</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <style>
+
+                            .dropdown {
+                                position: relative;
+                                display: inline-block;
+                            }
+
+                            .dropdown-content {
+                                display: none;
+                                position: absolute;
+                                background-color: #fff;
+                                min-width: 250px;
+                                overflow: auto;
+                                z-index: 1;
+                                border: 1px solid #ccc;
+                                border-color: rgba(0,0,0,.2);
+                                padding:10px;
+                            }
+                            .dropdown-content button{
+                                width:100%;
+                                margin-top:10px;
+                                border-radius: 0px;
+                                padding: 10px 10px;
+                                font-size: 19px;
+                                text-align:left;
+                            }
+
+                            .show {display: block;}
+                        </style>
+                        <script>
+                            /* When the user clicks on the button,
+                            toggle between hiding and showing the dropdown content */
+                            // function myFunction(hr) {
+                            //     document.getElementById("myDropdown").classList.toggle("show");
+                            // }
+
+                            // Close the dropdown if the user clicks outside of it
+                            window.onclick = function(event) {
+                                if (!event.target.matches('.dropbtn')) {
+                                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                                    var i;
+                                    for (i = 0; i < dropdowns.length; i++) {
+                                        var openDropdown = dropdowns[i];
+                                        if (openDropdown.classList.contains('show')) {
+                                            openDropdown.classList.remove('show');
+                                        }
+                                    }
+                                }
+                            }
+                        </script>
+
+
+                    </div>
+                </div>
+
+
+                <div class="modal fade addCustomer" tabindex="-1" id="add_AccLetter_row" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-lg" style="width: 1000px !important;">
+                        <div class="modal-content checkout" style="width: 1000px!important;">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 id="department-title" class="modal-title" style="font-weight: bold;text-align:center ;align-content: center">Acceptance Of Offer</h4>
+
+                            </div>
+                            <div class="panel-body" id="receiptPritableArea">
+                                <div class="row">
+                                    <h4>I,{{employeeName}},Accept/do not accept* the offer,position of {{empDesignation}}
+                                        with a salary of Ringgit Malaysia {{basicSal}} only and a performance allowance as follows:</h4>
+                                    <h4>1) Ringgit Malaysia _______ for Perfect Attendance Allowance</h4>
+                                    <h4> My Personal details are as follows,</h4>
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+                                                <h4 style="font-weight: bold">1.Banking Details(Maybank is Preferred)</h4>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label">Bank Name</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <input name="bankName" id="bankName"
+                                                               class="form-control input-md"
+                                                               ng-model="bankName">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label">Bank A/C No</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <input name="bankaccNo" id="bankaccNo"
+                                                               class="form-control input-md"
+                                                               ng-model="bankaccNo">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label">EPF A/C No</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <input name="epfaccNo" id="epfaccNo"
+                                                               class="form-control input-md"
+                                                               ng-model="epfaccNo">
+                                                    </div>
+                                                </div>
+
+                                                <h4 style="font-weight: bold">2.Correspondence Details</h4>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label">Address</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <input name="address" id="address"
+                                                               class="form-control input-md"
+                                                               ng-model="address">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label">Email</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <input name="email" id="email"
+                                                               class="form-control input-md"
+                                                               ng-model="email">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label">Mobile</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <input name="mobile" id="mobile"
+                                                               class="form-control input-md"
+                                                               ng-model="mobile">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label">Home</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <input name="home" id="home"
+                                                               class="form-control input-md"
+                                                               ng-model="home">
+                                                    </div>
+                                                </div>
+                                                <!--<div class="form-group">-->
+                                                <!--<label class="col-md-4 col-sm-4 control-label" for="">Status</label>-->
+                                                <!--<div class="col-md-6 col-sm-6" >-->
+                                                <!--<select name="status" id="status" ng-model="StatusText" ng-init="status='Active'"class="form-control input-md">-->
+                                                <!--<option value="Active">Active</option>-->
+                                                <!--<option value="InActive">InActive</option>-->
+                                                <!--</select>-->
+                                                <!--</div>-->
+                                                <!--</div>-->
+                                                <h4>Yours Sincerely,</h4>
+
+                                                <h4>Date : {{empDoj |date:'dd/MM/yyyy'}} </h4>
+
+                                            </fieldset>
+                                        </form>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3 col-sm-4" for="">i. Photo</label>
+                                            <div class="col-lg-5 col-sm-8">
+                                                <input type='file' accept='image/*' id="acceptLetter" ng-model-instant
+                                                       onchange="angular.element(this).scope().imageUpload6(event)"><br>   </div>
+                                            <div class="col-lg-4 col-sm-8">
+                                                <img class="image-preview6"
+                                                     style="width:50px;height:50px;" src={{fileName6}}>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                        ng-click="saveAcceptance()">Save
+                                </button>
+                                <button type="submit" id="print_invoice" ng-click="printDivA4('receiptPritableArea')" class="btn btn-primary">Print</button>
+
+                                <button type="button" class="btn btn-primary hi_btn"
+                                        data-dismiss="modal">Close
+                                </button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" id="add_OfferLetter_row" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-lg" style="width: 1000px !important;">
+                        <div class="modal-content checkout" style="width: 1000px!important;">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+
+                            </div>
+                            <div class="panel-body" id="receiptArea">
+                                <div align="center">
+                                    <a href="#" class="brand">
+                                        <large> <img src="images/icon/LogoMS.jpg" width="120" height="70"/></large>
+                                    </a>
+                                    <b>
+                                        <u>
+                                            <h2 style="font-family: fantasy">MOUNT SAFA INTERNATIONAL SCHOOL </h2>
+                                            <h1 style="font-family: fantasy">Offer Letter </h1>
+                                        </u>
+                                    </b>
+                                    <div class="col-lg-12 admission_border">
+
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <p class="adm_title_half" style="text-align:left;font-weight:bold">Our Reference.:MSI.2019/HRD/1/:  {{employeeCode}}</p>
+                                            </td>
+                                            <td>
+                                                <p class="adm_title_half" style="text-align:left;font-weight: bold">Date :  {{empDoj |date:'dd/MM/yyyy'}} </p>
+
+                                            </td>
+                                            <td>
+                                                <p class="adm_title_half" style="text-align:left">Dear  {{employeeName}},</p>
+
+                                            </td>
+                                            <td style="padding-left: 20px;">
+                                                <p style="text-align: left">Assalamualaikum WBT,</p>
+                                            </td>
+
+                                            <td>
+                                                <p class="adm_title_half" style="font-weight: bold;text-align: left">Letter Of Offer for a Position Of {{empDesignation}}</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <p align="left"> May Allah SWT showers His Rahmah Upon you and your family Ammen Ya Rabb.As per our
+                                                discussion and interview ,We would like to thank you for your intrest  and enthusiasm to be with us
+                                                in the capacity stated above.</p>
+                                            <p align="left"> Alhamdulillah,after a thorough deliberation on your request for a position in Mount Safa International,the management of the school has decided to extend an offer
+                                                to you a position of {{empDesignation}} with a basic remuneration package of Ringgit
+                                                Malaysia {{basicSal}} only.</p>
+                                            <p align="left"> Mount Safa Islamic School prides itself in providing quality Islamic education as our 'jihad' in building the ummah.We pray that your acceptance of this offer to join
+                                                Mount Safa will be long and mutually beneficial relationship in our effort to build the next Quranic generation, inshaAllah.</p>
+                                            <p align="left">Upon your acceptance,you will have to undergo a 6-month probation period,after which your performance will be appraised by the management.We await your favorable reply and pray that this
+                                                'partnership' receives the blessings of Allah SWT.</p>
+                                            <p align="left">We welcome you to our Mount Safa Family and for your information;your term of office will begin on the {{empDoj|date:'dd/MM/yyyy'}}.</p>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p class="adm_title_half" style="text-align:left">Shukran.</p>
+                                            </td>
+                                            <td>
+                                                <p class="adm_title_half" style="text-align:left"><h4 style="text-align: left">"KNOWLEDGE.FAITH.PURPOSE"</h4></p>
+                                            </td>
+                                            <td>
+                                                <p class="adm_title_half" style="text-align:left">Yours sincerely,                               </p>
+                                            </td>
+                                            <p class="adm_title_half" style="text-align:left">Asmadi Ahmad</p>
+                                            </td>
+                                            <td>
+                                                <p class="adm_title_half" style="text-align:left">Mudir</p>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                        <h2 style="font-family: fantasy">MOUNT SAFA INTERNATIONAL SCHOOL </h2>
+                                        <h4>Kompleks Mutiara Johorland, Jalan Bukit Mutiara, Bandar Dato’ Onn, 81100 Johor Bahru, Johor</h4>
+                                        <h4>Tel:073513834</h4>
+                                        <h4>E-mail:salam@mountsafa.com</h4>
+                                        <h4>www.mountsafa.com</h4>
+                                        <h3 style="text-align: center;font-weight:lighter">KNOWLEDGE . FAITH . PURPOSE</h3>
+
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" id="acceptance_invoice" ng-click="printDivA4('receiptArea')" class="btn btn-primary">Print</button>
+
+                                <button type="button" class="btn btn-primary hi_btn"
+                                        data-dismiss="modal">Close
+                                </button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade Student" tabindex="-1" id="add_new_hr_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-lg" style="width: 1000px !important;">
+                        <div class="modal-content checkout" style="width: 1000px!important;">
+                            <div class="modal-header">
+                                <button type="button" class="close"
+                                        data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 id="hr-title" class="modal-title" style="color:red;" align="center">
+                                    Application Form</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="student">
+                                            <fieldset>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade in active" id="sub_step12">
+                                                        <div class="fixed-table-container">
+                                                            <div class="table_wrapfixed-table-container-inner">
+                                                                <h4 style="color:#337ab7" >&nbsp;&nbsp;A.PERSONAL PARTICULARS</h4>
+                                                                <div class="header-background"></div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 control-label" for="">1.Position Applied<span style="color:red;">*</span></label>
+                                                                        <div class="col-md-6">
+                                                                            <input id="positionText" name="positionText"
+                                                                                   type="text" alpha-with-space=""
+                                                                                   ng-model="positionText" maxlength="125"
+                                                                                   class="form-control input-md" autocomplete="off">
+                                                                        </div>
+                                                                    </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-4 control-label" for="">2.Full Name(as stated in I.C/Passport):
+                                                                        <span style="color:red;">*</span></label>
+                                                                    <div class="col-md-6" style="position:relative;">
+                                                                        <strong>
+                                                                            <input id="hrFullName" name="hrFullName"
+                                                                                   type="text" maxlength="30"
+                                                                                   ng-model="hrFullName" alpha-with-space
+                                                                                   class="form-control input-md" >
+                                                                        </strong>
+                                                                    </div>
+                                                                </div>
+                                                                    <label >3.I.C.No/Passport No</label>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">New</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <input id="passportNew" name="passportNew"
+                                                                                   type="text" alphanum-with-space=""
+                                                                                   ng-model="passportNew" maxlength="50"
+                                                                                   class="form-control input-md" autocomplete="off" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">Old</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <input id="passportOld" name="passportOld"
+                                                                                   type="text" alphanum-with-space=""
+                                                                                   ng-model="passportOld" maxlength="50"
+                                                                                   class="form-control input-md" autocomplete="off" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">4.Date Of Birth</label>
+                                                                        <div class="col-md-6" >
+                                                                            <p class="input-group">
+                                                                                <input type="text" id="AppointmentDate1"
+                                                                                       ng-model="dOBText" class="form-control"
+                                                                                       ng-change="calculateAge()" readonly
+                                                                                       uib-datepicker-popup="{{format}}"
+                                                                                       is-open="popup2.opened"
+                                                                                       datepicker-options="dateOptions"
+                                                                                       close-text="Close"
+                                                                                       alt-input-formats="altInputFormats"/>
+                                                                                <span class="input-group-btn">
+                                                                     <button type="button" class="btn btn-default"
+                                                                             ng-click="open2()">
+                                                                         <i class="glyphicon glyphicon-calendar"></i></button>
+                                                                     </span>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">5.Age</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <input id="age" name="age" readonly
+                                                                                   type="text" num-with-out-space=""
+                                                                                   ng-model="hrage" maxlength="3"
+                                                                                   class="form-control input-md" autocomplete="off" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">6.Nationality</label>
+                                                                        <div class="col-md-6 col-sm-6"
+                                                                             style="position:relative;">
+                                                                             <select name="hrNationality" class="nationality form-control" id="hrNationality" ng-model="hrNationality"  >
+                                                                                 <option value="">Select</option>
+                                                                                 <option value="Malaysia">Malaysia</option>
+                                                                                 <option value="Pakistan">Pakistan</option>
+                                                                                 <option value="Thailand">Thailand</option>
+                                                                                 <option value="Yemen">Yemen</option>
+                                                                                 <option value="Indonesia">Indonesia</option>
+                                                                                 <option value="Maldives">Maldives</option>
+                                                                                 <option value="Singapore">Singapore</option>
+                                                                                 <option value="Myanmar">Myanmar</option>
+                                                                                 <option value="Algeria">Algeria</option>
+                                                                                 <option value="Bangladesh">Bangladesh</option>
+                                                                                 <option value="America">America</option>
+                                                                                 <option value="Nigeria">Nigeria</option>
+                                                                                 <option value="Syria">Syria</option>
+                                                                                 <option value="Switzerland">Switzerland</option>
+                                                                                 <option value="China">China</option>
+                                                                                 <option value="Lesotho">Lesotho</option>
+                                                                                 <option value="Philippines">Philippines</option>
+                                                                                 <option value="Canada">Canada</option>
+                                                                                 <option value="British">British</option>
+                                                                                 <option value="Senegal">Senegal</option>
+                                                                                 <option value="Egypty">Egypty</option>
+                                                                                 <option value="Spain">Spain</option>
+                                                                                 <option value="Canadia">Canadia</option>
+                                                                                 <option value="India">India</option>
+                                                                                 <option value="Saudi Arabia">Saudi Arabia</option>
+                                                                                 <option value="Russia">Russia</option>
+                                                                                 <option value="Cambodia">Cambodia</option>
+                                                                                 <option value="Arab">Arab</option>
+                                                                                 <option value="South Africa">South Africa</option>
+                                                                             </select></td><td colspan="2" style="width:60%">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">7.place Of Birth</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <input id="placeOfBirth" name="placeOfBirth"
+                                                                                   type="text" alpha-with-space=""
+                                                                                   ng-model="hrplaceOfBirth" maxlength="125"
+                                                                                   class="form-control input-md" autocomplete="off" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">8.Sex</label>
+                                                                        <div class="col-md-6 col-sm-6">
+                                                                            <select name="hrSex" id="hrSex" ng-model="hrSex"
+                                                                                    class="form-control input-md">
+                                                                                <option value="">Select</option>
+                                                                                <option value="female">Female</option>
+                                                                                <option value="male">Male</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">9.Marital Status</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <input id="maritalstatus" name="maritalstatus"
+                                                                                   type="text" alpha-with-space=""
+                                                                                   ng-model="hrmaritalstatus" maxlength="125"
+                                                                                   class="form-control input-md" autocomplete="off" >
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" >10.Country</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <select id="countryId" name="countryId" ng-model="countryId"
+                                                                                    ng-change="countryState(countryId)"
+                                                                                    ng-options="country.countryId as
+											country.countryName for country in country" class="form-control input-md">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label">11.State</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <select id="stateId" name="stateId" ng-model="stateId"
+                                                                                    ng-change="stateCity(stateId)"
+                                                                                    ng-options="state.stateId as
+											state.stateName for state in stateList" class="form-control input-md">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label">12.City</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <select id="cityId" name="cityId" ng-model="cityId" ng-options="city.cityId as
+											city.cityName for city in cityList" class="form-control input-md">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">13.Address Line 1</label>
+                                                                        <div class="col-md-6 col-sm-6">
+                                                                            <textarea id="hrAddress1" name="hrAddress1"
+                                                                                      type="text"
+                                                                                      ng-model="hrAddress1" maxlength="125"
+                                                                                      class="form-control input-md"
+                                                                                      autocomplete="off" ></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">14.Address Line 2</label>
+                                                                        <div class="col-md-6 col-sm-6">
+                                                                            <textarea id="hrAddress2" name="hrAddress2"
+                                                                                      type="text"
+                                                                                      ng-model="hrAddress2" maxlength="125"
+                                                                                      class="form-control input-md"
+                                                                                      autocomplete="off" ></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">15.PostCode</label>
+                                                                        <div class="col-md-6 col-sm-6">
+                                                                            <input id="postCode" name="postCode"
+                                                                                   type="text" num-with-out-space=""
+                                                                                   ng-model="postCode" maxlength="13"
+                                                                                   class="form-control input-md"
+                                                                                   autocomplete="off" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">16.Phone No.</label>
+                                                                        <div class="col-md-6 col-sm-6">
+                                                                            <input id="hrphoneNo" name="hrphoneNo"
+                                                                                   type="text" num-with-out-space=""
+                                                                                   ng-model="hrphoneNo" maxlength="13"
+                                                                                   class="form-control input-md"
+                                                                                   autocomplete="off" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">17.H/P No:</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <input id="hrHPNo" name="hrHPNo"
+                                                                                   type="text" num-with-out-space=""
+                                                                                   ng-model="hPNo" maxlength="10"
+                                                                                   class="form-control input-md" autocomplete="off" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">18.Email Address:</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <input id="hrEmailAddress" name="hrEmailAddress"
+                                                                                   type="email" ng-pattern="word"
+                                                                                   ng-model="hrEmailAddress" maxlength="125"
+                                                                                   class="form-control input-md" autocomplete="off" >
+                                                                            <p class="error" ng-show="student.hrEmailAddress.$error.pattern">Enter Valid MailID</p>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label"
+                                                                               for="">19.Application Date</label>
+                                                                        <div class="col-md-6">
+                                                                            <p class="input-group">
+                                                                                <input type="text" id="applicationDate"
+                                                                                       ng-model="applicationDate"
+                                                                                       class="form-control"
+                                                                                       readonly
+                                                                                       uib-datepicker-popup="{{format}}"
+                                                                                       is-open="popup3.opened"
+                                                                                       datepicker-options="dateOptions"
+                                                                                       close-text="Close"
+                                                                                       alt-input-formats="altInputFormats"/>
+                                                                                <span class="input-group-btn">
+                                                                     <button type="button" class="btn btn-default"
+                                                                             ng-click="open3()">
+                                                                         <i class="glyphicon glyphicon-calendar"></i></button>
+                                                                     </span>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">20.Status<span style="color: red">*</span></label>
+                                                                        <div class="col-md-6 col-sm-6" >
+                                                                            <select name="StatusText" id="StatusText" ng-model="StatusText"  class="form-control input-md">
+                                                                                <option value="">Select</option>
+                                                                                <option value="Accepted">ACTIVATED</option>
+                                                                                <option value="KIV">KIV</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="sub_step22">
+                                                        <div class="fixed-table-container">
+                                                            <h4 style="color:#337ab7" >&nbsp;&nbsp;B.  SPOUSE'S PARTICULARS</h4>
+                                                            <div class="table_wrapfixed-table-container-inner">
+                                                                <div class="header-background"></div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-4 control-label" for="">1.Full Name(as stated in I.C/Passport):</label>
+                                                                    <div class="col-md-6" style="position:relative;">
+                                                                        <strong>
+                                                                            <input id="spouseFullName" name="spouseFullName"
+                                                                                   type="text"
+                                                                                   ng-model="spouseFullName" alpha-with-space
+                                                                                   class="form-control input-md" >
+                                                                        </strong>
+                                                                    </div>
+                                                                </div>
+                                                                <label>&nbsp;&nbsp;2.I.C.No/Passport No</label>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-md-4 col-sm-4 control-label" for="">New</label>
+                                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                        <input id="spousepassportNew" name="spousepassportNew"
+                                                                               type="text"
+                                                                               ng-model="spousepassportNew" maxlength="125"
+                                                                               class="form-control input-md" autocomplete="off" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-4 col-sm-4 control-label" for="">Old
+                                                                        </label>
+                                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                        <input id="spousepassportOld" name="spousepassportOld"
+                                                                               type="text"
+                                                                               ng-model="spousepassportOld" maxlength="125"
+                                                                               class="form-control input-md" autocomplete="off" >
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <h4 class="col-md-4 col-sm-4 control-label" for="">3.Date Of Birth</h4>
+                                                                    <div class="col-md-6" >
+                                                                        <p class="input-group">
+                                                                            <input type="text" id="AppointmentDate"
+                                                                                   ng-model="spouseDOBText" class="form-control"
+                                                                                   ng-change="calculateAge1()" readonly
+                                                                                   uib-datepicker-popup="{{format}}"
+                                                                                   is-open="popup2.opened"
+                                                                                   datepicker-options="dateOptions"
+                                                                                   close-text="Close"
+                                                                                   alt-input-formats="altInputFormats"/>
+                                                                            <span class="input-group-btn">
+                                                                     <button type="button" class="btn btn-default"
+                                                                             ng-click="open2()">
+                                                                         <i class="glyphicon glyphicon-calendar"></i></button>
+                                                                     </span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-4 col-sm-4 control-label" for="">4.Age</label>
+                                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                        <input id="spouseage" name="spouseage"
+                                                                               type="text"
+                                                                               ng-model="spouseage" maxlength="125" readonly
+                                                                               class="form-control input-md" autocomplete="off" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-4 col-sm-4 control-label" for="">5.Nationality</label>
+                                                                    <div class="col-md-6 col-sm-6"
+                                                                         style="position:relative;">
+                                                                        <select name="spouseNationality" class="nationality form-control" id="spouseNationality" ng-model="spouseNationality" >
+                                                                            <option value="">Select </option><option value="Malaysia">Malaysia</option><option value="Pakistan">Pakistan</option><option value="Thailand">Thailand</option><option value="Yemen">Yemen</option><option value="Indonesia">Indonesia</option><option value="Maldives">Maldives</option><option value="Singapore">Singapore</option><option value="Myanmar">Myanmar</option><option value="Algeria">Algeria</option><option value="Bangladesh">Bangladesh</option><option value="America">America</option><option value="Nigeria">Nigeria</option><option value="Syria">Syria</option><option value="Switzerland">Switzerland</option><option value="China">China</option><option value="Lesotho">Lesotho</option><option value="Philippines">Philippines</option><option value="Canada">Canada</option><option value="British">British</option><option value="Senegal">Senegal</option><option value="Egypty">Egypty</option><option value="Spain">Spain</option><option value="Canadia">Canadia</option><option value="India">India</option><option value="Saudi Arabia">Saudi Arabia</option><option value="Russia">Russia</option><option value="Cambodia">Cambodia</option><option value="Arab">Arab</option><option value="South Africa">South Africa</option></select></td><td colspan="2" style="width:60%">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-md-4 col-sm-4 control-label" for="">6.place Of Birth</label>
+                                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                        <input id="spouseplaceOfBirth" name="spouseplaceOfBirth"
+                                                                               type="text"
+                                                                               ng-model="spouseplaceOfBirth" maxlength="125"
+                                                                               class="form-control input-md" autocomplete="off" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-4 col-sm-4 control-label" for="">7.Occupation</label>
+                                                                    <div class="col-md-6 col-sm-6">
+                                                                        <input id="spouseOccipation" name="spouseOccipation"
+                                                                               type="text"
+                                                                               ng-model="spouseOccipation" maxlength="125"
+                                                                               class="form-control input-md"
+                                                                               autocomplete="off" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-4 col-sm-4 control-label" for="">8.Address</label>
+                                                                    <div class="col-md-6 col-sm-6">
+                                                                        <input id="spouseAddress" name="spouseAddress"
+                                                                               type="text"
+                                                                               ng-model="spouseAddress" maxlength="125"
+                                                                               class="form-control input-md"
+                                                                               autocomplete="off" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-4 col-sm-4 control-label" for="">9.Phone No.</label>
+                                                                    <div class="col-md-6 col-sm-6">
+                                                                        <input id="spousephoneNo" name="spousephoneNo"
+                                                                               type="text"
+                                                                               ng-model="spousephoneNo" maxlength="125"
+                                                                               class="form-control input-md"
+                                                                               autocomplete="off" >
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-4 col-sm-4 control-label" for="">10.H/P No:</label>
+                                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                        <input id="spouseHPNo" name="spouseHPNo"
+                                                                               type="text"
+                                                                               ng-model="spouseHPNo" maxlength="125"
+                                                                               class="form-control input-md" autocomplete="off" >
+                                                                    </div>
+                                                                </div>
+                                                                <h4 style="color:#337ab7">&nbsp;&nbsp;C.  ACADEMIC QUALIFICATION</h4>
+
+                                                                <table id="academicQuali" class="table table-bordered table-striped" style="padding: 0 10px;">
+                                                                    <thead>
+                                                                    <tr style="background: #FFFFFF;">
+                                                                        <td><span style="color: black">No</span></td>
+                                                                        <td><span style="color: black">School/College/University</span></td>
+                                                                        <td><span style="color: black">From Date</span> </td>
+                                                                        <td><span style="color: black">To Date</span></td>
+                                                                        <td><span style="color: black">level</span></td>
+                                                                        <td><span style="color: black">Grade/CGPA</span></td>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody class="siblingadd">
+
+                                                                    <tr id="siblingtr1" ng-repeat="academicQuali in academicQualiList">
+                                                                        <td>
+                                                                            <input type="text" id="academicQualiNo" maxlength="255" ng-model="academicQuali.academicQualiNo" name="academicQualiNo[]" onkeyup="siblinginfo(this)" "=" "></td>
+                                                                        <td><input type="text" maxlength="255 " id="academicQualiSchool " ng-model="academicQuali.academicQualiSchool" value=""  name="academicQualiSchool[] "></td>
+                                                                        <td><input type="text" id="academicQualiFrom"
+                                                                                   ng-model="academicQuali.academicQualiFrom" class="form-control"
+                                                                                   uib-datepicker-popup="{{format}}"
+                                                                                   is-open="academicQuali.openedFrom"
+                                                                                   datepicker-options="dateOptions"
+                                                                                   close-text="Close"
+                                                                                   alt-input-formats="altInputFormats" readonly/>
+                                                                            <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default"
+                                                            ng-click="open5($event,academicQuali)">
+                                                    <i class="glyphicon glyphicon-calendar"></i></button>
+                                                    </span>
+                                                                        </td>
+                                                                        <td><input type="text" id="academicQualiTo"
+                                                                                   ng-model="academicQuali.academicQualiTo" class="form-control"
+                                                                                   uib-datepicker-popup="{{format}}"
+                                                                                   is-open="academicQuali.openedTo"
+                                                                                   datepicker-options="dateOptions"
+                                                                                   close-text="Close"
+                                                                                   alt-input-formats="altInputFormats" readonly/>
+                                                                            <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default"
+                                                            ng-click="open6($event,academicQuali)">
+                                                    <i class="glyphicon glyphicon-calendar"></i></button>
+                                                    </span>
+                                                                        </td>
+
+
+
+                                                                        <!--<td><input type="text" maxlength="255 " value="" ng-model="academicQuali.academicQualiFrom" name="academicQualiFrom[]"  id="academicQualiFrom "></td>-->
+                                                                        <!--<td><input type="text"  value=" " ng-model="academicQuali.academicQualiTo" id="academicQualiTo " name="academicQualiTo[] ">&nbsp;&nbsp;-->
+                                                                        <td><input type="text"  value=" " ng-model="academicQuali.academicQualiLevel" id="academicQualiLevel " name="academicQualiLevel[] ">&nbsp;&nbsp;
+                                                                        <td><input type="text"  value=" " ng-model="academicQuali.academicQualiGrade" id="academicQualiGrade " name="academicQualiGrade[] ">&nbsp;&nbsp;
+                                                                            <button type="button " class="btn btn-danger remove">X</button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                                <div style="padding: 0 20px;">
+                                                                    <input type="button" value="Add New" class="btn btn-default" ng-click="AddNewAcademicQuali()">
+                                                                </div>
+                                                                <h4 style="color:#337ab7">&nbsp;&nbsp;D.  FIELD OF SPECIALIZATION</h4>
+
+                                                                <table id="feildOfSpec" class="table table-bordered table-striped" style="padding: 0 10px;">
+                                                                    <thead>
+                                                                    <tr style="background: #FFFFFF;">
+                                                                        <td><span style="color: black">No</span></td>
+                                                                        <td><span style="color: black">Type of Degree/Masters</span></td>
+                                                                        <td><span style="color: black">Specialization</span> </td>
+                                                                        <td><span style="color: black">Thesis</span></td>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody class="siblingadd">
+
+                                                                    <tr id="siblingtr1" ng-repeat="feildOfSpec in feildOfSpecList">
+                                                                        <td>
+                                                                            <input type="text" id="feildOfSpecNo" maxlength="255" ng-model="feildOfSpec.feildOfSpecNo" name="feildOfSpecNo[]"></td>
+                                                                        <td><input type="text" maxlength="255 " id="feildOfSpecDegree " ng-model="feildOfSpec.feildOfSpecDegree" value=""  name="feildOfSpecDegree[] "></td>
+                                                                        <td><input type="text" maxlength="255 " value="" ng-model="feildOfSpec.feildOfSpecDetail" name="feildOfSpecDetail[]"  id="feildOfSpecDetail "></td>
+                                                                        <td><input type="text"  value=" " ng-model="feildOfSpec.feildOfSpecThesis" id="feildOfSpecThesis " name="feildOfSpecThesis[] ">&nbsp;&nbsp;
+                                                                            <button type="button " class="btn btn-danger remove">X</button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                                <div style="padding: 0 20px;">
+                                                                    <input type="button" value="Add New" class="btn btn-default" ng-click="AddNewfeildOfSpec()">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="sub_step23">
+                                                        <h4 style="color:#337ab7" >&nbsp;&nbsp;E.  PRESENT EMPLOYEMENT</h4>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" for="">1.Name Of Company/School</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input id="pecomsch" name="pecomsch"
+                                                                       type="text"
+                                                                       ng-model="pecomsch" maxlength="20"
+                                                                       class="form-control input-md" autocomplete="off" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" for="">2.Designation:</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input id="pedesignation" name="pedesignation"
+                                                                       type="text"
+                                                                       ng-model="pedesignation" maxlength="125"
+                                                                       class="form-control input-md" autocomplete="off" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" for="">3.Date Appointed</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <p class="input-group">
+                                                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="peDateAppoint" is-open="popup2.opened" datepicker-options="dateOptions" readonly ng-="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                                                    <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" for="">4.Address</label>
+                                                            <div class="col-md-6 col-sm-6">
+                                                                <input id="preEmpAddress" name="preEmpAddress"
+                                                                       type="text"
+                                                                       ng-model="preEmpAddress" maxlength="125"
+                                                                       class="form-control input-md"
+                                                                       autocomplete="off" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" for="">5.Telephone Number</label>
+                                                            <div class="col-md-6 col-sm-6">
+                                                                <input id="preEmpTelNo" name="preEmpTelNo"
+                                                                       type="text" num-with-out-space=""
+                                                                       ng-model="preEmpTelNo" maxlength="15"
+                                                                       class="form-control input-md"
+                                                                       autocomplete="off" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" for="">6.Present Salary:RM</label>
+                                                            <div class="col-md-6 col-sm-6">
+                                                                <input id="preEmpSal" name="preEmpSal"
+                                                                       type="text" num-with-out-space=""
+                                                                       ng-model="preEmpSal" maxlength="15"
+                                                                       class="form-control input-md"
+                                                                       autocomplete="off" >
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" for="">7.When are you available to start at Mount Safa International</label>
+                                                            <div class="col-md-6 col-sm-6">
+                                                                <input id="preEmpavail" name="preEmpavail"
+                                                                       type="text"
+                                                                       ng-model="preEmpavail" maxlength="125"
+                                                                       class="form-control input-md"
+                                                                       autocomplete="off" >
+                                                            </div>
+                                                        </div>
+                                                        <h4 style="color:#337ab7">&nbsp;&nbsp;F.  EMPLOYMENT HISTORY</h4>
+                                                        <label>&nbsp;&nbsp;1. Work Experience</label>
+
+                                                        <table id="workExperience" class="table table-bordered table-striped" style="padding: 0 10px;">
+                                                            <thead>
+                                                            <tr style="background: #FFFFFF;">
+                                                                <td><span style="color: black">From</span></td>
+                                                                <td><span style="color: black">To</span></td>
+                                                                <td><span style="color: black">Company/School/Employer</span> </td>
+                                                                <td><span style="color: black">Position</span></td>
+                                                                <td><span style="color: black">Salary</span></td>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody class="workExperience">
+                                                            <tr id="workExperiencedetails" ng-repeat="workExperiencedetails in workExperiencedetailsList">
+                                                                <td><input type="text" id="workExpFrom" maxlength="255" ng-model="workExperiencedetails.workExpFrom" name="workExpFrom[]"></td>
+                                                                <td><input type="text" maxlength="255 " id="workExpTo " ng-model="workExperiencedetails.workExpTo" value=""  name="workExpTo[] "></td>
+                                                                <td><input type="text" maxlength="255 " value="" ng-model="workExperiencedetails.workExpCompany" name="workExpCompany[]"  id="workExpCompany "></td>
+                                                                <td><input type="text"  value=" " ng-model="workExperiencedetails.workExpPosition" id="workExpPosition " name="workExpPosition[] ">&nbsp;&nbsp;
+                                                                <td><input type="text"  value=" " ng-model="workExperiencedetails.workExpSal" id="workExpSal " name="workExpSal[] " num-with-out-space="">&nbsp;&nbsp;
+                                                                    <button type="button " class="btn btn-danger remove">X</button>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <div style="padding: 0 20px;">
+                                                            <input type="button" value="Add New" class="btn btn-default" ng-click="AddNewWorkExper()">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <p>2.Reason for leaving current/previous employment?</p>
+
+                                                                <!--<hr style="color:black;"  >-->
+                                                                <input style="width:90%;" id="reasonForLeaving" name="reasonForLeaving"
+                                                                       type="text"
+                                                                       ng-model="reasonForLeaving" maxlength="20"
+                                                                       class="form-control input-md"
+                                                                       autocomplete="off" >
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <p>3.How long will you serve MSI should you be offered a position?</p>
+                                                                <input style="width:90%;" id="longServeMSI" name="longServeMSI"
+                                                                       type="text"
+                                                                       ng-model="longServeMSI" maxlength="20"
+                                                                       class="form-control input-md"
+                                                                       autocomplete="off" >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <p>4.Do you have any plan to further your studies?</p>
+                                                                <input style="width:90%;" id="furtherStudies" name="furtherStudies"
+                                                                       type="text"
+                                                                       ng-model="furtherStudies" maxlength="20"
+                                                                       class="form-control input-md"
+                                                                       autocomplete="off" >
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <p>5.What is your expected monthly salary from MSI</p>
+                                                                <input style="width:90%;" id="expecedSalary" name="expecedSalary"
+                                                                       type="text"
+                                                                       ng-model="expecedSalary" maxlength="20"
+                                                                       class="form-control input-md"
+                                                                       autocomplete="off" >
+                                                        </div>
+                                                        <label style="color:#337ab7" >&nbsp;&nbsp;LANGUAGE PROFICIENCY</label>
+                                                        <div class="table_wrapfixed-table-container-inner">
+                                                            <table style="height: 82px; margin-left: auto; margin-right: auto; width: 579px;" border="1">
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td style="width: 107px;" colspan="2">&nbsp; Language</td>
+                                                                    <td style="width: 74px;">&nbsp;Excellent</td>
+                                                                    <td style="width: 71px;">&nbsp; &nbsp; Good</td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp; Fair</td>
+                                                                    <td style="width: 53px;">&nbsp;Weak</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 107px;" rowspan="3"><strong>1. Arabic&nbsp;</strong></td>
+                                                                    <td style="width: 240px;">&nbsp;Speaking</td>
+                                                                    <td style="width: 74px;">&nbsp; &nbsp; &nbsp;&nbsp;<input type="radio" ng-model="arSpeaking" value="excellent"/></td>
+                                                                    <td style="width: 71px;">&nbsp; &nbsp; &nbsp;&nbsp;<input type="radio" ng-model="arSpeaking" value="good"/></td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp;&nbsp;<input type="radio" ng-model="arSpeaking" value="fair"/></td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp;&nbsp;<input type="radio" ng-model="arSpeaking" value="weak"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 240px;">&nbsp;Writing</td>
+                                                                    <td style="width: 74px;">&nbsp; &nbsp; &nbsp;&nbsp;<input type="radio" ng-model="arWriting" value="excellent"/></td>
+                                                                    <td style="width: 71px;">&nbsp; &nbsp; &nbsp;&nbsp;<input type="radio" ng-model="arWriting" value="good"/></td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp;&nbsp;<input type="radio" ng-model="arWriting" value="fair"/></td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp;&nbsp;<input type="radio" ng-model="arWriting" value="weak"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 240px;">&nbsp;Reading</td>
+                                                                    <td style="width: 74px;">&nbsp; &nbsp; &nbsp;&nbsp;<input type="radio" ng-model="arReading" value="excellent"/></td>
+                                                                    <td style="width: 71px;">&nbsp; &nbsp; &nbsp;&nbsp;<input type="radio" ng-model="arReading" value="good"/></td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp;&nbsp;<input type="radio" ng-model="arReading" value="fair"/></td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp;&nbsp;<input type="radio" ng-model="arReading" value="weak"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 107px;" rowspan="3"><strong>2. English</strong></td>
+                                                                    <td style="width: 240px;">&nbsp;Speaking</td>
+                                                                    <td style="width: 74px;">&nbsp; &nbsp; &nbsp;&nbsp;<input type="radio" ng-model="engSpeaking" value="excellent"/></td>
+                                                                    <td style="width: 71px;">&nbsp; &nbsp; &nbsp;&nbsp;<input type="radio" ng-model="engSpeaking" value="good"/></td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp;&nbsp;<input type="radio" ng-model="engSpeaking" value="fair"/></td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp;&nbsp;<input type="radio" ng-model="engSpeaking" value="weak"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 240px;">&nbsp;Writing</td>
+                                                                    <td style="width: 74px;">&nbsp; &nbsp; &nbsp;&nbsp;<input type="radio" ng-model="engWriting" value="excellent"/></td>
+                                                                    <td style="width: 71px;">&nbsp; &nbsp; &nbsp;&nbsp;<input type="radio" ng-model="engWriting" value="good"/></td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp;&nbsp;<input type="radio" ng-model="engWriting" value="fair"/></td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp;&nbsp;<input type="radio" ng-model="engWriting" value="weak"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 240px;">&nbsp;Reading</td>
+                                                                    <td style="width: 74px;">&nbsp; &nbsp; &nbsp;&nbsp;<input type="radio" ng-model="engReading" value="excellent"/></td>
+                                                                    <td style="width: 71px;">&nbsp; &nbsp; &nbsp;&nbsp;<input type="radio" ng-model="engReading" value="good"/></td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp;&nbsp;<input type="radio" ng-model="engReading"  value="fair"/></td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp;&nbsp;<input type="radio" ng-model="engReading" value="weak"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 107px;" rowspan="3"><strong>3. B Malaysia&nbsp;</strong></td>
+                                                                    <td style="width: 240px;">&nbsp;Speaking</td>
+                                                                    <td style="width: 74px;">&nbsp; &nbsp; &nbsp;&nbsp;<input type="radio" ng-model="malSpeaking" value="excellent"/></td>
+                                                                    <td style="width: 71px;">&nbsp; &nbsp; &nbsp;&nbsp;<input type="radio" ng-model="malSpeaking" value="good"/></td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp;&nbsp;<input type="radio" ng-model="malSpeaking" value="fair"/></td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp;&nbsp;<input type="radio" ng-model="malSpeaking" value="weak"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 240px;">&nbsp;Writing</td>
+                                                                    <td style="width: 74px;">&nbsp; &nbsp; &nbsp;&nbsp;<input type="radio" ng-model="malWriting" value="excellent"/></td>
+                                                                    <td style="width: 71px;">&nbsp; &nbsp; &nbsp;&nbsp;<input type="radio" ng-model="malWriting" value="good"/></td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp;&nbsp;<input type="radio" ng-model="malWriting" value="fair"/></td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp;&nbsp;<input type="radio" ng-model="malWriting" value="weak"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 240px;">&nbsp;Reading</td>
+                                                                    <td style="width: 74px;">&nbsp; &nbsp; &nbsp;&nbsp;<input type="radio" ng-model="malReading" value="excellent"/></td>
+                                                                    <td style="width: 71px;">&nbsp; &nbsp; &nbsp;&nbsp;<input type="radio" ng-model="malReading"  value="good"/></td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp;&nbsp;<input type="radio" ng-model="malReading" value="fair"/></td>
+                                                                    <td style="width: 53px;">&nbsp; &nbsp;&nbsp;<input type="radio" ng-model="malReading" value="weak"/></td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="tab-pane fade" id="sub_step24">
+                                                        <div class="tab-pane fade active in" id="UnderstandingOfIslam">
+                                                            <h4 style="color:#337ab7">&nbsp;&nbsp;H.  UNDERSTANDING OF ISLAMIC AND EFFORT OD DA'WAH</h4>
+
+                                                            <div class="form-group">
+                                                                <p>1.How would you describe your personal observation of fundamental religious duties such as solat,fasting,etc</p>
+                                                                    <input style="width:90%;" id="personalObservation" name="personalObservation"
+                                                                           type="text"
+                                                                           ng-model="personalObservation" maxlength="125"
+                                                                           class="form-control input-md"
+                                                                           autocomplete="off" >
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <p>2.Describe your contribution towards the cause of Islamic/Muslim Ummah or involvement in any Islamic organization</p>
+                                                                    <input style="width:90%;" id="contrtrowIslamic" name="contrtrowIslamic"
+                                                                           type="text"
+                                                                           ng-model="contrtrowIslamic" maxlength="125"
+                                                                           class="form-control input-md"
+                                                                           autocomplete="off" >
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <p>3.Explain briefly your understanding of the principles and concept of Islamic education</p>
+                                                                    <input style="width:90%;" id="usPrinAndConcept" name="usPrinAndConcept"
+                                                                           type="text"
+                                                                           ng-model="usPrinAndConcept" maxlength="125"
+                                                                           class="form-control input-md"
+                                                                           autocomplete="off" >
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <p>4.Describre the role that you are going to play as an academician at MSI</p>
+                                                                    <input style="width:90%;" id="rolePlayMSI" name="rolePlayMSI"
+                                                                           type="text"
+                                                                           ng-model="rolePlayMSI" maxlength="125"
+                                                                           class="form-control input-md"
+                                                                           autocomplete="off" >
+                                                            </div>
+                                                            <h4 style="color:#337ab7">&nbsp;&nbsp;I.  BOOKS/WRITINGS ON ISLAM</h4>
+                                                            <div class="form-group">
+                                                                <p>1.Name the books/writing on Islamic that have influnced and made a significant impact in your understanding and practice as a muslim</p>
+                                                                    <input style="width:90%;" id="booksWritingIslamic" name="booksWritingIslamic"
+                                                                           type="text"
+                                                                           ng-model="booksWritingIslamic" maxlength="125"
+                                                                           class="form-control input-md"
+                                                                           autocomplete="off" >
+                                                            </div>
+                                                            <h4 style="color:#337ab7">&nbsp;&nbsp;J.  MEDICAL HISTORY</h4>
+                                                            <div class="form-group">
+                                                                <p>1.Do you have any history or are suffering from any serious illness(High blood,Asthma ,etc)?Please indicate</p>
+                                                                    <input style="width:90%;" id="medicalHistory" name="medicalHistory"
+                                                                           type="text"
+                                                                           ng-model="medicalHistory" maxlength="125"
+                                                                           class="form-control input-md"
+                                                                           autocomplete="off" >
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <p>2.Do you have any disabilities?</p>
+                                                                    <input style="width:90%;" id="medicaldisabilities" name="medicaldisabilities"
+                                                                           type="text"
+                                                                           ng-model="medicaldisabilities" maxlength="125"
+                                                                           class="form-control input-md"
+                                                                           autocomplete="off" >
+                                                            </div>
+                                                            <h4 style="color:#337ab7">&nbsp;&nbsp;K.  REFERENCES</h4>
+                                                            <table id="reference" class="table table-bordered table-striped" style="padding: 0 10px;">
+                                                                <thead>
+                                                                <tr style="background: #FFFFFF;">
+                                                                    <td><span style="color: black">Name</span></td>
+                                                                    <td><span style="color: black">Company</span></td>
+                                                                    <td><span style="color: black">Position</span> </td>
+                                                                    <td><span style="color: black">Address</span></td>
+                                                                    <td><span style="color: black">Tel. Number</span></td>
+                                                                    <td><span style="color: black">Relation</span></td>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody class="reference">
+                                                                <tr id="referencedetails" ng-repeat="referenceDetails in referenceDetailsList">
+                                                                    <td>
+                                                                        <input type="text"  maxlength="255" ng-model="referenceDetails.referName" id="referName " name="referName[]"></td>
+                                                                    <td><input type="text" maxlength="255 "  ng-model="referenceDetails.referCompany" id="referCompany "  name="referCompany[] "></td>
+                                                                    <td><input type="text" maxlength="255 "  ng-model="referenceDetails.referPosition" id="referPosition " name="referPosition[]"  ></td>
+                                                                    <td><input type="text" maxlength="255"  ng-model="referenceDetails.referAddress" id="referAddress " name="referAddress[] ">
+                                                                    <td><input type="text" maxlength="255"  ng-model="referenceDetails.refertelNo" id="refertelNo " name="refertelNo[] " num-with-out-space="">
+                                                                    <td><input type="text"  maxlength="255" ng-model="referenceDetails.referRelation" id="referRelation " name="referRelation[] ">
+                                                                        <button type="button " class="btn btn-danger remove">X</button>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <div style="padding: 0 20px;">
+                                                                <input type="button" value="Add New" class="btn btn-default" ng-click="AddNewReference()">
+                                                            </div>
+                                                            <h4 style="color:#337ab7">&nbsp;&nbsp;L.  DECLARATION</h4>
+                                                            <h4>Saya mengaku bahawa:</h4>
+                                                            <p>i. Segala keterangan dan butir-butir yang di berikan di dalam borang ini adalah tepat dan benar.Pihak Sekolah MSI berhak menamatkan perkidmatan saya dengan serta merta jika sekiranya maklumat yang diberikan didapati tidak benar</p>
+                                                            <p>ii. Membenarkan pihak Sekolah Islam Adni menghubungi majikan dan penjamin diri saya bagi mendapatkan maklumat dan latar belakang tentang diri saya</p>
+                                                            <h4>I hereby declare that:</h4>
+                                                            <p>iii. All the imformation given in this application form is true and correct.Mount Safa International has the right to immediately my service if the imformation found to be false</p>
+                                                            <p>iv. I have no objection in regards to Mount Safa International containing my present/former employers/referees to obtain further information and background on me.</p>
+                                                            <div class="form-group">
+                                                                <h4 class="col-md-4 col-sm-4 control-label" for="">Date</h4>
+                                                                <div class="col-md-6" >
+                                                                    <p class="input-group">
+                                                                        <input type="text" id="declarationDate"
+                                                                               ng-model="declarationDate" class="form-control"
+                                                                               readonly
+                                                                               uib-datepicker-popup="{{format}}"
+                                                                               is-open="popup9.opened"
+                                                                               datepicker-options="dateOptions"
+                                                                               close-text="Close"
+                                                                               alt-input-formats="altInputFormats"/>
+                                                                        <span class="input-group-btn">
+                                                                     <button type="button" class="btn btn-default"
+                                                                             ng-click="open9()">
+                                                                         <i class="glyphicon glyphicon-calendar"></i></button>
+                                                                     </span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-md-4 col-sm-4 control-label" for="">Signature:</label>
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <input id="declarationSignature" name="declarationSignature"
+                                                                           type="text"
+                                                                           ng-model="declarationSignature" maxlength="125"
+                                                                           class="form-control input-md"
+                                                                           autocomplete="off" >
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="sub_step25">
+                                                        <div class="tab-pane fade active in" id="agreement_information">
+
+                                                                        <h4 class="modal-title" style="color:red;" align="center">Please provide the documents listed below with this application form:</h4>
+                                                                        <div class="form-group">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label col-lg-3 col-sm-4" for="">i. Photo</label>
+                                                                                <div class="col-lg-5 col-sm-8">
+                                                                                    <input type='file' accept='image/*' id="imageLoad" ng-model-instant
+                                                                                           onchange="angular.element(this).scope().imageUpload(event)"><br>   </div>
+                                                                                    <div class="col-lg-4 col-sm-8">
+                                                                                        <img class="image-preview"
+                                                                                             style="width:50px;height:50px;" src={{fileName}}>
+
+                                                                                    </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label col-lg-3 col-sm-4" for="">ii. Resume/CV</label>
+                                                                                <div class="col-lg-5 col-sm-8">
+                                                                                <input type='file' accept='image/*' id="hrResume" ng-model-instant
+                                                                                       onchange="angular.element(this).scope().imageUpload1(event)"><br>
+                                                                                </div>
+                                                                                <div class="col-lg-4 col-sm-8">
+                                                                                    <img class="image-preview1"
+                                                                                         style="width:50px;height:50px;" src={{fileName1}}>
+
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label col-lg-3 col-sm-4" for="">iii. NRIC/Passport</label>
+                                                                                <div class="col-lg-5 col-sm-8">
+                                                                                    <input type='file' accept='image/*' id="relevantcert" ng-model-instant
+                                                                                           onchange="angular.element(this).scope().imageUpload2(event)"><br>
+                                                                                                                                                                        </div>
+                                                                                <div class="col-lg-4 col-sm-8">
+                                                                                    <img class="image-preview2"
+                                                                                         style="width:50px;height:50px;" src={{fileName2}}>
+
+                                                                                </div></div>
+
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label col-lg-3 col-sm-4" for="">iv. Secondary education certificates</label>
+                                                                                <div class="col-lg-5 col-sm-8">
+                                                                                    <input type='file' accept='image/*' id="photocopy" ng-model-instant
+                                                                                           onchange="angular.element(this).scope().imageUpload3(event)"><br>
+                                                                                                                                                                       </div>
+                                                                                <div class="col-lg-4 col-sm-8">
+                                                                                    <img class="image-preview3"
+                                                                                         style="width:50px;height:50px;" src={{fileName3}}>
+
+                                                                                </div></div>
+
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label col-lg-3 col-sm-4" for="">v. Tertiary education certificates</label>
+                                                                                <div class="col-lg-5 col-sm-8">
+                                                                                    <input type='file' accept='image/*' id="tertiaryeducerts" ng-model-instant
+                                                                                           onchange="angular.element(this).scope().imageUpload4(event)"><br>
+                                                                                                                                                                       </div>
+                                                                                <div class="col-lg-4 col-sm-8">
+                                                                                    <img class="image-preview4"
+                                                                                         style="width:50px;height:50px;" src={{fileName4}}>
+
+                                                                                </div></div>
+
+                                                                        </div>
+                                                            <div class="form-group">
+
+                                                                            <div class="form-group">
+                                                                                <label class="control-label col-lg-3 col-sm-4" for="">vi. Other relevant documents</label>
+                                                                                <div class="col-lg-5 col-sm-8">
+
+                                                                                    <input type='file' accept='image/*' id="otherdocs" ng-model-instant
+                                                                                           onchange="angular.element(this).scope().imageUpload5(event)"><br>
+                                                                                                                                                                       </div>
+                                                                                <div class="col-lg-4 col-sm-8">
+                                                                                    <img class="image-preview5"
+                                                                                         style="width:50px;height:50px;" src={{fileName5}}>
+
+                                                                                </div></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer" style="border:none !important;">
+                                <a class="btn btn-primary back" id="back1" href="javascript:void(0)"
+                                   ng-click="back_wizardEdit()" data-toggle="tab" data-step="2">Back</a>
+                                <a class="btn btn-primary hi_btn next" id="next" href="javascript:void(0)"
+                                   ng-click="next_wizardEdit('next');" data-toggle="tab"
+                                   data-step="2" style="color:#D5ECFF">Next</a>
+                                <a class="btn btn-primary hi_btn next" id="next1" href="javascript:void(0)"
+                                   ng-click="next_wizardEdit1();" data-toggle="tab"
+                                   data-step="2" style="color:#D5ECFF" >Next</a>
+                                <a class="btn btn-primary hi_btn next" id="next2" href="javascript:void(0)"
+                                   ng-click="next_wizardEdit2();" data-toggle="tab"
+                                   data-step="2" style="color:#D5ECFF" >Next</a>
+                                <a class="btn btn-primary hi_btn next" id="next3" href="javascript:void(0)"
+                                   ng-click="next_wizardEdit3();" data-toggle="tab"
+                                   data-step="2" style="color:#D5ECFF" >Next</a>
+                                <a class="btn btn-primary back" id="back" href="javascript:void(0)"
+                                   ng-click="back_wizardEdit1()" data-toggle="tab" data-step="2" ng-hide="id='sub_step12'">Back</a>
+
+
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal"
+                                        id="saveId"  ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-click="savehrApplication()">Save
+                                </button>
+                                <button type="button" class="btn btn-primary hi_btn" data-dismiss="modal"
+                                        ng-click="removeStudentDetails()"> Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade addCustomer" tabindex="-1" id="add_new_KIV_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 id="country-title" class="modal-title">KIV Form</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Remarks
+                                                        <span>*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style=" position:relative;">
+                                                        <textarea id="kivremarks" name="kivremarks" alpha-with-space
+                                                               ng-pattern="/[aA-zZ\s]$/"
+                                                               type="text" placeholder="Remarks"
+                                                               ng-model="kivremarks"
+                                                               class="form-control input-md" autocomplete="off" required/>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-click="saveKivDetails()">Save
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade Student" tabindex="-1" id="lessionPlanMain_row" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-lg" style="width: 1000px !important;background-color: white !important;">
+                        <div align="center">
+                            <a href="#" class="brand">
+                                <large> <img src="images/icon/LogoMS.jpg" width="120" height="70"/></large>
+                            </a>
+                            <b>
+                                <u>
+                                    <h2 style="font-family: fantasy">MOUNT SAFA INTERNATIONAL SCHOOL </h2>
+                                </u>
+                            </b>
+                            <h4>Kompleks Mutiara Johorland, Jalan Bukit Mutiara, Bandar Dato’ Onn, 81100 Johor Bahru, Johor</h4>
+                            <h4>Tel:073513834</h4>
+                            <h4>E-mail:salam@mountsafa.com</h4>
+                            <h4>www.mountsafa.com</h4>
+
+<!--                            <div id="passport_photo" style="width: 150px;height: 150px;border:1px solid #ccc; margin:30px 0px; padding:30px 10px; background-color: #FFF;">-->
+<!--                                Pasport(2 Keping)  Passport Photo(2copies)-->
+<!--                            </div>-->
+                            <br/>
+                            <br/>
+                            <div class="row">
+                                <div class="col-lg-12 admission_border">
+                                    <table class="admission_table_1 table">
+                                        <tbody>
+                                        <tr>
+                                            <td colspan="2" style="padding-left: 20px;">
+                                                <p>For office use only</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">Registration No </span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half">6-2018</span>
+                                            </td>
+
+                                            <td>
+                                                <span class="adm_title_half">Full Name(as stated in I.C/Passport)</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half">{{hrFullName}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">Class</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half">{{className}}</span>
+                                            </td>
+
+                                            <td>
+                                                <span class="adm_title_half">Nationality</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half">{{hrNationality}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td >
+                                                <span class="adm_title_half">Date Of Birth</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half">{{dOBText|date:'dd/MM/yyyy'}}</span>
+                                            </td>
+
+                                            <td >
+                                                <span class="adm_title_half">Sex</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half">{{hrSex}}</span>
+                                            </td>
+
+                                            <td>&nbsp;
+
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+<!--                            <div class="row">-->
+<!--                                <div class="col-lg-12 admission_border pt-10" style="padding-left: 80px;">-->
+<!--                                    <p style="margin-left: -30px;">1. Please submit with this form following.</p>-->
+<!--                                    <p style="margin-bottom: 2px;"><span><i class="fa fa-square" aria-hidden="true"></i> Not Submitted</span> <span class="border_left_10px">Attach the photos of anyone whom you authorize to </span><br/><span style="margin-left:111px;"> pick up your child from BSIS</span></p>-->
+<!--                                    <p><span><i class="fa fa-square" aria-hidden="true"></i> Not Submitted</span> <span class="border_left_10px">Copy of Birth Certificate and translation (if not in  English )</span></p>-->
+<!--                                    <p><span><i class="fa fa-square" aria-hidden="true"></i> Not Submitted</span> <span class="border_left_10px">Copy of Identity Card or Passport of the Student</span></p>-->
+<!--                                    <p><span><i class="fa fa-square" aria-hidden="true"></i> Not Submitted</span> <span class="border_left_10px">Copy of Identity Card or Passport of the Parent</span></p>-->
+<!--                                    <p><span><i class="fa fa-square" aria-hidden="true"></i> Not Submitted</span> <span class="border_left_10px">Copy of Marriage Certificate (Foreign Parents only; for visa purposes)</span></p>-->
+<!--                                    <p><span><i class="fa fa-square" aria-hidden="true"></i> Not Submitted</span> <span class="border_left_10px">Copy of Previous School Leaving Certificate</span></p>-->
+<!--                                    <p><span><i class="fa fa-square" aria-hidden="true"></i> Not Submitted</span> <span class="border_left_10px">Other relevant document</span></p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+                            <div class="row">
+                                <div class="col-lg-12 admission_border">
+
+                                    <table class="admission_table_1 table">
+                                        <tbody>
+                                        <tr>
+                                            <td colspan="2" style="padding-left: 20px;">
+                                                <p>A. HR PARTICULARS</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">1. Full Name <small>(as stated in Birth Certicate / I.C /Passport)</small> </span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{hrFullName}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">2. Birth Certificate No </span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{dOBText|date:'dd/MM/yyyy'}}</span>
+
+                                                <span class="adm_title_half" style="width: 38%;margin-left: 17px;">Passport No</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{passportNew}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">3. Date of Birth</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{dOBText|date:'dd/MM/yyyy'}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>
+                                                <span class="adm_title_half">4. Age</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{hrage}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">5. Place of Birth</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{hrplaceOfBirth}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+
+                                            <td>
+                                                <span class="adm_title_half">6. Gender</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{hrSex}}</span>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">7. Nationality</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{hrNationality}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+
+                                            <td>
+                                                <span class="adm_title_half">8. Tel.No</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{hrphoneNo}}</span>
+                                            </td>
+                                        </tr>
+
+
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">9. Email</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{hrEmailAddress}}</span>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">10. Corresspondence Address</span>
+                                                <span class="adm_colon">:</span>
+
+                                                <span class="adm_val_half" style="width: 56%;">{{hrAddress1}} </span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">11. Permanent Address</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{hrAddress2}} </span>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">12. Working Experience:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;"></span>
+                                            </td>
+                                        </tr>
+
+
+                                        <table class="table">
+                                            <tr>
+
+                                                <td>
+                                                    <span style="color: black">workExpFrom</span>
+                                                </td>
+                                                <td><span style="color: black"> workExpTo</span></td>
+                                                <td><span style="color: black"> workExpCompany</span></td>
+                                                <td><span style="color: black">workExpPosition</span></td>
+                                                <td><span style="color: black">workExpSal</span></td>
+                                            </tr>
+                                            <tbody>
+                                            <tr ng-repeat="prev in workExperiencedetailsList">
+                                                <td>{{prev.workExpFrom}}</td>
+                                                <td>{{prev.workExpTo}}</td>
+                                                <td>{{prev.workExpCompany}}</td>
+                                                <td>{{prev.workExpPosition}}</td>
+                                                <td>{{prev.workExpSal}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                <div class="col-lg-12 admission_border">
+                                    <table class="admission_table_1 table">
+                                        <tbody>
+
+                                        <tr>
+                                            <td colspan="2" style="padding-left: 20px;">
+                                                <p>B. SPOUSE INFORTMATION:</p>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="2">
+                                                <table class="table" >
+                                                    <tr>
+                                                        <td>Spouse Name</td>
+                                                        <td>Passport </td>
+                                                        <td>Date of birth</td>
+                                                        <td>Nationality</td>
+                                                        <td>Age</td>
+                                                        <td>Place Of Birth</td>
+                                                        <td>Phone No</td>
+                                                    </tr>
+
+                                                    <tbody>
+                                                    <tr ng-repeat="sb in hrlist">
+                                                        <td>{{sb.spouseFullName}}</td>
+                                                        <td>{{sb.spousepassportNew}}</td>
+                                                        <td>{{sb.spouseDOBText}}</td>
+                                                        <td>{{sb.spouseNationality}}</td>
+                                                        <td>{{sb.spouseage}}</td>
+                                                        <td>{{sb.spouseplaceOfBirth}}</td>
+                                                        <td>{{sb.spousephoneNo}}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+
+
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+
+                                <div class="col-lg-12 admission_border">
+                                    <table class="admission_table_1 table">
+                                        <tbody>
+
+                                        <tr>
+                                            <td colspan="2" style="padding-left: 20px;">
+                                                <p>C. AGREEMENT & DECLARATION:</p>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td colspan="2">
+                                                I Understand and agree to the points below.
+                                                1) 2months notice must be served before withdrawal or the deposit will be forfeited.
+                                                2) Any outstanding payment will be deducted from deposit                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half"> Name </span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half"> {{stdname}}</span>
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">Date</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half"> 2018-12-03</span>
+                                            </td>
+                                            <td>
+                                                <span  class="adm_title_half"> Signature</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half"> ----------------------</span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <button type="button" class="btn btn-primary hi_btn"
+                                            data-dismiss="modal">Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" id="add_new_Interview_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 id="country-title" class="modal-title">Interviewer Form</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <label class="col-md-6 control-label" for=""
+                                                           style="padding-left: 61px; text-align: left;">Interview Date</label>
+                                                    <div class="col-md-6" style="padding-left: 0px;">
+                                                        <p class="input-group">
+                                                            <input type="text" id="interviewDate"
+                                                                   ng-model="interviewDate" class="form-control"
+                                                                   readonly
+                                                                   uib-datepicker-popup="{{format}}"
+                                                                   is-open="popup4.opened"
+                                                                   datepicker-options="dateOptions"
+                                                                   close-text="Close"
+                                                                   alt-input-formats="altInputFormats"/>
+                                                            <span class="input-group-btn">
+                                                                     <button type="button" class="btn btn-default"
+                                                                             ng-click="open4()">
+                                                                         <i class="glyphicon glyphicon-calendar"></i></button>
+                                                                     </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Interview Time</label>
+                                                    <div class="col-md-6 col-sm-6" style=" position:relative;">
+                                                        <input id="interviewNotes" name="interviewNotes"
+                                                               type="time" placeholder="20:10"
+                                                               ng-model="interviewtime"
+                                                               class="form-control input-md" autocomplete="off" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Interviewer</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="name" name="name"
+                                                                ng-model="interviewerText"
+                                                                ng-options="employee.employeeName as employee.employeeName for employee in employeeList"
+                                                                class="form-control input-md">
+                                                            <option value="">Select Employee</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Remarks</label>
+                                                    <div class="col-md-6 col-sm-6" style=" position:relative;">
+                                                        <textarea id="interviewNotes" name="interviewNotes" alpha-with-space
+                                                               ng-pattern="/[aA-zZ\s]$/"
+                                                               type="text" placeholder="Remarks"
+                                                               ng-model="interviewNotes"
+                                                               class="form-control input-md" autocomplete="off" required/>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-click="saveInterviewDetails()">Save
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" id="add_new_InterviewSchuduled_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 id="country-title" class="modal-title">Interviewer Form</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Interview Notes</label>
+                                                    <div class="col-md-6 col-sm-6" style=" position:relative;">
+                                                        <textarea id="interviewNotes" name="interviewNotes" alpha-with-space
+                                                               ng-pattern="/[aA-zZ\s]$/"
+                                                               type="text" placeholder="Interview Notes"
+                                                               ng-model="interviewSchedNotes"
+                                                               class="form-control input-md" autocomplete="off" required/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" for=""> Status</label>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <select name="interviewerText" id="interviewerText" ng-model="interviewerSchedStatus"
+                                                                class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                            <option value="UnSuccessful">Unsuccessful</option>
+                                                            <option value="Accepted">Accepted</option>
+                                                            <option value="Microteaching">Microteaching</option>
+                                                            <option value="2nd Interview">2 nd Interview</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" ng-show="interviewerSchedStatus=='Accepted'">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Salary Offered</label>
+                                                    <div class="col-md-6 col-sm-6" style=" position:relative;" >
+                                                        <input id="salaryoffered" name="salaryoffered"
+                                                               type="text" placeholder="salary"
+                                                               ng-model="interviewerSalary"
+                                                               class="form-control input-md" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" ng-show="interviewerSchedStatus=='Accepted'">
+                                                    <label class="col-md-6 control-label" for=""
+                                                           style="padding-left: 61px; text-align: left;">Reporting Date</label>
+                                                    <div class="col-md-6" style="padding-left: 0px;">
+                                                        <p class="input-group">
+                                                            <input type="text" id="reportingDate"
+                                                                   ng-model="reportDate" class="form-control"
+                                                                   readonly
+                                                                   uib-datepicker-popup="{{format}}"
+                                                                   is-open="popup10.opened"
+                                                                   datepicker-options="dateOptions"
+                                                                   close-text="Close"
+                                                                   alt-input-formats="altInputFormats"/>
+                                                            <span class="input-group-btn">
+                                                                     <button type="button" class="btn btn-default"
+                                                                             ng-click="open10()">
+                                                                         <i class="glyphicon glyphicon-calendar"></i></button>
+                                                                     </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-click="saveInterviewscheDetails()">Save
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <add-new-employee></add-new-employee>
+
+                <div class="modal fade addCustomer" tabindex="-1" id="add_second_new_Interview_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 id="country-title" class="modal-title">Second Interviewer Form</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Remarks</label>
+                                                    <div class="col-md-6 col-sm-6" style=" position:relative;">
+                                                        <textarea id="interviewNotes" name="interviewNotes"
+                                                               type="text" placeholder="Remarks"
+                                                               ng-model="notes"
+                                                               class="form-control input-md" autocomplete="off" required/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Interview Status</label>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <select name="interviewerText" id="interviewerText" ng-model="secondInteviewStatus"
+                                                                class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                            <option value="UnSuccessful">Unsuccessful</option>
+                                                            <option value="Accepted">Accepted</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" ng-show="secondInteviewStatus=='Accepted'">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Salary Offered</label>
+                                                    <div class="col-md-6 col-sm-6" style=" position:relative;" >
+                                                        <input id="salaryoffered" name="salaryoffered"
+                                                               type="text" placeholder="salary"
+                                                               ng-model="interviewerSalary"
+                                                               class="form-control input-md" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" ng-show="secondInteviewStatus=='Accepted'">
+                                                    <label class="col-md-6 control-label" for=""
+                                                           style="padding-left: 61px; text-align: left;">Reporting Date</label>
+                                                    <div class="col-md-6" style="padding-left: 0px;">
+                                                        <p class="input-group">
+                                                            <input type="text" id="reportingDate"
+                                                                   ng-model="reportDate" class="form-control"
+                                                                   readonly
+                                                                   uib-datepicker-popup="{{format}}"
+                                                                   is-open="popup11.opened"
+                                                                   datepicker-options="dateOptions"
+                                                                   close-text="Close"
+                                                                   alt-input-formats="altInputFormats"/>
+                                                            <span class="input-group-btn">
+                                                                     <button type="button" class="btn btn-default"
+                                                                             ng-click="open11()">
+                                                                         <i class="glyphicon glyphicon-calendar"></i></button>
+                                                                     </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-click="savesecondInterviewDetails()">Save
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+<script>
+    $('body').delegate('.remove','click',function()
+    {
+        $(this).parent().parent().remove();
+    });
+
+    $("#sameas").click(function () {
+
+        if($(this).prop("checked") == true){
+
+            $("#samecorrespended").hide();
+        }else{
+
+            $("#samecorrespended").show();
+
+        }
+
+
+
+    })
+function removereadonly(id,clicksid) {
+
+    if($("#"+clicksid).prop("checked") == true){
+
+        $('#'+id).prop('readonly', false);
+    }else{
+
+        $('#'+id).prop('readonly', true);
+
+    }
+
+}
+$("#next1").hide();
+    $("#next2").hide();
+    $("#next3").hide();
+    $("#saveId").hide();
+    $("#back1").hide();
+
+
+
+</script>

@@ -1,0 +1,284 @@
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+    <div class="container cus_main_row">
+        <style>
+
+            .overSelect {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+            }
+
+            #checkboxes {
+                display: none;
+                border: 1px #dadada solid;
+            }
+
+            #checkboxes label {
+                display: block;
+            }
+
+            #checkboxes label:hover {
+                background-color: #1e90ff;
+            }
+        </style>
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Semester</div>
+            </h2>
+        </div>
+
+        <!--// TO ADD GOLD//-->
+        <div class="col-md-2 col-sm-5 col-xs-5">
+            <input id="textinput" name="textinput" type="text"
+                   placeholder="Search For Semester" ng-model="searchText" class="form-control input-md"
+                   ng-keyup="$event.keyCode == 13 ? getSemesterPaginatedList(searchText) : null"/>
+        </div>
+        <div class="col-md-1 col-sm-1">
+            <button type="button" class="btn btn-primary hi_btn"
+                    ng-click="addSemester()" style="width: 100%;">Add
+            </button>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-4">
+            <button type="submit" id="colButn" class="btn btn-primary hi_btn" data-toggle="modal"
+                    ng-model="inactiveStatus" data-target=".print-me"
+                    ng-click="inactive()">{{ButtonStatus}}
+            </button>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="fixed-table-container">
+                <div class="table_wrap fixed-table-container-inner">
+                    <table class=" hi_table table table_option2 table-hover table-striped table-fixed-header list_table"
+                           id="" style="margin-bottom: 0;">
+                        <thead>
+
+                        <tr>
+
+
+                            <th data-field="desc">
+                                <div class="th-inner">Semester Name</div>
+                            </th>
+                            <!--<th data-field="desc">-->
+                                <!--<div class="th-inner">Level Name</div>-->
+                            <!--</th>-->
+                            <th data-field="desc">
+                                <div class="th-inner">Start Date</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">End Date</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Description</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner"> Status</div>
+                            </th>
+
+                            <th data-field="desc">
+                                <div class="th-inner">Actions</div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="parentTable">
+
+                        <tr ng-repeat="semester in semesterList|filter:searchText">
+                            <td>{{semester.semesterName}}</td>
+                            <!--<td>{{semester.level}}</td>-->
+                            <td>{{semester.startDate|date:'dd/MM/yyyy'}}</td>
+                            <td>{{semester.endDate|date:'dd/MM/yyyy'}}</td>
+                            <td>{{semester.description}}</td>
+                            <td>{{semester.semesterStatus}}</td>
+                            <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editSemester(semester)">Edit</button>
+                            <button type="button" class="btn btn-primary hi_btn" ng-click="deleteSemester(semester.semesterId)">Delete</button></td>
+                        </tr>
+                        <tr ng-if="searchText!=''&&(semesterList|filter:searchText).length==0">
+                            <td colspan="5" style="color: red; font-weight: bold">No Records Found</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-12 pagination_">
+                <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"
+                        ng-disabled="first"
+                        ng-click="getSemesterPaginatedList('firstPage')" ng-model="first">First
+                </button>
+                <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"
+                        ng-disabled="prev"
+                        ng-click="getSemesterPaginatedList('prevPage')" ng-model="prev">Prev
+                </button>
+                <button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"
+                        ng-click="getSemesterPaginatedList('nextPage')" value="next" ng-class="{'diabled-class': next}"
+                        ng-model="next">Next
+                </button>
+                <button type="button" class="btn btn-default hi_btn"
+                        ng-click="getSemesterPaginatedList('lastPage')" ng-class="{'diabled-class': last}" ng-disabled="last"
+                        ng-model="last">Last
+                </button>
+            </div>
+
+        </div>
+
+
+        <div class="modal fade Add Desig" tabindex="-1" id="add_new_Semester_modal" role="dialog"
+             data-backdrop="static"
+             aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content checkout">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true" ng-click="removeSemesterDetails()">&times;</span></button>
+                        <h4 class="modal-title" id="modelName"></h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <form class="form-horizontal">
+                                    <fieldset>
+                                        <input type="hidden" ng-model="semesterId"
+                                               value="{{semesterId}}">
+
+                                        <div class="form-group" style="margin-top: 20px;">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">BranchName<span style="color: red">*</span></label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <select id="branchname" name="branchname"
+                                                        ng-model="semeterBranch"
+                                                        ng-options="Branches.branchesId as Branches.branchName for Branches in bran"
+                                                        class="form-control input-md">
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <!--<div class="form-group" style="margin-top: 20px;" ng-hide="operation=='Edit'">-->
+                                        <!--<label class="col-md-4 col-sm-4 control-label" for="">LevelName<span style="color: red">*</span></label>-->
+                                        <!--<div class="col-md-6 col-sm-6">-->
+                                            <!--<div>-->
+                                                <!--<div class="wrapper">-->
+                                                    <!--<div class="multiselect" style="width: 98%;">-->
+                                                        <!--<div class="selectBox" ng-click="showCheckboxes()">-->
+                                                            <!--<select style="padding: 7px 0px; width: 100%;    ">-->
+                                                                <!--<option>Select</option>-->
+
+                                                            <!--</select>-->
+                                                            <!--<div class="overSelect"></div>-->
+                                                        <!--</div>-->
+                                                        <!--<div id="checkboxes">-->
+                                                            <!--<label ng-repeat="grade in gradeList">-->
+                                                                <!--<input type="checkbox"-->
+                                                                       <!--multiple="multiple"-->
+                                                                       <!--ng-click="pushSelectedGrades(grade.gradeId)"-->
+                                                                       <!--ng-model="LevelName"-->
+                                                                       <!--ng-value="grade.gradeName" style="display: inline;width: 30px"/>{{grade.gradeName}}</label>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <!--</div>-->
+                                        <!--<div class="form-group" style="margin-top: 20px;" ng-show="operation=='Edit'">-->
+                                            <!--<label class="col-md-4 col-sm-4 control-label" for="">LevelName<span style="color: red">*</span></label>-->
+                                            <!--<div class="col-md-6 col-sm-6" style="position:relative;">-->
+                                                <!--<select id="branchname" name="branchname"-->
+                                                        <!--ng-model="LevelName"-->
+                                                        <!--ng-options="grade.gradeId as grade.gradeName for grade in gradeList"-->
+                                                        <!--class="form-control input-md">-->
+                                                    <!--<option value="">Select</option>-->
+                                                <!--</select>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Semester Name<span style="color: red">*</span></label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="SemesterName" id="SemesterName" maxlength="30"
+                                                       class="form-control input-md"
+                                                       ng-model="SemesterName">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Start Date</label>
+
+                                            <div class="col-md-6 col-sm-6">
+                                                <p class="input-group">
+                                                    <input id="sdate" type="text" class="form-control"
+                                                           style=""
+                                                           uib-datepicker-popup="{{format}}" ng-model="Sdate" is-open="popup1.opened"
+                                                           datepicker-options="dateOptions" readonly="readonly" ng-required="true" class="form-control input-md"
+                                                           close-text="Close" alt-input-formats="altInputFormats"/>
+                                                <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                             class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                                </p>
+                                            </div>
+
+
+
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">End Date</label>
+
+
+                                            <div class="col-md-6 col-sm-6">
+                                                <p class="input-group"><input id="edate" type="text" class="form-control"
+                                                   style=""
+                                                   uib-datepicker-popup="{{format}}" ng-model="Edate" is-open="popup2.opened"
+                                                   datepicker-options="dateOptions" readonly="readonly" ng-required="true" class="form-control"
+                                                   close-text="Close" alt-input-formats="altInputFormats"/>
+                                            <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click ="open2()"><i
+                                             class="glyphicon glyphicon-calendar"></i></button>
+                                            </span></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Description</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <textarea name="Semesterdes" id="Semesterdes"
+                                                       class="form-control input-md"
+                                                          ng-model="SemesterDesc"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Status</label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <select name="desStatus" id="desStatus"
+                                                        ng-model="status" class="form-control input-md"
+                                                        required>
+                                                    <option value="Active">Active</option>
+                                                    <option value="InActive">InActive</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-default" ng-disabled="isDisabled"
+                                                    ng-click="saveSemester()">Save
+                                            </button>
+                                            <!--<button type="submit" class="btn btn-default" ng-show="operation=='Edit'"-->
+                                                    <!--ng-click="saveEditSemester()">Update-->
+                                            <!--</button>-->
+                                            <button type="button" class="btn btn-default" ng-click="removeSemesterDetails()" data-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>

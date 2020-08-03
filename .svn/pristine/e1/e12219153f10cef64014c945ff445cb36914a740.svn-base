@@ -1,0 +1,917 @@
+// var taskManagerModule = angular.module('taskManagerApp', ['ngRoute','ngAnimate']);
+//
+
+var app = angular.module('myApp',['ngRoute', 'ngAnimate',
+    'ngSanitize','ui-notification','ngTable',
+    'ngCookies', 'angular.filter','ngSanitize','ui.bootstrap','pascalprecht.translate']);
+
+
+app.config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+        .when("/login", {
+            templateUrl: "partials/login.html",
+            controller: "loginController"
+        })
+
+        .when("/enquiry", {
+            templateUrl: "partials/EnquiryForm.html",
+            controller: "enqController"
+        })
+        .when("/creator", {
+            templateUrl: "partials/Creator.html",
+            controller: "CreatorController"
+        })
+        .when("/timetable", {
+            templateUrl: "partials/timeTable.html",
+            controller: "timeController"
+        })
+        .when("/AssesmentSubmission", {
+            templateUrl: "partials/AssesmentSubmission.html",
+            controller: "asController"
+        })
+        .when("/StudentAssesmentMarks", {
+            templateUrl: "partials/studentAssesmentMarks.html",
+            controller: "samController"
+        })
+        .when("/approval", {
+            templateUrl: "partials/approval.html",
+            controller: "approvalController"
+        })
+        .when("/dashboard", {
+            templateUrl: "partials/dashboard.html",
+            controller: "dashboardController"
+        })
+        .when("/student", {
+            templateUrl: "partials/student.html",
+            controller: "studentController"
+        })
+        .when("/studentAttendance", {
+            templateUrl: "partials/studentAttendance.html",
+            controller: "studentAttendanceController"
+        })
+        .when("/visitor", {
+            templateUrl: "partials/visitorentry.html",
+            controller: "visitorController"
+        })
+        .when("/sowreport", {
+
+            templateUrl: "partials/sowreport.html",
+            controller: "sowreportController"
+        })
+        .when("/attendanceReport", {
+            templateUrl: "partials/attendanceReport.html",
+            controller: "attendanceReportController"
+        })
+        .when("/fee", {
+            templateUrl: "partials/fee.html",
+            controller: "feeController"
+        })
+
+        .when("/pvtLtdFee", {
+            templateUrl: "partials/pvtLtdFee.html",
+            controller: "feeController"
+        })
+
+        .when("/configuration", {
+            templateUrl: "partials/configuration.html",
+            // controller: "configurationController"
+        })
+        .when("/admin", {
+            templateUrl: "partials/admin.html",
+        })
+        .when("/hRPayRoll", {
+            templateUrl: "partials/hRPayRoll.html",
+        })
+        .when("/sar", {
+            templateUrl: "partials/sar.html",
+        })
+        .when("/country", {
+            templateUrl: "partials/country.html",
+            controller: "countryController"
+        })
+        .when("/periods", {
+            templateUrl: "partials/periods.html",
+            controller: "periodsController"
+        })
+        .when("/component", {
+            templateUrl: "partials/component.html",
+            controller: "componentController"
+        })
+        .when("/accountType", {
+            templateUrl: "partials/accountType.html",
+            controller: "accTypeCntrl"
+        })
+        .when("/accountGroup", {
+            templateUrl: "partials/accountGroup.html",
+            controller: "accGroupCntrl"
+        })
+        .when("/createchartofaccount", {
+            templateUrl: "partials/createchartofaccount.html",
+            controller: "createchartofaccountCtrl"
+        })
+        .when("/createchecklist", {
+            templateUrl: "partials/checkList.html",
+            controller: "createcheckListCtrl"
+        })
+        .when("/permission", {
+            templateUrl: "partials/permission.html",
+            controller: "permissionCtrl"
+        })
+        .when("/permissionrep", {
+            templateUrl: "partials/permissionRep.html",
+            controller: "permissionRepCtrl"
+        })
+        .when("/formsetup", {
+            templateUrl: "partials/formsetup.html",
+            controller: "formsetupCtrl as rest"
+        })
+        .when("/paymentmethod", {
+            templateUrl: "partials/paymentmethod.html",
+            controller: "paymentmethodCtrl as rest"
+        })
+        .when("/bank", {
+            templateUrl: "partials/bank.html",
+            controller: "bankCtrl as rest"
+        })
+        .when("/term", {
+            templateUrl: "partials/term.html",
+            controller: "termController"
+        })
+        .when("/Assignment", {
+            templateUrl: "partials/assignment.html",
+            controller: "assignmentController"
+        })
+        .when("/subject", {
+            templateUrl: "partials/subject.html",
+            controller: "subjectController"
+        })
+        .when("/chapter", {
+            templateUrl: "partials/chapter.html",
+            controller: "chapterController"
+        })
+        .when("/topic", {
+            templateUrl: "partials/topic.html",
+            controller: "topicController"
+        })
+
+        .when("/gradingMaster", {
+            templateUrl: "partials/gradingMaster.html",
+            controller: "gradingController"
+        })
+        .when("/topic", {
+            templateUrl: "partials/topic.html",
+            controller: "topicController"
+        })
+        .when("/lessonPlan", {
+            templateUrl: "partials/lessonPlan.html",
+            controller: "lessonPlanController"
+        })
+        .when("/newLessonPlan", {
+            templateUrl: "partials/newLessonPlan.html",
+            controller: "newLessonPlanController"
+        })
+        .when("/state", {
+            templateUrl: "partials/state.html",
+            controller: "stateController"
+        })
+        .when("/city", {
+            templateUrl: "partials/city.html",
+            controller: "cityController"
+        })
+        .when("/branches", {
+            templateUrl: "partials/branches.html",
+            controller: "branchesController"
+        })
+        .when("/holiday", {
+            templateUrl: "partials/holiday.html",
+            controller: "holidayController"
+        })
+        .when("/admission", {
+            templateUrl: "partials/admission.html",
+            controller: "admissionController"
+        })
+        .when("/contact", {
+            templateUrl: "partials/otherContacts.html",
+            controller: "contactController"
+        })
+
+        .when("/hr", {
+            templateUrl: "partials/hr.html",
+            controller: "hrController"
+        })
+        .when("/employeesar", {
+            templateUrl: "partials/employeesar.html",
+            controller: "employeesarCntrl"
+        })
+        .when("/assessorsar", {
+            templateUrl: "partials/assessorsar.html",
+            controller: "assessorsarCntrl"
+        })
+        .when("/leave", {
+            templateUrl: "partials/leave.html",
+            controller: "leaveControl"
+        })
+
+        .when("/leaveform", {
+            templateUrl: "partials/leaveform.html",
+            controller: "leaveformControl"
+        })
+        .when("/trainer", {
+            templateUrl: "partials/trainer.html",
+            controller: "trainerController"
+        })
+        .when("/roles", {
+            templateUrl: "partials/roles.html",
+            controller: "rolesController"
+        })
+        .when("/resourceCategory", {
+            templateUrl: "partials/resourceCategory.html",
+            controller: "rsrctgryController"
+        })
+        .when("/resource", {
+            templateUrl: "partials/resource.html",
+            controller: "resourceController"
+        })
+        .when("/department", {
+            templateUrl: "partials/department.html",
+            controller: "departmentController"
+        })
+        .when("/weekday", {
+            templateUrl: "partials/weekday.html",
+            controller: "weekdayController"
+        })
+        .when("/facilityDetails", {
+            templateUrl: "partials/facilityDetails.html",
+            controller: "facilityController"
+        })
+        .when("/ihesLessonPlan", {
+            templateUrl: "partials/ihesLessonPlan.html",
+            controller: "ihesLessonPlanController"
+        })
+        .when("/agegroup", {
+            templateUrl: "partials/agegroup.html",
+            controller: "agegroupController"
+        })
+        .when("/exitInterviewForm", {
+            templateUrl: "partials/ExitInterviewform.html",
+            controller: "ExitInterviewCtrl"
+        })
+        .when("/support", {
+            templateUrl: "partials/support.html",
+            controller: "supportController"
+        })
+        .when("/reports", {
+            templateUrl: "partials/reports.html"
+        })
+        .when("/feeDueReport", {
+            templateUrl: "partials/feeDueReports.html",
+            controller: "feeDueReportController"
+        })
+
+        .when("/remaindersss", {
+            templateUrl: "partials/remainders.html",
+            controller: "remaindersCtrl"
+        })
+        .when("/attendance", {
+            templateUrl: "partials/attendance.html",
+            controller: "attendanceCtrl"
+        })
+        .when("/suppliers", {
+            templateUrl: "partials/suppliers.html",
+            controller: "suppliersCtrl"
+        })
+        .when("/earnings", {
+            templateUrl: "partials/earnings.html",
+            controller: "earningCtrl"
+        })
+        .when("/deduction", {
+            templateUrl: "partials/deduction.html",
+            controller: "deductionCtrl"
+        })
+        .when("/payroll", {
+            templateUrl: "partials/payroll.html",
+            controller: "PayrollCtrl"
+        })
+
+        .when("/feeCollectedReport", {
+            templateUrl: "partials/feeCollectedReports.html",
+            controller: "feeCollectedReportController"
+        })
+        .when("/receiptReport", {
+            templateUrl: "partials/feeReceiptNoReport.html",
+            controller: "feeReceiptNoReportController"
+        })
+        .when("/plreport", {
+            templateUrl: "partials/plreport.html",
+            controller: "plreportCtrl"
+        })
+        .when("/balanceSheetReport", {
+            templateUrl: "partials/balanceSheetReport.html",
+            controller: "balanceSheetReportCtrl"
+        })
+        .when("/viewledger", {
+            templateUrl: "partials/viewledger.html",
+            controller: "viewRepCtrl as rest"
+        })
+        .when("/trialbalance", {
+            templateUrl: "partials/trialbalance.html",
+            controller: "trialbalancereportcontroller as rest"
+        })
+        .when("/feeDetailsReport", {
+            templateUrl: "partials/feeDetailsReport.html",
+            controller: "feeDetailsReportController"
+        })
+        .when("/feetypemaster", {
+            templateUrl: "partials/feetypemaster.html",
+            controller: "feetypemasterController"
+        })
+        .when("/grademaster", {
+            templateUrl: "partials/grademaster.html",
+            controller: "grademasterController"
+        })
+        .when("/designation", {
+            templateUrl: "partials/designation.html",
+            controller: "designationCtrl"
+        })
+        .when("/class", {
+            templateUrl: "partials/class.html",
+            controller: "classCtrl"
+        })
+        .when("/employee", {
+            templateUrl: "partials/employee.html",
+            controller: "employeeCtrl"
+        })
+        .when("/semester", {
+            templateUrl: "partials/semester.html",
+            controller: "semesterCtrl"
+        })
+
+        .when("/emailServer", {
+            templateUrl: "partials/emailserver.html",
+            controller: "emailserverCtrl"
+        })
+        .when("/reportMailScheduler", {
+            templateUrl: "partials/ReportMailScheduler.html",
+            controller: "reportMailSchedulerCtrl as rest"
+        })
+        .when("/academicyearmaster", {
+            templateUrl: "partials/academicyearmaster.html",
+            controller: "academicyearmasterController"
+        })
+        .when("/discounttype", {
+            templateUrl: "partials/discounttype.html",
+            controller: "discounttypeController"
+        })
+        .when("/remainder", {
+            templateUrl: "partials/remainder.html",
+            controller: "remainderController"
+        })
+        .when("/studentschooldetails", {
+            templateUrl: "partials/studentschooldetails.html",
+            controller: "studentschooldetailsController"
+        })
+        .when("/smsServer", {
+            templateUrl: "partials/SmsServer.html",
+            controller: "messageServerCtrl"
+        })
+        .when("/Doctorpanel", {
+            templateUrl: "partials/Doctorpanel.html",
+            controller: "doctormasterController"
+        })
+        .when("/TrainingModule", {
+            templateUrl: "partials/TrainingModule.html",
+            controller: "trainingModuleController"
+        })
+        .when("/EmailTemplate", {
+            templateUrl: "partials/EmailTemplate.html",
+            controller: "emailTemplateController"
+        })
+        .when("/Notification", {
+            templateUrl: "partials/Notification.html",
+            controller: "notificationController"
+        })
+        .when("/Qualification", {
+            templateUrl: "partials/Qualification.html",
+            controller: "qualificationController"
+        })
+
+        .when("/academics", {
+            templateUrl: "partials/academics.html",
+            controller: "academicsController"
+        })
+
+        .when("/sow", {
+            templateUrl: "partials/sow.html",
+            controller: "sowController"
+        })
+        .when("/journalentry", {
+            templateUrl: "partials/journalentry.html",
+            controller: "journalentryCtrl as rest"
+        })
+        .when("/gtforpurchase", {
+            templateUrl: "partials/gtforpurchase.html",
+            controller: "gtforpurchaseCtrl as rest"
+        })
+        .when("/gtforsales", {
+            templateUrl: "partials/gtforsales.html",
+            controller: "gtforsalesCtrl as rest"
+        })
+        .when("/StudentRegistration", {
+            templateUrl: "partials/StudentRegistration.html",
+            controller: "StudentRegistrationController"
+        })
+        .when("/assessmentQuestions", {
+            templateUrl: "partials/assessmentQuestions.html",
+            controller: "assessmentQuestionsController"
+        })
+
+        .when("/StudentJson", {
+            templateUrl: "partials/StudentJson.html",
+            controller: "studentJsonController"
+        })
+
+
+        .when("/TeachingObservationForm", {
+            templateUrl: "partials/TeachingObservationForm.html",
+            controller: "teachingObservationController"
+        })
+
+
+        .when("/staffChecklist", {
+            templateUrl: "partials/staffChecklist.html",
+            controller: "staffChecklistController"
+        })
+
+        .when("/teacherClearanceForm", {
+            templateUrl: "partials/teacherClearanceForm.html",
+            controller: "teachingClearanceFormController"
+        })
+
+        .when("/Position", {
+            templateUrl: "partials/Position.html",
+            controller: "positionController"
+        })
+
+        .when("/SubComponent", {
+            templateUrl: "partials/SubComponent.html",
+            controller: "subComponentController"
+        })
+
+        .when("/CustomApprover", {
+            templateUrl: "partials/CustomApprover.html",
+            controller: "CustomApproverController"
+        })
+
+        .when("/AssessmentType", {
+            templateUrl: "partials/AssessmentType.html",
+            controller: "assessmentTypeController"
+        })
+
+        .when("/Instruments", {
+            templateUrl: "partials/Instruments.html",
+            controller: "instrumentsController"
+        })
+        // .when("/controlPanel", {
+        //     templateUrl: "partials/controlPanel.html",
+        //     controller: "controlPanelController"
+        // })
+        // .when("/currency", {
+        //     templateUrl: "partials/currency.html",
+        //     controller: "currencyCtrl as rest"
+        // })
+        // .when("/paymentmethod", {
+        //     templateUrl: "partials/paymentmethod.html",
+        //     controller: "paymentMethodCtrl as rest"
+        // })
+        // .when("/versioncontrol", {
+        //     templateUrl: "partials/versioncontrol.html",
+        //     controller: "versionCtrl as rest"
+        // })
+        // .when("/subscription", {
+        //     templateUrl: "partials/subscription.html",
+        //     controller: "subscriptionCtrl as rest"
+        // })
+        // .when("/packages", {
+        //     templateUrl: "partials/packages.html",
+        //     controller: "packageCtrl as rest"
+        // })
+        // .when("/customer", {
+        //     templateUrl: "partials/customer.html",
+        //     controller: "customerCtrl as rest"
+        // })
+        // .when("/PractitionerRegistration", {
+        //     templateUrl: "partials/PractitionerRegister.html",
+        //     controller: "PractitionerRegistrationCtrl as rest"
+        // })
+        // .when("/addon", {
+        //     templateUrl: "partials/addOn.html",
+        //     controller: "addOnCtrl as rest"
+        // })
+        // .when("/Practitionerorders", {
+        //     templateUrl: "partials/Practitionerorders.html",
+        //     controller: "PractitionerordersCtrl as rest"
+        // })
+        // .when("/cartRegistration", {
+        //     templateUrl: "partials/cartRegistration.html",
+        //     controller: "cartRegCtrl as rest"
+        // })
+        .when("/user", {
+            templateUrl: "partials/user.html",
+            controller: "userCtrl as rest"
+        })
+        // .when("/cartcustomerlink", {
+        //     templateUrl: "partials/cartcustomerlink.html",
+        //     controller: "cartcustomerlinkCtrl as rest"
+        // })
+        // .when("/Hiconnector", {
+        //     templateUrl: "partials/Hiconnector.html",
+        //     controller: "HiconnectorCtrl as rest"
+        // })
+        // .when("/customernotification", {
+        //     templateUrl: "partials/customernotif.html",
+        //     controller: "customernotifCtrl as rest"
+        // })
+        // .when("/transactionsdata", {
+        //     templateUrl: "partials/transdata.html",
+        //     controller: "transdataCtrl as rest"
+        // })
+        .when("/cartMaster",{
+            templateUrl:"partials/cartMaster.html",
+            controller:"cartMasterCtrl as rest"
+        })
+        .otherwise({redirectTo:'/login'});
+}]);
+
+app.directive("limitTo", [function () {
+    return {
+        restrict: "A",
+        link: function (scope, elem, attrs) {
+            var limit = parseInt(attrs.limitTo);
+            angular.element(elem).on("keypress", function (e) {
+                if (this.value.length === limit)
+                    e.preventDefault();
+            });
+        }
+    };
+}]);
+
+
+/* for only  Alpha without space function
+ */
+app.directive('alphaWithoutSpace', function() {
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+            if(!ngModelCtrl) {
+                return;
+            }
+
+            ngModelCtrl.$parsers.push(function(val) {
+                var clean = val.replace( /[^.,a-zA-Z]/g, '');
+                if (val !== clean) {
+                    ngModelCtrl.$setViewValue(clean);
+                    ngModelCtrl.$render();
+                }
+                return clean;
+            });
+
+            element.bind('keypress', function(event) {
+                if(event.keyCode === 32) {
+                    event.preventDefault();
+                }
+            });
+        }
+    };
+});
+/* validation
+ * for only number with space function
+ */
+app.directive('numWithSpace', function() {
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+            if(!ngModelCtrl) {
+                return;
+            }
+
+            ngModelCtrl.$parsers.push(function(val) {
+                var clean = val.replace( /[^\s0-9]+/g, '');
+                if (val !== clean) {
+                    ngModelCtrl.$setViewValue(clean);
+                    ngModelCtrl.$render();
+                }
+                return clean;
+            });
+        }
+    };
+});
+
+/* validation
+ * It allows number,plus,hypen with space function
+ */
+app.directive('mobileNumWithSpace', function() {
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+            if(!ngModelCtrl) {
+                return;
+            }
+
+            ngModelCtrl.$parsers.push(function(val) {
+                var clean = val.replace( /[^- ^+^0-9]+/g, '');
+                if (val !== clean) {
+                    ngModelCtrl.$setViewValue(clean);
+                    ngModelCtrl.$render();
+                }
+                return clean;
+            });
+        }
+    };
+});
+app.directive('numWithOutSpace', function() {
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+            if(!ngModelCtrl) {
+                return;
+            }
+
+            ngModelCtrl.$parsers.push(function(val) {
+                var clean = val.replace( /[^0-9]+/g, '');
+                if (val !== clean) {
+                    ngModelCtrl.$setViewValue(clean);
+                    ngModelCtrl.$render();
+                }
+                return clean;
+            });
+        }
+    };
+});
+/* validation
+ * It allows number,plus,hypen with space function
+ */
+app.directive('number', function() {
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+            if(!ngModelCtrl) {
+                return;
+            }
+
+            ngModelCtrl.$parsers.push(function(val) {
+                var clean = val.replace( /[^0-9]+/g, '');
+                if (val !== clean) {
+                    ngModelCtrl.$setViewValue(clean);
+                    ngModelCtrl.$render();
+                }
+                return clean;
+            });
+        }
+    };
+});
+
+
+
+/* for only Alpha with space function
+ */
+app.directive('alphaWithSpace', function() {
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+            if(!ngModelCtrl) {
+                return;
+            }
+
+            ngModelCtrl.$parsers.push(function(val) {
+                var clean = val.replace( /[^\s\a-zA-Z]/g, '');
+                if (val !== clean) {
+                    ngModelCtrl.$setViewValue(clean);
+                    ngModelCtrl.$render();
+                }
+                return clean;
+            });
+        }
+    };
+});
+
+
+/* for only Alpha and number with space function
+ */
+app.directive('alphanumWithSpace', function() {
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+            if(!ngModelCtrl) {
+                return;
+            }
+
+            ngModelCtrl.$parsers.push(function(val) {
+                var clean = val.replace( /[^\s^a-zA-Z^0-9]/g, '');
+                if (val !== clean) {
+                    ngModelCtrl.$setViewValue(clean);
+                    ngModelCtrl.$render();
+                }
+                return clean;
+            });
+        }
+    };
+});
+
+
+/* for only Alpha and number without space function
+ */
+app.directive('alphanumWithoutSpace', function() {
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+            if(!ngModelCtrl) {
+                return;
+            }
+
+            ngModelCtrl.$parsers.push(function(val) {
+                var clean = val.replace( /[^a-zA-Z^0-9]/g, '');
+                if (val !== clean) {
+                    ngModelCtrl.$setViewValue(clean);
+                    ngModelCtrl.$render();
+                }
+                return clean;
+            });
+
+            element.bind('keypress', function(event) {
+                if(event.keyCode === 32) {
+                    event.preventDefault();
+                }
+            });
+        }
+    };
+});
+
+/* for only two digit decimal Function
+ */
+
+app.directive('twoDigitsDec', function() {
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+            if(!ngModelCtrl) {
+                return;
+            }
+
+            ngModelCtrl.$parsers.push(function(val) {
+                if (angular.isUndefined(val)) {
+                    var val = '';
+                }
+
+                var clean = val.replace(/[^-0-9\.]/g, '');
+                var negativeCheck = clean.split('-');
+                var decimalCheck = clean.split('.');
+                if(!angular.isUndefined(negativeCheck[1])) {
+                    negativeCheck[1] = negativeCheck[1].slice(0, negativeCheck[1].length);
+                    clean =negativeCheck[0] + '-' + negativeCheck[1];
+                    if(negativeCheck[0].length > 0) {
+                        clean =negativeCheck[0];
+                    }
+
+                }
+
+                if(!angular.isUndefined(decimalCheck[1])) {
+                    decimalCheck[1] = decimalCheck[1].slice(0,2);
+                    clean =decimalCheck[0] + '.' + decimalCheck[1];
+                }
+
+                if (val !== clean) {
+                    ngModelCtrl.$setViewValue(clean);
+                    ngModelCtrl.$render();
+                }
+                return clean;
+            });
+
+            element.bind('keypress', function(event) {
+                if(event.keyCode === 32) {
+                    event.preventDefault();
+                }
+            });
+        }
+    };
+});
+
+app.directive('noSpace', function() {
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+            element.bind('keypress', function(event) {
+                if(event.keyCode === 32) {
+                    event.preventDefault();
+                }
+            });
+        }
+    };
+});
+
+// Change text to uppercase and add dash every 5 char
+app.directive('capitalizeWithDash', function() {
+    return {
+        require: 'ngModel',
+        link: function(scope, element, attrs, modelCtrl) {
+            var capitalize = function(inputValue) {
+                var number = 5;
+                if (inputValue == undefined) inputValue = '';
+                var inputUpper = inputValue.toUpperCase();
+                var capitalizedArray = [];
+                for(var i=0; i<inputUpper.length; i+= number){
+                    if(inputUpper[i] == "-"){
+                        capitalizedArray.push(inputUpper.substr(i+1,number))
+                        i += 1;
+                    }else {
+                        capitalizedArray.push(inputUpper.substr(i, number))
+                    }
+                }
+                var capitalized = capitalizedArray.join("-");
+                if (capitalized !== inputValue) {
+                    modelCtrl.$setViewValue(capitalized);
+                    modelCtrl.$render();
+                }
+                return capitalized;
+            }
+            modelCtrl.$parsers.push(capitalize);
+            capitalize(scope[attrs.ngModel]);
+        }
+    };
+});
+
+
+app.filter('setDecimal', function ($filter) {
+    return function (input, places) {
+        if (isNaN(input))
+            return input;
+        // If we want 1 decimal place, we want to mult/div by 10
+        // If we want 2 decimal places, we want to mult/div by 100, etc
+        // So use the following to create that factor
+        var factor = "1" + Array(+(places > 0 && places + 1)).join("0");
+        return Math.round(input * factor) / factor;
+    };
+});
+
+app.filter('firstLetter', function () {
+    return function (input, key, letter) {
+        input = input || [];
+        var out = [];
+        input.forEach(function (item) {
+            console.log('item: ', item[key][0].toLowerCase());
+            console.log('letter: ', letter);
+            if (item[key][0].toLowerCase() == letter.toLowerCase()) {
+                out.push(item);
+            }
+        });
+        return out;
+    }
+});
+
+
+app.directive('accerrrr', function() {
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+            if(!ngModelCtrl) {
+                return;
+            }
+
+            ngModelCtrl.$parsers.push(function(val) {
+                var clean = val.replace( /[^a-zA-Z,@#$%&]/g,'');
+                if (val !== clean) {
+                    ngModelCtrl.$setViewValue(clean);
+                    ngModelCtrl.$render();
+                }
+                return clean;
+            });
+        }
+    };
+});
+
+var isSessionExpireFirstAlert = true;
+app.config(function ($httpProvider) {
+    $httpProvider.interceptors.push(function ($q, $window) {
+        return {
+            'response': function (response) {
+                //do something with success response
+                isSessionExpireFirstAlert = true;
+                return response;
+            },
+            'responseError': function (response) {
+                //do something with error response
+                if (response.status && response.status === 401) {
+                    if (!/\!\/(login|manageCompanies|superAdminLogin)$/.test($window.location.href.split("?")[0])) {
+                        if (isSessionExpireFirstAlert) {
+                            alert('Your Session Expired');
+                            isSessionExpireFirstAlert = false;
+                            // $window.location.reload();
+                            $window.location.href = '/home#!/login';
+                        }
+                    }
+                }
+                return $q.reject(response);
+            }
+        };
+    });
+
+});

@@ -1,0 +1,153 @@
+package com.hyva.bsfms.bs.bspojo;
+
+import com.hyva.bsfms.bs.bsentities.AssessmentQuestions;
+
+import javax.persistence.Column;
+
+public class AssessmentQuestionDetailsPojo {
+    private Long assessmentDetailsId;
+    private String question;
+    private String maxMarks;
+    private String questionType;
+    private String instrument;
+    private String componentNm;
+    private String subComponent;
+    private String multipleChoiceList;
+    private String rubicsList;
+    private String description;
+    private String trueorfalse;
+    @Column(columnDefinition="text")
+    private String answer;
+    private String remarks;
+    private String marks;
+    private AssessmentQuestions assessmentQuestions;
+    private String questionList;
+
+    public String getQuestionList() {
+        return questionList;
+    }
+
+    public void setQuestionList(String questionList) {
+        this.questionList = questionList;
+    }
+
+    public String getComponentNm() {
+        return componentNm;
+    }
+
+    public void setComponentNm(String componentNm) {
+        this.componentNm = componentNm;
+    }
+
+    public String getSubComponent() {
+        return subComponent;
+    }
+
+    public void setSubComponent(String subComponent) {
+        this.subComponent = subComponent;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public String getMarks() {
+        return marks;
+    }
+
+    public void setMarks(String marks) {
+        this.marks = marks;
+    }
+
+    public String getMultipleChoiceList() {
+        return multipleChoiceList;
+    }
+
+    public void setMultipleChoiceList(String multipleChoiceList) {
+        this.multipleChoiceList = multipleChoiceList;
+    }
+
+    public String getRubicsList() {
+        return rubicsList;
+    }
+
+    public void setRubicsList(String rubicsList) {
+        this.rubicsList = rubicsList;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getTrueorfalse() {
+        return trueorfalse;
+    }
+
+    public void setTrueorfalse(String trueorfalse) {
+        this.trueorfalse = trueorfalse;
+    }
+
+    public AssessmentQuestions getAssessmentQuestions() {
+        return assessmentQuestions;
+    }
+
+    public void setAssessmentQuestions(AssessmentQuestions assessmentQuestions) {
+        this.assessmentQuestions = assessmentQuestions;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public Long getAssessmentDetailsId() {
+        return assessmentDetailsId;
+    }
+
+    public void setAssessmentDetailsId(Long assessmentDetailsId) {
+        this.assessmentDetailsId = assessmentDetailsId;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getMaxMarks() {
+        return maxMarks;
+    }
+
+    public void setMaxMarks(String maxMarks) {
+        this.maxMarks = maxMarks;
+    }
+
+    public String getQuestionType() {
+        return questionType;
+    }
+
+    public void setQuestionType(String questionType) {
+        this.questionType = questionType;
+    }
+
+    public String getInstrument() {
+        return instrument;
+    }
+
+    public void setInstrument(String instrument) {
+        this.instrument = instrument;
+    }
+}

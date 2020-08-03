@@ -1,0 +1,289 @@
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+    <div class="container cus_main_row">
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Remainders</div>
+            </h2>
+        </div>
+
+        <!--// TO ADD GOLD//-->
+        <div class="col-md-2 col-sm-5 col-xs-5">
+            <input id="textinput" name="textinput" type="text"
+                   placeholder="Search For Remainders" ng-model="searchText" class="form-control input-md"
+                   ng-keyup="$event.keyCode == 13 ? getRemaindersList(searchText) : null"/>
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <button type="button" class="btn btn-default hi_btn"
+                    ng-click="addRemainder()" style="width: 100%;">Add
+            </button>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-4">
+            <button type="submit" id="colButn" class="btn btn-default" data-toggle="modal"
+                    ng-model="inactiveStatus" data-target=".print-me"
+                    ng-click="inactive()">{{ButtonStatus}}
+            </button>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="fixed-table-container">
+                <div class="table_wrap fixed-table-container-inner">
+                    <table class=" hi_table table table_option2 table-hover table-striped table-fixed-header list_table"
+                           id="" style="margin-bottom: 0;">
+                        <thead>
+
+                        <tr>
+                            <th data-field="desc">
+                                <div class="th-inner">Remainder Name</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Reason</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Level Name</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Class Name</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Semester</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">SentTo</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Remainder Start</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Days</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Email Template</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Untill</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner"> Status</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Actions</div>
+                            </th>
+
+                        </tr>
+                        </thead>
+                        <tbody id="parentTable">
+
+                        <tr ng-repeat="remainders in remaindersList">
+                            <td>{{remainders.remainderName}}</td>
+                            <td>{{remainders.reason}}</td>
+                            <td>{{remainders.levelName}}</td>
+                            <td>{{remainders.className}}</td>
+                            <td>{{remainders.semester}}</td>
+                            <td>{{remainders.sentTo}}</td>
+                            <td>{{remainders.remainderStart}}</td>
+                            <td>{{remainders.days}}</td>
+                            <td>{{remainders.untill}}</td>
+                            <td>{{remainders.emailTemplate}}</td>
+                            <td>{{remainders.remainderStatus}}</td>
+                            <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editRemainders(remainders)">Edit</button>
+
+                            <button type="button" class="btn btn-primary hi_btn" ng-click="deleteRemainder(remainders.remainderId)">Delete</button></td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-12 pagination_">
+                <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"
+                        ng-disabled="first"
+                        ng-click="getRemaindersPaginatedList('firstPage')" ng-model="first">First
+                </button>
+                <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"
+                        ng-disabled="prev"
+                        ng-click="getRemaindersPaginatedList('prevPage')" ng-model="prev">Prev
+                </button>
+                <button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"
+                        ng-click="getRemaindersPaginatedList('nextPage')" value="next" ng-class="{'diabled-class': next}"
+                        ng-model="next">Next
+                </button>
+                <button type="button" class="btn btn-default hi_btn"
+                        ng-click="getRemaindersPaginatedList('lastPage')" ng-class="{'diabled-class': last}" ng-disabled="last"
+                        ng-model="last">Last
+                </button>
+            </div>
+            <div>
+
+            </div>
+        </div>
+
+
+        <div class="modal fade Add Desig" tabindex="-1" id="add_new_Remainders_modal" role="dialog"
+             data-backdrop="static"
+             aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content checkout">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="modelName"></h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <form class="form-horizontal">
+                                    <fieldset>
+                                        <input type="hidden" ng-model="remainderId"
+                                               value="{{remainderId}}">
+
+                                        <div class="form-group" style="margin-top: 20px;">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">BranchName</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <select id="branchname" name="branchname"
+                                                        ng-model="RemainderBranch"
+                                                        ng-options="branch.branchesId as branch.branchName for branch in bran"
+                                                        class="form-control input-md">
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Remainder Name</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="SemesterName" id="SemesterName"
+                                                       class="form-control input-md" alpha-with-space maxlength="30"
+                                                       ng-model="RemainderName">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Reason</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="Reason" id="Reason"
+                                                       class="form-control input-md"
+                                                       ng-model="Reason">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-top: 20px;">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">LevelName</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <select id="LevelName" name="LevelName"
+                                                        ng-model="LevelName"
+                                                        ng-options="branch.gradeName as branch.gradeName for branch in gradee"
+                                                        class="form-control input-md">
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-top: 20px;">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">ClassName</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <select id="ClassName" name="ClassName"
+                                                        ng-model="ClassName"
+                                                        ng-options="class.className as class.className for class in classs"
+                                                        class="form-control input-md">
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-top: 20px;">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Semester</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <select id="Semester" name="Semester"
+                                                        ng-model="Semester"
+                                                        ng-options="semester.semesterName as semester.semesterName for semester in seme"
+                                                        class="form-control input-md">
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Sent To</label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <select name="sentTo" id="sentTo"
+                                                        ng-model="sentTo" class="form-control input-md"
+                                                        required>
+                                                    <option value="">Select</option>
+                                                    <option value="StudentAll">StudentAll</option>
+                                                    <option value="TeacherAll">TeacherAll</option>
+                                                    <option value="ParentAll">ParentAll</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Remainder Start</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="RemainderStart" id="RemainderStart" num-with-out-space
+                                                       class="form-control input-md"
+                                                       ng-model="RemainderStart">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Days</label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <select name="Days" id="Days"
+                                                        ng-model="Days" class="form-control input-md"
+                                                        required>
+                                                    <option value="">Select</option>
+                                                    <option value="DaysBeforeDueDate">Days Before Due Date</option>
+                                                    <option value="DaysAfterDueDate">Days After Due Date</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Email Template</label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <select name="Email" id="Email"
+                                                        ng-model="Email" class="form-control input-md"
+                                                        required>
+                                                    <option value="">Select</option>
+                                                    <option value="FeeRemainder">Fee Remainder</option>
+                                                    <option value="ExamFeeRemainderEmailTemplate">Exam Fee Remainder Email Template</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Untill</label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <select name="Untill" id="Untill"
+                                                        ng-model="Untill" class="form-control input-md"
+                                                        required>
+                                                    <option value="">Select</option>
+                                                    <option value="Paid">Paid</option>
+                                                    <option value="DueDate">Due Date</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Status</label>
+                                            <div class="col-md-6 col-sm-6" >
+                                                <select name="status" id="status" ng-model="status" ng-init="status='Active'"class="form-control input-md">
+                                                    <option value="Active">Active</option>
+                                                    <option value="InActive">InActive</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                     <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" id="submit"
+
+                                                    ng-click="saveRemainders()">Save
+                                            </button>
+                                            <button type="button" class="btn btn-default" ng-click="removeRemaindersDetails()"data-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

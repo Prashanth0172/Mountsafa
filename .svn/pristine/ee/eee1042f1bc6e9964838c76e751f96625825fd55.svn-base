@@ -1,0 +1,840 @@
+<style>
+    .modal-content{
+        width:696px;
+    }
+    .modal-footer {
+        padding: 5px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    fieldset {
+        min-width: 0;
+        padding: 10px;
+        margin: 0;
+        border: 0;
+    }
+    .form-control {
+        display: block;
+        width: 171px;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+</style>
+<style>
+    .lamp {
+        height: 30px;
+        width: 30px;
+        border-style: solid;
+        border-width: 2px;
+        border-radius: 25px;
+    }
+    .lampRed {
+        background-color: red;
+    }
+    .lampYellow {
+        background-color: yellow;
+    }
+    .lampGreen {
+        background-color: green;
+    }
+</style>
+<!--<script>
+
+    var changeState = (function () {
+        var state = 0,
+            lamps = ["Red", "Yellow", "Green"],
+            lampsLength = lamps.length,
+            order = [
+                [5000, "Red"],
+                [3000, "Red", "Yellow"],
+                [5000, "Green"],
+                [3000, "Yellow"]
+            ],
+            orderLength = order.length,
+            lampIndex,
+            orderIndex,
+            sId;
+
+        return function (stop) {
+            if (stop) {
+                clearTimeout(sId);
+                return;
+            }
+
+            var lamp,
+                lampDOM;
+
+            for (lampIndex = 0; lampIndex < lampsLength; lampIndex += 1) {
+                lamp = lamps[lampIndex];
+                lampDOM = document.getElementById(lamp);
+                if (order[state].indexOf(lamp) !== -1) {
+                    lampDOM.classList.add("lamp" + lamp);
+                } else {
+                    lampDOM.classList.remove("lamp" + lamp);
+                }
+            }
+
+            sId = setTimeout(changeState, order[state][0]);
+            state += 1;
+            if (state >= orderLength) {
+                state = 0;
+            }
+        };
+    }());
+
+    document.getElementById("trafficLight").addEventListener("click", (function () {
+        var state = false;
+
+        return function () {
+            changeState(state);
+            state = !state;
+        };
+    }()), false);
+</script>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row" >
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Enquiry Form</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel-body" style="height: 65px;">
+                            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                                <form class="form-horizontal ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <p class="input-group" style="display: block;">
+                                                <input id="search_academic" name="textinput" type="text"
+                                                       placeholder="Search" ng-model="searchText" class="form-control input-md"
+                                                       ng-keyup="$event.keyCode == 13 ? getBranchesList(searchText) : null"/>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-7">
+
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addEnqForm()">Add</button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                         <span class="custom-dropdown custom-dropdown--white">
+                                           <select class="form-control input-md"
+                                                   ng-model="status"
+                                                   ng-change="getStudentListBasedOnStatus(status);getEnqList()"
+                                                   ng-options="enq.status as enq.status for enq in enqFormList">
+                                                        <option value="">Select Status</option>
+                                           </select>
+                                         </span>
+                                </div>
+                                <div class="col-sm-2">
+                                         <span class="custom-dropdown custom-dropdown--white">
+                                             <select class="form-control input-md"
+                                                     ng-model="studentText"
+                                                     ng-change="getEnqList()"
+                                                     ng-options="enq.grade as enq.grade for enq in studentListBasedOnStatus">
+                                                        <option value="">Select Student</option>
+                                           </select>
+                                         </span>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="fixed-table-container">
+                        <div class="table_wrapfixed-table-container-inner">
+                            <div class="header-background"></div>
+                            <table data-toggle="table" data-cache="false" data-height="299" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                                <thead>
+                                <tr>
+                                    <th data-field="cntryname">
+                                        <div class="th-inner" align="center">Enquiry No</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Date</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Student Name</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Telephone No</div></th>
+                                    <!--<th data-field="edit">
+                                        <div class="th-inner" align="center">Email Id</div></th>-->
+                                    <!--<th data-field="edit">-->
+                                    <!--<div class="th-inner" align="center">Grade</div></th>-->
+                                    <!--<th data-field="edit">
+                                        <div class="th-inner" align="center">Sibling Grade</div></th>-->
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Status</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Action</div></th>
+                                    <!--<th data-field="edit">
+                                        <div class="th-inner" align="center">Delete</div></th>-->
+                                </tr>
+                                </thead>
+                                <tbody id="parentTable">
+                                <input type="hidden" ng-model="enquiryId" value="{{enqFormList.enquiryId}}"/>
+                                <tr ng-repeat="enq in enqFormList| filter:searchText">
+                                    <td>{{enq.enquiryNo}}</td>
+                                    <td>{{enq.enqDate|date:'dd/MM/yyyy'}}</td>
+                                    <td>{{enq.studentName}}</td>
+                                    <td>{{enq.telephoneNo}}</td>
+                                    <!--<td>{{enq.gradeName}}</td>-->
+                                    <td>{{enq.status}}</td>
+                                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editEnqForm(enq)">Edit</button>&nbsp;<button type="button" class="btn btn-primary hi_btn"  ng-click="deleteEnqForm(enq.enquiryId)">Delete</button>&nbsp;<button class="btn btn-success"  ng-click="openAssessment(enq)">Assesment</button>&nbsp;<button class="btn btn-success" ng-click="openConsularPopup(enq);">Consular</button>&nbsp;<button class="btn btn-success" ng-click="openAdmission(enq)">Admission</button>
+                                    </td><!-- <td></td>-->
+                                </tr>
+                                <tr ng-if="searchText!=''&&(enqFormList|filter:searchText).length==0">
+                                    <td colspan="5"  style="color: red; font-weight: bold">No Records Found</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal fade" id="consular" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Consular</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="col-md-4 col-sm-4 control-label" for="">Remarks</label>
+                                        <div class="col-md-6 col-sm-6"
+                                             style="position:relative;">
+                                            <input type="hidden" name="enqueryno" id="enqueryno" value="">
+                                            <textarea  name="remarks"
+                                                       type="text"
+                                                       ng-model="cRemarks"
+                                                       class="form-control input-md"
+                                                       autocomplete="off" >
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 col-sm-4 control-label" for="">Accept to Grade</label>
+                                        <div class="col-md-6 col-sm-6"
+                                             style="position:relative;">
+                                            <select class="form-control input-md"
+                                                    ng-model="cGrade"
+                                                    ng-change="getFeeTypeMasterLists(grade)"
+                                                    ng-options="grades.gradeId as grades.gradeName for grades in gradeList">
+                                                <option value="">Select Grade</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 col-sm-4 control-label">&nbsp;</label>
+                                        <div class="col-md-4 col-sm-6" id="trafficLight" style="width: 200px; !important;">
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 20px !important;">
+                                                        <div class="lamp" id="Red" onclick="changecolor(this);"></div></td>
+                                                    <td style="width: 20px !important;"><div class="lamp"  id="Yellow" onclick="changecolor(this);"></div></td>
+                                                    <td style="width: 20px !important;"><div class="lamp" id="Green" onclick="changecolor(this);"></div></td>
+                                                </tr>
+
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success pull-left" ng-click="saveCounslar()">Save</button>
+                                    <button type="button" class="btn btn-primary hi_btn" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div></div>
+
+                <div class="modal fade Student" tabindex="-1" id="add_new_enquiry_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-lg" style="width: 1000px !important;">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close" ng-click="removeStudentDetails()"
+                                        data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 id="student-title" class="modal-title" style="color:red;" align="center">Enquiry Form</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="student">
+                                            <fieldset>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade in active" id="sub_steps12">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label"
+                                                                   for="">Enquiry Form No</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input id="enquiryNo" name="enquiryNo"
+                                                                       type="text"
+                                                                       ng-model="enquiryNo"
+                                                                       class="form-control input-md" disabled>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" for="">Date</label>
+
+                                                            <div class="col-md-3 col-sm-4" style="position:relative;">
+                                                                <p style="display: table;">
+                                                                    <input style="width: 130px !important;" type="text" id="enqDate" class="form-control input-md" uib-datepicker-popup="{{format}}"  ng-model="enqDate"  is-open="popup1.opened" datepicker-options="dateOptions"  close-text="Close" alt-input-formats="altInputFormats" readonly />
+                                                                    <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+
+                                                                </p>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label"
+                                                                   for="">Student Name<span style="color:red;">*</span></label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input id="studentName" name="studentName"
+                                                                       type="text"
+                                                                       ng-model="studentName"
+                                                                       class="form-control input-md">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label"
+                                                                   for="">Father Name<span style="color:red;">*</span></label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input id="fatherName" name="fatherName"
+                                                                       type="text"
+                                                                       ng-model="fatherName"
+                                                                       class="form-control input-md">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label"
+                                                                   for="">Mother Name<span style="color:red;">*</span></label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input id="motherName" name="motherName"
+                                                                       type="text"
+                                                                       ng-model="motherName"
+                                                                       class="form-control input-md">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label"
+                                                                   for="">Father/Mother Profession<span style="color:red;"></span></label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input id="profession" name="profession" placeholder="FATHER/Mothers Profession"
+                                                                       type="text"
+                                                                       ng-model="profession" alphanum-with-space=""
+                                                                       class="form-control input-md">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label"
+                                                                   for="">Father/Mother Qualification<span style="color:red;"></span></label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input id="Qualification" name="Qualification" placeholder="FATHER/Mothers Qualification"
+                                                                       type="text"
+                                                                       ng-model="qualification" alphanum-with-space=""
+                                                                       class="form-control input-md">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label"
+                                                                   for="">Father/Mother Annual Income<span style="color:red;"></span></label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input id="annualIncome" name="annualIncome"
+                                                                       type="text" placeholder="FATHER/Mothers Annual Income"
+                                                                       ng-model="annualIncome" num-with-out-space=""
+                                                                       class="form-control input-md">
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label"
+                                                                   for="">Telephone No <span style="color:red;">*</span></label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input id="telephoneNo" name="telephoneNo"
+                                                                       type="text" placeholder="telephoneNo" maxlength="30"
+                                                                       ng-model="telephoneNo" num-with-space
+                                                                       class="form-control input-md">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label" for=""> Address <span style="color:red;">*</span></label>
+                                                            <div class="col-md-6" style="position:relative;">
+                                       <textarea id="address" name="address" maxlength="100"
+                                                 type="text"
+                                                 ng-model="address"
+                                                 class="form-control input-md" required>
+                                          </textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label"
+                                                                   for="">Email <span style="color:red;">*</span></label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input id="emailId" name="emailId"
+                                                                       type="email" placeholder="Email" maxlength="30"
+                                                                       ng-model="emailId" ng-pattern="word"
+                                                                       class="form-control input-md">
+                                                                <p class="error" ng-show="student.emailId.$error.pattern">Enter Valid MailID</p>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" >Grade<span style="color:red;">*</span></label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <select class="form-control input-md"
+                                                                        ng-model="grade"
+                                                                        ng-change="getFeeTypeMasterLists(grade)"
+                                                                        ng-options="grades.gradeId as grades.gradeName for grades in gradeList">
+                                                                    <option value="">Select Grade</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label" for=""> Sibling Details</label>
+                                                            <div class="col-md-6" style="position:relative;">
+                                       <textarea id="siblingDetails" name="siblingDetails" maxlength="100"
+                                                 type="text"
+                                                 ng-model="siblingDetails"
+                                                 class="form-control input-md" required>
+                                          </textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label">Sibling Grade</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <select class="form-control input-md"
+                                                                        ng-model="siblingGrade"
+                                                                        ng-options="grades.gradeId as grades.gradeName for grades in gradeList">
+                                                                    <option value="">Select Grade</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label" for="">Academic Details of Student</label>
+                                                            <div class="col-md-6" style="position:relative;">
+                                       <textarea id="academicDetailsOfStud" name="academicDetailsOfStud" maxlength="100"
+                                                 type="text"
+                                                 ng-model="academicDetailsOfStud"
+                                                 class="form-control input-md" required>
+                                          </textarea>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" for="">Choose Option</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <select name="option" id="option" ng-model="option" class="form-control input-md" required>
+                                                                    <option value="">Select</option>
+                                                                    <option value="Single Parent" selected>Single Parent</option>
+                                                                    <option value="Orphan" selected>Orphan</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" for="">Availing Transport Facility</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <select name="transport" id="transport" ng-model="transport" class="form-control input-md" required>
+                                                                    <option value="">Select</option>
+                                                                    <option value="YES" selected>YES</option>
+                                                                    <option value="NO" selected>NO</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+
+
+
+
+
+                                                        <div class="form-group" ng-show="transport === 'YES'">
+                                                            <label class="col-md-4 col-sm-4 control-label" for="">pick up Point</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input id="pick" name="pick"
+                                                                       type="text"
+                                                                       ng-model="pick"
+                                                                       class="form-control input-md">
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group" >
+                                                            <label class="col-md-4 col-sm-4 control-label" for="">Referrel</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <select name="referrel" id="referrel" ng-model="referrel" class="form-control input-md" required>
+                                                                    <option value="">Select</option>
+                                                                    <option value="Facebook" selected>Facebook</option>
+                                                                    <option value="Watsapp" selected>WhatsApp</option>
+                                                                    <option value="Social Media" selected>Social Media</option>
+                                                                    <option value="Gmail" selected>Gmail</option>
+                                                                    <option value="LinkedIn" selected>LinkedIn</option>
+                                                                    <!--<option value="Assesment" selected>LinkedIn</option>-->
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" for="">Status</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <select name="Status" id="Status" ng-model="statusText" class="form-control input-md" required>
+                                                                    <option value="Enquiry" selected>Enquiry</option>
+                                                                    <option value="Assesment" selected>Assessment</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="tab-pane fade" id="sub_steps22">
+                                                        <div class="fixed-table-container">
+                                                            <div class="table_wrapfixed-table-container-inner">
+                                                                <div class="header-background"></div>
+                                                                <table data-toggle="table" data-cache="false"
+                                                                       data-height="299"
+                                                                       class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th></th>
+                                                                        <th class="th-inner" data-field="edit"
+                                                                            style="width: 25%;height: 10% ;font-size: 10px!important;"
+                                                                            data-field="cntryname">
+                                                                            <div class="th-inner">Fee Name</div>
+                                                                        </th>
+                                                                        <th class="th-inner" data-field="edit"
+                                                                            style="width: 11%;height: 10%;font-size: 10px !important;"
+                                                                            data-field="edit">
+                                                                            <div class="th-inner">Fee Amount</div>
+                                                                        </th>
+                                                                        <th class="th-inner" data-field="edit"
+                                                                            style="height: 10px ;font-size: 10px!important;"
+                                                                            data-field="edit">
+                                                                            <div class="th-inner">Payable</div>
+                                                                        </th>
+
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody id="parentTable"
+                                                                           ng-repeat="feeType in selectedFeeList"
+                                                                           class="studentList"
+                                                                           ng-init="sectionIndex = $index">
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div><input id="checkBox" type="checkBox"
+                                                                                        ng-model="feeType.checkBox"
+                                                                                        ng-change="getEnqTotal(feeType)"/>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td colspan="1"
+                                                                            style="width: 15%;height: 10% !important;text-align: left">
+                                                                            {{feeType.feeTypeName}}
+                                                                        </td>
+                                                                        <td colspan="1"
+                                                                            style="width: 10%;height: 10% !important;text-align: right">
+                                                                            {{feeType.feeAmount|number:0}}
+                                                                        </td>
+                                                                        <td ><input
+                                                                                type="text" style="text-align:right"
+                                                                                placeholder="payable" num-with-space
+                                                                                maxlength="9"
+                                                                                ng-model="feeType.paidAmount"
+                                                                                ng-change="getEnqTotal()"
+                                                                        >
+                                                                        </td>
+
+
+
+
+                                                                    </tr>
+
+                                                                    </tr>
+                                                                    </tbody>
+                                                                    <td><strong>Total</strong></td>
+                                                                    <td></td>
+
+                                                                    <td style="text-align: right"><strong>{{totalPayableAmt|number:0}}</strong>
+
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer" style="border:none !important;">
+                                        <a class="btn btn-primary hi_btn next" id="next123" href="javascript:void(0)"
+                                           ng-click="next_wizard(grade);" data-toggle="tab"
+                                           data-step="2" style="color:#D5ECFF">Next</a>
+                                        <a class="btn btn-primary hi_btn next" id="nextEdit123" href="javascript:void(0)"
+                                           ng-click="next_wizard(grade);" data-toggle="tab"
+                                           data-step="2" style="color:#D5ECFF">Next</a>
+                                        <a class="btn btn-primary back" id="back123" href="javascript:void(0)"
+                                           ng-click="back_wizard()" data-toggle="tab" data-step="2">Back</a>
+
+                                        <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal"
+                                                id="saveIds"  ng-disabled="isDisabled"
+                                                data-target=".print-me" ng-click="saveEnqForm(feeTypeMasterList)">Save
+                                        </button>
+                                        <button type="button" class="btn btn-primary hi_btn" data-dismiss="modal"
+                                                ng-click="removesDetails();removeEnq()"> Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <add-New-Admission></add-New-Admission>
+
+                <div class="modal fade Assessment" tabindex="-1" id="add_new_assessment_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-lg" style="width: 1000px !important;">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close" ng-click="removeAssesmnts()"
+                                        data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 id="view-student-title" class="modal-title" style="color:red;" align="left">ASSESSMENT
+                                    DETAILS</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="student">
+                                            <fieldset>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade in active" >
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label"
+                                                                   for="">Student Name</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input id="studName" name="studName"
+                                                                       type="text"
+                                                                       ng-model="studName"
+                                                                       class="form-control input-md" disabled>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label"
+                                                                   for="">Father Name</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input id="parentName" name="parentName"
+                                                                       type="text"
+                                                                       ng-model="parentName"
+                                                                       class="form-control input-md">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label"
+                                                                   for="">Mother Name</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input id="mother" name="mother"
+                                                                       type="text"
+                                                                       ng-model="mother"
+                                                                       class="form-control input-md">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label"
+                                                                   for="">Telephone No</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input id="telephone" name="telephone"
+                                                                       type="text" placeholder="telephone" maxlength="13"
+                                                                       ng-model="telephone" num-with-space
+                                                                       class="form-control input-md">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="">Date</label>
+
+                                                            <div class="col-md-3 col-sm-4" style="position:relative;">
+                                                                <p class="input-group">
+                                                                    <input style="width: 130px !important;" type="text" id="date" class="form-control" uib-datepicker-popup="{{format}}"  ng-model="date"  is-open="popup1.opened" datepicker-options="dateOptions"  close-text="Close" alt-input-formats="altInputFormats" />
+                                                                    <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+
+                                                                </p>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" >Grade</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <select class="form-control input-md"
+                                                                        ng-model="gd"
+                                                                        ng-options="grades.gradeId as grades.gradeName for grades in gradeList" disabled>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" for="">Status</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <select name="Status" id="assessStatus" ng-model="assessStatus" class="form-control input-md" required>
+                                                                    <option value="Accepted">Accepted</option>
+                                                                    <option value="Accelerated">Accelerated</option>
+                                                                    <option value="Prohibited">Prohibited</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <table class="table ">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Subject</th>
+                                                                <th>Marks</th>
+                                                                <th>Remarks</th>
+                                                                <th>close</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr ng-repeat="key in remarklist ">
+                                                                <td>
+                                                                    <input name="countryId" ng-model="key.subject"
+                                                                           class="form-control input-md">
+                                                                    </input>
+                                                                </td>
+                                                                <td>
+                                                                    <input name="countryId" ng-model="key.marks"
+                                                                           class="form-control input-md">
+                                                                    </input>
+                                                                </td>
+                                                                <td>
+                                                                    <input name="countryId" ng-model="key.remarks"
+                                                                           class="form-control input-md">
+                                                                    </input>
+                                                                </td>
+                                                                <td> <button type="button" class="btn btn-danger remove" ng-click="removeRemarksList($index)">X
+                                                                </button>
+                                                                </td>
+
+
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="form-group">
+                                                            <input type="submit"
+                                                                   class="btn btn-primary addnew pull-left"
+                                                                   value="Add New" ng-click="addNew()">
+                                                        </div>
+                                                        <td>
+                                                            <button type="button"
+                                                                    class="btn btn-primary pull-right"
+                                                                    ng-click="removeServices()"
+                                                                    data-dismiss="modal">Close
+                                                            </button>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button"
+                                                                    class="btn btn-primary addnew pull-left"
+                                                                    ng-click="saveAssessment(remarklist)">
+                                                                Save
+                                                            </button>
+                                                        </td>
+                                                    </div>
+                                                </div>
+
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function changecolor(object){
+
+        var id = $(object).attr('id');
+        // alert(id)
+        if(id=='Red'){
+            $("#"+id).css('background-color', 'red');
+            $("#Yellow").css('background-color', 'white');
+            $("#Green").css('background-color', 'white');
+
+        }
+
+        if(id=='Yellow'){
+            $("#"+id).css('background-color', 'orange');
+            $("#Red").css('background-color', 'white');
+            $("#Green").css('background-color', 'white');
+
+        }
+
+
+        if(id=='Green'){
+            $("#"+id).css('background-color', 'green');
+            $("#Red").css('background-color', 'white');
+            $("#Yellow").css('background-color', 'white');
+
+        }
+
+
+    }
+</script>
+</body>
+</html>

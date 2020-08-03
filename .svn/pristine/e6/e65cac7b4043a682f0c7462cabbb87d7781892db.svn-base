@@ -1,0 +1,36 @@
+{
+  "Branch Code":"Branch Code",
+  "User Name":"User Name",
+  "Login":"Login",
+  "Admin Masters":"Admin Masters",
+  "Country":"Country",
+  "State":"State",
+  "City":"City",
+  "Branches":"Branches",
+  "Roles":"Roles",
+  "Component":"Component",
+  "Grading Master":"Grading Master",
+  "Department":"Department",
+  "Grade Master":"Grade Master",
+  "User":"User",
+  "Designation":"Designation",
+  "Class":"Class",
+  "Semester":"Semester",
+  "Term":"Term",
+  "Subject":"Subject",
+  "Chapter":"Chapter",
+  "Topic":"Topic",
+  "Deduction":"Deduction",
+  "CheckList":"CheckList",
+  "Leave Type":"Leave Type",
+  "Earnings Policy":"Earnings Policy",
+  "Workdays":"Workdays",
+  "Holiday":"Holiday",
+  "Assessment Type":"Assessment Type",
+  "Instruments":"Instruments",
+  "SubComponent":"SubComponent",
+
+  "Password":"Password"
+
+
+}

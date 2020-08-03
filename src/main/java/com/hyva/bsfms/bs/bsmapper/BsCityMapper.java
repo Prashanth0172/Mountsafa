@@ -1,0 +1,26 @@
+package com.hyva.bsfms.bs.bsmapper;
+
+import com.hyva.bsfms.bs.bsentities.City;
+import com.hyva.bsfms.bs.bspojo.CityDTO;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class BsCityMapper {
+    public static List<CityDTO> mapcityEntityToPojo(List<City> List) {
+        List<CityDTO> list = new ArrayList<>();
+        for (City city : List) {
+            CityDTO pojo = new CityDTO();
+            pojo.setCountryId(city.getCountryId());
+            pojo.setStatus(city.getStatus());
+            pojo.setStateId(city.getStateId());
+            pojo.setCityId(city.getCityId());
+            pojo.setCityName(city.getCityName());
+
+            list.add(pojo);
+        }
+        return list;
+    }
+
+
+}

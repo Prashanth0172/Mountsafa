@@ -1,0 +1,1329 @@
+<style>
+    .form-horizontal .control-label {
+        padding-top: 7px;
+        margin-bottom: 0;
+        text-align: left !important;
+        padding: 10px 0 0 10px !important;
+    }
+
+    .modal-footer .btn + .btn {
+        margin-bottom: 0;
+        margin-left: 4px !important;
+        margin-right: 0px !important;
+    }
+
+    .modal-title {
+        margin: 0;
+        line-height: -31.571429 !important;
+    }
+
+    .form-horizontal .form-group {
+        margin-right: -5px;
+        margin-left: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 5px;
+    }
+
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .modal-footer {
+        padding: 23px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 100;
+    }
+
+    .btn btn-primary back {
+        padding: 5px;
+    }
+
+    table>tbody>tr>td {
+        text-align: left !important;
+    }
+
+
+</style>
+
+<div class="modal fade Student" tabindex="-1" id="add_new_admission_modal" role="dialog"
+     data-backdrop="static"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-lg" style="width: 1000px !important;">
+        <div class="modal-content checkout" style="width: 1000px!important;">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 id="student-title" class="modal-title" style="color:red;" align="center">
+                    Admission Form</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <form class="form-horizontal" name="mail">
+                            <fieldset>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade in active" id="sub_step12">
+                                        <h4 class="modal-title" style="color:red;" align="center">ENTER THE FOLLOWING INFORMATION</h4>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="">Academic
+                                                    Year<span style="color:red;">*</span></label>
+                                                <div class="col-md-6">
+                                                    <strong>
+                                                        <select class="form-control input-md"
+                                                                ng-model="acdYearId" id="acdYearId"
+                                                                ng-options="academicYear.acdyrId as academicYear.acdyrName for academicYear in academicYearList">
+                                                            <option value="" selected>Select Academic
+                                                                Year
+                                                            </option>
+                                                        </select>
+                                                    </strong>
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label" >Level:<span style="color: red">*</span></label>
+                                                <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                    <select id="branchId" name="branchId" ng-model="levelId"
+                                                            ng-options="grade.gradeId as grade.gradeName for grade in gradeList" class="form-control input-md">
+                                                        <option value="">Select Level</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label" for="">Class:<span style="color: red">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <select id="classId" name="classId" ng-model="classId" ng-options="class.classId as
+											class.className for class in classList" class="form-control input-md">
+                                                        <option value="">Select Class</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-4" for="">Admission Date:</label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <p class="input-group">
+                                                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="admindt" is-open="popup1.opened" datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly />
+                                                        <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label" for="">Gender<span style="color: red">*</span></label>
+                                                <div class="col-md-6 col-sm-6">
+                                                    <select name="StatusText" id="StatusText" ng-model="genderText"
+                                                            class="form-control input-md">
+                                                        <option value="">Select</option>
+                                                        <option value="female">Female</option>
+                                                        <option value="male">Male</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label" for="">I.C.No/Passport No
+                                                    <span></span></label>
+                                                <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                    <input id="PassportName" name="PassportNoName"
+                                                           type="text"
+                                                           ng-model="PassportNoNameText" maxlength="125"
+                                                           class="form-control input-md" autocomplete="off" >
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label" for="">Birth Certificate</label>
+                                                <div class="col-md-6 col-sm-6"
+                                                     style="position:relative;">
+                                                    <input id="PassportNoName" name="PassportNoName"
+                                                           type="text"
+                                                           ng-model="birthcertificateText" maxlength="125"
+                                                           class="form-control input-md"
+                                                           autocomplete="off" >
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label" for="">Age:</label>
+                                                <div class="col-md-6 col-sm-6"
+                                                     style="position:relative;">
+                                                    <input id="age" name="age"
+                                                           type="text" num-with-space
+                                                           ng-model="age" readonly
+                                                           class="form-control input-md"
+                                                           autocomplete="off" >
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label" for="">Tel No:</label>
+                                                <div class="col-md-6 col-sm-6"
+                                                     style="position:relative;">
+                                                    <input id="phone" name="phone" maxlength="13"
+                                                           type="text" num-with-space
+                                                           ng-model="phone"
+                                                           class="form-control input-md"
+                                                           autocomplete="off" >
+                                                </div>
+                                            </div>
+
+                                            <div class="control-label">
+                                                <p>Correspondence Address:</p>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">House No:</label>
+                                                    <div class="col-md-6 col-sm-6"
+                                                         style="position:relative;">
+                                                        <input id="houseno" name="houseno"
+                                                               type="text"
+                                                               ng-model="corresponding.correshouseno"
+                                                               class="form-control input-md"
+                                                               autocomplete="off" >
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Street No:</label>
+                                                    <div class="col-md-6 col-sm-6"
+                                                         style="position:relative;">
+                                                        <input id="street" name="street"
+                                                               type="text"
+                                                               ng-model="corresponding.corresstreet"
+                                                               class="form-control input-md"
+                                                               autocomplete="off" >
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Post Code:</label>
+                                                    <div class="col-md-6 col-sm-6"
+                                                         style="position:relative;">
+                                                        <input id="postal" name="postal"
+                                                               type="text" num-with-space maxlength="6"
+                                                               ng-model="corresponding.correspostal"
+                                                               class="form-control input-md"
+                                                               autocomplete="off" >
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Country</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="countryId" name="countryId"
+                                                                ng-model="corresponding.correscountryId"
+                                                                ng-change="countryState(corresponding.correscountryId,'CorrespondanceAdr')"
+                                                                ng-options="country.countryId as
+											country.countryName for country in countryList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label">State</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="stateId" name="stateId" ng-model="corresponding.corresstateId"
+                                                                ng-change="stateCity(corresponding.corresstateId,'CorrespondanceAdr')"
+                                                                ng-options="state.stateId as
+											state.stateName for state in stateList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label">City</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="cityId" name="cityId" ng-model="corresponding.correscityId" ng-options="city.cityId as
+											city.cityName for city in cityList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <table id="spokenlist" class="table table-bordered table-striped">
+                                                    <thead>
+                                                    <tr style="background: #FFFFFF;">
+                                                        <td><span style="color: black">Spoken Language</span></td>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody class="spokenadd">
+                                                    <tr id="spoken1" ng-repeat="spoken in spokenList">
+                                                        <td>
+                                                            <input type="text" name="spoken_languages[]" ng-model="spoken.spokenlaug" value="" id="spoken_languages" required="true">
+                                                            <button type="button" class="btn btn-danger remove" id="spoken0" ng-click="removespoken($index)">X</button><span style="color: black"></span></td>
+                                                    </tr>
+
+
+                                                    </tbody>
+                                                </table>
+                                                <div>
+                                                    <input type="button" value="Add New" class="btn btn-default" ng-click="addSpokenLang()">
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="">Semester
+                                                    <span style="color:red;">*</span></label>
+                                                <div class="col-md-6" style="position:relative;">
+                                                    <strong>
+                                                        <select id="semester" name="semester" ng-model="semester" ng-options="semester.semesterName as
+											semester.semesterName for semester in semesterList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+
+                                                    </strong>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="">Student Name:
+                                                    <span style="color:red;">*</span></label>
+                                                <div class="col-md-6" style="position:relative;">
+                                                    <strong>
+                                                        <input id="stdname" name="stdname"
+                                                               type="text"
+                                                               ng-model="stdname" alpha-with-space
+                                                               class="form-control input-md" >
+                                                    </strong>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="">Nationality:</label>
+                                                <div class="col-md-6" style="position:relative;">
+                                                    <tbody>
+                                                    <select name="nationality" class="nationality form-control" id="nationality" ng-model="nationality" >
+                                                        <option value="">Select Nationality</option>
+                                                        <option value="Malaysia">Malaysia</option>
+                                                        <option value="Pakistan">Pakistan</option>
+                                                        <option value="Thailand">Thailand</option>
+                                                        <option value="Yemen">Yemen</option>
+                                                        <option value="Indonesia">Indonesia</option><option value="Maldives">Maldives</option><option value="Singapore">Singapore</option><option value="Myanmar">Myanmar</option><option value="Algeria">Algeria</option><option value="Bangladesh">Bangladesh</option><option value="America">America</option><option value="Nigeria">Nigeria</option><option value="Syria">Syria</option><option value="Switzerland">Switzerland</option><option value="China">China</option><option value="Lesotho">Lesotho</option><option value="Philippines">Philippines</option><option value="Canada">Canada</option><option value="British">British</option><option value="Senegal">Senegal</option><option value="Egypty">Egypty</option><option value="Spain">Spain</option><option value="Canadia">Canadia</option><option value="India">India</option><option value="Saudi Arabia">Saudi Arabia</option><option value="Russia">Russia</option><option value="Cambodia">Cambodia</option><option value="Arab">Arab</option><option value="South Africa">South Africa</option></select></td><td colspan="2" style="width:60%">
+                                                        &nbsp;&nbsp;&nbsp;
+                                                        <!--<input type="radio" ng-model="value" value="female">Female-->
+                                                    </tbody>
+                                                </div>
+                                            </div>
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="control-label col-sm-4" for="">Date of Birth:</label>-->
+                                                <!--<div class="col-md-6 col-sm-6">-->
+                                                    <!--<p class="input-group">-->
+                                                        <!--<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dateofbirth" is-open="popup2.opened" datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly />-->
+                                                        <!--<span class="input-group-btn">-->
+                                     <!--<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>-->
+                                <!--</span>-->
+                                                    <!--</p>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+
+
+                                            <div class="form-group">
+                                                <label class="col-md-6 control-label" for=""
+                                                       style="padding-left: 61px; text-align: left;">Date Of Birth</label>
+                                                <div class="col-md-6" style="padding-left: 0px;">
+                                                    <p class="input-group">
+                                                        <input type="text" id="AppointmentDate"
+                                                               ng-model="dateofbirth" class="form-control"
+                                                               ng-change="calculateAge()" readonly
+                                                               uib-datepicker-popup="{{format}}"
+                                                               is-open="popup2.opened"
+                                                               datepicker-options="dateOptions"
+                                                               close-text="Close"
+                                                               alt-input-formats="altInputFormats"/>
+                                                        <span class="input-group-btn">
+                                                                     <button type="button" class="btn btn-default"
+                                                                             ng-click="open2()">
+                                                                         <i class="glyphicon glyphicon-calendar"></i></button>
+                                                                     </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label" for="">Place of Birth:</label>
+                                                <div class="col-md-6 col-sm-6"
+                                                     style="position:relative;">
+                                                    <input id="placeOfBirth" name="placeOfBirth"
+                                                           type="text"
+                                                           ng-model="placeOfBirth"
+                                                           class="form-control input-md"
+                                                           autocomplete="off" >
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="">Email Id:</label>
+                                                <div class="col-md-6" style="position:relative;">
+                                                    <strong>
+                                                        <input id="emailid" name="emailid"
+                                                               maxlength="45"
+                                                               type="email"
+                                                               ng-model="emailid" ng-pattern="word"
+                                                               class="form-control input-md" >
+                                                        <p class="error" ng-show="mail.emailid.$error.pattern">Enter Valid MailID</p>
+                                                    </strong>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="">Launguage:</label>
+                                                <div class="col-md-6" style="position:relative;">
+                                                    <strong>
+                                                        <input id="launguage" name="launguage"
+                                                               maxlength="45"
+                                                               type="text"
+                                                               ng-model="launguage"
+                                                               class="form-control input-md" >
+                                                    </strong>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="control-label">
+                                                <p>Permanent Address: </p>
+                                                <p>Same as Correspondance Address </p>
+                                                <input type="checkbox" name="sameas" id="sameas" ng-model="sameascorresponding">
+                                                <div id="aaa">
+                                                    <div class="form-group" ng-show="sameascorresponding!==true">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">House No:</label>
+                                                        <div class="col-md-6 col-sm-6"
+                                                             style="position:relative;">
+                                                            <input id="houseno" name="houseno"
+                                                                   type="text" alphanum-with-space
+                                                                   ng-model="permanent.phouseno"
+                                                                   class="form-control input-md"
+                                                                   autocomplete="off" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" ng-show="sameascorresponding!==true">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Street No:</label>
+                                                        <div class="col-md-6 col-sm-6"
+                                                             style="position:relative;">
+                                                            <input id="street" name="street"
+                                                                   type="text"
+                                                                   ng-model="permanent.pstreet"
+                                                                   class="form-control input-md"
+                                                                   autocomplete="off" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" ng-show="sameascorresponding!==true">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Post Code:</label>
+                                                        <div class="col-md-6 col-sm-6"
+                                                             style="position:relative;">
+                                                            <input id="postal" name="postal"
+                                                                   type="text" num-with-space maxlength="6"
+                                                                   ng-model="permanent.ppostal"
+                                                                   class="form-control input-md"
+                                                                   autocomplete="off" >
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" ng-show="sameascorresponding!==true">
+                                                        <label class="col-md-4 col-sm-4 control-label" >Country</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="countryId" name="countryId"
+                                                                    ng-model="permanent.pcountryId"
+                                                                    ng-change="countryState(permanent.pcountryId,'PerAdr')"
+                                                                    ng-options="country.countryId as
+											country.countryName for country in countryList" class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group" ng-show="sameascorresponding!==true">
+                                                        <label class="col-md-4 col-sm-4 control-label">State</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="stateId" name="stateId" ng-model="permanent.pstateId"
+                                                                    ng-change="stateCity(permanent.pstateId,'PerAdr')"
+                                                                    ng-options="state.stateId as
+											state.stateName for state in statePerList" class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" ng-show="sameascorresponding!==true">
+                                                        <label class="col-md-4 col-sm-4 control-label">City</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="cityId" name="cityId" ng-model="permanent.pcityId" ng-options="city.cityId as
+											city.cityName for city in cityPerList" class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div></div>
+                                            </div><br>
+                                            <!--<tbody id="parentTable">
+                                            <tr ng-repeat="std in stdlist">
+                                                <td></td>
+                                            </tr>
+                                            </tbody>
+                                            <div class="form-group">
+                                                <input type="submit"
+                                                       class="btn btn-primary addnew pull-right"
+                                                       value="Add New" ng-click="addnew()">
+                                            </div>-->
+
+                                        </div>
+
+                                        <!--<tbody id="parentTable">
+                                        <div >Previous schools attended</div>
+                                        <tr ng-repeat="schoolAttendedList">
+                                            <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        </tr>
+                                        </tbody>-->
+
+
+                                        <table id="admissionlist" class="table table-bordered table-striped" style="padding: 0 20px;" ng-su>
+                                            <thead>
+                                            <tr style="background: #FFFFFF;">
+                                                <td colspan="4" style="text-align: center;">Previous schools attended</td>
+
+                                            </tr>
+                                            <tr style="background: #FFFFFF;">
+                                                <td><span style="color: black;text-align: center;">No</span></td>
+                                                <td><span style="color: black;text-align: center;">School</span> </td>
+                                                <td><span style="color: black;text-align: center;">Year</span></td>
+                                                <td><span style="color: black;text-align: center;">Level</span></td>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="prevschoolattend">
+
+                                            <tr id="admission2"  ng-repeat="previousschool in previousSchoolsDetails">
+                                                <td>
+                                                    <input type="text" ng-model="previousschool.schoolno" value="" name="previous_school_no[]">
+                                                </td>
+                                                <td>
+                                                    <input type="text" ng-model="previousschool.schoolName" value="" name="prev_school_name[]">
+                                                </td>
+                                                <td>
+                                                    <input type="text" ng-model="previousschool.schoolYear" value="" maxlength="255" num-with-out-space="" name="year[]">
+                                                </td>
+                                                <td>
+                                                    <input type="text" ng-model="previousschool.schoolGrade" value="" maxlength="255" name="grade[]">&nbsp;&nbsp;
+                                                    <button type="button" class="btn btn-danger remove" ng-click="removePreviousSchoolsDetails($index)" >X</button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+
+                                        </table>
+
+                                        <div style="padding: 0 20px;">
+                                            <input type="button" value="Add New" class="btn btn-default mb-20" ng-click="addNewPreviousDetails()">
+                                        </div>
+
+                                        <table id="siblinglist" class="table table-bordered table-striped" style="padding: 0 20px;">
+                                            <thead>
+                                            <tr style="background: #FFFFFF;">
+                                                <td><span style="color: black">Sibling Admission No</span></td>
+                                                <td><span style="color: black">Sibling Name</span></td>
+                                                <td><span style="color: black">Sibling's DOB</span> </td>
+                                                <td><span style="color: black">Sibling Previous School</span></td>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="siblingadd">
+
+                                            <tr id="siblingtr1" ng-repeat="sbillingDetails in sbillingDetailsList">
+                                                <td><input type="text" id="siblingRegistNo_1" maxlength="255" ng-model="sbillingDetails.sbilladminNo" name="siblingRegistNo[]" onkeyup="siblinginfo(this)" "=" "></td>
+                                                <td><input type="text" maxlength="255 " id="siblingName1 " ng-model="sbillingDetails.sbillName" value=""  name="siblingName[] "></td>
+                                            <td><input type="text" id="siblingSchool1"
+                                                       ng-model="sbillingDetails.sbillDOB" class="form-control"
+                                                       uib-datepicker-popup="{{format}}"
+                                                       is-open="sbillingDetails.open"
+                                                       datepicker-options="dateOptions"
+                                                       close-text="Close"
+                                                       alt-input-formats="altInputFormats" readonly/>
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default"
+                                                            ng-click="open3($event,sbillingDetails)">
+                                                    <i class="glyphicon glyphicon-calendar"></i></button>
+                                                    </span>
+                                            </td>
+                                                <!--<td><input type="text" maxlength="255 " value="" ng-model="sbillingDetails.sbillDOB" name="siblingDob[]"  id="siblingDob1 "></td>-->
+                                            <td><input type="text"  value=" " ng-model="sbillingDetails.sbillPrevSchool" id="siblingSchool1 " name="siblingSchool[] ">&nbsp;&nbsp;</td>
+                                                  <td>  <button type="button " class="btn btn-danger remove" ng-click="removeSbillingDetails($index)">X</button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <div style="padding: 0 20px;">
+                                            <input type="button" value="Add New" class="btn btn-default" ng-click="AddNewRowForSiblings()">
+                                        </div>
+
+
+
+
+
+
+
+                                    </div>
+                                    <div class="tab-pane fade" id="sub_step22">
+                                        <div class="fixed-table-container">
+                                            <div class="table_wrapfixed-table-container-inner">
+                                                <label class="col-md-4 control-label" for="currency"
+                                                       style="color:#337ab7" ;>MEDICAL HISTORY</label>
+                                                <div class="header-background"></div>
+                                                <table style="text-align: left !important;">
+                                                    <tbody><tr> <td style="width: 544px;">
+                                                        <div class="controls">
+                                                            <label><b>Does your child have any allergies:</b></label>
+                                                            <br>
+                                                            <label style="font-weight: normal;">Medicine</label>
+                                                            <!--<input name="medicine" type="checkbox" />-->
+                                                            <input type="checkbox" name="medicine" value="1" id="medicine" ng-model="medicine" required="true" class="medicine" onclick="removereadonly('medicineState','medicine');"></label>
+
+
+                                                            <span class="lbl"></span>
+                                                        </div></td>
+                                                        <td>
+
+
+                                                            <p>Please State
+                                                            </p>
+                                                            <p><input type="text" name="medicineState" value="" id="medicineState" ng-model="medicineState" required="true" class="medicineState form-control" readonly>
+                                                            </p></td></tr>
+
+
+                                                    <tr>  <td>
+
+                                                        <div class="controls" style="font-weight: normal;">
+                                                            <label>Immunization
+                                                                <input type="checkbox" name="immunization" value="1" id="immunization" ng-model="immunization" required="true" class="immunization"  onclick="removereadonly('immunizationState','immunization');">
+
+                                                                <span class="lbl"></span></label>
+                                                        </div></td>
+                                                        <td>
+
+                                                            <div class="controls" style="font-weight: normal;">
+                                                                <label>Please State
+                                                                </label>
+                                                                <input type="text" name="immunizationState" value="" id="immunizationState" ng-model="immunizationState" required="true" class="immunizationState form-control" readonly>
+                                                            </div></td></tr>
+
+                                                    <tr>  <td>
+
+                                                        <div class="controls" style="font-weight: normal;">
+                                                            <label>Food
+                                                                <input type="checkbox" name="food" value="1" id="food" ng-model="food" required="true" class="food"  onclick="removereadonly('foodState','food');">
+
+                                                                <span class="lbl"></span></label>
+                                                        </div></td>
+                                                        <td>
+
+                                                            <div class="controls" style="font-weight: normal;">
+                                                                <label>Please State
+                                                                </label>
+                                                                <input type="text" name="foodState" value="" id="foodState" ng-model="foodState" required="true" class="foodState form-control" readonly>
+                                                            </div></td></tr>
+                                                    <tr>  <td>
+
+                                                        <div class="controls" style="font-weight: normal;">
+                                                            <label>Others
+                                                                <input type="checkbox" name="others" value="1" id="others" ng-model="others" required="true" class="others" onclick="removereadonly('othersState','others');" >
+                                                                <span class="lbl"></span></label>
+                                                        </div></td>
+                                                        <td>
+
+                                                            <div class="controls" style="font-weight: normal;">
+                                                                <label>Please State
+                                                                </label>
+                                                                <input type="text" name="othersState" value="" id="othersState"  ng-model="othersState" required="true" class="othersState form-control" readonly>
+                                                            </div></td></tr>
+                                                    <tr>  <td>
+
+                                                        <div class="controls">
+                                                            <label><b>Does your child have/had any illness/problem:</b></label>
+                                                            <br>
+                                                            <label>Asthma
+                                                                <input type="checkbox" name="asthma" value="1" ng-model="asthma" id="asthma" required="true" class="asthma" onclick="removereadonly('asthmaState','asthma');">
+                                                                <span class="lbl"></span></label></div></td>
+                                                        <td><label>Please State
+                                                        </label>
+                                                            <input type="text" name="asthmaState" value="" id="asthmaState" ng-model="asthmaState" required="true" class="asthmaState form-control" readonly >
+
+
+                                                        </td></tr>
+
+                                                    <tr>  <td>
+
+                                                        <div class="controls">
+
+                                                            <label style="font-weight: normal;">Epilepsy
+                                                                <input type="checkbox" name="epilepsy" value="1" id="epilepsy" ng-model="epilepsy" required="true" class="epilepsy" onclick="removereadonly('epilepsyState','epilepsy');">
+
+                                                                <span class="lbl"></span></label></div></td>
+                                                        <td><label style="font-weight: normal;">Please State
+                                                        </label>
+                                                            <input type="text" name="epilepsyState" value="" id="epilepsyState" ng-model="epilepsyState" required="true" class="epilepsyState form-control" readonly>
+
+
+                                                        </td></tr>
+
+                                                    <tr>  <td>
+
+                                                        <div class="controls">
+                                                            <label style="font-weight: normal;">Others
+                                                                <input type="checkbox" name="illnessOthers" value="1" id="illnessOthers" ng-model="illnessOthers" required="true" class="illnessOthers" onclick="removereadonly('illnessOthersState','illnessOthers');">
+
+                                                                <span class="lbl"></span></label>
+                                                        </div></td>
+
+                                                        <td>
+
+                                                            <div class="controls">
+                                                                <label style="font-weight: normal;">Please State
+                                                                </label>
+                                                                <input type="text" name="illnessOthersState" value="" id="illnessOthersState" ng-model="illnessOthersState" required="true" class="illnessOthersState form-control" readonly>
+                                                            </div></td>
+                                                    </tr>
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="sub_step23">
+                                        <div class="fixed-table-container">
+                                            <div class="table_wrapfixed-table-container-inner">
+                                                <label class="col-md-4 control-label" for="currency"
+                                                       style="color:#337ab7" ;>PARENT'S INFORMATION</label>
+                                                <div class="header-background"></div>
+                                                <table class="table table-bordered table-striped">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <label>Father's Name:</label>
+                                                            <input type="text" name="fatherName" value="" id="fatherName" ng-model="fatherName" required="true" class="fatherName form-control" alpha-with-space>
+
+                                                        </td><td colspan="2" style="width:60%">
+                                                        <label>Passport No:</label>
+                                                        <input type="text" name="fatherPassNo" value="" id="fatherPassNo"  ng-model="fatherPassNo"required="true" alphanum-without-space="" class="fatherPassNo form-control">
+                                                    </td>
+                                                    </tr>
+                                                    <tr><td>
+                                                        <label>I.C.No:</label>
+                                                        <input type="text" name="fatherICNO" value="" id="fatherICNO" ng-model="fatherICNO" required="true" alphanum-without-space="" class="fatherICNO form-control">
+                                                    </td>
+                                                        <td colspan="2" style="width:60%">
+                                                            <label>Fax No:</label>
+                                                            <input type="text" name="fatherFax" value="" id="fatherFax" ng-model="fatherFax" required="true" num-with-out-space="" class="fatherFax form-control">
+                                                        </td></tr>
+                                                    <tr><td>
+                                                        <label>Nationality:</label>
+                                                        <select name="fathernationality" class="fathernationality form-control" id="fathernationality" ng-model="fathernationality" ><option value="none">Select Nationality</option><option value="Malaysia">Malaysia</option><option value="Pakistan">Pakistan</option><option value="Thailand">Thailand</option><option value="Yemen">Yemen</option><option value="Indonesia">Indonesia</option><option value="Maldives">Maldives</option><option value="Singapore">Singapore</option><option value="Myanmar">Myanmar</option><option value="Algeria">Algeria</option><option value="Bangladesh">Bangladesh</option><option value="America">America</option><option value="Nigeria">Nigeria</option><option value="Syria">Syria</option><option value="Switzerland">Switzerland</option><option value="China">China</option><option value="Lesotho">Lesotho</option><option value="Philippines">Philippines</option><option value="Canada">Canada</option><option value="British">British</option><option value="Senegal">Senegal</option><option value="Egypty">Egypty</option><option value="Spain">Spain</option><option value="Canadia">Canadia</option><option value="India">India</option><option value="Saudi Arabia">Saudi Arabia</option><option value="Russia">Russia</option><option value="Cambodia">Cambodia</option><option value="Arab">Arab</option><option value="South Africa">South Africa</option></select></td>
+                                                        <td colspan="2" style="width:60%">
+                                                            <label>Father's DOB:</label>
+
+                                                            <p class="input-group">
+                                                                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="fatherDOB" readonly is-open="popup1.opened" datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                                                <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                                            </p>
+                                                        </td></tr>
+                                                    <tr><td>
+                                                        <label>Highest Education:</label>
+                                                        <input type="text" name="fathereducation" value="" id="fathereducation"  ng-model="fathereducation" class="fathereducation form-control">
+                                                    </td>
+                                                        <td colspan="2" style="width:60%">
+                                                            <label>Occupation:</label>
+                                                            <input type="text" name="fatheroccupation" value="" id="fatheroccupation" ng-model="fatheroccupation"  class="fatheroccupation form-control" alpha-with-space>
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td>
+                                                        <label>Income per annum:</label>
+                                                        <input type="text" name="fatherincome" value="" id="fatherincome" ng-model="fatherincome" num-with-out-space="" required="true" class="fatherincome form-control" num-with-space>
+                                                    </td>
+                                                        <td colspan="2" style="width:60%">
+                                                            <label>Employer:</label>
+                                                            <input type="text" name="fatherEmployer" value="" id="fatherEmployer" ng-model="fatherEmployer" required="true" class="fatherEmployer form-control" alpha-with-space>
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td>
+                                                        <label>Nature Of Business:</label>
+                                                        <input type="text" name="fatherBusiness" value="" id="fatherBusiness" ng-model="fatherBusiness" required="true" class="fatherBusiness form-control">
+                                                    </td>
+                                                        <td colspan="2" style="width:60%">
+
+                                                            Office Address
+                                                            <table class="table bg-transparent mb-0 no-border-td">
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="mlr--8">
+                                                                            <label>House No:</label>
+                                                                            <input type="fatheroffice_house_no" name="fatheroffice_house_no" ng-model="fatherOfficeAddress.fatherofficeHNO" value="" id="fatheroffice_house_no" required="true" class="form-control">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="mr--8">
+                                                                            <label>Street No:</label>
+                                                                            <input type="fatheroffice_street_addr" name="fatheroffice_street_addr" value="" ng-model="fatherOfficeAddress.fatherofficeAddr" id="fatheroffice_street_addr" required="true" class="form-control">
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="mlr--8">
+                                                                            <label>Post Code: </label>
+                                                                            <input type="fatheroffice_postalcode" name="fatheroffice_postalcode" value="" ng-model="fatherOfficeAddress.fatherofficePostal" alphanum-with-space="" id="fatheroffice_postalcode" required="true" class="form-control" num-with-space maxlength="6">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="mr--8">
+                                                                            <label>Country  </label>
+                                                                            <select id="countryId" name="countryId"
+                                                                                    ng-model="fatherOfficeAddress.fathercountryId"
+                                                                                    ng-change="countryState(fatherOfficeAddress.fathercountryId,'FatherAdr')"
+                                                                                    ng-options="country.countryId as
+											country.countryName for country in countryList" class="form-control input-md">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="mlr--8">
+                                                                            <label>State  </label>
+                                                                            <select id="stateId" name="stateId" ng-model="fatherOfficeAddress.fatherstateId"
+                                                                                    ng-change="stateCity(fatherOfficeAddress.fatherstateId,'FatherAdr')"
+                                                                                    ng-options="state.stateId as
+											state.stateName for state in stateFatherList" class="form-control input-md">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="mr--8">
+                                                                            <label>City  </label>
+                                                                            <select id="cityId" name="cityId" ng-model="fatherOfficeAddress.fathercityId" ng-options="city.cityId as
+											city.cityName for city in cityFatherList" class="form-control input-md">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label>Tel.No</label>
+                                                            <input type="text" name="fatherTelNo" value="" id="fatherTelNo" ng-model="fatherTelNo"  class="fatherTelNo form-control" num-with-out-space="" maxlength="13">
+                                                        </td>
+                                                        <td>
+                                                            <label>Mobile No:</label>
+                                                            <input type="text" name="fatherMobileNo" value="" id="fatherMobileNo" ng-model="fatherMobileNo" class="fatherMobileNo form-control" num-with-out-space="" maxlength="13">
+
+                                                        </td>
+
+                                                        <td>
+                                                        <label>Primary Contact:</label>
+                                                        <input type="checkbox" name="sameas" id="sameas" ng-disabled="motherPrimaryContact==true" ng-model="parentPrimaryContact">
+                                                        </td>
+                                                        <td>
+                                                            <label>Email:</label>
+                                                            <input type="email" name="fatherEmail" value="" id="fatherEmail" ng-model="fatherEmail" ng-pattern="word" class="fatherEmail form-control">
+                                                            <p class="error" ng-show="mail.fatherEmail.$error.pattern">Enter Valid MailID</p>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <table class="table table-bordered table-striped">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <label>Mother's Name:</label>
+                                                            <input type="text" name="motherName" value="" id="motherName" ng-model="motherName" required="true" class="fatherName form-control" alpha-with-space>
+
+                                                        </td><td colspan="2" style="width:60%">
+                                                        <label>Passport No:</label>
+                                                        <input type="text" name="motherPassNo" value="" id="motherPassNo"  ng-model="motherPassNo" alphanum-without-space="" class="fatherPassNo form-control">
+                                                    </td>
+                                                    </tr>
+                                                    <tr><td>
+                                                        <label>I.C.No:</label>
+                                                        <input type="text" name="motherICNO" value="" id="motherICNO" ng-model="motherICNO" alphanum-without-space="" class="fatherICNO form-control">
+                                                    </td>
+                                                        <td colspan="2" style="width:60%">
+                                                            <label>Fax No:</label>
+                                                            <input type="text" name="motherFax" value="" id="motherFax" ng-model="motherFax" num-with-out-space="" class="fatherFax form-control">
+                                                        </td></tr>
+                                                    <tr><td>
+                                                        <label>Nationality:</label>
+                                                        <select name="mothernationality" class="mothernationality form-control" id="mothernationality" ng-model="mothernationality" ><option value="none">Select Nationality</option><option value="Malaysia">Malaysia</option><option value="Pakistan">Pakistan</option><option value="Thailand">Thailand</option><option value="Yemen">Yemen</option><option value="Indonesia">Indonesia</option><option value="Maldives">Maldives</option><option value="Singapore">Singapore</option><option value="Myanmar">Myanmar</option><option value="Algeria">Algeria</option><option value="Bangladesh">Bangladesh</option><option value="America">America</option><option value="Nigeria">Nigeria</option><option value="Syria">Syria</option><option value="Switzerland">Switzerland</option><option value="China">China</option><option value="Lesotho">Lesotho</option><option value="Philippines">Philippines</option><option value="Canada">Canada</option><option value="British">British</option><option value="Senegal">Senegal</option><option value="Egypty">Egypty</option><option value="Spain">Spain</option><option value="Canadia">Canadia</option><option value="India">India</option><option value="Saudi Arabia">Saudi Arabia</option><option value="Russia">Russia</option><option value="Cambodia">Cambodia</option><option value="Arab">Arab</option><option value="South Africa">South Africa</option></select></td><td colspan="2" style="width:60%">
+                                                        <label>Mother's DOB:</label>
+
+                                                        <p class="input-group">
+                                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="motherDOB" is-open="popup2.opened" datepicker-options="dateOptions" readonly ng-="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                                            <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                                        </p>
+                                                    </td></tr>
+                                                    <tr><td>
+                                                        <label>Highest Education:</label>
+                                                        <input type="text" name="mothereducation" value="" id="mothereducation"  ng-model="mothereducation" class="fathereducation form-control">
+                                                    </td>
+                                                        <td colspan="2" style="width:60%">
+                                                            <label>Occupation:</label>
+                                                            <input type="text" name="motheroccupation" value="" id="motheroccupation" ng-model="motheroccupation"  class="fatheroccupation form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td>
+                                                        <label>Income per annum:</label>
+                                                        <input type="text" name="motherincome" value="" id="motherincome" ng-model="motherincome"  class="fatherincome form-control" num-with-space>
+                                                    </td>
+                                                        <td colspan="2" style="width:60%">
+                                                            <label>Employer:</label>
+                                                            <input type="text" name="motherEmployer" value="" id="motherEmployer" ng-model="motherEmployer"  class="fatherEmployer form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td>
+                                                        <label>Nature Of Business:</label>
+                                                        <input type="text" name="motherBusiness" value="" id="motherBusiness" ng-model="motherBusiness"  class="fatherBusiness form-control">
+                                                    </td>
+                                                        <td colspan="2" style="width:60%">
+
+                                                            Office Address
+                                                            <table class="table bg-transparent mb-0 no-border-td">
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="mlr--8">
+                                                                            <label>House No:</label>
+                                                                            <input type="text" name="motheroffice_house_no" value="" id="motheroffice_house_no" ng-model="motherOfficeAddress.motherHouseNo"  class="form-control">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="mr--8">
+                                                                            <label>Street No:</label>
+                                                                            <input type="text" name="motheroffice_street_addr" value="" id="motheroffice_street_addr" ng-modal="motherOfficeAddress.motherOfficeAddress" required="true" class="form-control">
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="mlr--8">
+                                                                            <label>Post Code: </label>
+                                                                            <input type="text" name="motheroffice_postalcode" value="" id="motheroffice_postalcode" ng-model="motherOfficeAddress.motherpostalcode" class="form-control" num-with-space maxlength="6">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="mr--8">
+                                                                            <label>Country  </label>
+                                                                            <select id="countryId" name="countryId"
+                                                                                    ng-model="motherOfficeAddress.mothercountryId"
+                                                                                    ng-change="countryState(motherOfficeAddress.mothercountryId,'MotherAdr')"
+                                                                                    ng-options="country.countryId as
+											                                     country.countryName for country in countryList" class="form-control input-md">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="mlr--8">
+                                                                            <label>State  </label>
+                                                                            <select id="stateId" name="stateId" ng-model="motherOfficeAddress.motherstateId"
+                                                                                    ng-change="stateCity(motherOfficeAddress.motherstateId,'MotherAdr')"
+                                                                                    ng-options="state.stateId as
+											state.stateName for state in stateMotherList" class="form-control input-md">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="mr--8">
+                                                                            <label>City  </label>
+                                                                            <select id="cityId" name="cityId" ng-model="motherOfficeAddress.mothercityId" ng-options="city.cityId as
+											city.cityName for city in cityMotherList" class="form-control input-md">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label>Tel.No</label>
+                                                            <input type="text" name="motherTelNo" value="" id="motherTelNo" ng-model="motherTelNo"  class="fatherTelNo form-control" num-with-space maxlength="13">
+                                                        </td>
+                                                        <td>
+                                                            <label>Mobile No:</label>
+                                                            <input type="text" name="motherMobileNo" value="" id="motherMobileNo" ng-model="motherMobileNo" class="fatherMobileNo form-control" num-with-space maxlength="13">
+                                                        </td>
+
+                                                        <td>
+                                                            <label>Primary Contact:</label>
+                                                            <input type="checkbox" name="sameas" id="sameas" ng-disabled="parentPrimaryContact==true" ng-model="motherPrimaryContact">
+                                                        </td>
+                                                        <!--<td>-->
+                                                            <!--<label>Primary Contact:</label>-->
+                                                            <!--<input type="checkbox" name="sameas" id="sameas" ng-model="motherPrimaryContact">-->
+                                                        <!--</td>-->
+                                                        <td>
+                                                            <label>Email:</label>
+                                                            <input type="email" name="motherEmail" value="" id="motherEmail" ng-pattern="word" ng-model="motherEmail" class="fatherEmail form-control">
+                                                            <p class="error" ng-show="mail.motherEmail.$error.pattern">Enter Valid MailID</p>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="sub_step24">
+                                        <div class="tab-pane fade active in" id="gaurdian_information">
+                                            <h3 class="head text-center">Guardian's Information</h3>
+                                            <form class="form-horizontal" role="form" method="post" id="gaurdianInformationForm">
+                                                <table class="table table-bordered table-striped">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="width:50%">
+                                                            <label>Guardian's Name:</label>
+                                                            <input type="text" name="guardianName" value="" id="guardianName" ng-model="guardianName" class="guardianName form-control" alpha-with-space>
+                                                        </td>
+                                                        <td>
+                                                            <label>Passport No:</label>
+                                                            <input type="text" name="guardianPassNo" value="" id="guardianPassNo" ng-model="guardianPassNo" alphanum-without-space="" class="guardianPassNo form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label>Nationality:</label>
+                                                            <select name="guardiannationality" class="guardiannationality form-control" id="guardiannationality" ng-model="guardiannationality"><option value="none">Select Nationality</option><option value="Malaysia">Malaysia</option><option value="Pakistan">Pakistan</option><option value="Thailand">Thailand</option><option value="Yemen">Yemen</option><option value="Indonesia">Indonesia</option><option value="Maldives">Maldives</option><option value="Singapore">Singapore</option><option value="Myanmar">Myanmar</option><option value="Algeria">Algeria</option><option value="Bangladesh">Bangladesh</option><option value="America">America</option><option value="Nigeria">Nigeria</option><option value="Syria">Syria</option><option value="Switzerland">Switzerland</option><option value="China">China</option><option value="Lesotho">Lesotho</option><option value="Philippines">Philippines</option><option value="Canada">Canada</option><option value="British">British</option><option value="Senegal">Senegal</option><option value="Egypty">Egypty</option><option value="Spain">Spain</option><option value="Canadia">Canadia</option><option value="India">India</option><option value="Saudi Arabia">Saudi Arabia</option><option value="Russia">Russia</option><option value="Cambodia">Cambodia</option><option value="Arab">Arab</option><option value="South Africa">South Africa</option></select>        </td>
+                                                        <td>
+                                                            <label>Relation:</label> <input type="text" name="guardianRelation" value="" id="guardianRelation" ng-model="guardianRelation" class="guardianName form-control">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label>Occupation:</label> <input type="text" name="guardianoccupation" value="" id="guardianoccupation" ng-model="guardianoccupation" class="guardianoccupation form-control" alpha-with-space>
+                                                        </td>
+                                                        <td>
+                                                            <label>Employer:</label> <input type="text" name="guardianEmployer" value="" id="guardianEmployer" ng-model="guardianEmployer" class="guardianEmployer form-control" alpha-with-space>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label>I.C.No:</label>
+                                                            <input type="text" name="guardianICNO" value="" id="guardianICNO" ng-model="guardianICNO" alphanum-without-space="" class="guardianICNO form-control">
+                                                        </td>
+                                                        <td>
+                                                            <label>Mobile.No:</label> <input type="text" name="guardianTelNo" id="guardianTelNo" ng-model="guardianTelNo" class="guardianTelNo form-control" num-with-space maxlength="13">
+                                                        </td>
+
+                                                        <!--<td>-->
+                                                            <!--<label>Primary Contact:</label>-->
+                                                            <!--<input type="checkbox" name="sameas" id="sameas" ng-model="GuarPrimaryContact">-->
+                                                        <!--</td>-->
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label>Tel.No:</label><input type="text" name="guardianMobileNo"  id="guardianMobileNo" ng-model="guardianMobileNo" class="guardianMobileNo form-control" num-with-space maxlength="13">
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+
+                                                            Correspondence Address
+                                                            <table class="table bg-transparent mb-0 no-border-td">
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>House No:</label>  <input type="guardiancorres_house_no" name="guardiancorres_house_no" value="" id="guardiancorres_house_no" ng-model="guardCorrAddress.guardiancorreshouseno" class="form-control">
+                                                                    </td>
+                                                                    <td>
+                                                                        <label>Street No:</label>  <input type="guardiancorres_street_addr" name="guardiancorres_street_addr" value="" id="guardiancorres_street_addr" ng-model="guardCorrAddress.guardiancorresstreetaddr" class="form-control">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>Post Code:</label>  <input type="guardiancorres_postalcode" name="guardiancorres_postalcode" value="" id="guardiancorres_postalcode" ng-model="guardCorrAddress.guardiancorrespostalcode" class="form-control">
+                                                                    </td>
+                                                                    <td>
+                                                                        <label>Country:  </label>
+                                                                        <select id="countryId" name="countryId"
+                                                                                ng-model="guardCorrAddress.guarcorrescountryId"
+                                                                                ng-change="countryState(guardCorrAddress.guarcorrescountryId,'GuarCorAdr')"
+                                                                                ng-options="country.countryId as
+											country.countryName for country in countryList" class="form-control input-md">
+                                                                            <option value="">Select</option>
+                                                                        </select>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>State:  </label>
+                                                                        <select id="stateId" name="guarcorresstateId" ng-model="guardCorrAddress.guarcorresstateId"
+                                                                                ng-change="stateCity(guardCorrAddress.guarcorresstateId,'GuarCorAdr')"
+                                                                                ng-options="state.stateId as
+											state.stateName for state in stateGuarList" class="form-control input-md">
+                                                                            <option value="">Select</option>
+                                                                        </select>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label>City:  </label>
+                                                                        <select id="cityId" name="cityId" ng-model="guardCorrAddress.guarcorrescityId" ng-options="city.cityId as
+											city.cityName for city in cityGuarList" class="form-control input-md">
+                                                                            <option value="">Select</option>
+                                                                        </select>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+
+                                                        </td>
+                                                        <td>
+                                                            <p>Permanent Address: </p>
+                                                            <p>Same as Correspondance Address </p>
+                                                            <input type="checkbox" name="sameas" id="sameas" ng-model="guarSameAsCorresAdd">
+                                                            <table class="sameascorres1 table bg-transparent mb-0 no-border-td">
+                                                                <tbody>
+                                                                <tr ng-show="guarSameAsCorresAdd!==true">
+                                                                    <td>
+                                                                        <label>House No:</label>
+                                                                        <input type="guardianperm_house_no" name="guardianperm_house_no"
+                                                                               value="" id="guardianperm_house_no" ng-model="guardPerAddress.guardianpermhouseno" class="form-control">
+                                                                    </td>
+                                                                    <td>
+                                                                        <label>Street No: </label>
+                                                                        <input type="guardianperm_street_addr" name="guardianperm_street_addr" value="" id="guardianperm_street_addr" ng-model="guardPerAddress.guardianpermstreetaddr" class="form-control">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr ng-show="guarSameAsCorresAdd!==true">
+                                                                    <td>
+                                                                        <label>Post Code:</label>
+                                                                        <input type="guardianperm_postalcode" name="guardPerAddress.guardianperm_postalcode" value="" id="guardianperm_postalcode" ng-model="guardPerAddress.guardianpermpostalcode" class="form-control" num-with-space maxlength="6">
+                                                                    </td>
+                                                                    <td>
+                                                                        <label>Country:  </label>
+                                                                        <select id="countryId" name="countryId"
+                                                                                ng-model="guardPerAddress.guarpermcountryId"
+                                                                                ng-change="countryState(guardPerAddress.guarpermcountryId,'GuarPerAdr')"
+                                                                                ng-options="country.countryId as
+											country.countryName for country in countryList" class="form-control input-md">
+                                                                            <option value="">Select</option>
+                                                                        </select>                                                                                </tr>
+                                                                <tr ng-show="guarSameAsCorresAdd!==true">
+                                                                    <td>
+                                                                        <label>State:  </label>
+                                                                        <select id="stateId" name="stateId" ng-model="guardPerAddress.guarpermstateId"
+                                                                                ng-change="stateCity(guardPerAddress.guarpermstateId,'GuarPerAdr')"
+                                                                                ng-options="state.stateId as
+											state.stateName for state in stateGuarPerList" class="form-control input-md">
+                                                                            <option value="">Select</option>
+                                                                        </select>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label>City:  </label>
+                                                                        <select id="cityId" name="cityId" ng-model="guardPerAddress.guarpermcityId" ng-options="city.cityId as
+											city.cityName for city in cityGuarPerList" class="form-control input-md">
+                                                                            <option value="">Select</option>
+                                                                        </select>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+
+                                                        </td>
+                                                    </tr>
+
+
+                                                    </tbody></table>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="sub_step25">
+                                        <div class="tab-pane fade active in" id="agreement_information">
+                                            <h3 class="head text-center">Agreement's Information</h3>
+                                            <form class="" method="post" id="agreementInformationForm">
+<textarea name="declaration" cols="100" rows="4" id="declaration" readonly required="true" class="declaration form-control">I Understand and agree to the points below.
+1) 2months notice must be served before withdrawal or the deposit will be forfeited.
+2) Any outstanding payment will be deducted from deposit </textarea>
+
+                                                <table class="table table-bordered table-striped mt-20">
+                                                    <tbody><tr>
+
+                                                    </tr>
+                                                    <tr><td>
+                                                        <label>Signature:
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------</label></td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-sm-4" for="">Date:</label>
+                                                                <div class="col-md-6 col-sm-6">
+                                                                    <p class="input-group">
+                                                                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="AgreeDate" is-open="popupad1.opened" datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly />
+                                                                        <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="openad1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                                                    </p>
+                                                                </div>
+
+                                                            </div>
+                                                            <!--<label>Date:</label>-->
+                                                            <!--<input type="text" name="agreementDate" ng-model="AgreeDate" value="" id="agreementDate" required="true" class="agreementDate form-control hasDatepicker" readonly="1">-->
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                        <!--                                                                        <label>1) &nbsp;&nbsp;Please Complete the form using CAPITAL LETTER
+                                                                                </label><br/>-->
+                                                        <label>1)     &nbsp;&nbsp;Please submit with this form the following
+                                                        </label><br>
+
+
+                                                        <label>
+                                                            <input type="checkbox" name="passportphotograph" value="1" id="passportphotograph" required="true" class="passportphotograph">
+                                                            <br>
+                                                            &nbsp;&nbsp;2 passport sized photograph(Malaysian Student).
+                                                            &nbsp;&nbsp;6 passport sized photograph(Foreign Student).
+                                                        </label><br>
+                                                        <input type='file' accept='image/*' id="imageLoad" ng-model-instant
+                                                               onchange="angular.element(this).scope().imageUpload(event)"><br>
+                                                        <img class="image-preview"
+                                                             style="width:50px;height:50px; margin-left: 39px;" src={{fileName}}>
+                                                            <br>
+                                                        <label>
+                                                            <input type="checkbox" name="copyofbirth" value="1" id="copyofbirth" required="true" class="copyofbirth">
+                                                            &nbsp;&nbsp;Copy of Birth Certificate and translation(if not in  English Language).
+                                                            <input type='file' accept='image/*' id="studbirthcert" ng-model-instant
+                                                                   onchange="angular.element(this).scope().imageUpload1(event)"><br>
+                                                            <img class="image-preview1"
+                                                                 style="width:50px;height:50px; margin-left: 39px;" src={{fileName1}}>                                                        </label><br>
+                                                        <label><input type="checkbox" name="copyofidentitystd" value="1" id="copyofidentitystd" required="true" class="copyofidentitystd">
+                                                            &nbsp;&nbsp;Copy of Identity Card or Passport of the student.
+                                                            <input type='file' accept='image/*' id="studidentity" ng-model-instant
+                                                                   onchange="angular.element(this).scope().imageUpload2(event)"><br>
+                                                            <img class="image-preview2"
+                                                                 style="width:50px;height:50px; margin-left: 39px;" src={{fileName2}}>                                                            <br>
+                                                        </label><br>
+                                                        <label><input type="checkbox" name="copyofFatherphoto" value="1" id="copyofFatherphoto" required="true" class="copyofFatherphoto">
+                                                            &nbsp;&nbsp;Copy of Identity Card or Passport of the Father.
+                                                            <input type='file' accept='image/*' id="studentfatherphoto" ng-model-instant
+                                                                   onchange="angular.element(this).scope().imageUpload3(event)"><br>
+                                                            <img class="image-preview3"
+                                                                 style="width:50px;height:50px; margin-left: 39px;" src={{fileName3}}>                                                            <br>
+                                                        </label><br>
+
+
+                                                            <label><input type="checkbox" name="copyofMotherphoto" value="1" id="copyofMotherphoto" required="true" class="copyofMotherphoto">
+                                                                &nbsp;&nbsp;Copy of Identity Card or Passport of the Mother.
+                                                                <input type='file' accept='image/*' id="studentmotherphoto" ng-model-instant
+                                                                       onchange="angular.element(this).scope().imageUpload7(event)"><br>
+                                                                <img class="image-preview7"
+                                                                     style="width:50px;height:50px; margin-left: 39px;" src={{fileName7}}>                                                            <br>
+                                                            </label><br>
+                                                        <label><input type="checkbox" name="copyofmariagefrgn" value="1" id="copyofmariagefrgn" required="true" class="copyofmariagefrgn">
+                                                            &nbsp;&nbsp;Guardian Id Proof .
+                                                            <input type='file' accept='image/*' id="studparmarrcer" ng-model-instant
+                                                                   onchange="angular.element(this).scope().imageUpload4(event)"><br>
+                                                            <img class="image-preview4"
+                                                                 style="width:50px;height:50px; margin-left: 39px;" src={{fileName4}}>                                                            <br>
+                                                        </label><br>
+                                                        <label><input type="checkbox" name="copyofprvschool" value="1" id="copyofprvschool" required="true" class="copyofprvschool">
+                                                            &nbsp;&nbsp;Copy of Previous School Leaving Certificate.
+                                                            <input type='file' accept='image/*' id="studprevsch" ng-model-instant
+                                                                   onchange="angular.element(this).scope().imageUpload5(event)"><br>
+                                                            <img class="image-preview5"
+                                                                 style="width:50px;height:50px; margin-left: 39px;" src={{fileName5}}>                                                            <br>
+
+                                                        </label><br>
+                                                        <label><input type="checkbox" name="otherrelevantd" value="1" id="otherrelevantd" required="true" class="otherrelevantd">
+                                                            &nbsp;&nbsp;Other relevant documents.
+                                                        </label><br>
+                                                        <input type='file' accept='image/*' id="studotherdoc" ng-model-instant
+                                                               onchange="angular.element(this).scope().imageUpload6(event)"><br>
+                                                        <img class="image-preview6"
+                                                             style="width:50px;height:50px; margin-left: 39px;" src={{fileName6}}>                                                        <br>
+                                                    </td>
+                                                    </tr>
+
+                                                    </tbody></table>
+                                                <input type="hidden" value="" name="student_id">;
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none !important;">
+                <a class="btn btn-primary back" id="back1" href="javascript:void(0)"
+                   ng-click="back_wizardEdit()" data-toggle="tab" data-step="2">Back</a>
+                <a class="btn btn-primary hi_btn next" id="next" href="javascript:void(0)"
+                   ng-click="next_wizardEdit();" data-toggle="tab"
+                   data-step="2" style="color:#D5ECFF">Next</a>
+                <a class="btn btn-primary hi_btn next" id="next1" href="javascript:void(0)"
+                   ng-click="next_wizardEdit1();" data-toggle="tab"
+                   data-step="2" style="color:#D5ECFF" >Next</a>
+                <a class="btn btn-primary hi_btn next" id="next2" href="javascript:void(0)"
+                   ng-click="next_wizardEdit2();" data-toggle="tab"
+                   data-step="2" style="color:#D5ECFF" >Next</a>
+                <a class="btn btn-primary hi_btn next" id="next3" href="javascript:void(0)"
+                   ng-click="next_wizardEdit3();" data-toggle="tab"
+                   data-step="2" style="color:#D5ECFF" >Next</a>
+                <a class="btn btn-primary back" id="back" href="javascript:void(0)"
+                   ng-click="back_wizardEdit1()" data-toggle="tab" data-step="2" ng-hide="id='sub_step12'">Back</a>
+
+
+                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal"
+                        id="saveId"  ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="saveAdmission()">Save
+                </button>
+                <button type="button" class="btn btn-primary hi_btn" data-dismiss="modal"
+                        ng-click="removeStudentDetails()"> Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('body').delegate('.remove','click',function()
+    {
+        $(this).parent().parent().remove();
+    });
+
+    function removereadonly(id,clicksid) {
+
+        if($("#"+clicksid).prop("checked") == true){
+
+            $('#'+id).prop('readonly', false);
+        }else{
+
+            $('#'+id).prop('readonly', true);
+
+        }
+
+    }
+    $("#next1").hide();
+    $("#next2").hide();
+    $("#next3").hide();
+    $("#saveId").hide();
+    $("#back1").hide();
+
+
+
+</script>

@@ -1,0 +1,504 @@
+<style>
+    .form-horizontal .control-label {
+        padding-top: 7px;
+        margin-bottom: 0;
+        text-align: left !important;
+        padding: 10px 0 0 10px !important;
+    }
+
+    .modal-footer .btn + .btn {
+        margin-bottom: 0;
+        margin-left: 4px !important;
+        margin-right: 0px !important;
+    }
+
+    .modal-title {
+        margin: 0;
+        line-height: -31.571429 !important;
+    }
+
+    .form-horizontal .form-group {
+        margin-right: -5px;
+        margin-left: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 5px;
+    }
+
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .modal-footer {
+        padding: 23px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 100;
+    }
+
+    .btn btn-primary back {
+        padding: 5px;
+    }
+
+    table>tbody>tr>td {
+        text-align: left !important;
+    }
+
+
+</style>
+
+<div class="modal fade Student" tabindex="-1" id="add_new_Employee_modal" role="dialog"
+     data-backdrop="static"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-lg" style="width: 1000px !important;">
+        <div class="modal-content checkout" style="width: 1000px!important;">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 id="hr-title" class="modal-title" style="color:red;" align="center">
+                    Add Employee</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <form class="form-horizontal" name="mail">
+                            <fieldset>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade in active" id="sub_step01">
+                                        <div class="fixed-table-container">
+                                            <div class="table_wrapfixed-table-container-inner">
+                                                <div class="header-background"></div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group" style="margin-top: 20px;">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Branch</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="empBranch" name="empBranch"
+                                                                    ng-model="empBranch"
+                                                                    ng-options="dept.branchesId as dept.branchName for dept in branchesList"
+                                                                    class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">Employee Code</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="employeeCode" id="employeeCode" maxlength="10"
+                                                                   class="form-control input-md" alphanum-without-space readonly
+                                                                   ng-model="employeeCode">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">Employee Name<span style="color:red;">*</span></label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="employeeName" id="employeeName" maxlength="30"
+                                                                   class="form-control input-md" alpha-with-space
+                                                                   ng-model="employeeName">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="control-label col-sm-4" for=""
+                                                               style="padding-left: 61px; text-align: left;">Employee DOB</label>
+                                                        <div class="col-md-3 col-sm-4" style="position:relative;">
+                                                            <p class="input-group">
+                                                                <input style="width: 165px !important;" type="empDob" id="empDob"
+                                                                       ng-model="empDob" class="form-control"
+                                                                       ng-change="calculateEmpAge()" readonly
+                                                                       uib-datepicker-popup="{{format}}"
+                                                                       is-open="popup2.opened"
+                                                                       datepicker-options="dateOptions"
+                                                                       close-text="Close"
+                                                                       alt-input-formats="altInputFormats"/>
+                                                                <span class="input-group-btn">
+                                                                     <button type="button" class="btn btn-default"
+                                                                             ng-click="open2()">
+                                                                         <i class="glyphicon glyphicon-calendar"></i></button>
+                                                                     </span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Employee Age</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input id="empAge" name="empAge"
+                                                                   type="text"
+                                                                   ng-model="empAge" maxlength="125" readonly
+                                                                   class="form-control input-md" autocomplete="off" >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">User Type</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="userType" id="userType"
+                                                                   class="form-control input-md"
+                                                                   ng-model="userType">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" style="margin-top: 20px;">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Department</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="empDepartment" name="empDepartment"
+                                                                    ng-model="empDepartment"
+                                                                    ng-options="dept.departmentName as dept.departmentName for dept in departmentList"
+                                                                    class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">EmployeeType</label>
+                                                        <div class="col-md-6 col-sm-6" >
+                                                            <select name="empType" id="empType" ng-model="empType" class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                                <option value="teaching">Teaching</option>
+                                                                <option value="NonTeaching">Non-Teaching</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Type Of Employee</label>
+                                                        <div class="col-md-6 col-sm-6" >
+                                                            <select name="typeOfEmp" id="typeOfEmp" ng-model="typeOfEmp" class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                                <option value="fullTime">FullTime</option>
+                                                                <option value="fixedpartTime">Fixed Part Time</option>
+                                                                <option value="flexypartTime">Flexy Part Time</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" style="margin-top: 20px;">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Designation<span style="color: red">*</span></label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="empCoordinator" id="empCoordinator" alpha-with-space
+                                                                   class="form-control input-md" maxlength="50"
+                                                                   ng-model="empDesignation">
+                                                            <!--<select id="empDepartment" name="empDepartment"-->
+                                                            <!--ng-model="empDesignation"-->
+                                                            <!--class="form-control input-md">-->
+                                                            <!--<option value="">Select</option>-->
+                                                            <!--</select>-->
+                                                            <!--ng-options="Branches.designationName as Branches.designationName for Branches in designationList"-->
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">Coordinator</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="empCoordinator" id="empCoordinator" alpha-with-space
+                                                                   class="form-control input-md" maxlength="50"
+                                                                   ng-model="empCoordinator">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">Report To</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="reportTo" id="reportTo" alpha-with-space
+                                                                   class="form-control input-md"
+                                                                   ng-model="reportTo">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label col-sm-4" for="">Date Of Joining</label>
+                                                        <div class="col-md-3 col-sm-4" style="position:relative;">
+                                                            <p class="input-group">
+                                                                <input style="width: 165px !important;" type="empDoj" id="empDoj" class="form-control" uib-datepicker-popup="{{format}}"  ng-model="empDoj"  is-open="popupp.opened" datepicker-options="dateOptions"  close-text="Close" alt-input-formats="altInputFormats" readonly/>
+                                                                <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="openn()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">Capability</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="empCapability" id="empCapability"
+                                                                   class="form-control input-md"
+                                                                   ng-model="empCapability">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">Speciality</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="speciality" id="speciality"
+                                                                   class="form-control input-md" alpha-with-space
+                                                                   ng-model="speciality">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">Mobile</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="mobile" id="mobile" maxlength="13"
+                                                                   class="form-control input-md" num-with-out-space
+                                                                   ng-model="mobile">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">Email ID<span style="color:red;">*</span></label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="emailId" id="emailId" type="email"
+                                                                   class="form-control input-md"
+                                                                   ng-model="emailId" ng-pattern="word">
+                                                            <p class="error" ng-show="mail.emailId.$error.pattern">Enter Valid MailID</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">Aadhar Card No</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="aadharNo" id="aadharNo" num-with-space
+                                                                   class="form-control input-md" maxlength="15"
+                                                                   ng-model="aadharNo">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">Passport No</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="passportNo" id="passportNo" maxlength="30"
+                                                                   class="form-control input-md" alphanum-with-space
+                                                                   ng-model="passportNo">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">Experience</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="experience" id="experience"
+                                                                   class="form-control input-md" alphanum-with-space
+                                                                   ng-model="experience">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">Address Line 1</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="addressLine1" id="addressLine1"
+                                                                   class="form-control input-md"
+                                                                   ng-model="addressLine1">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">Address Line 2</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="addressLine2" id="addressLine2"
+                                                                   class="form-control input-md"
+                                                                   ng-model="addressLine2">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" style="margin-top: 20px;">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Country</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="country" name="country"
+                                                                    ng-change="countryState(country)"
+                                                                    ng-model="country"
+                                                                    ng-options="Branches.countryId as Branches.countryName for Branches in countryList"
+                                                                    class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" style="margin-top: 20px;">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">State</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="state" name="state"
+                                                                    ng-change="stateCity(state)"
+                                                                    ng-model="state"
+                                                                    ng-options="Branches.stateId as Branches.stateName for Branches in stateList"
+                                                                    class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" style="margin-top: 20px;">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">City</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="city" name="city"
+                                                                    ng-model="city"
+                                                                    ng-options="Branches.cityId as Branches.cityName for Branches in cityList"
+                                                                    class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">PostalCode</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="postalCode" id="postalCode" num-with-out-space maxlength="6"
+                                                                   class="form-control input-md"
+                                                                   ng-model="postalCode">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">UserName</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="userName" id="userName"
+                                                                   class="form-control input-md"
+                                                                   ng-model="userName">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">Password</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="password" id="password"
+                                                                   class="form-control input-md"
+                                                                   ng-model="password">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Status</label>
+                                                        <div class="col-md-6 col-sm-6" >
+                                                            <select name="status" id="status" ng-model="status" ng-init="status='Active'"class="form-control input-md">
+                                                                <option value="Active">Active</option>
+                                                                <option value="InActive">InActive</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade in active" id="sub_step02">
+                                        <div class="fixed-table-container">
+                                            <div class="table_wrapfixed-table-container-inner">
+                                                <div class="header-background"></div>
+                                                <div class="col-md-6">
+                                                    <h4 class="col-md-4 control-label"
+                                                        style="color:#337ab7" ;>Add Employee</h4>
+                                                    <div class="form-group">
+                                                        <label class="control-label col-sm-4" for="">SalEffective Date</label>
+                                                        <div class="col-sm-8">
+                                                            <p class="input-group">
+                                                                <input type="text" id="salEffectiveDate" class="form-control" uib-datepicker-popup="{{format}}" readonly  ng-model="salEffectiveDate"  is-open="popupp1.opened" datepicker-options="dateOptions"  close-text="Close" alt-input-formats="altInputFormats" />
+                                                                <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="openn1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label">BasicSal</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input name="basicSal" id="basicSal"
+                                                                   class="form-control input-md"
+                                                                   ng-model="basicSal" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <table id="earninglist" class="table table-bordered table-striped" style="padding: 0 20px;" ng-su>
+                                                        <thead>
+                                                        <tr style="background: #FFFFFF;">
+                                                            <td><span style="color: black;text-align: center;"></span></td>
+                                                            <td><span style="color: black;text-align: center;">Earning Name</span> </td>
+                                                            <td><span style="color: black;text-align: center;">Earning Amount</span> </td>
+
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody class="earningamountdetails">
+
+                                                        <tr id="earning"  ng-repeat="earningamountdetails in earningList">
+                                                            <td>
+                                                                <input type="checkbox" name="checkval" value="checkval" class="checkval form-control" id="checkval" ng-model="earningamountdetails.empearnings" required="true"></label>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" id="earning2" class="earningtype form-control" ng-model="earningamountdetails.earningName" value=" " readonly></td>
+                                                            <td>
+                                                                <input type="text" id="earning3" class="earningtype form-control" ng-model="earningamountdetails.earningAmount" value=" " ng-disabled="!earningamountdetails.empearnings"></td>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+
+                                                    </table>
+                                                    <table id="deductionlist" class="table table-bordered table-striped" style="padding: 0 20px;" ng-su>
+                                                        <thead>
+                                                        <tr style="background: #FFFFFF;">
+                                                            <td><span style="color: black;text-align: center;"></span></td>
+                                                            <td><span style="color: black;text-align: center;">Deduction Name</span> </td>
+                                                            <td><span style="color: black;text-align: center;">Deduction Amount</span> </td>
+
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody class="deductionamountdetails">
+
+                                                        <tr id="deduction"  ng-repeat="deduction in deductionList">
+                                                            <td>
+                                                                <input type="checkbox" name="checkval" value="checkval" class="checkval form-control" id="checkval" ng-model="deduction.empdeductions" required="true"></label>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" id="deduction1" class="deductiontype form-control" ng-model="deduction.deductionName" value=" " readonly></td>
+                                                            <td>
+                                                                <input type="text" id="deduction2" class="deductiontype form-control" ng-model="deduction.deductionAmount" value=" " ng-disabled="!deduction.empdeductions"></td>                                                </td>
+                                                        </tr>
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none !important;">
+                <a class="btn btn-primary back" id="back1" href="javascript:void(0)"
+                   ng-click="back_wizardEditEmp()" data-toggle="tab" data-step="2">Back</a>
+                <a class="btn btn-primary hi_btn next" id="next" href="javascript:void(0)"
+                   ng-click="next_wizardEditEmp();" data-toggle="tab"
+                   data-step="2" style="color:#D5ECFF">Next</a>
+                <a class="btn btn-primary back" id="back" href="javascript:void(0)"
+                   ng-click="back_wizardEdit1Emp()" data-toggle="tab" data-step="2" ng-hide="id='sub_step01'">Back</a>
+
+                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal"
+                        id="saveId"  ng-disabled="isDisabled"
+                        data-target=".print-me" ng-click="saveEmployee()">Save
+                </button>
+                <button type="button" class="btn btn-primary hi_btn" data-dismiss="modal"
+                        ng-click="removeEmployeeDetails()"> Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('body').delegate('.remove','click',function()
+    {
+        $(this).parent().parent().remove();
+    });
+
+    function removereadonly(id,clicksid) {
+
+        if($("#"+clicksid).prop("checked") == true){
+
+            $('#'+id).prop('readonly', false);
+        }else{
+
+            $('#'+id).prop('readonly', true);
+
+        }
+
+    }
+    $("#next1").hide();
+    $("#next2").hide();
+    $("#next3").hide();
+    $("#saveId").hide();
+    $("#back1").hide();
+
+
+
+</script>

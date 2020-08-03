@@ -1,0 +1,215 @@
+<style>
+    .modal-content{
+        width:696px;
+    }
+    .modal-footer {
+        padding: 5px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    fieldset {
+        min-width: 0;
+        padding: 10px;
+        margin: 0;
+        border: 0;
+    }
+    .form-control {
+        display: block;
+        width: 171px;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+</style>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row" >
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Workdays</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel-body" style="height: 65px;">
+                            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                                <form class="form-horizontal ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <p class="input-group" style="display: block;">
+                                                <input id="search_academic" name="textinput" type="text"
+                                                       placeholder="Search" ng-model="searchText" class="form-control input-md"
+                                                       ng-keyup="$event.keyCode == 13 ? getWeekdayList() : null"/>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-7">
+
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addWeekday()" ng-hide="weekdayList.length > 0">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="fixed-table-container">
+                        <div class="table_wrapfixed-table-container-inner">
+                            <div class="header-background"></div>
+                            <table data-toggle="table" data-cache="false" data-height="299" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                                <thead>
+                                <tr>
+                                    <th data-field="cntryname">
+                                        <div class="th-inner" align="center">Sunday</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Monday</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Tuesday</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Wednesday</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Thursday</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Friday</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Saturday</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Actions</div></th>
+                                </tr>
+                                </thead>
+                                <tbody id="parentTable">
+                                <input type="hidden" ng-model="weekdayId" value="{{weekdayList.weekdayId}}"/>
+                                <tr ng-repeat="weekday in weekdayList|filter:searchText">
+                                    <td>{{weekday.sunday}}</td>
+                                    <td>{{weekday.monday}}</td>
+                                    <td>{{weekday.tuesday}}</td>
+                                    <td>{{weekday.wednesday}}</td>
+                                    <td>{{weekday.thursday}}</td>
+                                    <td>{{weekday.friday}}</td>
+                                    <td>{{weekday.saturday}}</td>
+                                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editWeekday(weekday)">Edit</button>
+                                    <button type="button" class="btn btn-primary hi_btn"  ng-click="deleteWeekday(weekday)">Delete</button></td>
+                                </tr>
+                                <tr ng-if="searchText!=''&&(weekdayList|filter:searchText).length==0">
+                                    <td colspan="5" style="color: red; font-weight: bold">No Records Found</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" id="add_new_weekday_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 id="weekday-title" class="modal-title">Add WorkDay</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Sunday</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <input  id="sunday" type="checkbox"  ng-model="sunday">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" >Monday</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input  id="monday" type="checkbox" ng-model="monday">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" >Tuesday</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input  id="tuesday" type="checkbox" ng-model="tuesday">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" >Wednesday</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input  id="wednesday" type="checkbox"  ng-model="wednesday">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" >Thursday</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input  id="thursday" type="checkbox" ng-model="thursday">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" >Friday</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input  id="friday" type="checkbox" ng-model="friday">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 col-sm-4 control-label" >Saturday</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input  id="saturday" type="checkbox"  ng-model="saturday">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                        ng-click="saveWeekday('add_new_weekday_modal')">Save
+                                </button>
+                                <button type="button" class="btn btn-primary hi_btn" data-dismiss="modal">Close
+                                </button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

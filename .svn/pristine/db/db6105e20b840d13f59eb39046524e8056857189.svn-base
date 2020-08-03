@@ -1,0 +1,186 @@
+app.controller('attendanceReportController',
+    function ($scope, $timeout, $http, $location, $filter, Notification) {
+        $scope.bshimServerURL = "/bs";
+        $scope.CountryNameText = "";
+        $scope.StatusText = "";
+        $scope.operation = 'Create';
+        $scope.inactiveStatus = "Active";
+        $scope.levelClass = function(gradeId){
+            var url = "/bs/getClassLevel?levelId=" + gradeId;
+            $http.post(url).then(function (response) {
+                var data = response.data;
+                $scope.classList = angular.copy(data);
+                $scope.classes=[];
+                angular.forEach($scope.classList,function (val,key) {
+                    if(val.status=="Active"){
+                        $scope.classes.push(val);
+                    }
+
+                })
+
+            })
+        }
+        $scope.getStudentListBasedOnClass = function (data) {
+            if($scope.class==null){
+                $scope.getStudentList();
+            }
+            $http.post($scope.bshimServerURL + "/getStudentListBasedOnClass?id="+data).then(function (response) {
+                var data = response.data;
+                $scope.studentList=data;
+                $scope.allList=[];
+                angular.forEach($scope.studentList,function (val,key) {
+                    $scope.allList.push({
+                        serialNo:key,
+                        studentName:val.studentName,
+                        present:"present"
+                    });
+                });
+                $scope.studentList=angular.fromJson($scope.allList);
+
+            })
+        };
+
+        $scope.getSearch=function(studentGrade,classes,month){
+                if (angular.isUndefined(studentGrade)) {
+                    studentGrade = "";
+                }
+                if (angular.isUndefined(classes)) {
+                    classes = "";
+                }
+            if (angular.isUndefined(month)) {
+                month = "";
+            }
+                $http.post($scope.bshimServerURL + "/getSearch?studentGrade=" + studentGrade+'&classes=' + classes+'&month=' + month).then(function (response) {
+                    var data = response.data;
+                    $scope.reportList = data;
+
+                }, function (error) {
+                    Notification.error({
+                        message: 'Something went wrong, please try again',
+                        positionX: 'center',
+                        delay: 2000
+                    });
+                })
+                $(".loader").css("display", "block");
+                $("#submit").text("Save");
+            };
+
+
+        $scope.addReport = function () {
+            $scope.monthsList = [];
+            $scope.monthsList.push({
+                id: 1,
+                name: "january"
+
+            }, {
+                id: 2,
+                name: "Febraury"
+            }, {
+                id: 3,
+                name: "March"
+            }, {
+                id: 4,
+                name: "April"
+            }, {
+                id: 5,
+                name: "May"
+            }, {
+                id: 6,
+                name: "June"
+            }, {
+                id: 7,
+                name: "July"
+            }, {
+                id: 8,
+                name: "August"
+            }, {
+                id: 9,
+                name: "September"
+            }, {
+                id: 10,
+                name: "October"
+            }, {
+                id: 11,
+                name: "November"
+            }, {
+                id: 12,
+                name: "December"
+            });
+
+
+            $("#add_new_student_Report_modal").modal('show');
+        }
+        $scope.getMonth = function (month) {
+            var date = new Date();
+            var i=$scope.getDaysInMonth(month,date.getFullYear());
+            $scope.DaysList=[];
+            for (var j=0;j<i;j++){
+                $scope.DaysList.push(j+1);
+            }
+            $scope.fromDate=$scope.DaysList[0]+"/"+(parseInt(month)) +"/"+date.getFullYear();
+            $scope.toDate = $scope.DaysList[$scope.DaysList.length-1] +"/"+parseInt(month) +"/"+date.getFullYear();
+            $scope.getListaa();
+        };
+        $scope.getGradeList = function () {
+            $http.post($scope.bshimServerURL + '/getGradeListNormal').then(function (response) {
+                var data = response.data.object;
+                $scope.gradeList = data;
+            }, function (error) {
+                Notification.error({
+                    message: 'Something went wrong, please try again',
+                    positionX: 'center',
+                    delay: 2000
+                });
+            });
+        };
+        $scope.getGradeList();
+        $scope.getClassList = function () {
+            $http.post($scope.bshimServerURL + '/getClassList').then(function (response) {
+                var data = response.data;
+                $scope.classList = data;
+            }, function (error) {
+                Notification.error({
+                    message: 'Something went wrong, please try again',
+                    positionX: 'center',
+                    delay: 2000
+                });
+            });
+        };
+        $scope.getClassList();
+
+        $scope.getListaa = function () {
+            $http.post($scope.bshimServerURL + "/getList?fromDate="+$scope.fromDate +"&toDate="+$scope.toDate).then(function (response) {
+                var data = response.data;
+                $scope.getList =data;
+            })
+        }
+
+        $scope.getDaysInMonth = function(month,year) {
+            return new Date(year, month, 0).getDate();
+        };
+
+
+        $scope.getStudentNameList = function (name) {
+            $http.post($scope.bshimServerURL +"/getStudentNameList?name="+name).then(function (response) {
+                var data = response.data;
+            })
+        }
+
+        $scope.getStudentList= function () {
+            $http.post($scope.bshimServerURL +"/getStudentAttendanceList").then(function (response) {
+                var data = response.data;
+                $scope.studentList = data;
+            })
+        };
+        $scope.getStudentList();
+
+
+
+        $scope.saveStudentAttendanceReport = function () {
+            $http.post($scope.bshimServerURL +"/saveStudentattendanceReport",angular.toJson($scope.details)).then(function (response) {
+                var data = response.data;
+                $scope.stdAttendanceList = data;
+            })
+        }
+
+    });

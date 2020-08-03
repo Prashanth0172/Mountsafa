@@ -1,0 +1,278 @@
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+    <div class="container cus_main_row">
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Earning</div>
+            </h2>
+        </div>
+
+        <!--// TO ADD GOLD//-->
+        <div class="col-md-2 col-sm-5 col-xs-5">
+            <input id="textinput" name="textinput" type="text"
+                   placeholder="Search" ng-model="searchText" class="form-control input-md"
+                   ng-keyup="$event.keyCode == 13 ? getPaginatedEarningList(searchText) : null"/>
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <button type="button" class="btn btn-default hi_btn"
+                    ng-click="addEarning()" style="width: 100%;">Add
+            </button>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-4">
+            <button type="submit" id="colButn" class="btn btn-default" data-toggle="modal"
+                    ng-model="inactiveStatus" data-target=".print-me"
+                    ng-click="inactiveearning()">{{ButtonStatus}}
+            </button>
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="fixed-table-container">
+                <div class="table_wrap fixed-table-container-inner">
+                    <table class=" hi_table table table_option2 table-hover table-striped table-fixed-header list_table"
+                           id="" style="margin-bottom: 0;">
+                        <thead>
+
+                        <tr>
+
+                            <th data-field="desc">
+                                <div class="th-inner">Earning Name</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Earning Description</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Earning Status</div>
+                            </th>
+                            <!--<th data-field="desc">-->
+                                <!--<div class="th-inner">Edit</div>-->
+                            <!--</th>-->
+                            <th data-field="desc">
+                                <div class="th-inner">Actions</div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="parentTable">
+
+                        <tr ng-repeat="earning in earningList">
+                            <td>{{earning.earningName}}</td>
+                            <td>{{earning.earningDesc}}</td>
+                            <td>{{earning.status}}</td>
+
+                            <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editEarning(earning)">Edit</button>
+
+                            <button type="button" class="btn btn-primary hi_btn" ng-click="deleteEarning(earning.earningId)">Delete</button></td>
+
+                        </tr>
+                        <tr ng-if="searchText!=''&&(earningList|filter:searchText).length==0">
+                            <td colspan="4" style="color: red; font-weight: bold">No Records Found</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12 pagination_">
+                <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"
+                        ng-disabled="first"
+                        ng-click="getPaginatedEarningList('firstPage')" ng-model="first">First
+                </button>
+                <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"
+                        ng-disabled="prev"
+                        ng-click="getPaginatedEarningList('prevPage')" ng-model="prev">Prev
+                </button>
+                <button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"
+                        ng-click="getPaginatedEarningList('nextPage')" value="next" ng-class="{'diabled-class': next}"
+                        ng-model="next">Next
+                </button>
+                <button type="button" class="btn btn-default hi_btn"
+                        ng-click="getPaginatedEarningList('lastPage')" ng-class="{'diabled-class': last}" ng-disabled="last"
+                        ng-model="last">Last
+                </button>
+            </div>
+
+        </div>
+        <div class="modal fade Add Earning" tabindex="-1" id="add_new_Earning_modal" role="dialog"
+             data-backdrop="static"
+             aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content checkout">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="modelName"></h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <form class="form-horizontal">
+                                    <fieldset>
+                                        <input type="hidden" ng-model="earningId"
+                                               value="{{earningId}}">
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Earning Name<span style="color:#cd0a0a;">*</span> </label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="earningName" id="earningName" class="form-control input-md" alpha-with-space=""
+                                                       ng-model="earningName">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Earning Description</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="earningDesc" id="earningDesc" class="form-control input-md"
+                                                       ng-model="earningDesc">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Status</label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <select name="status" id="status"
+                                                        ng-model="status" class="form-control input-md"
+                                                        required>
+                                                    <option value="Active">Active</option>
+                                                    <option value="InActive">InActive</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Method</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <select name="emethod" id="emethod" ng-model="emethod" class="form-control input-md" required>
+                                                    <option value="">Select</option>
+                                                    <option value="Earned Immediately">Earned Immediately</option>
+                                                    <option value="Prorated" selected>Prorated</option>
+                                                    <option value="Custom Monthly Allocation" selected>Custom Monthly Allocation</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-show="emethod === 'Prorated'" >
+                                            <label class="col-md-4 col-sm-4 control-label">Actual Period</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="actulPeriod" id="actulPeriod" class="form-control input-md" alpha-with-space=""
+                                                       ng-model="actulPeriod">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="emethod ==='Prorated'"|| ng-if="emethod === 'Custom Monthly Allocation'">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Earn At</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <select name="earnAt" id="earnAt" ng-model="earnAt" class="form-control input-md" required>
+                                                    <option value="">Select</option>
+                                                    <option value="End of Accrual Period">End of Accrual Period</option>
+                                                    <option value="Start of Accrual Period" selected>Start of Accrual Period</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="emethod === 'Custom Monthly Allocation'">
+                                            <label class="col-md-4 col-sm-4 control-label">Month 1</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="month1" type="number" id="month1" class="form-control input-md" alpha-with-space=""
+                                                       ng-model="month1">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="emethod === 'Custom Monthly Allocation'">
+                                            <label class="col-md-4 col-sm-4 control-label">Month 2</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="month2" type="number" id="month2" class="form-control input-md" alpha-with-space=""
+                                                       ng-model="month2">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="emethod === 'Custom Monthly Allocation'">
+                                            <label class="col-md-4 col-sm-4 control-label">Month 3</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="month3" type="number" id="month3" class="form-control input-md" alpha-with-space=""
+                                                       ng-model="month3">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="emethod === 'Custom Monthly Allocation'">
+                                            <label class="col-md-4 col-sm-4 control-label">Month 4</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="month4" type="number" id="month4" class="form-control input-md" alpha-with-space=""
+                                                       ng-model="month4">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="emethod === 'Custom Monthly Allocation'">
+                                            <label class="col-md-4 col-sm-4 control-label">Month 5</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="month5" type="number" id="month5" class="form-control input-md" alpha-with-space=""
+                                                       ng-model="month5">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-show="emethod === 'Custom Monthly Allocation'">
+                                            <label class="col-md-4 col-sm-4 control-label">Month 6</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="month6" type="number" id="month6" class="form-control input-md" alpha-with-space=""
+                                                       ng-model="month6">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="emethod === 'Custom Monthly Allocation'">
+                                            <label class="col-md-4 col-sm-4 control-label">Month 7</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="month7" type="number" id="month7" class="form-control input-md" alpha-with-space=""
+                                                       ng-model="month7">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="emethod === 'Custom Monthly Allocation'">
+                                            <label class="col-md-4 col-sm-4 control-label">Month 8</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="month8" type="number" id="month8" class="form-control input-md" alpha-with-space=""
+                                                       ng-model="month8">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="emethod === 'Custom Monthly Allocation'">
+                                            <label class="col-md-4 col-sm-4 control-label">Month 9</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="month9" type="number" id="month9" class="form-control input-md" alpha-with-space=""
+                                                       ng-model="month9">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="emethod === 'Custom Monthly Allocation'">
+                                            <label class="col-md-4 col-sm-4 control-label">Month 10</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="month10" type="number" id="month10" class="form-control input-md" alpha-with-space=""
+                                                       ng-model="month10">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="emethod === 'Custom Monthly Allocation'">
+                                            <label class="col-md-4 col-sm-4 control-label">Month 11</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="month11" type="number" id="month11" class="form-control input-md" alpha-with-space=""
+                                                       ng-model="month11">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="emethod === 'Custom Monthly Allocation'">
+                                            <label class="col-md-4 col-sm-4 control-label">Month 12</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="month12" type="number" id="month12" class="form-control input-md" alpha-with-space=""
+                                                       ng-model="month12">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="emethod === 'Custom Monthly Allocation'">
+                                            <label class="col-md-4 col-sm-4 control-label">Accumulated</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="accumulated" id="accumulated" class="form-control input-md" alpha-with-space=""
+                                                       ng-model="accumulated">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer" >
+                                            <button type="button" class="btn btn-default" id="submit"
+                                                    ng-disabled="isDisabled"
+                                                    ng-click="saveEarning()">Save
+                                            </button>
+                                            <button type="button" class="btn btn-default" ng-click="removeEarningDetails()"data-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

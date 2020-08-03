@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Demo</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .multiselect {
+            width: 200px;
+        }
+
+        .selectBox {
+            position: relative;
+        }
+        .triangleDiv {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 5px 5px 5px;
+            border-color: transparent transparent transparent #007bff;
+        }
+        .selectBox select {
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .overSelect {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        #checkboxes {
+            display: none;
+            border: 1px #dadada solid;
+        }
+
+        #checkboxes label {
+            display: block;
+        }
+
+        #checkboxes label:hover {
+            background-color: #1e90ff;
+        }
+
+        .report_ineer {
+            background-color: #ccc;
+            padding: 0px 0 5px 0;
+            margin-top: 0px;
+            border-radius: 5px 5px 0px 0px;
+        }
+
+        .inner_top {
+            background-color: #66ad2d;
+            border-radius: 5px 5px 0px 0px;
+            margin-top: 10px;
+        }
+
+        .inner_top p {
+            color: #fff;
+            margin: 0;
+            padding: 10px 10px;
+        }
+
+        .form-group label {
+            color: #72309a;
+        }
+
+        .set_widht tr > th:nth-child(1), .set_widht tr > td:nth-child(1) {
+            width: 8% !important;
+            padding: 10px 5px;
+            text-align: center;
+        }
+
+        .set_widht tr > th:nth-child(2), .set_widht tr > td:nth-child(2) {
+            width: 8% !important;
+            padding: 10px 5px;
+            text-align: center;
+        }
+
+        .set_widht tr > th:nth-child(3), .set_widht tr > th:nth-child(4), .set_widht tr > th:nth-child(5), .set_widht tr > th:nth-child(6), .set_widht tr > td:nth-child(3), .set_widht tr > td:nth-child(4), .set_widht tr > td:nth-child(5), .set_widht tr > td:nth-child(6) {
+            width: 12% !important;
+            padding: 10px 5px;
+            text-align: center;
+        }
+
+        #demo .wrapper {
+            display: inline-block;
+            width: 100%;
+            margin: 0 10px 0 0;
+            height: 20px;
+            position: relative;
+        }
+
+        #demo .parent {
+            height: 100%;
+            width: 100%;
+            display: block;
+            cursor: pointer;
+            line-height: 30px;
+            height: 34px;
+            border-radius: 5px;
+            background: #F9F9F9;
+            font-weight: normal;
+            z-index: 2;
+            position: relative;
+            -webkit-transition: border-radius .1s linear, background .1s linear, z-index 0s linear;
+            -webkit-transition-delay: .8s;
+            text-align: center;
+        }
+
+        #demo .content {
+            position: absolute;
+            top: 0;
+            display: block;
+            z-index: 1;
+            height: 0;
+            width: 100%;
+            padding-top: 30px;
+            -webkit-transition: height .5s ease;
+            -webkit-transition-delay: .4s;
+        }
+
+        #demo .wrapper:active .content {
+            height: auto;
+            z-index: 3;
+            -webkit-transition-delay: 0s;
+        }
+
+        #demo .content:hover {
+            height: auto;
+            z-index: 3;
+            -webkit-transition-delay: 0s;
+        }
+
+        #demo .content ul {
+            background: #fff;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        #demo .content ul a {
+            text-decoration: none;
+        }
+
+        #demo .content li:hover {
+            background: #eee;
+            color: #333;
+        }
+
+        #demo .content li {
+            list-style: none;
+            text-align: left;
+            color: #888;
+            font-size: 14px;
+            line-height: 30px;
+            height: 30px;
+            padding-left: 10px;
+            border-top: 1px solid #ccc;
+        }
+
+        #demo .content li:last-of-type {
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        input[type=checkbox] {
+            display: inline !important;
+        }
+    </style>
+</head>
+<body>
+<div class="col-lg-10" style="padding: 0px;">
+    <div class="abc">
+        <div class="report_ineer">
+            <div class="inner_top">
+                <p>Remainder</p>
+            </div>
+            <div class="col-lg-12 col-md-12" style="margin-top: 10px;">
+                <div class="col-lg-5 col-md-5">
+                    <div>
+                        <div class="wrapper">
+                            <div class="multiselect" style="width: 98%;">
+                                <div class="col-lg-4 col-md-4">
+                                    <input type="checkbox" ng-click="toggleAll()" ng-model="isAllSelected">Select all
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <button style="padding: 6px 0; text-align: center; background-color: #72309a; color: #fff; width: 100%; box-shadow: none; border-radius: 5px; border: none;"
+                    ng-click="sendSMS()">
+                        Send
+                    </button>
+                </div>
+            </div>
+            <div class="form_table">
+                <div class="col-lg-12 col-md-12" style="padding: 10px 31px;">
+                    <div class="set_widht">
+                        <table style="width: 100%;">
+                            <thead style="background-color: #72309a; color: #fff; border-bottom: 5px solid #ccc;">
+                            <tr>
+                                <th></th>
+                                <th style="border-left: 0px; text-align: left !important; font-size: 12px; width: 6% !important;">
+                                    Sl.No
+                                </th>
+                                <th data-field="edit" style=" width: 25% !important; text-align: left">
+                                    <div class="th-inner"
+                                         ng-click="orderByField='name'; reverseSort = !reverseSort;setSorting()"
+                                         align="left">
+                                        Name
+                                        <span ng-if="length>1" class="sortorder descending"
+                                              ng-show="(orderByField=='name' && reverseSort==true)">&#9650;</span>
+                                        <span ng-if="length>1" class="sortorder"
+                                              ng-show="(orderByField=='name' && reverseSort==false)">&#9660;    </span>
+                                    </div>
+                                </th>
+                                <th data-field="cntryname" style="width: 15% !important; text-align: left">
+                                    <div class="th-inner"
+                                         ng-click="orderByField='profileId'; reverseSort = !reverseSort;setSorting()"
+                                         align="left">Student Profile ID
+                                        <span ng-if="length>1" class="sortorder descending"
+                                              ng-show="(orderByField=='profileId' && reverseSort==true)">&#9650;</span>
+                                        <span ng-if="length>1" class="sortorder"
+                                              ng-show="(orderByField=='profileId' && reverseSort==false)">&#9660;</span>
+                                    </div>
+                                </th>
+
+                                <th data-field="cntryname" style="width: 12% !important; text-align: left">
+                                    <div class="th-inner"
+                                         ng-click="orderByField='grade'; reverseSort = !reverseSort;setSorting()"
+                                         align="left">Level
+                                        <span ng-if="length>1" class="sortorder descending"
+                                              ng-show="(orderByField=='grade' && reverseSort==true)">&#9650;</span>
+                                        <span ng-if="length>1" class="sortorder"
+                                              ng-show="(orderByField=='grade' && reverseSort==false)">&#9660;</span>
+                                    </div>
+                                </th>
+
+                                <th data-field="edit" style="width: 8% !important;">
+                                    <div class="th-inner"
+                                         ng-click="orderByField='feeAmt'; reverseSort = !reverseSort;setSorting()"
+                                         align="right">Fee Amount
+                                        <span ng-if="length>1" class="sortorder descending"
+                                              ng-show="(orderByField=='feeAmt' && reverseSort==true)">&#9650;</span>
+                                        <span ng-if="length>1" class="sortorder"
+                                              ng-show="(orderByField=='feeAmt' && reverseSort==false)">&#9660;</span>
+                                    </div>
+                                </th>
+                                <th data-field="edit" style="width: 10% !important;">
+                                    <div class="th-inner"
+                                         ng-click="orderByField='due'; reverseSort = !reverseSort;setSorting()"
+                                         align="right">
+                                        Due
+                                        <span ng-if="length>1" class="sortorder descending"
+                                              ng-show="(orderByField=='due' && reverseSort==true)">&#9650;</span>
+                                        <span ng-if="length>1" class="sortorder"
+                                              ng-show="(orderByField=='due' && reverseSort==false)">&#9660;</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            </thead>
+
+                            <tbody style="background-color: #fff; color: #72309a; border-bottom: 5px solid #ccc;">
+                            <tr ng-repeat-start="student in studentFeeList| orderBy:orderByField:reverseSort"
+                                ng-if="student.dueAmount>0"
+                                ng-click="getReceiptDetails(student.studentFeeId,$index);">
+
+                                <td hidden>{{student.studentId}}</td>
+                                <td><input
+                                        type="checkbox" ng-model="student.selectedStudent" ng-click="selectedStudentList(student.primaryContactNo)"
+                                        value="student.studentName"></td>
+                                <td style="text-align:left !important; width: 8% !important;">{{$index+1}}</td>
+                                <td style="word-break: break-word; text-align: left; width: 30% !important;">
+                                    {{student.studentName}}
+                                </td>
+                                <td style="word-break: break-word; text-align: left; width: 15% !important;">
+                                    {{student.student.studentProfileId}}
+                                </td>
+                                <td style="text-align: right; width: 8% !important;">{{student.gradeName}}</td>
+                                <td style="text-align: right; width: 8% !important;">{{student.totalFeeAmount}}</td>
+                                <td style="text-align: right; width: 8% !important;">{{student.dueAmount}}</td>
+                            <tr ng-repeat-end></tr>
+                            <tr ng-if="length>0">
+                                <td style="text-align: left"><strong>Total</strong></td>
+                                <td><strong></strong></td>
+                                <td><strong></strong></td>
+                                <td><strong></strong></td>
+                                <td><strong></strong></td>
+                                <td style="text-align: right"><strong>{{totalFeeAmt}}</strong></td>
+                                <td style="text-align: right"><strong>{{totalDueAmt}}</strong></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<script>
+    var options = [];
+
+    $('.dropdown-menu a').on('click', function (event) {
+
+        var $target = $(event.currentTarget),
+            val = $target.attr('data-value'),
+            $inp = $target.find('input'),
+            idx;
+
+        if ((idx = options.indexOf(val)) > -1) {
+            options.splice(idx, 1);
+            setTimeout(function () {
+                $inp.prop('checked', false)
+            }, 0);
+        } else {
+            options.push(val);
+            setTimeout(function () {
+                $inp.prop('checked', true)
+            }, 0);
+        }
+
+        $(event.target).blur();
+
+        console.log(options);
+        return false;
+    });
+</script>
+</body>
+</html>

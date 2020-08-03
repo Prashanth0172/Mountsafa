@@ -1,0 +1,1168 @@
+<style>
+    .modal-content{
+        width:696px;
+    }
+
+    .modal-footer {
+        padding: 5px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    fieldset {
+        min-width: 0;
+        padding: 10px;
+        margin: 0;
+        border: 0;
+    }
+    .control-label {
+        position: relative;
+        min-height: 1px;
+        padding-right: 8px;
+        padding-left: 11px;
+    }
+
+    .form-control {
+        display: block;
+        width: 264px;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+
+
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row" >
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Teaching Observation Form</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel-body" style="height: 65px;">
+                            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                                <form class="form-horizontal ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <p class="input-group" style="display: block;">
+                                                <input id="search_academic" name="textinput" type="text"
+                                                       placeholder="Search" ng-model="searchText" class="form-control input-md"
+                                                       ng-keyup="$event.keyCode == 13 ? getTeachingObservationList(searchText) : null"/>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-7">
+
+                                <div class="form-group">
+                                    <!--<div class="col-sm-2">-->
+                                        <!--<button type="button" class="btn btn-primary hi_btn"  ng-click="addTeachingObservationForm()">Add</button>-->
+                                    <!--</div>-->
+
+                                    <!--<div class="col-sm-2 col-md-3 col-sm-3">-->
+                                    <!--<button type="button" class="btn btn-default hi_btn"  ng-click="importPopup()">Import</button>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-sm-2 col-md-3 col-sm-3">-->
+                                    <!--<a href="/bs/gradeMasterExcel?val={{searchText}}&type={{checkboxForInActive}}">-->
+                                    <!--<button type="button" class="btn btn-default hi_btn"-->
+                                    <!--style="margin-bottom: 10px;background: #72319a;color: white">-->
+                                    <!--Excel-->
+                                    <!--</button>-->
+                                    <!--</a>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-sm-2 col-md-3 col-sm-3">-->
+                                    <!--<button type="button" class="btn btn-primary hi_btn"  ng-click="feeconfigurationList()">Back</button>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-md-2 col-sm-5 col-xs-5">-->
+                                        <!--<input id="textinput" name="textinput" type="text"-->
+                                               <!--placeholder="Search For Grade" ng-model="searchText" class="form-control input-md"-->
+                                               <!--ng-keyup="$event.keyCode == 13 ? getPaginationList(searchText) : null"/>-->
+                                    <!--</div>-->
+                                    <!--<span style="align-content: right">InActive</span>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="fixed-table-container">
+                    <div class="table_wrapfixed-table-container-inner">
+                        <div class="header-background"></div>
+                        <table data-toggle="table" data-cache="false" data-height="299" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                            <thead>
+                            <tr>
+                                <th data-field="cntryname">
+                                    <div class="th-inner" align="center">Teacher Name</div>
+                                </th>
+                                <th data-field="edit">
+                                    <div class="th-inner" align="center">Subject</div>
+                                </th>
+                                <th data-field="edit">
+                                    <div class="th-inner" align="center">Date of Session</div>
+                                </th>
+                                <th data-field="edit">
+                                    <div class="th-inner" align="center">Time of Session</div>
+                                </th>
+                                <!--<th data-field="edit">-->
+                                    <!--<div class="th-inner" align="center">Edit</div>-->
+                                <!--</th>-->
+                                <th data-field="edit">
+                                    <div class="th-inner" align="center">Actions</div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody id="parentTable">
+                            <input type="hidden" ng-model="teachingObservationId" value="{{teacherObservationList.teachingObservationId}}"/>
+                            <tr ng-repeat="teacherObservation in teacherObservationList|filter:searchText">
+                                <td>{{teacherObservation.teacherName}}</td>
+                                <td>{{teacherObservation.subjectId}}</td>
+                                <td>{{teacherObservation.sdate|date:'dd/mm/yyyy'}}</td>
+                                <td>{{teacherObservation.edate|date:'dd/mm/yyyy'}}</td>
+
+                                <td><button type="button" class="btn btn-primary hi_btn"  ng-click="EditTeacherObservation(teacherObservation)">Edit</button></td>
+                                <td><button type="button" class="btn btn-primary hi_btn"  ng-click="DeleteTeacherObservation(teacherObservation)">Delete</button></td>
+                            </tr>
+                            <tr ng-if="searchText!=''&&(teacherObservationList|filter:searchText).length==0">
+                                <td colspan="4" style="color: red; font-weight: bold">No Records Found</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--<div class="form-group">-->
+                        <!--<div class="col-sm-12 pagination_">-->
+
+                            <!--<button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"-->
+                                    <!--ng-disabled="first"-->
+                                    <!--ng-click="getPaginationList('firstPage')" ng-model="first">First-->
+                            <!--</button>-->
+                            <!--<button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"-->
+                                    <!--ng-disabled="prev"-->
+                                    <!--ng-click="getPaginationList('prevPage')" ng-model="prev">Prev-->
+                            <!--</button>-->
+                            <!--<button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"-->
+                                    <!--ng-click="getPaginationList('nextPage')" value="next"-->
+                                    <!--ng-class="{'diabled-class': next}" ng-model="next">Next-->
+                            <!--</button>-->
+                            <!--<button type="button" class="btn btn-default hi_btn"-->
+                                    <!--ng-click="getPaginationList('lastPage')" ng-class="{'diabled-class': last}"-->
+                                    <!--ng-disabled="last"-->
+                                    <!--ng-model="last">Last-->
+                            <!--</button>-->
+                        <!--</div>-->
+                        <!--<div align="center"><span style="color: red;"></span></div>-->
+                    <!--</div>-->
+
+                </div>
+            </div>
+
+<div class="modal fade Student" tabindex="-1" id="add_new_Teaching_Observation_modal" role="dialog"
+     data-backdrop="static"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-lg" style="width: 1000px !important;">
+        <div class="modal-content checkout" style="width: 1000px!important;">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true" ng-click="removeTeachingObservation()">&times;</span></button>
+                <h4 id="student-title" class="modal-title" style="color:red;" align="center">
+                    Teaching Observation Form</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <form class="form-horizontal" name="student">
+                            <fieldset>
+<!--                                <div class="tab-content">-->
+                                    <!--<div class="tab-pane fade in active" id="sub_step12">-->
+<!--                                        <h4 class="modal-title" style="color:red;" align="center">Teaching Observation Form</h4>-->
+<!--                                        <div class="col-md-6">-->
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label" >Teacher Name:<span style="color:red;">*</span></label>
+                                                <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                    <input type="text" name="teacherName" ng-model="teacherName"  id="teacherName" readonly ng-disabled="disabled" />
+
+                                                    <!--<select id="branchId" name="branchId" ng-model="teacherName" readonly=""-->
+                                                             <!--class="form-control input-md">-->
+                                                        <!--<option value="">Select Employee</option>-->
+                                                    <!--</select>-->
+                                                </div>
+                                            </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-4 col-sm-4 control-label">Level<span
+                                            style="color:red;">*</span></label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <select id="levelId" name="levelId" ng-model="levelId"
+                                                ng-change="levelClass(levelId)"
+                                                ng-options="lev.gradeName as
+											lev.gradeName for lev in gradeList" class="form-control input-md">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label" >Subject:<span style="color:red;">*</span></label>
+                                                <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                    <select id="branchId" name="branchId" ng-model="subjectId"
+                                                            ng-options="subject.subjectName as subject.subjectName for subject in subjectList" class="form-control input-md">
+                                                        <option value="">Select Subject</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label">Date of Session</label>
+
+                                                <div class="col-md-6 col-sm-6">
+                                                    <p class="input-group">
+                                                        <input id="sdate" type="text" class="form-control"
+                                                               style=""
+                                                               uib-datepicker-popup="{{format}}" ng-model="Sdate" is-open="popup1.opened"
+                                                               datepicker-options="dateOptions" readonly="readonly" ng-required="true" class="form-control input-md"
+                                                               close-text="Close" alt-input-formats="altInputFormats"/>
+                                                        <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                             class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                                    </p>
+                                                </div>
+
+
+
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label">Time Of Session</label>
+
+
+                                                <div class="col-md-6 col-sm-6">
+                                                    <p class="input-group"><input id="edate" type="text" class="form-control"
+                                                                                  style=""
+                                                                                  uib-datepicker-popup="{{format}}" ng-model="Edate" is-open="popup2.opened"
+                                                                                  datepicker-options="dateOptions" readonly="readonly" ng-required="true" class="form-control"
+                                                                                  close-text="Close" alt-input-formats="altInputFormats"/>
+                                                        <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open2()"><i
+                                             class="glyphicon glyphicon-calendar"></i></button>
+                                            </span></p>
+                                                </div>
+                                            </div>
+
+
+                                            <!--<div class="form-group">-->
+                                                <!--&lt;!&ndash;<label class="col-md-4 control-label">Type:<span style="color:red;">*</span></label>&ndash;&gt;-->
+                                                <!--<div class="col-md-8">-->
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<input type="radio" id="NoAttempt" ng-model="noAttempt" name="noAttempt" value="noAttempt" checked> No attempt/Not observed-->
+                                                    <!--</div><br>-->
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<input type="radio" id="BelowExpect" ng-model="belowExpectation" name="belowExpectation" value="belowExpectation"> Below Expectation-->
+                                                    <!--</div><br>-->
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<input type="radio" id="MinimumRequirement" ng-model="minimumrequirement" name="minimumrequirement" value="minimumrequirement">Minimum requirement-->
+                                                    <!--</div><br>-->
+
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<input type="radio" id="Good Attempt" ng-model="goodattempt" name="goodattempt" value="goodattempt">Good attempt-->
+                                                    <!--</div><br>-->
+                                                    <!--<div class="col-md-4">-->
+                                                        <!--<input type="radio" id="Welldone" ng-model="welldone" name="welldone" value="welldone">Well done-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label" for=""> No Attempt / Not Observed</label>
+                                                <div class="col-md-6 col-sm-6" >
+                                                    <input type="checkbox" name="noAttempt" ng-model="noAttempt" value="noAttempt" id="noAttempt" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label" for="">Below Expectation</label>
+                                                <div class="col-md-6 col-sm-6" >
+                                                    <input type="checkbox" name="belowExpectation" ng-model="belowExpectation" value="belowExpectation" id="belowExpectation" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label" for=""> Minimum Requirement</label>
+                                                <div class="col-md-6 col-sm-6" >
+                                                    <input type="checkbox" name="minReq" ng-model="minReq" value="minReq" id="minReq" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label" for="">Good Attempt</label>
+                                                <div class="col-md-6 col-sm-6" >
+                                                    <input type="checkbox" name="goodAttempt" ng-model="goodAttempt" value="goodAttempt" id="goodAttempt" />
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label" for="">Well done</label>
+                                                <div class="col-md-6 col-sm-6" >
+                                                    <input type="checkbox" name="wellDone" ng-model="wellDone" value="wellDone" id="wellDone" />
+                                                </div>
+                                            </div>
+
+
+
+
+                                        <div class="fixed-table-container">
+                                            <div class="table_wrapfixed-table-container-inner">
+                                                <label class="col-md-4 control-label" for="currency"
+                                                       style="color:#337ab7" ;>INDUCTION SET</label>
+                                                <div class="header-background"></div>
+                                                <table style="text-align: left !important;">
+                                                    <tbody><tr> <td style="width: 544px;">
+                                                        <div class="controls">
+                                                            <!--<label><b>Students are ready:</b></label>-->
+                                                            <br>
+                                                            <label style="font-size:medium;"><b>Students are ready</b></label>
+                                                            <!--<input name="medicine" type="checkbox" />-->
+                                                            <!--<input type="checkbox" name="medicine" value="1" id="medicine" ng-model="medicine" required="true" class="medicine" onclick="removereadonly('medicineState','medicine');"></label>-->
+
+
+                                                            <span class="lbl"></span>
+                                                        </div></td>
+                                                        <td>
+
+
+                                                            <p>SCORE
+                                                            </p>
+                                                            <p>
+                                                        <input type="radio" name="studentReady1" ng-model="inductionSetStudentReadyScore" value="studentReady1" id="studentReady1" />1
+                                                        <input type="radio" name="studentReady2" ng-model="inductionSetStudentReadyScore" value="studentReady2" id="studentReady2" />2
+                                                        <input type="radio" name="studentReady3" ng-model="inductionSetStudentReadyScore" value="studentReady3" id="studentReady3" />3
+                                                        <input type="radio" name="studentReady4" ng-model="inductionSetStudentReadyScore" value="studentReady4" id="studentReady4" />4
+                                                        <input type="radio" name="studentReady5" ng-model="inductionSetStudentReadyScore" value="studentReady5" id="studentReady5" />5
+
+                                                                <!--<input type="text" name="inductionSetStudentReadyScore" value="" id="inductionSetStudentReadyScore" ng-model="inductionSetStudentReadyScore" required="true" class="medicineState form-control">-->
+                                                            </p>
+
+                                                        </td><td>  <p><R>REMARKS</R>
+                                                        </p>
+                                                            <p><input type="text" name="inductionSetStudentReadyRemarks" value="" id="inductionSetStudentReadyRemarks" ng-model="inductionSetStudentReadyRemarks" required="true" class="medicineState form-control">
+                                                            </p></td>
+
+
+                                                    <tr>  <td>
+
+                                                        <div class="controls" style="font-size:medium;">
+                                                            <label>Execution of greeting procsdures
+                                                                <!--<input type="checkbox" name="immunization" value="1" id="immunization" ng-model="immunization" required="true" class="immunization"  onclick="removereadonly('immunizationState','immunization');">-->
+
+                                                                <span class="lbl"></span></label>
+                                                        </div></td>
+                                                        <td>
+
+                                                            <p>SCORE
+                                                            </p>
+                                                            <p>
+                                                                <!--<input type="text" name="inductionSetGreetingProceduresScore" value="" id="inductionSetGreetingProceduresScore" ng-model="inductionSetGreetingProceduresScore" required="true" class="medicineState form-control">-->
+
+                                                       <input type="radio" name="setGreetingProcedures1" ng-model="inductionSetGreetingProceduresScore" value="setGreetingProcedures1" id="setGreetingProcedures1" />1
+                                                        <input type="radio" name="setGreetingProcedures2" ng-model="inductionSetGreetingProceduresScore" value="setGreetingProcedures2" id="setGreetingProcedures2" />2
+                                                        <input type="radio" name="setGreetingProcedures3" ng-model="inductionSetGreetingProceduresScore" value="setGreetingProcedures3" id="setGreetingProcedures3" />3
+                                                        <input type="radio" name="setGreetingProcedures4" ng-model="inductionSetGreetingProceduresScore" value="setGreetingProcedures4" id="setGreetingProcedures4" />4
+                                                        <input type="radio" name="setGreetingProcedures5" ng-model="inductionSetGreetingProceduresScore" value="setGreetingProcedures5" id="setGreetingProcedures5" />5
+
+
+                                                            </p>
+                                                        </td><td>
+                                                            <p><R>REMARKS</R>
+                                                            </p>
+                                                            <p><input type="text" name="inductionSetGreetingProceduresRemarks" value="" id="inductionSetGreetingProceduresRemarks" ng-model="inductionSetGreetingProceduresRemarks" required="true" class="medicineState form-control">
+                                                            </p></td></tr>
+
+                                                    <tr>  <td>
+
+                                                        <div class="controls" style="font-size:medium;">
+                                                            <label>Ensuring both calenders for day and date
+                                                                <!--<input type="checkbox" name="food" value="1" id="food" ng-model="food" required="true" class="food"  onclick="removereadonly('foodState','food');">-->
+
+                                                                <span class="lbl"></span></label>
+                                                        </div></td>
+                                                        <td>
+
+                                                            <p>SCORE
+                                                            </p>
+                                                            <p>
+
+                                                       <input type="radio" name="setCalender1" ng-model="inductionSetCalenderForDayScore" value="setCalender1" id="setCalender1" />1
+                                                        <input type="radio" name="setCalender2" ng-model="inductionSetCalenderForDayScore" value="setCalender2" id="setCalender2" />2
+                                                        <input type="radio" name="setCalender3" ng-model="inductionSetCalenderForDayScore" value="setCalender3" id="setCalender3" />3
+                                                        <input type="radio" name="setCalender4" ng-model="inductionSetCalenderForDayScore" value="setCalender4" id="setCalender4" />4
+                                                        <input type="radio" name="setCalender5" ng-model="inductionSetCalenderForDayScore" value="setCalender5" id="setCalender5" />5
+                                                                <!--<input type="text" name="inductionSetCalenderForDayScore" value="" id="inductionSetCalenderForDayScore" ng-model="inductionSetCalenderForDayScore" required="true" class="medicineState form-control">-->
+                                                            </p>
+
+                                                  </td><td>  <p><R>REMARKS</R>
+                                                        </p>
+                                                            <p><input type="text" name="inductionSetCalenderForDayRemarks" value="" id="inductionSetCalenderForDayRemarks" ng-model="inductionSetCalenderForDayRemarks" required="true" class="medicineState form-control">
+                                                            </p></td></tr>
+                                                    <tr>  <td>
+
+                                                        <div class="controls" style="font-size:medium;">
+                                                            <label>Stating lesson objective(LO)
+                                                                <!--<input type="checkbox" name="others" value="1" id="others" ng-model="others" required="true" class="others" onclick="removereadonly('othersState','others');" >-->
+                                                                <span class="lbl"></span></label>
+                                                        </div></td>
+                                                        <td>
+
+                                                            <p>SCORE
+                                                        </p>
+                                                            <p>
+
+                                                        <input type="radio" name="setLessonObjective1" ng-model="inductionSetLessonObjectiveScore" value="setLessonObjective1" id="setLessonObjective1" />1
+                                                        <input type="radio" name="setLessonObjective2" ng-model="inductionSetLessonObjectiveScore" value="setLessonObjective2" id="setLessonObjective2" />2
+                                                        <input type="radio" name="setLessonObjective3" ng-model="inductionSetLessonObjectiveScore" value="setLessonObjective3" id="setLessonObjective3" />3
+                                                        <input type="radio" name="setLessonObjective4" ng-model="inductionSetLessonObjectiveScore" value="setLessonObjective4" id="setLessonObjective4" />4
+                                                        <input type="radio" name="setLessonObjective5" ng-model="inductionSetLessonObjectiveScore" value="setLessonObjective5" id="setLessonObjective5" />5
+
+                                                                <!--<input type="text" name="inductionSetLessonObjectiveScore" value="" id="inductionSetLessonObjectiveScore" ng-model="inductionSetLessonObjectiveScore" required="true" class="medicineState form-control">-->
+                                                            </p>
+
+                                                   </td><td> <p><R>REMARKS</R>
+                                                        </p>
+                                                            <p><input type="text" name="inductionSetLessonObjectiveRemarks" value="" id="inductionSetLessonObjectiveRemarks" ng-model="inductionSetLessonObjectiveRemarks" required="true" class="medicineState form-control">
+                                                            </p></td></tr>
+                                                    <tr>  <td>
+
+
+
+
+
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+                                        </div>
+
+
+                                            <div class="fixed-table-container">
+                                                <div class="table_wrapfixed-table-container-inner">
+                                                    <label class="col-md-4 control-label" for="currency"
+                                                           style="color:#337ab7" ;>DELIVERY SET</label>
+                                                    <div class="header-background"></div>
+                                                    <table style="text-align: left !important;">
+                                                        <tbody><tr> <td style="width: 544px;">
+                                                            <div class="controls">
+                                                                <!--<label><b>Students are ready:</b></label>-->
+                                                                <br>
+                                                                <label style="font-size:medium;"><b>Stimulus attracts students</b></label>
+                                                                <!--<input name="medicine" type="checkbox" />-->
+                                                                <!--<input type="checkbox" name="medicine" value="1" id="medicine" ng-model="medicine" required="true" class="medicine" onclick="removereadonly('medicineState','medicine');"></label>-->
+
+
+                                                                <span class="lbl"></span>
+                                                            </div></td>
+                                                            <td>
+
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="setStimulus1" ng-model="deliverySetStimulusScore" value="setStimulus1" id="setStimulus1" />1
+                                                                    <input type="radio" name="setStimulus2" ng-model="deliverySetStimulusScore" value="setStimulus2" id="setStimulus2" />2
+                                                                    <input type="radio" name="setStimulus3" ng-model="deliverySetStimulusScore" value="setStimulus3" id="setStimulus3" />3
+                                                                    <input type="radio" name="setStimulus4" ng-model="deliverySetStimulusScore" value="setStimulus4" id="setStimulus4" />4
+                                                                    <input type="radio" name="setStimulus5" ng-model="deliverySetStimulusScore" value="setStimulus5" id="setStimulus5" />5
+
+                                                                    <!--<input type="text" name="deliverySetStimulusScore" value="" id="deliverySetStimulusScore" ng-model="deliverySetStimulusScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+
+                                                               </td><td> <p><R>REMARKS</R>
+                                                            </p>
+                                                                <p><input type="text" name="deliverySetStimulusRemarks" value="" id="deliverySetStimulusRemarks" ng-model="deliverySetStimulusRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+
+
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-size:medium;">
+                                                                <label>Relating to previous lesson
+                                                                    <!--<input type="checkbox" name="immunization" value="1" id="immunization" ng-model="immunization" required="true" class="immunization"  onclick="removereadonly('immunizationState','immunization');">-->
+
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="setPreviousLesson1" ng-model="deliverySetPreviousLessonScore" value="setPreviousLesson1" id="setPreviousLesson1" />1
+                                                                    <input type="radio" name="setPreviousLesson2" ng-model="deliverySetPreviousLessonScore" value="setPreviousLesson2" id="setPreviousLesson2" />2
+                                                                    <input type="radio" name="setPreviousLesson3" ng-model="deliverySetPreviousLessonScore" value="setPreviousLesson3" id="setPreviousLesson3" />3
+                                                                    <input type="radio" name="setPreviousLesson4" ng-model="deliverySetPreviousLessonScore" value="setPreviousLesson4" id="setPreviousLesson4" />4
+                                                                    <input type="radio" name="setPreviousLesson5" ng-model="deliverySetPreviousLessonScore" value="setPreviousLesson5" id="setPreviousLesson5" />5
+
+                                                                    <!--<input type="text" name="deliverySetPreviousLessonScore" value="" id="deliverySetPreviousLessonScore" ng-model="deliverySetPreviousLessonScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+
+                                                               </td><td> <p><R>REMARKS</R>
+                                                            </p>
+                                                                <p><input type="text" name="deliverySetPreviousLessonRemarks" value="" id="deliverySetPreviousLessonRemarks" ng-model="deliverySetPreviousLessonRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-size:medium;">
+                                                                <label>Teaching from general to specific
+                                                                    <!--<input type="checkbox" name="food" value="1" id="food" ng-model="food" required="true" class="food"  onclick="removereadonly('foodState','food');">-->
+
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="setTeachingFromGeneral1" ng-model="deliverySetTeachingFromGeneralScore" value="setTeachingFromGeneral1" id="setTeachingFromGeneral1" />1
+                                                                    <input type="radio" name="setTeachingFromGeneral2" ng-model="deliverySetTeachingFromGeneralScore" value="setTeachingFromGeneral2" id="setTeachingFromGeneral2" />2
+                                                                    <input type="radio" name="setTeachingFromGeneral3" ng-model="deliverySetTeachingFromGeneralScore" value="setTeachingFromGeneral3" id="setTeachingFromGeneral3" />3
+                                                                    <input type="radio" name="setTeachingFromGeneral4" ng-model="deliverySetTeachingFromGeneralScore" value="setTeachingFromGeneral4" id="setTeachingFromGeneral4" />4
+                                                                    <input type="radio" name="setTeachingFromGeneral5" ng-model="deliverySetTeachingFromGeneralScore" value="setTeachingFromGeneral5" id="setTeachingFromGeneral5" />5
+
+                                                                    <!--<input type="text" name="deliverySetTeachingFromGeneralScore" value="" id="deliverySetTeachingFromGeneralScore" ng-model="deliverySetTeachingFromGeneralScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+
+                                                                </td><td><p><R>REMARKS</R>
+                                                            </p>
+                                                                <p><input type="text" name="deliverySetTeachingFromGeneralRemarks" value="" id="deliverySetTeachingFromGeneralRemarks" ng-model="deliverySetTeachingFromGeneralRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-size:medium;">
+                                                                <label>Use of White board
+                                                                    <!--<input type="checkbox" name="others" value="1" id="others" ng-model="others" required="true" class="others" onclick="removereadonly('othersState','others');" >-->
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="setWhiteBoard1" ng-model="deliverySetWhiteBoardScore" value="setWhiteBoard1" id="setWhiteBoard1" />1
+                                                                    <input type="radio" name="setWhiteBoard2" ng-model="deliverySetWhiteBoardScore" value="setWhiteBoard2" id="setWhiteBoard2" />2
+                                                                    <input type="radio" name="setWhiteBoard3" ng-model="deliverySetWhiteBoardScore" value="setWhiteBoard3" id="setWhiteBoard3" />3
+                                                                    <input type="radio" name="setWhiteBoard4" ng-model="deliverySetWhiteBoardScore" value="setWhiteBoard4" id="setWhiteBoard4" />4
+                                                                    <input type="radio" name="setWhiteBoard5" ng-model="deliverySetWhiteBoardScore" value="setWhiteBoard5" id="setWhiteBoard5" />5
+
+                                                                    <!--<input type="text" name="deliverySetWhiteBoardScore" value="" id="deliverySetWhiteBoardScore" ng-model="deliverySetWhiteBoardScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+
+                                                               </td><td> <p><R>REMARKS</R>
+                                                            </p>
+                                                                <p><input type="text" name="deliverySetWhiteBoardScoreRemarks" value="" id="deliverySetWhiteBoardScoreRemarks" ng-model="deliverySetWhiteBoardScoreRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-size:medium;">
+                                                                <label>Use of other teaching aids(please Specify)
+                                                                    <!--<input type="checkbox" name="others" value="1" id="others" ng-model="others" required="true" class="others" onclick="removereadonly('othersState','others');" >-->
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="setTeachingAids1" ng-model="deliverySetTeachingAidsScore" value="setTeachingAids1" id="setTeachingAids1" />1
+                                                                    <input type="radio" name="setTeachingAids2" ng-model="deliverySetTeachingAidsScore" value="setTeachingAids2" id="setTeachingAids2" />2
+                                                                    <input type="radio" name="setTeachingAids3" ng-model="deliverySetTeachingAidsScore" value="setTeachingAids3" id="setTeachingAids3" />3
+                                                                    <input type="radio" name="setTeachingAids4" ng-model="deliverySetTeachingAidsScore" value="setTeachingAids4" id="setTeachingAids4" />4
+                                                                    <input type="radio" name="setTeachingAids5" ng-model="deliverySetTeachingAidsScore" value="setTeachingAids5" id="setTeachingAids5" />5
+
+                                                                    <!--<input type="text" name="deliverySetTeachingAidsScore" value="" id="deliverySetTeachingAidsScore" ng-model="deliverySetTeachingAidsScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+
+                                                                </td><td><p><R>REMARKS</R>
+                                                            </p>
+                                                                <p><input type="text" name="deliverySetTeachingAidsRemarks" value="" id="deliverySetTeachingAidsRemarks" ng-model="deliverySetTeachingAidsRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-size:medium;">
+                                                                <label>Reference to textbooks & other materials
+                                                                    <!--<input type="checkbox" name="others" value="1" id="others" ng-model="others" required="true" class="others" onclick="removereadonly('othersState','others');" >-->
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="setTextbookRef1" ng-model="deliverySetTextbookRefScore" value="setTextbookRef1" id="setTextbookRef1" />1
+                                                                    <input type="radio" name="setTextbookRef2" ng-model="deliverySetTextbookRefScore" value="setTextbookRef2" id="setTextbookRef2" />2
+                                                                    <input type="radio" name="setTextbookRef3" ng-model="deliverySetTextbookRefScore" value="setTextbookRef3" id="setTextbookRef3" />3
+                                                                    <input type="radio" name="setTextbookRef4" ng-model="deliverySetTextbookRefScore" value="setTextbookRef4" id="setTextbookRef4" />4
+                                                                    <input type="radio" name="setTextbookRef5" ng-model="deliverySetTextbookRefScore" value="setTextbookRef5" id="setTextbookRef5" />5
+                                                                    <!--<input type="text" name="deliverySetTextbookRefScore" value="" id="deliverySetTextbookRefScore" ng-model="deliverySetTextbookRefScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+
+                                                                </td><td><p><R>REMARKS</R>
+                                                            </p>
+                                                                <p><input type="text" name="deliverySetTextbookRefRemarks" value="" id="deliverySetTextbookRefRemarks" ng-model="deliverySetTextbookRefRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+                                                        <tr>  <td>
+
+
+                                                            <div class="controls" style="font-size:medium;">
+                                                                <label>Making associations(concretisations/examples)
+                                                                    <!--<input type="checkbox" name="others" value="1" id="others" ng-model="others" required="true" class="others" onclick="removereadonly('othersState','others');" >-->
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="setMakingAssociation1" ng-model="deliverySetMakingAssociationScore" value="setMakingAssociation1" id="setMakingAssociation1" />1
+                                                                    <input type="radio" name="setMakingAssociation2" ng-model="deliverySetMakingAssociationScore" value="setMakingAssociation2" id="setMakingAssociation2" />2
+                                                                    <input type="radio" name="setMakingAssociation3" ng-model="deliverySetMakingAssociationScore" value="setMakingAssociation3" id="setMakingAssociation3" />3
+                                                                    <input type="radio" name="setMakingAssociation4" ng-model="deliverySetMakingAssociationScore" value="setMakingAssociation4" id="setMakingAssociation4" />4
+                                                                    <input type="radio" name="setMakingAssociation5" ng-model="deliverySetMakingAssociationScore" value="setMakingAssociation5" id="setMakingAssociation5" />5
+
+                                                                    <!--<input type="text" name="deliverySetMakingAssociationScore" value="" id="deliverySetMakingAssociationScore" ng-model="deliverySetMakingAssociationScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+
+                                                                </td><td><p><R>REMARKS</R>
+                                                            </p>
+                                                                <p><input type="text" name="deliverySetMakingAssociationRemarks" value="" id="deliverySetMakingAssociationRemarks" ng-model="deliverySetMakingAssociationRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+                                                        <tr>  <td>
+
+
+                                                            <div class="controls" style="font-size:medium;">
+                                                                <label>Encouraging thinking levels(please Specify)
+                                                                    <!--<input type="checkbox" name="others" value="1" id="others" ng-model="others" required="true" class="others" onclick="removereadonly('othersState','others');" >-->
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="setThinkingLevel1" ng-model="deliverySetThinkingLevelScore" value="setThinkingLevel1" id="setThinkingLevel1" />1
+                                                                    <input type="radio" name="setThinkingLevel2" ng-model="deliverySetThinkingLevelScore" value="setThinkingLevel2" id="setThinkingLevel2" />2
+                                                                    <input type="radio" name="setThinkingLevel3" ng-model="deliverySetThinkingLevelScore" value="setThinkingLevel3" id="setThinkingLevel3" />3
+                                                                    <input type="radio" name="setThinkingLevel4" ng-model="deliverySetThinkingLevelScore" value="setThinkingLevel4" id="setThinkingLevel4" />4
+                                                                    <input type="radio" name="setThinkingLevel5" ng-model="deliverySetThinkingLevelScore" value="setThinkingLevel5" id="setThinkingLevel5" />5
+                                                                    <!--<input type="text" name="deliverySetThinkingLevelScore" value="" id="deliverySetThinkingLevelScore" ng-model="deliverySetThinkingLevelScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+
+                                                                </td><td><p><R>REMARKS</R>
+                                                            </p>
+                                                                <p><input type="text" name="deliverySetThinkingLevelRemarks" value="" id="deliverySetThinkingLevelRemarks" ng-model="deliverySetThinkingLevelRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-size:medium;">
+                                                                <label>Engaging and Interaction with Students
+                                                                    <!--<input type="checkbox" name="others" value="1" id="others" ng-model="others" required="true" class="others" onclick="removereadonly('othersState','others');" >-->
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="setInteractionStudent1" ng-model="deliverySetInteractionStudentScore" value="setInteractionStudent1" id="setInteractionStudent1" />1
+                                                                    <input type="radio" name="setInteractionStudent2" ng-model="deliverySetInteractionStudentScore" value="setInteractionStudent2" id="setInteractionStudent2" />2
+                                                                    <input type="radio" name="setInteractionStudent3" ng-model="deliverySetInteractionStudentScore" value="setInteractionStudent3" id="setInteractionStudent3" />3
+                                                                    <input type="radio" name="setInteractionStudent4" ng-model="deliverySetInteractionStudentScore" value="setInteractionStudent4" id="setInteractionStudent4" />4
+                                                                    <input type="radio" name="setInteractionStudent5" ng-model="deliverySetInteractionStudentScore" value="setInteractionStudent5" id="setInteractionStudent5" />5
+
+                                                                    <!--<input type="text" name="deliverySetInteractionStudentScore" value="" id="deliverySetInteractionStudentScore" ng-model="deliverySetInteractionStudentScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+
+                                                                </td><td><p><R>REMARKS</R>
+                                                            </p>
+                                                                <p><input type="text" name="deliverySetInteractionStudentRemarks" value="" id="deliverySetInteractionStudentRemarks" ng-model="deliverySetInteractionStudentRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+                                                        <tr>  <td>
+
+
+                                                            <div class="controls" style="font-size:medium;">
+                                                                <label>Language used is appropriate to level
+                                                                    <!--<input type="checkbox" name="others" value="1" id="others" ng-model="others" required="true" class="others" onclick="removereadonly('othersState','others');" >-->
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="setAppropriateLevel1" ng-model="deliverySetAppropriateLevelScore" value="setAppropriateLevel1" id="setAppropriateLevel1" />1
+                                                                    <input type="radio" name="setAppropriateLevel2" ng-model="deliverySetAppropriateLevelScore" value="setAppropriateLevel2" id="setAppropriateLevel2" />2
+                                                                    <input type="radio" name="setAppropriateLevel3" ng-model="deliverySetAppropriateLevelScore" value="setAppropriateLevel3" id="setAppropriateLevel3" />3
+                                                                    <input type="radio" name="setAppropriateLevel4" ng-model="deliverySetAppropriateLevelScore" value="setAppropriateLevel4" id="setAppropriateLevel4" />4
+                                                                    <input type="radio" name="setAppropriateLevel5" ng-model="deliverySetAppropriateLevelScore" value="setAppropriateLevel5" id="setAppropriateLevel5" />5
+                                                                    <!--<input type="text" name="deliverySetAppropriateLevelScore" value="" id="deliverySetAppropriateLevelScore" ng-model="deliverySetAppropriateLevelScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+
+                                                                </td><td><p><R>REMARKS</R>
+                                                            </p>
+                                                                <p><input type="text" name="deliverySetAppropriateLevelRemarks" value="" id="deliverySetAppropriateLevelRemarks" ng-model="deliverySetAppropriateLevelRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+                                                        <tr>  <td>
+
+
+                                                            <div class="controls" style="font-size:medium;">
+                                                                <label>Proper use of Language
+                                                                    <!--<input type="checkbox" name="others" value="1" id="others" ng-model="others" required="true" class="others" onclick="removereadonly('othersState','others');" >-->
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="setProperLanguage1" ng-model="deliverySetProperLanguageScore" value="setProperLanguage1" id="setProperLanguage1" />1
+                                                                    <input type="radio" name="setProperLanguage2" ng-model="deliverySetProperLanguageScore" value="setProperLanguage2" id="setProperLanguage2" />2
+                                                                    <input type="radio" name="setProperLanguage3" ng-model="deliverySetProperLanguageScore" value="setProperLanguage3" id="setProperLanguage3" />3
+                                                                    <input type="radio" name="setProperLanguage4" ng-model="deliverySetProperLanguageScore" value="setProperLanguage4" id="setProperLanguage4" />4
+                                                                    <input type="radio" name="setProperLanguage5" ng-model="deliverySetProperLanguageScore" value="setProperLanguage5" id="setProperLanguage5" />5
+                                                                    <!--<input type="text" name="deliverySetProperLanguageScore" value="" id="deliverySetProperLanguageScore" ng-model="deliverySetProperLanguageScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+
+                                                                </td><td><p><R>REMARKS</R>
+                                                            </p>
+                                                                <p><input type="text" name="deliverySetProperLanguageRemarks" value="" id="deliverySetProperLanguageRemarks" ng-model="deliverySetProperLanguageRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-size:medium;">
+                                                                <label>Voice and Pronunciation is clear
+                                                                    <!--<input type="checkbox" name="others" value="1" id="others" ng-model="others" required="true" class="others" onclick="removereadonly('othersState','others');" >-->
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="setPronounciation1" ng-model="deliverySetPronounciationScore" value="setPronounciation1" id="setPronounciation1" />1
+                                                                    <input type="radio" name="setPronounciation2" ng-model="deliverySetPronounciationScore" value="setPronounciation2" id="setPronounciation2" />2
+                                                                    <input type="radio" name="setPronounciation3" ng-model="deliverySetPronounciationScore" value="setPronounciation3" id="setPronounciation3" />3
+                                                                    <input type="radio" name="setPronounciation4" ng-model="deliverySetPronounciationScore" value="setPronounciation4" id="setPronounciation4" />4
+                                                                    <input type="radio" name="setPronounciation5" ng-model="deliverySetPronounciationScore" value="setPronounciation5" id="setPronounciation5" />5
+                                                                    <!--<input type="text" name="deliverySetPronounciationScore" value="" id="deliverySetPronounciationScore" ng-model="deliverySetPronounciationScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+
+                                                                </td><td><p><R>REMARKS</R>
+                                                            </p>
+                                                                <p><input type="text" name="deliverySetPronounciationRemarks" value="" id="deliverySetPronounciationRemarks" ng-model="deliverySetPronounciationRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+                                                        <tr>  <td>
+
+
+                                                            <div class="controls" style="font-size:medium;">
+                                                                <label>Developing students esteem and confidence
+                                                                    <!--<input type="checkbox" name="others" value="1" id="others" ng-model="others" required="true" class="others" onclick="removereadonly('othersState','others');" >-->
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="setStudentConfidence1" ng-model="deliverySetStudentConfidenceScore" value="setStudentConfidence1" id="setStudentConfidence1" />1
+                                                                    <input type="radio" name="setStudentConfidence2" ng-model="deliverySetStudentConfidenceScore" value="setStudentConfidence2" id="setStudentConfidence2" />2
+                                                                    <input type="radio" name="setStudentConfidence3" ng-model="deliverySetStudentConfidenceScore" value="setStudentConfidence3" id="setStudentConfidence3" />3
+                                                                    <input type="radio" name="setStudentConfidence4" ng-model="deliverySetStudentConfidenceScore" value="setStudentConfidence4" id="setStudentConfidence4" />4
+                                                                    <input type="radio" name="setStudentConfidence5" ng-model="deliverySetStudentConfidenceScore" value="setStudentConfidence5" id="setStudentConfidence5" />5
+
+                                                                    <!--<input type="text" name="deliverySetStudentConfidenceScore" value="" id="deliverySetStudentConfidenceScore" ng-model="deliverySetStudentConfidenceScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+
+                                                               </td><td> <p><R>REMARKS</R>
+                                                            </p>
+                                                                <p><input type="text" name="deliverySetStudentConfidenceRemarks" value="" id="deliverySetStudentConfidenceRemarks" ng-model="deliverySetStudentConfidenceRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+                                                        <tr>  <td>
+
+
+                                                            <div class="controls" style="font-size:medium;">
+                                                                <label>Incorporating different learning styles(Specify)
+                                                                    <!--<input type="checkbox" name="others" value="1" id="others" ng-model="others" required="true" class="others" onclick="removereadonly('othersState','others');" >-->
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+
+                                                                    <input type="radio" name="setLearningStyles1" ng-model="deliverySetLearningStylesScore" value="setLearningStyles1" id="setLearningStyles1" />1
+                                                                    <input type="radio" name="setLearningStyles2" ng-model="deliverySetLearningStylesScore" value="setLearningStyles2" id="setLearningStyles2" />2
+                                                                    <input type="radio" name="setLearningStyles3" ng-model="deliverySetLearningStylesScore" value="setLearningStyles3" id="setLearningStyles3" />3
+                                                                    <input type="radio" name="setLearningStyles4" ng-model="deliverySetLearningStylesScore" value="setLearningStyles4" id="setLearningStyles4" />4
+                                                                    <input type="radio" name="setLearningStyles5" ng-model="deliverySetLearningStylesScore" value="setLearningStyles5" id="setLearningStyles5" />5
+                                                                    <!--<input type="text" name="deliverySetLearningStylesScore" value="" id="deliverySetLearningStylesScore" ng-model="deliverySetLearningStylesScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+
+                                                                </td><td><p><R>REMARKS</R>
+                                                            </p>
+                                                                <p><input type="text" name="deliverySetLearningStylesRemarks" value="" id="deliverySetLearningStylesRemarks" ng-model="deliverySetLearningStylesRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-size:medium;">
+                                                                <label>Providing and supervising classwork/notes
+                                                                    <!--<input type="checkbox" name="others" value="1" id="others" ng-model="others" required="true" class="others" onclick="removereadonly('othersState','others');" >-->
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="setSupervisingClasswork1" ng-model="deliverySetSupervisingClassworkScore" value="setSupervisingClasswork1" id="setSupervisingClasswork1" />1
+                                                                    <input type="radio" name="setSupervisingClasswork2" ng-model="deliverySetSupervisingClassworkScore" value="setSupervisingClasswork2" id="setSupervisingClasswork2" />2
+                                                                    <input type="radio" name="setSupervisingClasswork3" ng-model="deliverySetSupervisingClassworkScore" value="setSupervisingClasswork3" id="setSupervisingClasswork3" />3
+                                                                    <input type="radio" name="setSupervisingClasswork4" ng-model="deliverySetSupervisingClassworkScore" value="setSupervisingClasswork4" id="setSupervisingClasswork4" />4
+                                                                    <input type="radio" name="setSupervisingClasswork5" ng-model="deliverySetSupervisingClassworkScore" value="setSupervisingClasswork5" id="setSupervisingClasswork5" />5
+                                                                    <!--<input type="text" name="deliverySetSupervisingClassworkScore" value="" id="deliverySetSupervisingClassworkScore" ng-model="deliverySetSupervisingClassworkScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+</td><td>
+                                                                <p><R>REMARKS</R>
+                                                                </p>
+                                                                <p><input type="text" name="deliverySetSupervisingClassworkRemarks" value="" id="deliverySetSupervisingClassworkRemarks" ng-model="deliverySetSupervisingClassworkRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-size:medium;">
+                                                                <label>Effort in classroom management
+                                                                    <!--<input type="checkbox" name="others" value="1" id="others" ng-model="others" required="true" class="others" onclick="removereadonly('othersState','others');" >-->
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="setClassroomManagement1" ng-model="deliverySetClassroomManagementScore" value="setClassroomManagement1" id="setClassroomManagement1" />1
+                                                                    <input type="radio" name="setClassroomManagement2" ng-model="deliverySetClassroomManagementScore" value="setClassroomManagement2" id="setClassroomManagement2" />2
+                                                                    <input type="radio" name="setClassroomManagement3" ng-model="deliverySetClassroomManagementScore" value="setClassroomManagement3" id="setClassroomManagement3" />3
+                                                                    <input type="radio" name="setClassroomManagement4" ng-model="deliverySetClassroomManagementScore" value="setClassroomManagement4" id="setClassroomManagement4" />4
+                                                                    <input type="radio" name="setClassroomManagement5" ng-model="deliverySetClassroomManagementScore" value="setClassroomManagement5" id="setClassroomManagement5" />5
+
+                                                                    <!--<input type="text" name="deliverySetClassroomManagementScore" value="" id="deliverySetClassroomManagementScore" ng-model="deliverySetClassroomManagementScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+</td><td>
+                                                                <p><R>REMARKS</R>
+                                                                </p>
+                                                                <p><input type="text" name="deliverySetClassroomManagementRemarks" value="" id="deliverySetClassroomManagementRemarks" ng-model="deliverySetClassroomManagementRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-size:medium;">
+                                                                <label>Effort in individual student management
+                                                                    <!--<input type="checkbox" name="others" value="1" id="others" ng-model="others" required="true" class="others" onclick="removereadonly('othersState','others');" >-->
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="setStudentManagement1" ng-model="deliverySetStudentManagementScore" value="setStudentManagement1" id="setStudentManagement1" />1
+                                                                    <input type="radio" name="setStudentManagement2" ng-model="deliverySetStudentManagementScore" value="setStudentManagement2" id="setStudentManagement2" />2
+                                                                    <input type="radio" name="setStudentManagement3" ng-model="deliverySetStudentManagementScore" value="setStudentManagement3" id="setStudentManagement3" />3
+                                                                    <input type="radio" name="setStudentManagement4" ng-model="deliverySetStudentManagementScore" value="setStudentManagement4" id="setStudentManagement4" />4
+                                                                    <input type="radio" name="setStudentManagement5" ng-model="deliverySetStudentManagementScore" value="setStudentManagement5" id="setStudentManagement5" />5
+
+
+                                                                    <!--<input type="text" name="deliverySetStudentManagementScore" value="" id="deliverySetStudentManagementScore" ng-model="deliverySetStudentManagementScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+
+                                                               </td><td> <p><R>REMARKS</R>
+                                                            </p>
+                                                                <p><input type="text" name="deliverySetStudentManagementRemarks" value="" id="deliverySetStudentManagementRemarks" ng-model="deliverySetStudentManagementRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+                                                        <tr>  <td>
+
+
+
+
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="fixed-table-container">
+                                                <div class="table_wrapfixed-table-container-inner">
+                                                    <label class="col-md-4 control-label" for="currency"
+                                                           style="color:#337ab7" ;><b>LESSON CONCLUSION</b></label>
+                                                    <div class="header-background"></div>
+                                                    <table style="text-align: left !important;">
+                                                        <tbody><tr> <td style="width: 544px;">
+                                                            <div class="controls">
+                                                                <!--<label><b>Execution of Lesson Plan:</b></label>-->
+                                                                <br>
+                                                                <label style="font-size:medium;">Execution of Lesson Plan</label>
+                                                                <!--<input name="medicine" type="checkbox" />-->
+                                                                <!--<input type="checkbox" name="medicine" value="1" id="medicine" ng-model="medicine" required="true" class="medicine" onclick="removereadonly('medicineState','medicine');"></label>-->
+
+
+                                                                <span class="lbl"></span>
+                                                            </div></td>
+                                                            <td>
+
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="conclusionLessonPlan1" ng-model="lessonConclusionLessonPlanScore" value="conclusionLessonPlan1" id="conclusionLessonPlan1" />1
+                                                                    <input type="radio" name="conclusionLessonPlan2" ng-model="lessonConclusionLessonPlanScore" value="conclusionLessonPlan2" id="conclusionLessonPlan2" />2
+                                                                    <input type="radio" name="conclusionLessonPlan3" ng-model="lessonConclusionLessonPlanScore" value="conclusionLessonPlan3" id="conclusionLessonPlan3" />3
+                                                                    <input type="radio" name="conclusionLessonPlan4" ng-model="lessonConclusionLessonPlanScore" value="conclusionLessonPlan4" id="conclusionLessonPlan4" />4
+                                                                    <input type="radio" name="conclusionLessonPlan5" ng-model="lessonConclusionLessonPlanScore" value="conclusionLessonPlan5" id="conclusionLessonPlan5" />5
+
+                                                                    <!--<input type="text" name="lessonConclusionLessonPlanScore" value="" id="lessonConclusionLessonPlanScore" ng-model="lessonConclusionLessonPlanScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+
+                                                                </td><td><p><R>REMARKS</R>
+                                                            </p>
+                                                                <p><input type="text" name="lessonConclusionLessonPlanRemarks" value="" id="lessonConclusionLessonPlanRemarks" ng-model="lessonConclusionLessonPlanRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+
+
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-size:medium;">
+                                                                <label>Evaluating student achievement of LO
+                                                                    <!--<input type="checkbox" name="immunization" value="1" id="immunization" ng-model="immunization" required="true" class="immunization"  onclick="removereadonly('immunizationState','immunization');">-->
+
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="conclusionStudentAchievement1" ng-model="lessonConclusionStudentAchievementScore" value="conclusionStudentAchievement1" id="conclusionStudentAchievement1" />1
+                                                                    <input type="radio" name="conclusionStudentAchievement2" ng-model="lessonConclusionStudentAchievementScore" value="conclusionStudentAchievement2" id="conclusionStudentAchievement2" />2
+                                                                    <input type="radio" name="conclusionStudentAchievement3" ng-model="lessonConclusionStudentAchievementScore" value="conclusionStudentAchievement3" id="conclusionStudentAchievement3" />3
+                                                                    <input type="radio" name="conclusionStudentAchievement4" ng-model="lessonConclusionStudentAchievementScore" value="conclusionStudentAchievement4" id="conclusionStudentAchievement4" />4
+                                                                    <input type="radio" name="conclusionStudentAchievement5" ng-model="lessonConclusionStudentAchievementScore" value="conclusionStudentAchievement5" id="conclusionStudentAchievement5" />5
+
+
+                                                                    <!--<input type="text" name="lessonConclusionStudentAchievementScore" value="" id="lessonConclusionStudentAchievementScore" ng-model="lessonConclusionStudentAchievementScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+
+                                                                </td><td><p><R>REMARKS</R>
+                                                            </p>
+                                                                <p><input type="text" name="lessonConclusionStudentAchievementRemarks" value="" id="lessonConclusionStudentAchievementRemarks" ng-model="lessonConclusionStudentAchievementRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-size:medium;">
+                                                                <label>Preparing students for next lesson
+                                                                    <!--<input type="checkbox" name="food" value="1" id="food" ng-model="food" required="true" class="food"  onclick="removereadonly('foodState','food');">-->
+
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p>SCORE
+                                                                </p>
+                                                                <p>
+                                                                    <input type="radio" name="conclusionNextLesson1" ng-model="lessonConclusionNextLessonScore" value="conclusionNextLesson1" id="conclusionNextLesson1" />1
+                                                                    <input type="radio" name="conclusionNextLesson2" ng-model="lessonConclusionNextLessonScore" value="conclusionNextLesson2" id="conclusionNextLesson2" />2
+                                                                    <input type="radio" name="conclusionNextLesson3" ng-model="lessonConclusionNextLessonScore" value="conclusionNextLesson3" id="conclusionNextLesson3" />3
+                                                                    <input type="radio" name="conclusionNextLesson4" ng-model="lessonConclusionNextLessonScore" value="conclusionNextLesson4" id="conclusionNextLesson4" />4
+                                                                    <input type="radio" name="conclusionNextLesson5" ng-model="lessonConclusionNextLessonScore" value="conclusionNextLesson5" id="conclusionNextLesson5" />5
+
+
+                                                                    <!--<input type="text" name="lessonConclusionNextLessonScore" value="" id="lessonConclusionNextLessonScore" ng-model="lessonConclusionNextLessonScore" required="true" class="medicineState form-control">-->
+                                                                </p>
+
+                                                               </td><td> <p><R>REMARKS</R>
+                                                            </p>
+                                                                <p><input type="text" name="lessonConclusionNextLessonRemarks" value="" id="lessonConclusionNextLessonRemarks" ng-model="lessonConclusionNextLessonRemarks" required="true" class="medicineState form-control">
+                                                                </p></td></tr>
+                                                        <tr>  <td>
+
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label class="col-md-6 control-label" for=""> Additional Remarks<span style="color:red;"></span></label>
+                                                <div class="col-md-6" style="position:relative;">
+                                                    <textarea id="additionalRemarks" name="additionalRemarks"  maxlength="250"
+                                                           type="text" placeholder="Additional Remarks"
+                                                           ng-model="additionalRemarks"
+                                                              class="form-control input-md" required></textarea>
+                                                </div>
+                                            </div>
+
+
+
+
+                                            <div class="form-group">
+                                                <label class="col-md-6 control-label" for="">  Observation Report by:<span style="color:red;"></span></label>
+                                                <div class="col-md-6" style="position:relative;">
+                                                    <select id="observationReport" name="observationReport" ng-model="observationReport"
+                                                            ng-options="employee.employeeName as employee.employeeName for employee in employeeList" class="form-control input-md">
+                                                        <option value="">Select Employee</option>
+                                                    </select>
+                                                    <!--<input id="observationReport" name="observationReport"  maxlength="32"-->
+                                                           <!--type="text" placeholder="Observation Report"-->
+                                                           <!--ng-model="observationReport"-->
+                                                           <!--class="form-control input-md" required>-->
+                                                </div>
+                                            </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-4 col-sm-4 control-label" for="">Status</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <select name="interviewerText" id="interviewerText" ng-model="signature"
+                                                class="form-control input-md">
+                                            <option value="">Select</option>
+                                            <option value="UnSuccessful">Unsuccessful</option>
+                                            <option value="Accepted">Accepted</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-show="signature=='Accepted'">
+                                    <label class="col-md-4 col-sm-4 control-label" for="">Salary Offered</label>
+                                    <div class="col-md-6 col-sm-6" style=" position:relative;" >
+                                        <input id="salaryoffered" name="salaryoffered"
+                                               type="text" placeholder="salary"
+                                               ng-model="interviewerSalary"
+                                               class="form-control input-md" required>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-show="signature=='Accepted'">
+                                    <label class="col-md-6 control-label" for=""
+                                           style="padding-left: 61px; text-align: left;">Reporting Date</label>
+                                    <div class="col-md-6" style="padding-left: 0px;">
+                                        <p class="input-group">
+                                            <input type="text" id="reportingDate"
+                                                   ng-model="reportDate" class="form-control"
+                                                   readonly
+                                                   uib-datepicker-popup="{{format}}"
+                                                   is-open="popup10.opened"
+                                                   datepicker-options="dateOptions"
+                                                   close-text="Close"
+                                                   alt-input-formats="altInputFormats"/>
+                                            <span class="input-group-btn">
+                                                                     <button type="button" class="btn btn-default"
+                                                                             ng-click="open10()">
+                                                                         <i class="glyphicon glyphicon-calendar"></i></button>
+                                                                     </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                            <!--<div class="form-group">-->
+                                                <!--<label class="col-md-6 control-label" for=""> Signature:<span style="color:red;"></span></label>-->
+                                                <!--<div class="col-md-6" style="position:relative;">-->
+                                                    <!--<input id="signature" name="signature"-->
+                                                           <!--type="text" placeholder="signature"-->
+                                                           <!--ng-model="signature"-->
+                                                           <!--class="form-control input-md" required>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" ng-click="saveTeachingObservation()" ng-disabled="">Save</button>
+                                                <button type="button" class="btn btn-primary" ng-click="removeTeachingObservation()" data-dismiss="modal">Close</button>
+                                            </div>
+
+<!--                                    </div>-->
+<!--                                        </div>-->
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</div>
+<script>
+    $('body').delegate('.remove','click',function()
+    {
+        $(this).parent().parent().remove();
+    });
+
+    $("#sameas").click(function () {
+
+        if($(this).prop("checked") == true){
+
+            $("#samecorrespended").hide();
+        }else{
+
+            $("#samecorrespended").show();
+
+        }
+
+
+
+    })
+    function removereadonly(id,clicksid) {
+
+        if($("#"+clicksid).prop("checked") == true){
+
+            $('#'+id).prop('readonly', false);
+        }else{
+
+            $('#'+id).prop('readonly', true);
+
+        }
+
+    }
+    $("#next1").hide();
+    $("#next2").hide();
+    $("#next3").hide();
+    $("#saveId").hide();
+    $("#back1").hide();
+
+
+
+</script>

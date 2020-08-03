@@ -1,0 +1,162 @@
+<style>
+    fieldset {
+        min-width: 0;
+        padding: 10px;
+        margin: 0;
+        border: 0;
+    }
+    .form-control {
+        display: block;
+        width: 171px;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+</style>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row" >
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Grading Master</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addList()" ng-hide="topicDetailsList.length > 0">Add</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-2">
+                        <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editList(topicDetailsList)">Edit</button>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-8" >
+                    <table>
+
+                        <thead>
+                        <tr>
+                            <th>Maximun</th>
+                            <th>Minimun</th>
+                            <th>Grading</th>
+                            <!--<th >Action</th>-->
+                        </tr>
+                        </thead>
+                        <tbody id="topicAdd" class="topicAdd">
+                        <tr id="topic" ng-repeat="topic in topicDetailsList">
+                            <td>{{topic.maximum}} </td>
+                            <td>{{topic.minimum}} </td>
+                            <td>{{topic.grading}} </td>
+
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--<div class="form-group">-->
+                    <!--<div class="col-sm-12 pagination_">-->
+                        <!--<button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"-->
+                                <!--ng-disabled="first"-->
+                                <!--ng-click="getPaginatedTopicList('firstPage')" ng-model="first">First-->
+                        <!--</button>-->
+                        <!--<button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"-->
+                                <!--ng-disabled="prev"-->
+                                <!--ng-click="getPaginatedTopicList('prevPage')" ng-model="prev">Prev-->
+                        <!--</button>-->
+                        <!--<button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"-->
+                                <!--ng-click="getPaginatedTopicList('nextPage')" value="next" ng-class="{'diabled-class': next}"-->
+                                <!--ng-model="next">Next-->
+                        <!--</button>-->
+                        <!--<button type="button" class="btn btn-default hi_btn"-->
+                                <!--ng-click="getPaginatedTopicList('lastPage')" ng-class="{'diabled-class': last}" ng-disabled="last"-->
+                                <!--ng-model="last">Last-->
+                        <!--</button>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+                <!--<div align="center"><span style="color: red;"></span></div>-->
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade addCustomer" tabindex="-1" id="add_new_List_modal" role="dialog"
+         data-backdrop="static"
+         aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content checkout">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true" ng-click="removeList()">&times;</span></button>
+                    <h4 id="list-title" class="modal-title">Add List</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <form class="form-horizontal" name="form">
+                                <fieldset>
+                                    <table id="Topiclist" class="table table-bordered table-striped" style="padding: 0 20px;" ng-su>
+                                        <thead>
+                                        <tr style="background: #ec2c8a ;">
+                                            <td style="width: 130px"><span  style="color: black;text-align: center; width: 14;">Maximum</span></td>
+                                            <td style="width: 130px"><span style="color: black;text-align: center;">Minimum</span> </td>
+                                            <td style="width: 130px"><span style="color: black;text-align: center;">Grading</span></td>
+                                            <td style="width: 130px"><span style="color: black;text-align: center;"></span></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="prevschoolattend">
+
+                                        <tr id="admission2"  ng-repeat="previousList in previouslistDetails">
+                                            <td><input type="text" style="width: 130px" id="previous_minimum_Id" num-with-out-space="" name="previous_minimum_name" ng-model="previousList.maximum" class="form-control input-md"></td>
+                                            <td><input type="text" style="width: 130px" type="text" id="previous_maximum_Id" num-with-out-space="" ng-model="previousList.minimum"  value="" name="prev_maximum_name" class="form-control input-md"></td>
+                                            <td><input type="text" style="width: 130px" id="prev_grading_Id" name="prev_grading_Id" ng-model="previousList.grading" class="form-control input-md"></td>
+
+                                            <td> <button type="button" class="btn btn-danger remove" ng-click="removecrossing($index)">X
+                                             </button></td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div style="padding: 0 20px;">
+                                        <input type="button" value="Add New" class="btn btn-default mb-20" ng-click="addNewList()" >
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                            data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                            ng-click="saveList('add_new_List_modal')">Save
+                    </button>
+                    <button type="button" class="btn btn-primary hi_btn" ng-click="removeList()"
+                            data-dismiss="modal">Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

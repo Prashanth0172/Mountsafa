@@ -1,0 +1,312 @@
+
+app.controller('holidayController',
+    function ($scope, $rootScope, $http, $location, $filter, Notification) {
+        $scope.word = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+        $scope.userRights = [];
+        $scope.bshimServerURL = "/bs";
+        $scope.operation = 'Create';
+        $scope.inactiveStatus = "Active";
+        $scope.firstPage = true;
+        $scope.lastPage = false;
+        $scope.pageNo = 0;
+        $scope.prevPage = false;
+        $scope.isPrev = false;
+        $scope.isNext = false;
+        $scope.clicked = false;
+        $scope.ButtonStatus = "InActive";
+
+        $scope.feeconfigurationList=function () {
+            $window.location.href = '/home#!/configuration';
+        };
+
+        $scope.dt = new Date();
+        $scope.dt1 = new Date();
+
+        $scope.format = 'dd/MM/yyyy';
+        $scope.open1 = function () {
+            $scope.popup1.opened = true;
+        };
+        $scope.popup1 = {
+            opened: false
+        };
+        $scope.open2 = function () {
+            $scope.popup2.opened = true;
+        };
+        $scope.popup2 = {
+            opened: false
+        };
+
+
+        $scope.editHoliday = function(data){
+            $scope.id =data.id;
+            $scope.holidayname = data.holidayName;
+            $scope.employeetype = data.employeeType;
+            $scope.typeOfEmployee = data.typeOfEmployee;
+            $scope.statusText=data.status;
+            $scope.dt = new Date(data.fromdate);
+            $scope.dt1 = new Date(data.todate);
+            $scope.noofdays = data.noOfDays;
+            $scope.branchid = parseInt(data.branchId);
+            $scope.branchList()
+            $("#title").text("Edit Holiday");
+            $("#add_user_holiday").modal('show');
+        };
+
+
+        $scope.removeholiday = function () {
+            $scope.branchid ="";
+            $scope.holidayname = "";
+            $scope.status = "";
+            $scope.employeetype ="";
+            $scope.noofdays = "";
+        };
+
+        $scope.deleteHoliday = function (data) {
+            bootbox.confirm({
+                title: "Alert",
+                message: "Do you want to Continue ?",
+                buttons: {
+                    confirm: {
+                        label: 'OK'
+                    },
+                    cancel: {
+                        label: 'Cancel'
+                    }
+                },
+                callback: function (result) {
+                    if(result == true){
+                        var deleteDetails = {
+                            id:data.id,
+                            holidayName:data.holidayname,
+                            employeeType:data.employeetype,
+                            typeOfEmployee:data.typeOfEmployee,
+                            fromdate:data.dt,
+                            todate:data.dt1,
+                            noOfDays:data.noofdays,
+                            branchId:data.branchId
+
+                        };
+                        $http.post("bs/deleteHoliday", angular.toJson(deleteDetails)).then(function (response, status, headers, config) {
+                            var data = response.data;
+                            $scope.getPaginationList();
+                            if(data==true){
+                                Notification.success({
+                                    message: 'Successfully Deleted',
+                                    positionX: 'center',
+                                    delay: 2000
+                                });
+                            }else {
+                                Notification.warning({
+                                    message: 'Cannot delete Already in Use',
+                                    positionX: 'center',
+                                    delay: 2000
+                                });
+                            }
+                        }, function (error) {
+                            Notification.warning({
+                                message: 'Cannot be delete,already it is using',
+                                positionX: 'center',
+                                delay: 2000
+                            });
+                        });
+                    }
+                }
+            });
+        };
+        $scope.inactiveholiday = function () {
+            if ($scope.clicked == false) {
+                $scope.inactiveStatus = "InActive";
+                $scope.ButtonStatus = "Active";
+                var page = "Page";
+            }
+            else {
+                $scope.inactiveStatus = "Active";
+                $scope.ButtonStatus = "InActive";
+                var page = "";
+            }
+            $scope.clicked = !$scope.clicked;
+            $scope.getPaginationList();
+
+        };
+        $scope.getPaginationList = function (page) {
+            switch (page) {
+                case 'firstPage':
+                    $scope.firstPage = true;
+                    $scope.lastPage = false;
+                    $scope.isNext = false;
+                    $scope.isPrev = false;
+                    $scope.pageNo = 0;
+                    break;
+                case 'lastPage':
+                    $scope.lastPage = true;
+                    $scope.firstPage = false;
+                    $scope.isNext = false;
+                    $scope.isPrev = false;
+                    $scope.pageNo = 0;
+                    break;
+                case 'nextPage':
+                    $scope.isNext = true;
+                    $scope.isPrev = false;
+                    $scope.lastPage = false;
+                    $scope.firstPage = false;
+                    $scope.pageNo = $scope.pageNo + 1;
+                    break;
+                case 'prevPage':
+                    $scope.isPrev = true;
+                    $scope.lastPage = false;
+                    $scope.firstPage = false;
+                    $scope.isNext = false;
+                    $scope.pageNo = $scope.pageNo - 1;
+                    break;
+                default:
+                    $scope.firstPage = true;
+            }
+            var paginationDetails;
+            paginationDetails = {
+                firstPage: $scope.firstPage,
+                lastPage: $scope.lastPage,
+                pageNo: $scope.pageNo,
+                prevPage: $scope.prevPage,
+                prevPage: $scope.isPrev,
+                nextPage: $scope.isNext
+            }
+            if (angular.isUndefined($scope.searchText)) {
+                $scope.searchText = "";
+            }
+            $http.post($scope.bshimServerURL + "/getpaginatedholiday?&type=" + $scope.inactiveStatus+ '&searchText=' + $scope.searchText, angular.toJson(paginationDetails)).then(function (response) {
+                var data = response.data;
+                console.log(data);
+                var i = 0;
+                $scope.holidayList = data.list;
+                $scope.first = data.firstPage;
+                $scope.last = data.lastPage;
+                $scope.prev = data.prevPage;
+                $scope.next = data.nextPage;
+                $scope.pageNo = data.pageNo;
+                $scope.listStatus = true;
+                // $scope.removeState();
+
+            }, function (error) {
+                Notification.error({
+                    message: 'Something went wrong, please try again',
+                    positionX: 'center',
+                    delay: 2000
+                });
+            })
+        };
+        $scope.getPaginationList();
+
+
+        $scope.saveholiday = function () {
+            if ($scope.branchid == '' || $scope.branchid == null) {
+                Notification.warning({message: 'BranchName  can not be empty', positionX: 'center', delay: 2000});
+                return false;
+            }
+            else if ($scope.dt>$scope.dt1){
+                Notification.warning({message: 'From date should not be greater than To date', positionX: 'center', delay: 2000});
+                return false;
+            }
+            else if ($scope.holidayname == '' || $scope.holidayname == null) {
+                Notification.warning({message: 'HolidayName  can not be empty', positionX: 'center', delay: 2000});
+                return false;
+            }
+            else if ($scope.employeetype == '' || $scope.employeetype == null) {
+                Notification.warning({message: 'Employee Type  can not be empty', positionX: 'center', delay: 2000});
+                return false;
+            }
+            else if ($scope.typeOfEmployee == '' || $scope.typeOfEmployee == null) {
+                Notification.warning({message: 'TypeOfEmployee  can not be empty', positionX: 'center', delay: 2000});
+                return false;
+            }
+            else {
+                var saveHoliday;
+            saveHoliday = {
+                id:$scope.id,
+                holidayName: $scope.holidayname,
+                employeeType: $scope.employeetype,
+                typeOfEmployee: $scope.typeOfEmployee,
+                fromdate: $scope.dt,
+                todate: $scope.dt1,
+                noOfDays: $scope.noofdays,
+                branchId:$scope.branchid,
+                status:$scope.statusText
+                };
+                $http.post("/bs/saveHoliday", angular.toJson(saveHoliday)).then(function (response) {
+                    var data = response.data;
+                    if (data == "") {
+                        Notification.error({message: 'Already exists', positionX: 'center', delay: 2000});
+                    } else {
+                        $("#add_user_holiday").modal('hide');
+                        $scope.getPaginationList();
+                        Notification.success({message: 'User Created  successfully', positionX: 'center', delay: 2000});
+                    }
+                }, function (error) {
+                    Notification.error({
+                        message: 'Something went wrong, please try again',
+                        positionX: 'center',
+                        delay: 2000
+                    });
+                });
+            };
+
+        }
+
+        // $scope.getHolidayList = function () {
+        //     $(".loader").css("display", "block");
+        //     $http.post("/bs/getholidayList").then(function (response) {
+        //         var data = response.data.object;
+        //         console.log(data);
+        //         $scope.holidayList = data;
+        //
+        //     }, function (error) {
+        //         Notification.error({
+        //             message: 'Something went wrong, please try again',
+        //             positionX: 'center',
+        //             delay: 2000
+        //         });
+        //     })
+        // };
+        // $scope.getHolidayList();
+        $scope.addholiday = function () {
+            $scope.id = null;
+           $scope.holidayname="";
+           $scope.branchid=null;
+           $scope.employeetype=null;
+           $scope.typeOfEmployee="";
+           $scope.noofdays="";
+           $scope.statusText="Active";
+           $scope.dt=new Date();
+           $scope.dt1=new Date();
+            $scope.branchList();
+            $("#title").text("Add Holiday");
+            $("#add_user_holiday").modal('show');
+        };
+
+
+        $scope.branchList = function() {
+            $http.post("bs/getBranchesList").then(function (response) {
+                var data = response.data;
+                $scope.branchesList = data;
+                $scope.bran=[];
+                angular.forEach( $scope.branchesList,function (val,key) {
+                    if(val.status=="Active"){
+                        $scope.bran.push(val) ;
+                    }
+
+                })
+            }, function (error) {
+                Notification.error({
+                    message: 'Something went wrong, please try again',
+                    positionX: 'center',
+                    delay: 2000
+                });
+            })
+        }
+
+
+
+
+
+
+
+    });

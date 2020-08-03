@@ -1,0 +1,115 @@
+<div class="modal fade addCustomer" tabindex="-1" id="add_new_topic_modal" role="dialog"
+     data-backdrop="static"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content checkout">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true" ng-click="removeTopic()">&times;</span></button>
+                <h4 id="topic-title" class="modal-title">Add Topic</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <form class="form-horizontal" name="form">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-4 col-sm-4 control-label" >Level<span style="color:red;">*</span></label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <select id="levelId" name="levelId" ng-model="levelId"
+                                                ng-change="levelClass(levelId)"
+                                                ng-options="lev.gradeId as
+											lev.gradeName for lev in gradeList" class="form-control input-md">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 col-sm-4 control-label" >Class<span style="color:red;">*</span></label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <select id="classId" name="classId" ng-model="classId"
+                                                ng-change="classSubject(classId)"
+                                                ng-options="cla.classId as
+											cla.className for cla in classList" class="form-control input-md">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-4 col-sm-4 control-label" >SubjectName<span style="color:red;">*</span></label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <select id="subjectId" name="subjectId" ng-model="subjectId"
+                                                ng-change="subjectChapter(subjectId)"
+                                                ng-options="sub.subjectId as
+											sub.subjectName for sub in subjectList" class="form-control input-md">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <table id="Topiclist" class="table table-bordered table-striped" style="padding: 0 20px;" ng-su>
+                                    <thead>
+                                    <tr style="background: #FFFFFF;">
+                                        <td colspan="4" style="text-align: center;">Topics</td>
+
+                                    </tr>
+                                    <tr style="background: #FFFFFF;">
+                                        <td><span style="color: black;text-align: center;">Chapter Name</span></td>
+                                        <td><span style="color: black;text-align: center;">TopicName</span> </td>
+                                        <td><span style="color: black;text-align: center;">Assignment</span></td>
+                                        <td><span style="color: black;text-align: center;">Status</span></td>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="prevschoolattend">
+
+                                    <tr id="admission2"  ng-repeat="previoustopic in previoustopicDetails">
+                                        <td>
+                                            <select style="width: 135px" id="previous_chapter_Id" name="previous_chapter_name" ng-model="previoustopic.chapter" ng-options="chapter.chapterId as
+											chapter.chapterName for chapter in chapterList" class="form-control input-md">
+                                                <option value="">Select</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input  style="width: 135px" type="text"  ng-model="previoustopic.TopicName" alpha-with-space ng-change="checkTopicName(previoustopic,$index)" value="" name="prev_topic_name[]" class="form-control input-md">
+                                        </td>
+                                        <td>
+
+                                            <select style="width: 135px" id="prev_assignment_Id" name="prev_assignment_Id" ng-model="previoustopic.Assignment" ng-options="component.componentId as
+											component.componentName for component in componentList" class="form-control input-md">
+                                                <option value="">Select</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select style="width: 135px" name="prev_status_name" id="prev_status_Id" ng-model="previoustopic.status" ng-init="status='Active'"class="form-control input-md">
+                                                <option value="">Select</option>
+                                                <option value="Active">Active</option>
+                                                <option value="InActive">InActive</option>
+                                            </select>
+                                        </td>
+                                        <td> <button type="button" class="btn btn-danger remove" ng-click="removecross($index)">X
+                                        </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div style="padding: 0 20px;">
+                                    <input type="button" value="Add New" class="btn btn-default mb-20" ng-click="addNewTopic()">
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                        ng-click="saveTopic('add_new_topic_modal')">Save
+                </button>
+                <button type="button" class="btn btn-primary hi_btn" ng-click="removeTopic()"
+                        data-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

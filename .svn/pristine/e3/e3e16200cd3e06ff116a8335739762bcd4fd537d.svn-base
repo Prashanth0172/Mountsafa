@@ -1,0 +1,142 @@
+package com.hyva.bsfms.bs.bsmapper;
+
+import com.hyva.bsfms.bs.bsentities.LessonPlan;
+import com.hyva.bsfms.bs.bspojo.LessonPlanPojo;
+import com.hyva.bsfms.bs.bspojo.StudentPojo;
+import com.hyva.bsfms.bs.bsentities.Student;
+import org.apache.commons.lang3.StringUtils;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
+public class BsStudentMapper {
+    public static Student saveStudent(StudentPojo saveStudentDetails) {
+        Student student = new Student();
+        student.setStudentId(saveStudentDetails.getStudentId());
+        student.setStudentName(saveStudentDetails.getStudentName());
+        student.setStudentProfileId(saveStudentDetails.getStudentProfileId());
+        student.setAcademicYearMaster(saveStudentDetails.getAcademicYearMaster());
+        student.setAdmissionFormNo(saveStudentDetails.getAdmissionFormNo());
+        student.setBloodGroup(saveStudentDetails.getBloodGroup());
+        student.setDateOfAdmission(saveStudentDetails.getDateOfAdmission());
+        student.setDateOfJoining(saveStudentDetails.getDateOfJoining());
+        student.setFatherContactNo(saveStudentDetails.getFatherContactNo());
+        student.setFatherEmailId(saveStudentDetails.getFatherEmailId());
+        student.setFatherName(saveStudentDetails.getFatherName());
+        student.setFatherOccupation(saveStudentDetails.getFatherOccupation());
+        student.setLevel(saveStudentDetails.getGradeMaster());
+        student.setClassId(saveStudentDetails.getClsId());
+        student.setTelNo(saveStudentDetails.getTelNo());
+        student.setMotherContactNo(saveStudentDetails.getMotherContactNo());
+        student.setMotherEmailId(saveStudentDetails.getMotherEmailId());
+        student.setMotherName(saveStudentDetails.getMotherName());
+        student.setMotherOccupation(saveStudentDetails.getMotherOccupation());
+        student.setPrimaryContactNo(saveStudentDetails.getPrimaryContactNo());
+        student.setAdmissionStatus(saveStudentDetails.getAdmissionStatus());
+        student.setDateofbirth(saveStudentDetails.getDateofbirth());
+        student.setGender(saveStudentDetails.getGender());
+        student.setStudentType(saveStudentDetails.getStudentType());
+        student.setGaurdianName(saveStudentDetails.getGaurdianName());
+        student.setAnnualIncome(saveStudentDetails.getAnnualIncome());
+        student.setPresentAddress(saveStudentDetails.getPresentAddress());
+        student.setPermanentAddress(saveStudentDetails.getPermanentAddress());
+        student.setReligion(saveStudentDetails.getReligion());
+        student.setPhysicalCondition(saveStudentDetails.getPhysicalCondition());
+        if(saveStudentDetails.getDocumentUpload()!=null){
+            student.setDocumentUpload(saveStudentDetails.getDocumentUpload());
+        }
+        student.setAadhaarNo(saveStudentDetails.getAadhaarNo());
+        if(StringUtils.equalsIgnoreCase(saveStudentDetails.getStudentStatus(),"true")){
+            student.setStudentStatus("Active");
+        }
+        else {
+            student.setStudentStatus("InActive");
+        }
+        student.setGaurdianNumber(saveStudentDetails.getGaurdianNumber());
+
+        return student;
+    }
+
+
+    public static List<StudentPojo> mapStudentEntityToPojo(List<Student> typeList){
+        List<StudentPojo> list=new ArrayList<>();
+        for(Student type:typeList) {
+            StudentPojo studentPojo = new StudentPojo();
+            studentPojo.setStudentProfileId(type.getStudentProfileId());
+            studentPojo.setStudentId(type.getStudentId());
+            studentPojo.setStudentName(type.getStudentName());
+            studentPojo.setAcademicYearMaster(type.getAcademicYearMaster());
+            studentPojo.setAdmissionFormNo(type.getAdmissionFormNo());
+            studentPojo.setBloodGroup(type.getBloodGroup());
+            studentPojo.setDateOfAdmission(type.getDateOfAdmission());
+            studentPojo.setDateOfJoining(type.getDateOfJoining());
+            studentPojo.setFatherContactNo(type.getFatherContactNo());
+            studentPojo.setFatherEmailId(type.getFatherEmailId());
+            studentPojo.setFatherName(type.getFatherName());
+            studentPojo.setFatherOccupation(type.getFatherOccupation());
+            if(type.getLevel()!=null)
+            studentPojo.setGradeId(type.getLevel().getGradeId());
+            studentPojo.setTelNo(type.getTelNo());
+            studentPojo.setMotherContactNo(type.getMotherContactNo());
+            studentPojo.setMotherEmailId(type.getMotherEmailId());
+            studentPojo.setMotherName(type.getMotherName());
+            studentPojo.setMotherOccupation(type.getMotherOccupation());
+            studentPojo.setPrimaryContactNo(type.getPrimaryContactNo());
+            studentPojo.setAdmissionStatus(type.getAdmissionStatus());
+            studentPojo.setDateofbirth(type.getDateofbirth());
+            studentPojo.setGender(type.getGender());
+            studentPojo.setStudentType(type.getStudentType());
+            studentPojo.setGaurdianName(type.getGaurdianName());
+            studentPojo.setAnnualIncome(type.getAnnualIncome());
+            studentPojo.setPresentAddress(type.getPresentAddress());
+            studentPojo.setPermanentAddress(type.getPermanentAddress());
+            studentPojo.setReligion(type.getReligion());
+            studentPojo.setPhysicalCondition(type.getPhysicalCondition());
+            studentPojo.setStudentStatus(type.getStudentStatus());
+
+            list.add(studentPojo);
+        }
+        return list;
+    }
+
+
+
+
+    public static String generateStudentProfileNo(String grade,Date fromYear,int size) {
+
+    String academicyear = String.valueOf(fromYear);
+    String[] year = academicyear.split("-");
+    String grd;
+    String admissionNo="0";
+    grade = grade.trim();
+      try {
+        if (Integer.parseInt(grade) <= 9) {
+            grd = "0" + Integer.parseInt(grade);
+        } else {
+            grd = "" + Integer.parseInt(grade);
+        }
+    } catch (NumberFormatException nuex) {
+        grd = "0" + grade.toUpperCase().charAt(0);
+    }
+    int no = size;
+    no++;
+      if (no < 10) {
+        admissionNo = admissionNo + grd +  year[0].substring(2)  + "0000" + no;
+
+
+    } else if (no >= 10 && no < 100) {
+        admissionNo = admissionNo + grd +  year[0].substring(2) + "000" + no;
+    } else if (no >= 100 && no < 1000) {
+        admissionNo = admissionNo + grd +  year[0].substring(2) + "00" + no;
+    } else if (no >= 1000 && no < 10000) {
+        admissionNo = admissionNo + grd +  year[0].substring(2) +"0" + no;
+    } else {
+        admissionNo = admissionNo + grd +  year[0].substring(2) + no;
+    }
+//        System.out.println("admissionNoadmissionNoadmissionNo" + admissionNo);
+      return admissionNo;
+}
+
+
+}

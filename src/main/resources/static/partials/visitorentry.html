@@ -1,0 +1,261 @@
+<style>
+    .modal-content{
+        width:696px;
+    }
+    .modal-footer {
+        padding: 5px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    fieldset {
+        min-width: 0;
+        padding: 10px;
+        margin: 0;
+        border: 0;
+    }
+    .form-control {
+        display: block;
+        width: 171px;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+</style>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row" >
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Visitor</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel-body" style="height: 65px;">
+                            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                                <form class="form-horizontal ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <p class="input-group" style="display: block;">
+                                                <input id="search_academic" name="textinput" type="text"
+                                                       placeholder="Search" ng-model="searchText" class="form-control input-md"
+                                                       ng-keyup="$event.keyCode == 13 ? getVisitorList(searchText) : null"/>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-7">
+
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addVisitor()">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="fixed-table-container">
+                        <div class="table_wrapfixed-table-container-inner">
+                            <div class="header-background"></div>
+                            <table data-toggle="table" data-cache="false" data-height="299" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                                <thead>
+                                <tr>
+                                    <th data-field="cntryname">
+                                        <div class="th-inner" align="center">Visitor Name</div>
+                                    </th>
+                                    <th data-field="cntryname">
+                                        <div class="th-inner" align="center">Visitor Address</div>
+                                    </th>
+                                    <th data-field="cntryname">
+                                        <div class="th-inner" align="center">Visitor Mobile</div>
+                                    </th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Status</div></th>
+                                    <!--<th data-field="edit">-->
+                                        <!--<div class="th-inner" align="center">Edit</div></th>-->
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Actions</div></th>
+                                </tr>
+                                </thead>
+                                <tbody id="parentTable">
+                                <input type="hidden" ng-model="vistorId" value="{{visitorList.vistorId}}"/>
+                                <tr ng-repeat="visitor in visitorList|filter:searchText">
+                                    <td>{{visitor.visitorName}}</td>
+                                    <td>{{visitor.visitorAddress}}</td>
+                                    <td>{{visitor.visitorMobile}}</td>
+                                    <td>{{visitor.vistorStatus}}</td>
+                                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editVisitor(visitor)">Edit</button>
+                                    <button type="button" class="btn btn-primary hi_btn"  ng-click="deleteVisitor(visitor.vistorId)">Delete</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-12 pagination_">
+                            <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"
+                                    ng-disabled="first"
+                                    ng-click="getPaginationList('firstPage')" ng-model="first">First
+                            </button>
+                            <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"
+                                    ng-disabled="prev"
+                                    ng-click="getPaginationList('prevPage')" ng-model="prev">Prev
+                            </button>
+                            <button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"
+                                    ng-click="getPaginationList('nextPage')" value="next"
+                                    ng-class="{'diabled-class': next}" ng-model="next">Next
+                            </button>
+                            <button type="button" class="btn btn-default hi_btn"
+                                    ng-click="getPaginationList('lastPage')" ng-class="{'diabled-class': last}"
+                                    ng-disabled="last"
+                                    ng-model="last">Last
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" id="add_new_visitor_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 id="department-title" class="modal-title">Add Visitor</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label">Vistor No</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <input name="visitorNo" id="visitorNo"
+                                                               class="form-control input-md" readonly
+                                                               ng-model="visitorNo">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label">Name</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <input name="visitorName" id="visitorName" alpha-with-space=""
+                                                               class="form-control input-md" maxlength="30"
+                                                               ng-model="visitorName">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label">Address</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <input name="visitorAddress" id="visitorAddress"
+                                                               class="form-control input-md"
+                                                               ng-model="visitorAddress">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label">Mobile</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <input name="visitorMobile" id="visitorMobile" num-with-out-space=""
+                                                               class="form-control input-md" maxlength="13"
+                                                               ng-model="visitorMobile">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label">Email</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <input name="visitorEmailID" id="visitorEmailID"
+                                                               class="form-control input-md"
+                                                               ng-model="visitorEmailID">
+                                                        <p class="error" ng-show="form.visitorEmailID.$error.pattern">Enter Valid MailID</p>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label">LoginTime</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <input type="text" name="visitorLogin" id="visitorLogin"
+                                                               class="form-control input-md"
+                                                               ng-model="visitorLogin" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Purpose</label>
+                                                    <div class="col-md-6 col-sm-6" >
+                                                        <select name="visitorPurpose" id="visitorPurpose" ng-model="visitorPurpose" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                            <option value="Interview">Interview</option>
+                                                            <option value="Meeting">Meeting</option>
+                                                            <option value="Personal">Personal</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >ToMeet</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="empName" name="empName"
+                                                                ng-model="EmpName"
+                                                                ng-options="employee.employeeName as employee.employeeName for employee in employeeList"
+                                                                class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Status</label>
+                                                    <div class="col-md-6 col-sm-6" >
+                                                        <select name="status" id="status" ng-model="status" ng-init="status='Active'"class="form-control input-md">
+                                                            <option value="Active">Active</option>
+                                                            <option value="InActive">InActive</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                        ng-click="saveVisitor()">Save
+                                </button>
+                                <button type="button" class="btn btn-primary hi_btn" ng-click="removeDepartment()"
+                                        data-dismiss="modal">Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

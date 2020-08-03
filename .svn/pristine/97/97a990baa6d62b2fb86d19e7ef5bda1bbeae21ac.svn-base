@@ -1,0 +1,921 @@
+<style>
+    .modal-content{
+        width:696px;
+    }
+    .modal-footer {
+        padding: 5px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    fieldset {
+        min-width: 0;
+        padding: 10px;
+        margin: 0;
+        border: 0;
+    }
+    .overSelectq {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }    #checkboxes {
+             display: none;
+             border: 1px #dadada solid;
+         }
+
+    #checkboxesq label {
+        display: block;
+    }
+
+    #checkboxesq label:hover {
+        background-color: #1e90ff;
+    }#checkboxesq {
+         display: none;
+         border: 1px #dadada solid;
+     }
+
+    .form-control {
+        display: block;
+        width: 171px;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+</style>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row" >
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Lesson Plan</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel-body" style="height: 65px;">
+                            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                                <form class="form-horizontal ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <p class="input-group" style="display: block;">
+                                                <input id="search_academic" name="textinput" type="text"
+                                                       placeholder="Search" ng-model="searchText" class="form-control input-md"
+                                                       ng-keyup="$event.keyCode == 13 ? getLessonPaginationList(searchText) : null"/>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-7">
+
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addLessonPlan()">Add</button>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-default hi_btn"  ng-click="importLessonPlan()">Import</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="fixed-table-container">
+                        <div class="table_wrapfixed-table-container-inner">
+                            <div class="header-background"></div>
+                            <table data-toggle="table" data-cache="false" data-height="299" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                                <thead>
+                                <tr>
+                                    <th data-field="cntryname">
+                                        <div class="th-inner" align="center">Level</div></th>
+                                    <!--<th data-field="edit">-->
+                                        <!--<div class="th-inner" align="center">Class</div></th>-->
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Subject</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Chapter</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Topic</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Assesment</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Max Marks</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Actions</div></th>
+                                </tr>
+                                </thead>
+                                <tbody id="parentTable">
+                                <input type="hidden" ng-model="lessonPlanId" value="{{planList.lessonPlanId}}"/>
+                                <tr ng-repeat="plan in planList|filter:searchText">
+                                    <td>{{plan.levelName}}</td>
+                                    <td>{{plan.subjectName}}</td>
+                                    <td>{{plan.chapterName}}</td>
+                                    <td>{{plan.topicName}}</td>
+                                    <td>{{plan.assessment}}</td>
+                                    <td>{{plan.maxMarks}}</td>
+                                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editLessonPlan(plan)">Edit</button>
+                                    <button type="button" class="btn btn-primary hi_btn"  ng-click="deleteLessonPlan(plan)">Delete</button>
+                                    <!--<button type="button" class="btn btn-primary hi_btn"  ng-click="addAssessmentDetails(plan)">Add Assessment Details</button>-->
+                                    <button type="button" class="btn btn-primary hi_btn"  ng-show="plan.assessment != 'simpleassesment'&&plan.assessment != 'noassesment'" ng-click="openAssessment(plan)">Assessment</button>
+                                    <button type="button" class="btn btn-primary hi_btn"  ng-show="plan.assessment != 'detailassesment'&&plan.assessment != 'noassesment'" ng-click="openSimpleAssessment(plan)">Assessment</button></td>
+
+                                </tr>
+                                <tr ng-if="searchText!=''&&(planList|filter:searchText).length==0">
+                                    <td colspan="4" style="color: red; font-weight: bold">No Records Found</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 pagination_">
+
+                        <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"
+                                ng-disabled="first"
+                                ng-click="getLessonPaginationList('firstPage')" ng-model="first">First
+                        </button>
+                        <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"
+                                ng-disabled="prev"
+                                ng-click="getLessonPaginationList('prevPage')" ng-model="prev">Prev
+                        </button>
+                        <button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"
+                                ng-click="getLessonPaginationList('nextPage')" value="next"
+                                ng-class="{'diabled-class': next}" ng-model="next">Next
+                        </button>
+                        <button type="button" class="btn btn-default hi_btn"
+                                ng-click="getLessonPaginationList('lastPage')" ng-class="{'diabled-class': last}"
+                                ng-disabled="last"
+                                ng-model="last">Last
+                        </button>
+                    </div>
+                    <div align="center"><span style="color: red;"></span></div>
+                </div>
+
+
+                <div class="modal fade addCustomer" tabindex="-1" id="add_new_plan_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true" ng-click="removeLessonPlan()">&times;</span></button>
+                                <h4 id="plan-title" class="modal-title">Add Lesson Plan</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+                                                <div class="form-group" >
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Term<span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="termNm" name="termNm" ng-model="termNm"
+                                                                ng-options="term.termId as term.termName for term in termList" class="form-control input-md">
+                                                            <option value="">Select Term</option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Level<span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="levelId" name="levelId" ng-model="levelId"
+                                                                ng-change="levelClass(levelId)"
+                                                                ng-options="grade.gradeId as
+											grade.gradeName for grade in gradeList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label">Class<span
+                                                            style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="classId" name="classId" ng-model="classId"
+                                                                ng-change="classSubject(classId)"
+                                                                ng-options="cla.classId as
+											cla.className for cla in classList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Subject<span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="subjectId" name="subjectId" ng-model="subjectId"
+                                                                ng-change="subjectChapter(subjectId)"
+                                                                ng-options="sub.subjectId as
+											sub.subjectName for sub in subjectList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Chapter<span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="chapterId" name="chapterId" ng-model="chapterId"
+                                                                ng-change="getTopicList(chapterId)"
+                                                                ng-options="chapter.chapterId as
+											chapter.chapterName for chapter in chapterList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Topic <span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="topicName" name="topicName" ng-model="topicName"
+                                                                ng-change="getTopicDetails(levelId,termNm,subjectId,chapterId,topicName)"
+                                                                ng-options="previoustopic.id as
+											previoustopic.topicName for previoustopic in topicList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                     </div>
+                                                </div>
+
+                                                <div class="col-md-12 col-sm-8" ng-show="topicName">
+                                                    <table>
+
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Topic Name</th>
+                                                            <th>From Week</th>
+                                                            <th>To Week</th>
+                                                            <th>Page No</th>
+                                                            <th>Total Pages</th>
+                                                            <th>Workbook Activity</th>
+                                                            <th>&nbsp;</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody id="topicAdd" class="topicAdd">
+                                                        <tr id="topic" ng-repeat="topic in topicDetailsList">
+                                                            <td><input style="width: 90px" type="text" ng-model="topic.topicName" name="no[]" class="form-control" readonly></td>
+                                                            <td><input style="width: 90px" type="text" ng-model="topic.fromweek" name="no[]" class="form-control" readonly></td>
+                                                            <td><input style="width: 90px" type="text" ng-model="topic.toweek" name="no[]" class="form-control" readonly></td>
+                                                            <td><input style="width: 90px" type="text"  ng-model="topic.pageNo" name="pages[]"  class="form-control" readonly></td>
+                                                            <td><input  style="width: 90px" type="text"  ng-model="topic.totalPages" name="workActivity[]" class="form-control" readonly></td>
+                                                            <td><input  style="width: 110px" type="text"  ng-model="topic.activity" name="workActivity[]" class="form-control" readonly>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <div class="form-group" ng-show="topicName">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Learning Outcomes</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <textarea id="lessonPlanning" name="lessonPlanning"
+                                                               type="text"
+                                                               ng-model="lessonPlanning" maxlength="500"
+                                                               class="form-control input-md" autocomplete="off" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" ng-show="topicName">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Resources</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <textarea id="outcomesText" name="outcomesText"
+                                                               type="text"
+                                                               ng-model="outcomesText" maxlength="500"
+                                                               class="form-control input-md" autocomplete="off" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" ng-show="topicName">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Activities</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <textarea id="objective" name="objective"
+                                                               type="text"
+                                                               ng-model="objective" maxlength="500"
+                                                               class="form-control input-md" autocomplete="off" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" ng-show="topicName">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Islamic Integration</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <textarea id="introduction" name="introduction"
+                                                               type="text"
+                                                               ng-model="introduction" maxlength="500"
+                                                               class="form-control input-md" autocomplete="off" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" ng-show="topicName">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Thinking Comp. &Level</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <textarea id="immersion" name="immersion"
+                                                               type="text"
+                                                               ng-model="immersion" maxlength="500"
+                                                               class="form-control input-md" autocomplete="off"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" ng-show="topicName">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Remarks</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <textarea id="explanation" name="explanation"
+                                                               type="text"
+                                                               ng-model="explanation" maxlength="500"
+                                                               class="form-control input-md" autocomplete="off"/>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Assessment<span style="color: red">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" >
+                                                        <select name="" id="assessmentYes" ng-model="assessmentYes" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                            <option value="noassesment">No Assesment</option>
+                                                            <option value="simpleassesment">Simple Assesment</option>
+                                                            <option value="detailassesment">Detail Assesment</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div ng-show="assessmentYes!='noassesment'&&assessmentYes">
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Component Name</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="componentNm" name="componentNm" ng-model="componentNm" ng-change="compSubComp(componentNm)"
+                                                                    ng-options="component.componentId as component.componentName for component in componentList" class="form-control input-md">
+                                                                <option value="">Select Component</option>
+                                                            </select>
+
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">SubComponent</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="subComponent" name="subComponent" ng-model="subComponent"
+                                                                    ng-options="comp.subComponentId as comp.subComponentName for comp in subComponentList" ng-change="topicQuestion(topicName,subComponent)" class="form-control input-md">
+                                                                <option value="">Select Component</option>
+                                                            </select>
+
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" ng-show="assessmentYes=='simpleassesment'">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Maximum Marks</label>
+                                                        <div class="col-md-6 col-sm-6" >
+                                                            <input id="topic" name="textinput" type="text" num-with-out-space=""
+                                                                   placeholder="Maximum Marks" ng-model="maxMarks" class="form-control input-md">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" style="margin-top: 20px;" ng-show="assessmentYes=='detailassesment'">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Questions List</label>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div>
+                                                                <div class="wrapper">
+                                                                    <div class="multiselect" style="width: 98%;">
+                                                                        <div class="selectBox" ng-click="showCheckboxesq()">
+                                                                            <select style="padding: 7px 0px; width: 100%;    ">
+                                                                                <option>Select</option>
+
+                                                                            </select>
+                                                                            <div class="overSelectq"></div>
+                                                                        </div>
+                                                                        <div id="checkboxesq">
+                                                                            <label ng-repeat="ques in questionList">
+                                                                                <input type="checkbox"
+                                                                                       multiple="multiple"
+                                                                                       ng-model="ques.assessmentId"
+                                                                                       ng-click="selectQuestion(ques.assessmentDetailsId)"
+                                                                                       ng-value="ques.assessmentDetailsId" style="display: inline;width: 30px"/>{{ques.question}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Marks:{{ques.maxMarks}}</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--<div class="form-group">-->
+                                                    <!--<label class="col-md-4 col-sm-4 control-label" for="">Questions List</label>-->
+                                                    <!--<div class="col-md-6 col-sm-6" style="position:relative;">-->
+                                                    <!--<select id="subComponent" name="subComponent" ng-model="assessmentDetailsId"-->
+                                                    <!--ng-options="comp.assessmentDetailsId as comp.question for comp in questionList" class="form-control input-md">-->
+                                                    <!--<option value="">Select Component</option>-->
+                                                    <!--</select>-->
+
+
+                                                    <!--</div>-->
+                                                    <!--</div>-->
+
+                                                    <div  ng-show="assessmentYes=='detailassesment'">
+                                                        <div class="form-group" >
+                                                            <label class="col-md-4 col-sm-4 control-label" for="">Weightage</label>
+                                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                <input id="new" name="new"
+                                                                       type="text" readonly
+                                                                       ng-model="newComponent"
+                                                                       class="form-control input-md">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+
+
+                                                <div class="form-group" >
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Checked By:</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="observationReport" name="observationReport" ng-model="checkedBy"
+                                                                ng-options="employee.employeeName as employee.employeeName for employee in employeeList" class="form-control input-md">
+                                                            <option value="">Select Employee</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <h4 class="col-md-4 col-sm-4 control-label" for="">Date :</h4>
+                                                    <div class="col-md-6" >
+                                                        <p style="width: 180px" class="input-group">
+                                                            <input type="text" id="lessonPlanDate"
+                                                                   ng-model="lessonPlanDate" class="form-control"
+                                                                   readonly
+                                                                   uib-datepicker-popup="{{format}}"
+                                                                   is-open="popup2.opened"
+                                                                   datepicker-options="dateOptions"
+                                                                   close-text="Close"
+                                                                   alt-input-formats="altInputFormats"/>
+                                                            <span class="input-group-btn">
+                                                                     <button type="button" class="btn btn-default"
+                                                                             ng-click="open2()">
+                                                                         <i class="glyphicon glyphicon-calendar"></i></button>
+                                                                     </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <h4 class="col-md-4 col-sm-4 control-label" for="">Attach File :</h4>
+                                                <input type='file' accept='image/*' id="imageLoad" ng-model-instant
+                                                       onchange="angular.element(this).scope().imageUpload(event)"><br>
+                                                <img class="image-preview"
+                                                     style="width: 61px;height:50px;margin-left: 275px;" src={{fileName}}>
+                                                <br>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                        ng-click="saveLessonPlan('add_new_plan_modal')">Save
+                                </button>
+                                <button type="button" class="btn btn-primary hi_btn" ng-click="removeLessonPlan()"
+                                        data-dismiss="modal">Close
+                                </button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" id="add_new_Lesson_plan_import_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout" style="width: 805px;">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true" ng-click="removeSow()">&times;</span></button>
+                                <h4 id="plan-title" class="modal-title">Lesson Plan Import</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label" >Level<span style="color:red;">*</span></label>
+                                                <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                    <select id="levelId" name="levelId" ng-model="levelId"
+                                                            ng-change="levelClasses(levelId)"
+                                                            ng-options="grade.gradeId as
+											grade.gradeName for grade in gradeList" class="form-control input-md">
+                                                        <option value="">Select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label" >Subject<span style="color:red;">*</span></label>
+                                                <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                    <select id="subjectId" name="subjectId" ng-model="subjectId"
+                                                            ng-change="subjectChapter(subjectId)"
+                                                            ng-options="sub.subjectId as
+											sub.subjectName for sub in subjectList" class="form-control input-md">
+                                                        <option value="">Select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                        <div class="col-md-12 col-sm-8">
+                                            <form class="form-horizontal" id="details" method="post" >
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <a href="resource/ImpotSheets/LessonPlan.xlsx" download>Download ExcelSheet</a>
+                                                <div class="modal-body checkout-body">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="col-xs-5">
+                                                                <input type="file" name="myFile"
+                                                                       id="myFile"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-default" data-toggle="modal" ng-click="saveLessonPlanImportMaster()" ng-disabled="isDisabled">Save</button>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="removeSow()">Close</button>
+                                                </div>
+                                            </form>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="modal fade addCustomer" tabindex="-1" id="add_new_Assesment_modal" role="dialog"
+         data-backdrop="static"
+         aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content checkout">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 id="country-title" class="modal-title">Assesment Form</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <form class="form-horizontal" name="form">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <label class="col-md-4 col-sm-4 control-label" for="">Assessment</label>
+                                        <div class="col-md-6 col-sm-6" >
+                                            <select name="" id="assessmentYes" ng-model="assessmentYes" class="form-control input-md">
+                                                <option value="">Select</option>
+                                                <!--<option value="noassesment">No Assesment</option>-->
+                                                <option value="simpleassesment">Simple Assesment</option>
+                                                <option value="detailassesment">Detail Assesment</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div ng-show="assessmentYes!='noassesment'&&assessmentYes">
+                                        <div class="form-group" ng-show="assessmentYes=='simpleassesment'">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Maximum Marks</label>
+                                            <div class="col-md-6 col-sm-6" >
+                                                <input id="topic" name="textinput" type="text" num-with-out-space=""
+                                                       placeholder="Maximum Marks" ng-model="maxMarks" class="form-control input-md">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Component Name</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <select id="componentNm" name="componentNm" ng-model="componentNm" ng-change="compSubComp(componentNm)"
+                                                        ng-options="component.componentId as component.componentName for component in componentList" class="form-control input-md">
+                                                    <option value="">Select Component</option>
+                                                </select>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">SubComponent</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <select id="subComponent" name="subComponent" ng-model="subComponent"
+                                                        ng-options="comp.subComponentId as comp.subComponentName for comp in subComponentList" ng-change="topicQuestion(subComponent,componentNm)" class="form-control input-md">
+                                                    <option value="">Select Component</option>
+                                                </select>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-top: 20px;" ng-show="assessmentYes=='detailassesment'">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Questions List</label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <div>
+                                                    <div class="wrapper">
+                                                        <div class="multiselect" style="width: 98%;">
+                                                            <div class="selectBox" ng-click="showCheckboxesq()">
+                                                                <select style="padding: 7px 0px; width: 100%;    ">
+                                                                    <option>Select</option>
+
+                                                                </select>
+                                                                <div class="overSelectq"></div>
+                                                            </div>
+                                                            <div id="checkboxesq">
+                                                                <label ng-repeat="ques in questionList">
+                                                                    <input type="checkbox"
+                                                                           multiple="multiple"
+                                                                           ng-model="ques.assessmentId"
+                                                                           ng-click="selectQuestion(ques.assessmentDetailsId)"
+                                                                           ng-value="ques.assessmentDetailsId" style="display: inline;width: 30px"/>{{ques.question}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Marks:{{ques.maxMarks}}</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--<div class="form-group">-->
+                                        <!--<label class="col-md-4 col-sm-4 control-label" for="">Questions List</label>-->
+                                        <!--<div class="col-md-6 col-sm-6" style="position:relative;">-->
+                                        <!--<select id="subComponent" name="subComponent" ng-model="assessmentDetailsId"-->
+                                        <!--ng-options="comp.assessmentDetailsId as comp.question for comp in questionList" class="form-control input-md">-->
+                                        <!--<option value="">Select Component</option>-->
+                                        <!--</select>-->
+
+
+                                        <!--</div>-->
+                                        <!--</div>-->
+
+                                        <div ng-show="assessmentYes=='simpleassesment'">
+                                            <div class="form-group" >
+                                                <label class="col-md-4 col-sm-4 control-label" for="">Weightage</label>
+                                                <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                    <input id="new" name="new"
+                                                           type="text" readonly
+                                                           ng-model="newComponent"
+                                                           class="form-control input-md">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </fieldset>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                            data-target=".print-me" ng-click="saveLessonPlanAssesmentDetails()">Save
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <add-new-ass-submisssion></add-new-ass-submisssion>
+
+    <div class="modal fade addCustomer" tabindex="-1" id="add_new_detail_modal" role="dialog"
+         data-backdrop="static"
+         aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content checkout">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 id="topic-title" class="modal-title">Question Wise Marks</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <form class="form-horizontal" name="form">
+                                <fieldset>
+
+
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 col-sm-4 control-label">Teacher</label>
+                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                            <select id="teacher" name="teacher" ng-model="teacher" ng-change="getemployeeData(teacher)"
+                                                    ng-options="emp.employeeId as
+											emp.employeeName for emp in employeeList" class="form-control input-md">
+                                                <option value="">Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 col-sm-4 control-label" >Class<span style="color:red;">*</span></label>
+                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                            <select id="classId" name="classId" ng-model="classId"
+                                                    ng-change="getstd()"
+                                                    ng-options="class.classId as
+											class.className for class in classList" class="form-control input-md">
+                                                <option value="">Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" >
+                                        <label class="col-md-4 col-sm-4 control-label" for="">Date</label>
+                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                            <input id="date" name="date"
+                                                   type="text" readonly
+                                                   ng-model="date"
+                                                   class="form-control input-md">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" >
+                                        <label class="col-md-4 col-sm-4 control-label" for="">Topic</label>
+                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                            <input id="topic" name="topic"
+                                                   type="text" readonly
+                                                   ng-model="topicName"
+                                                   class="form-control input-md">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" >
+                                        <label class="col-md-4 col-sm-4 control-label" for="">Level</label>
+                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                            <input id="levelName" name="levelName"
+                                                   type="text" readonly
+                                                   ng-model="levelName"
+                                                   class="form-control input-md">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" >
+                                        <label class="col-md-4 col-sm-4 control-label" for="">Term</label>
+                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                            <input id="termName" name="termName"
+                                                   type="text" readonly
+                                                   ng-model="termName"
+                                                   class="form-control input-md">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" >
+                                        <label class="col-md-4 col-sm-4 control-label" for="">Subject</label>
+                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                            <input id="subjectName" name="subjectName"
+                                                   type="text" readonly
+                                                   ng-model="subjectName"
+                                                   class="form-control input-md">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" >
+                                        <label class="col-md-4 col-sm-4 control-label" for="">Chapter</label>
+                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                            <input id="chapterName" name="chapterName"
+                                                   type="text" readonly
+                                                   ng-model="chapterName"
+                                                   class="form-control input-md">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" >
+                                        <label class="col-md-4 col-sm-4 control-label" for="">Component</label>
+                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                            <input id="componentName" name="componentName"
+                                                   type="text" readonly
+                                                   ng-model="componentName"
+                                                   class="form-control input-md">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" >
+                                        <label class="col-md-4 col-sm-4 control-label" for="">Sub Component</label>
+                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                            <input id="subcomponentName" name="subcomponentName"
+                                                   type="text" readonly
+                                                   ng-model="subcomponentName"
+                                                   class="form-control input-md">
+                                        </div>
+                                    </div>
+                                    <!--<div class="form-group" >-->
+                                        <!--<label class="col-md-4 col-sm-4 control-label" for="">Component</label>-->
+                                        <!--<div class="col-md-6 col-sm-6" style="position:relative;">-->
+                                            <!--<input id="componentName" name="componentName"-->
+                                                   <!--type="text" readonly-->
+                                                   <!--ng-model="componentName"-->
+                                                   <!--class="form-control input-md">-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="form-group" >-->
+                                        <!--<label class="col-md-4 col-sm-4 control-label" for="">Sub Component</label>-->
+                                        <!--<div class="col-md-6 col-sm-6" style="position:relative;">-->
+                                            <!--<input id="subcomponentName" name="subcomponentName"-->
+                                                   <!--type="text" readonly-->
+                                                   <!--ng-model="subcomponentName"-->
+                                                   <!--class="form-control input-md">-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <div class="form-group">
+                                        <label class="col-md-4 col-sm-4 control-label" for="">Questions List</label>
+                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                            <select id="subjectId" name="subjectId" type="text"
+                                                    ng-model="assessmentDetailsId"    ng-options="class.assessmentDetailsId as
+											class.question for class in questionName" class="form-control input-md">
+                                                <option value="">Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 admission_border">
+                                        <table class="admission_table_1 table">
+                                            <tbody>
+
+
+                                            <tr>
+                                                <td colspan="2">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <td>Student</td>
+                                                            <td>Max Marks</td>
+                                                            <td>Marks</td>
+                                                            <td>Remarks</td>
+                                                            <tbody>
+                                                            <tr ng-repeat="sb in studentMap[assessmentDetailsId]">
+                                                                <td>{{sb.studentName}}</td>
+                                                                <td>{{sb.maxMarks}}</td>
+                                                                <td><input type="text" ng-model="sb.marks" ng-change="validateMarks(sb)">
+                                                                </td>
+                                                                <td><textarea type="text"
+                                                                              ng-model="sb.remarks"></textarea></td>
+                                                            </tr>
+                                                            </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal"
+                                                ng-disabled="isDisabled"
+                                                data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                                ng-click="saveAssessment('DetailAssesment')">Save
+                                        </button>
+                                        <button type="button" class="btn btn-primary hi_btn" ng-click="removeTopic()"
+                                                data-dismiss="modal">Close
+                                        </button>
+
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    $("#voluntryblock").hide();
+    // $("#involuntryblock").hide();
+    function  hideblock() {
+
+
+
+        if($("input[name='assessmentYess']:checked").val()=="voluntry"){
+            $("#voluntryblock").show();
+            $("#involuntryblock").hide();
+        }
+
+        if($("input[name='assessmentYess']:checked").val()=="involuntry"){
+            $("#voluntryblock").hide();
+            $("#involuntryblock").show();
+        }
+
+
+    }
+</script>

@@ -1,0 +1,210 @@
+<style>
+    .modal-content{
+        width:696px;
+    }
+    .modal-footer {
+        padding: 5px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    fieldset {
+        min-width: 0;
+        padding: 10px;
+        margin: 0;
+        border: 0;
+    }
+    .form-control {
+        display: block;
+        width: 171px;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+</style>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row" >
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Approval</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel-body" style="height: 65px;">
+                            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                                <form class="form-horizontal ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <p class="input-group" style="display: block;">
+                                                <input id="search_academic" name="textinput" type="text"
+                                                       placeholder="Search" ng-model="searchText" class="form-control input-md"
+                                                       ng-keyup="$event.keyCode == 13 ? getApprovalList(searchText) : null"/>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-7">
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addApprover()">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="fixed-table-container">
+                        <div class="table_wrapfixed-table-container-inner">
+                            <div class="header-background"></div>
+                            <table data-toggle="table" data-cache="false" data-height="299" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                                <thead>
+                                <tr>
+                                    <th data-field="cntryname">
+                                        <div class="th-inner" align="center">Approver 1</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Approver 2</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Approver 3</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Actions</div></th>
+
+                                </tr>
+                                </thead>
+                                <tbody id="parentTable">
+                                <input type="hidden" ng-model="approvalId" value="{{approvalList.approvalId}}"/>
+                                <tr ng-repeat="approval in approvalList|filter:searchText">
+                                    <td>{{approval.approver1}}</td>
+                                    <td>{{approval.approver2}}</td>
+                                    <td>{{approval.approver3}}</td>
+                                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editAprroval(approval)">Edit</button>
+                                    <button type="button" class="btn btn-primary hi_btn"  ng-click="deleteApproval(approval)">Delete</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-12 pagination_">
+                            <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"
+                                    ng-disabled="first"
+                                    ng-click="getPaginationList('firstPage')" ng-model="first">First
+                            </button>
+                            <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"
+                                    ng-disabled="prev"
+                                    ng-click="getPaginationList('prevPage')" ng-model="prev">Prev
+                            </button>
+                            <button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"
+                                    ng-click="getPaginationList('nextPage')" value="next"
+                                    ng-class="{'diabled-class': next}" ng-model="next">Next
+                            </button>
+                            <button type="button" class="btn btn-default hi_btn"
+                                    ng-click="getPaginationList('lastPage')" ng-class="{'diabled-class': last}"
+                                    ng-disabled="last"
+                                    ng-model="last">Last
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" id="add_new_approval_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 id="approval-title" class="modal-title">Add Approvals</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >1st Approver</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="Approver1" name="Approver1"
+                                                                ng-model="approver1"
+                                                                ng-options="roles.role as roles.role for roles in rolesList"
+                                                                class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label">2nd Approver</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="Approver2" name="Approver2"
+                                                                ng-model="approver2"
+                                                                ng-options="roles.role as roles.role for roles in rolesList"
+                                                                class="form-control input-md">
+                                                        <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label">3rd Aprrover</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="Approver3" name="Approver3"
+                                                                ng-model="approver3"
+                                                                ng-options="roles.role as roles.role for roles in rolesList"
+                                                                class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </fieldset>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                        ng-click="saveApproval('add_new_approval_modal')">Save
+                                </button>
+                                <button type="button" class="btn btn-primary hi_btn" ng-click="removeApproval()"
+                                        data-dismiss="modal">Close
+                                </button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

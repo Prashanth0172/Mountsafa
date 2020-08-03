@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row" >
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Payment Method</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="panel">
+        <div class="panel-body" style="height: 65px;">
+           <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+               <form class="form-horizontal ng-pristine ng-valid">
+                    <div class="form-group"   ng-show="userPermission.search_payment_method!='InActive'">
+                        <div class="col-sm-12">
+                             <p class="input-group" style="display: block;">
+                                 <input id="search_payment_method" name="textinput"  type="text"
+                                        placeholder="Search Payment Method" ng-model="paymentMethodSearchText" class="form-control input-md"
+                                        ng-keyup="$event.keyCode == 13 ? getPaymentMethodList() : null" />
+                            </p>
+                        </div>
+                    </div>
+            	</form>
+            </div>
+
+            <div class="col-lg-7 col-md-9 col-sm-9" >
+               
+                <div class="form-group">
+                    <div class="col-sm-2"  ng-show="userPermission.add_payment!='InActive'">
+                         <button id="add_payment" type="button" class="btn btn-default hi_btn"  ng-click="addNewPaymentMethodPopulate()">Add</button>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4">
+                        <button ng-if="ButtonStatus=='InActive'" type="submit" id="paymthd_inactive_button"
+                                class="btn btn-default" data-toggle="modal"
+                                ng-model="inactiveStatus" data-target=".print-me"
+                                ng-click="inactivePaymentMethod()"
+                                ng-show="userPermission.paymthd_inactive_button!='InActive'">
+                            {{ButtonStatus}}
+                        </button>
+                        <button ng-if="ButtonStatus!='InActive'" type="submit" id="paymthd_active_button"
+                                class="btn btn-default" data-toggle="modal"
+                                ng-model="inactiveStatus" data-target=".print-me"
+                                ng-click="inactivePaymentMethod()"
+                                ng-show="userPermission.paymthd_active_button!='InActive'">
+                            {{ButtonStatus}}
+                        </button>
+                    </div>
+                    <div class="col-lg-3 col-md-5 col-sm-5" ng-show="userPermission.select_type_payment!='InActive'">
+                        <span class="custom-dropdown custom-dropdown--white">
+                            <select ng-model="exportsType"  id="select_type_payment" class="form-control "  ng-change="GetValue()">
+                                <option value=""> Select Type</option>
+                                <option value="pdf"> Pdf</option>
+                                <option value="excel"> Excel</option>
+                            </select>
+                        </span>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4" ng-show="userPermission.export_payment!='InActive'">
+                        <div ng-if="exportsType"><a href="/pos/paymentMethodExport?val={{paymentMethodSearchText}}&type={{exportsType}}&statustype={{inactiveStatus}}"><button id="export_payment" type="button" class="btn btn-default hi_btn">Export</button></a>
+                    </div>
+                        <div ng-if="!exportsType" ng-show="userPermission.export_payment!='InActive'">
+                            <button type="button" class="btn btn-default hi_btn">Export</button>
+                        </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="fixed-table-container">
+            <div class="table_wrap fixed-table-container-inner">
+                <div class="header-background"> </div>
+                <table data-toggle="table" data-cache="false" data-height="299"  style="margin-bottom: 0px;" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                    <thead>
+                    <tr>
+                        <th data-field="agentname"><div class="th-inner">Payment Name</div></th>
+                        <th data-field="agentdesc"><div class="th-inner">Description</div></th>
+                        <th data-field="agentemail"><div class="th-inner">Payment Type</div></th>
+                            <th data-field="edit" ng-show="userPermission.payment_edit!='InActive'"><div class="th-inner">Action</div></th>
+						<!--<th data-field="edit"><div class="th-inner">{{ButtonStatus}}</div></th>-->
+                    </tr>
+                    </thead>
+                    <tbody id="parentTable">
+                    <tr ng-repeat="paymentMethod in paymentMethodList| filter:searchText">
+                        <td>{{paymentMethod.paymentmethodName}}</td>
+                        <td>{{paymentMethod.paymentmethodDescription}}</td>
+                        <td>{{paymentMethod.paymentmethodType}}</td>
+                        <td ng-show="userPermission.payment_edit!='InActive'"><button type="button" href="javascript:void(0)" class="btn btn-primary hi_btn"  ng-click="editPayment(paymentMethod)">Edit</button></td>
+                    </tr>
+                 </tbody>
+                </table>
+            </div>
+            <!--Button added for pagination @rahul-->
+
+        </div>
+    <div class="form-group">
+        <div class="col-sm-12 pagination_">
+
+            <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}" ng-disabled="first"
+                    ng-click="getPaymentMethodList('','firstPage')"  ng-model="first">First
+            </button>
+            <button type="button" class="btn btn-default hi_btn"  ng-class="{'diabled-class': prev}" ng-disabled="prev"
+                    ng-click="getPaymentMethodList('','prevPage')"   ng-model="prev">Prev
+            </button>
+            <button type="button" class="btn btn-default hi_btn"  name="next" ng-disabled="next"
+                    ng-click="getPaymentMethodList('','nextPage')"  value="next"  ng-class="{'diabled-class': next}" ng-model="next">Next
+            </button>
+            <button type="button" class="btn btn-default hi_btn"
+                    ng-click="getPaymentMethodList('','lastPage')"   ng-class="{'diabled-class': last}" ng-disabled="last"
+                    ng-model="last">Last
+            </button>
+        </div>
+        <div align="center"><span style="color: red;"></span></div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade ExchangeRate" tabindex="-1" id="add_new_PaymentMethod_modal" role="dialog" data-backdrop="static"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content checkout">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 id = "payment-title" class="modal-title">Add Payment Method</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <form class="form-horizontal" name="paymentmethod">
+                            <fieldset>
+                                <div class="form-group" ng-show="userPermission.payment_name!='InActive'">
+                                    <input type="hidden" ng-model="setupobj.paymentmethodId" value="{{setupobj.paymentmethodId}}"/>
+                                    <label class="col-md-4 col-sm-4 control-label" for="">Payment Name </label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <input id="payment_name" name="paymentmethodName"
+                                               type="text" placeholder="payment Name"
+                                               ng-pattern="/[aA-zZ\s]$/"  alpha-with-space=""
+                                               ng-model="paymentmethodNameText" maxlength="30"
+                                               ng-value="setupobj.paymentmethodName"
+                                               class="form-control input-md" autocomplete="off" required>
+                                        <p class="error" ng-show="paymentmethod.paymentmethodName.$error.pattern">Alphabets only, please.</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-show="userPermission.payment_name!='InActive'">
+                                    <label class="col-md-4 col-sm-4 control-label" for="">Payment Description</label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <textarea id="payment_description" name="paymentmethodDescription"
+                                                  allowpattern="[a-z]"
+                                                  type="text" placeholder="payment Description"
+                                                  ng-model="paymentmethodDescriptionText" maxlength="250"
+                                                  ng-value="setupobj.paymentmethodDescription"
+                                                  class="form-control input-md"> </textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-show="userPermission.payment_type!='InActive'">
+                                    <label class="col-md-4 col-sm-4 control-label" for="">Payment Type</label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <select name="paymentmethodType" id="payment_type"
+                                                ng-value="setupobj.paymentmethodType"
+                                                ng-model="paymentmethodTypeText" class="form-control input-md">
+                                            <option value="">Select Your Payment Type</option>
+                                            <option value="Cash">Cash</option>
+                                            <option value="Bank">Bank</option>
+                                            <option value="Voucher">Voucher</option>
+                                            <option value="Card">Card</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-show="userPermission.account_type!='InActive'">
+                                    <label class="control-label col-md-4 col-sm-4" for=""> Account type:</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="hidden" ng-model="CashAccountIDText">
+                                        <input id="select_account_type" name="accountName"
+                                               type="text" class="form-control input-md"
+                                               placeholder="Select Account Type"
+                                               ng-value="setupobj.accountMaster.account_name"
+                                               ng-model="accountname"
+                                               ng-click ="getAccountList(accountSearchText,false)">
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-show="userPermission.status_payment!='InActive'">
+                                    <label class="col-md-4 col-sm-4 control-label" for="">Status</label>
+                                    <div class="col-md-6 col-sm-6" >
+                                        <select name="paymentMethodText" id="status_payment" ng-model="paymentMethodText"  class="form-control input-md" required>
+                                            <option value="Active">Active</option>
+                                            <option value="InActive">InActive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group"  ng-show="userPermission.defaulttype_payment!='InActive'">
+                                    <label class="col-md-4 col-sm-4 control-label" >Default Type</label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <input id="defaulttype_payment" type="checkbox" ng-model="defaultType" ng-value="defaultType">
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-show="paymentmethodTypeText=='Voucher'">
+                                    <label class="col-md-4 col-sm-4 control-label" >Validate Voucher</label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <input id="validateVoucher" type="checkbox" ng-model="validateVoucher" >
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled"
+                        data-target=".print-me" ng-disabled="!paymentmethod.$valid" ng-click="saveOrUpdatePayment('add_new_PaymentMethod_modal')">Save
+                </button>
+                <button type="button" class="btn btn-default" ng-click="removePaymentMethodDetails()" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade selectItem" tabindex="-1" id="selectAccount" role="dialog" data-backdrop="static"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content checkout">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Select Account</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Search: <input class="form-control input-sm" ng-change="getAccountList(searchText)"
+                                              ng-change-delay="300" ng-model="searchText"></label>
+                        <div class="table-responsive">
+                            <table class="table table-striped table_costomize itemlisttable" id="">
+                                <thead>
+                                <tr>
+                                    <th data-field="name">Account Code</th>
+                                    <th data-field="desc">Account Name</th>
+                                    <th data-field="desc">Upper Level Name</th>
+                                    <th data-field="desc">Account Type</th>
+                                    <!--<th data-field="desc">Item Category Name</th>-->
+                                </tr>
+                                </thead>
+                                <tbody id="parentTable">
+                                <tr ng-repeat="account in accountList| filter:searchText"
+                                    ng-click="appendAccount(account)">
+                                    <td hidden>{{account.accountid}}</td>
+                                    <td>{{account.stringAccountCode}}</td>
+                                    <td class="word_break">{{account.accountname}}</td>
+                                    <td>{{account.accountGroup}}</td>
+                                    <td>{{account.aparcode}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</body>
+</html>

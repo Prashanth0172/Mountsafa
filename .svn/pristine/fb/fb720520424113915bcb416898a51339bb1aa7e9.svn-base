@@ -1,0 +1,1721 @@
+<style>
+    .form-horizontal .control-label {
+        padding-top: 7px;
+        margin-bottom: 0;
+        text-align: left !important;
+        padding: 10px 0 0 10px !important;
+    }
+
+    .modal-footer .btn + .btn {
+        margin-bottom: 0;
+        margin-left: 4px !important;
+        margin-right: 0px !important;
+    }
+
+    .modal-title {
+        margin: 0;
+        line-height: -31.571429 !important;
+    }
+
+    .form-horizontal .form-group {
+        margin-right: -5px;
+        margin-left: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 5px;
+    }
+
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .modal-footer {
+        padding: 23px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 100;
+    }
+
+    .btn btn-primary back {
+        padding: 5px;
+    }
+
+    table>tbody>tr>td {
+        text-align: left !important;
+    }
+
+
+</style>
+<div class="container-fluid">
+    <div class="container cus_main_row">
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>EMPLOYEE APPRAISAL RECORD</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel-body" style="height: 65px;">
+                            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                                <form class="form-horizontal ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <p class="input-group" style="display: block;">
+                                                <input id="search_academic" name="textinput" type="text"
+                                                       placeholder="Search" ng-model="searchText" class="form-control input-md"
+                                                       ng-keyup="$event.keyCode == 13 ? getSarList(searchText) : null"/>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-7">
+
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addNewAdmission()">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="fixed-table-container">
+                        <div class="table_wrapfixed-table-container-inner">
+                            <div class="header-background"></div>
+                            <table data-toggle="table" data-cache="false" data-height="299" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                                <thead>
+                                <tr>
+                                    <th data-field="cntryname">
+                                        <div class="th-inner">Staff Name</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Desigmnation</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Department</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Date of Join</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Action</div></th>
+                                </tr>
+                                </thead>
+                                <tbody id="parentTable">
+                                <input type="hidden" ng-model="apprId" value="{{sarList.apprId}}"/>
+                                <tr ng-repeat="employee in sarList|filter:searchText">
+                                    <td >{{employee.staffName}}</td>
+                                    <td>{{employee.staffDesig}}</td>
+                                    <td>{{employee.staffDepar}}</td>
+                                    <td>{{employee.dateJoined| date:'dd/MM/yyyy'}}</td>
+                                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editEmployesar(employee)">Edit</button></td>
+                                </tr>
+                                <tr ng-if="searchText!=''&&(sarList|filter:searchText).length==0">
+                                    <td colspan="4" style="color: red; font-weight: bold">No Records Found</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="modal fade Student" tabindex="-1" id="add_new_hr_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-lg" style="width: 1000px !important;">
+                        <div class="modal-content checkout" style="width: 1000px!important;">
+                            <div class="modal-header">
+                                <button type="button" class="close"
+                                        data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 id="hr-title" class="modal-title" style="color:red;" align="center">
+                                    Application Form</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="student">
+                                            <fieldset>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade in active" id="sub_step12">
+                                                        <div class="fixed-table-container">
+                                                            <div class="table_wrapfixed-table-container-inner">
+                                                                <div class="header-background"></div>
+                                                                <label style="color:#337ab7" ;>PART I-PARTICULARS</label>
+
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" >Employee Name<span style="color:red;">*</span></label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <select id="staffName" name="staffName"
+                                                                                    ng-model="staffName"
+                                                                                    ng-change="getEmployeeByName(staffName)"
+                                                                                    ng-options="employee.employeeName as employee.employeeName for employee in employeeList"
+                                                                                    class="form-control input-md">
+                                                                                <option value="">Select Employee</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">Designation<span style="color:red;">*</span></label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <input id="staffDesig" name="staffDesig"
+                                                                                   type="text"
+                                                                                   ng-model="staffDesig" maxlength="125"
+                                                                                   class="form-control input-md" autocomplete="off" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">Department<span style="color:red;">*</span></label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <input id="staffDepar" name="staffDepar"
+                                                                                   type="text"
+                                                                                   ng-model="staffDepar" maxlength="125"
+                                                                                   class="form-control input-md" autocomplete="off" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">Date Joined</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <p class="input-group">
+                                                                                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dateJoined" is-open="popup1.opened" datepicker-options="dateOptions" readonly ng-="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                                                                <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">Date Confirmed</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <p class="input-group">
+                                                                                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dateConfirmed" is-open="popup2.opened" datepicker-options="dateOptions" readonly ng-="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                                                                <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>  </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">Supervisory Officer</label>
+                                                                        <div class="col-md-6 col-sm-6"
+                                                                             style="position:relative;">
+                                                                            <input id="staffsupervisory" name="staffsupervisory"
+                                                                                   type="text"
+                                                                                   ng-model="staffsupervisory" maxlength="125"
+                                                                                   class="form-control input-md"
+                                                                                   autocomplete="off" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">Principal</label>
+                                                                        <div class="col-md-6 col-sm-6">
+                                                                            <input id="principal" name="principal"
+                                                                                   type="text"
+                                                                                   ng-model="principal" maxlength="125"
+                                                                                   class="form-control input-md"
+                                                                                   autocomplete="off" >
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">Age</label>
+                                                                        <div class="col-md-6 col-sm-6">
+                                                                            <input id="staffage" name="staffage"
+                                                                                   type="text" num-with-out-space=""
+                                                                                   ng-model="staffage" maxlength="125" readonly
+                                                                                   class="form-control input-md"
+                                                                                   autocomplete="off" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">Job Level</label>
+                                                                        <div class="col-md-6 col-sm-6">
+                                                                            <input id="jobgrade" name="jobgrade"
+                                                                                   type="text" alpha-with-space=""
+                                                                                   ng-model="jobgrade" maxlength="125"
+                                                                                   class="form-control input-md"
+                                                                                   autocomplete="off" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">Medical Leave Taken</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <input id="medleavetaken" name="medleavetaken"
+                                                                                   type="text"
+                                                                                   ng-model="medleavetaken" maxlength="125"
+                                                                                   class="form-control input-md" autocomplete="off" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">Emergency leave taken</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <input id="emergencyTaken" name="emergencyTaken"
+                                                                                   type="text"
+                                                                                   ng-model="emergencyTaken" maxlength="125"
+                                                                                   class="form-control input-md" autocomplete="off" >
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">Period Under Review</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <input id="PerUndReveiw" name="PerUndReveiw"
+                                                                                   type="text"
+                                                                                   ng-model="PerUndReveiw" maxlength="125"
+                                                                                   class="form-control input-md" autocomplete="off" >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">Length in current post</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <input id="currentPost" name="currentPost"
+                                                                                   type="text"
+                                                                                   ng-model="currentPost" maxlength="125" num-with-out-space=""
+                                                                                   class="form-control input-md" autocomplete="off" >
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="sub_step22">
+                                                        <div class="fixed-table-container">
+                                                            <div class="table_wrapfixed-table-container-inner">
+                                                                <table width="100%"   border="1">
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>&nbsp;</td>
+                                                                        <td width="9%">Employee</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td width="3%">1.</td>
+                                                                        <td width="82%"><strong>Organization of Work</strong></td>
+                                                                        <td colspan="2" align="center">( Please select appropriate one)</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Plans and controls work very well</td>
+                                                                        <td><input type="radio" name="emp1" ng-model="type" value="emp5" id="emp5" />5</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Perform job in a direct and orderly manner</td>
+                                                                        <td><input type="radio" name="emp2" ng-model="type" value="emp4"  id="emp4" />4</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Satisfactory Plans and control work</td>
+                                                                        <td><input type="radio" name="emp3" ng-model="type" value="emp3"  id="emp3" />3</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Approach to work haphazard</td>
+                                                                        <td><input type="radio" name="emp4" ng-model="type" value="emp2" id="emp2" />2</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Poor planning and not organized</td>
+                                                                        <td><input type="radio" name="emp5" ng-model="type" value="emp1" id="emp1" />1</td>
+                                                                        </tr>
+
+                                                                </table>
+                                                                <table width="100%" border="1">
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>&nbsp;</td>
+                                                                        <td width="9%"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td width="3%">2.</td>
+                                                                        <td width="82%"><strong>Knowledge of Job</strong></td>
+                                                                        <td colspan="2" align="center"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Has exceptional eide knowledge of job</td>
+                                                                        <td><input type="radio" name="koj1" ng-model="koj" value="koj5" id="koj5" />5</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Above average understanding of job requirement</td>
+                                                                        <td><input type="radio" name="koj2" ng-model="koj" value="koj4"  id="koj4" />4</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Satisfactory; able to cope with most situations</td>
+                                                                        <td><input type="radio" name="koj3" ng-model="koj" value="koj3"  id="koj3" />3</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Fair Knowledge of job but requires some assistance</td>
+                                                                        <td><input type="radio" name="koj2" ng-model="koj" value="koj2" id="koj2" />2</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Requires a lot of assistance</td>
+                                                                        <td><input type="radio" name="koj1" ng-model="koj" value="koj1" id="koj1" />1</td>
+                                                                    </tr>
+
+                                                                </table>
+                                                                <table width="100%" border="1">
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>&nbsp;</td>
+                                                                        <td width="9%"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td width="3%">3.</td>
+                                                                        <td width="82%"><strong>Quality of Work</strong></td>
+                                                                        <td colspan="2" align="center"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Produces constant high standard of work with no errors</td>
+                                                                        <td><input type="radio" name="qof5" ng-model="qof" value="qof5" id="qof5" />5</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Good quality of work with few errors/above average</td>
+                                                                        <td><input type="radio" name="qof4" ng-model="qof" value="qof4"  id="qof4" />4</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>*Satisfactory quality of work ,subject to normal supervision</td>
+                                                                        <td><input type="radio" name="qof3" ng-model="qof" value="qof3"  id="qof3" />3</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* work requires close supervision and generally falls short of requirements</td>
+                                                                        <td><input type="radio" name="qof2" ng-model="qof" value="qof2" id="qof2" />2</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Unsatisfactory in all respects</td>
+                                                                        <td><input type="radio" name="qof1" ng-model="qof" value="qof1" id="qof1" />1</td>
+                                                                    </tr>
+
+                                                                </table>
+                                                                <table width="100%" border="1">
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>&nbsp;</td>
+                                                                        <td width="9%"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td width="3%">4.</td>
+                                                                        <td width="82%"><strong>Initiative</strong></td>
+                                                                        <td colspan="2" align="center"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Extremely enterprising and successful in all actions;very proactive</td>
+                                                                        <td><input type="radio" name="initiative5" ng-model="initiative" value="initiative5" id="initiative5" />5</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* self -reliant and competent;attempts to improve self and job</td>
+                                                                        <td><input type="radio" name="initiative4" ng-model="initiative" value="initiative4"  id="initiative4" />4</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* May step beyond basic job responsibility</td>
+                                                                        <td><input type="radio" name="initiative3" ng-model="initiative" value="initiative3"  id="initiative3" />3</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* seldom demonstrates orginally or assumes grater responsibility</td>
+                                                                        <td><input type="radio" name="initiative2" ng-model="initiative" value="initiative2" id="initiative2" />2</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* does routine jobs and lack orginality;lacks initivative;shuns responsibility</td>
+                                                                        <td><input type="radio" name="initiative1" ng-model="initiative" value="initiative1" id="initiative1" />1</td>
+                                                                    </tr>
+
+                                                                </table>
+                                                                <table width="100%" border="1">
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>&nbsp;</td>
+                                                                        <td width="9%"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td width="3%">5.</td>
+                                                                        <td width="82%"><strong>Neatness of Work</strong></td>
+                                                                        <td colspan="2" align="center"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Always produces very neat and tidy work</td>
+                                                                        <td><input type="radio" name="neatness1" ng-model="neatness" value="neatness5" id="neatness1" />5</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* usually writes neatly and legibly</td>
+                                                                        <td><input type="radio" name="neatness2" ng-model="neatness" value="neatness4"  id="neatness2" />4</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Adequate degree of neatness</td>
+                                                                        <td><input type="radio" name="neatness3" ng-model="neatness" value="neatness3"  id="neatness3" />3</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* At times,write untidily</td>
+                                                                        <td><input type="radio" name="neatness4" ng-model="neatness" value="neatness2" id="neatness2" />2</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Produces untidy and illegible work</td>
+                                                                        <td><input type="radio" name="neatness5" ng-model="neatness" value="neatness1" id="neatness1" />1</td>
+                                                                    </tr>
+
+                                                                </table>
+                                                                <table width="100%" border="1">
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>&nbsp;</td>
+                                                                        <td width="9%"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td width="3%">6.</td>
+                                                                        <td width="82%"><strong>Creative use of school facilities-Lab,MM room,van</strong></td>
+                                                                        <td colspan="2" align="center"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* very frequent use</td>
+                                                                        <td><input type="radio" name="cusf5" ng-model="cusf" value="cusf5" id="cusf5" />5</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* frequent use</td>
+                                                                        <td><input type="radio" name="cusf4" ng-model="cusf" value="cusf4"  id="cusf4" />4</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Satisfactory use</td>
+                                                                        <td><input type="radio" name="cusf3" ng-model="cusf" value="cusf3"  id="cusf3" />3</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>*Does not meet monthly use</td>
+                                                                        <td><input type="radio" name="cusf2" ng-model="cusf" value="cusf2" id="cusf2" />2</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Poor use</td>
+                                                                        <td><input type="radio" name="cusf1" ng-model="cusf" value="cusf1" id="cusf1" />1</td>
+                                                                    </tr>
+
+                                                                </table>
+                                                                <table width="100%" border="1">
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>&nbsp;</td>
+                                                                        <td width="9%"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td width="3%">7.</td>
+                                                                        <td width="82%"><strong>Responsibility</strong></td>
+                                                                        <td colspan="2" align="center"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Shows complete dedication. requires no supervision; very keen to accept responsibilities </td>
+                                                                        <td><input type="radio" name="responsibility5" ng-model="responsibility" value="responsibility5" id="responsibility5" />5</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Requires minimum supervision .Accepts responsibilities willingly  </td>
+                                                                        <td><input type="radio" name="responsibility4" ng-model="responsibility" value="responsibility4"  id="responsibility4" />4</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* usually trustworthy,but requires supervision occasionally.Accepts fair share of responsibilities</td>
+                                                                        <td><input type="radio" name="responsibility3" ng-model="responsibility" value="responsibility3"  id="responsibility3" />3</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Needs encouragement and supervision to accept responsibilities</td>
+                                                                        <td><input type="radio" name="responsibility2" ng-model="responsibility" value="responsibility2" id="responsibility2" />2</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Is unreliable and needs constant supervision.Always evades responsibilities</td>
+                                                                        <td><input type="radio" name="responsibility1" ng-model="responsibility" value="responsibility1" id="responsibility1" />1</td>
+                                                                    </tr>
+
+                                                                </table>
+                                                                <table width="100%" border="1">
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>&nbsp;</td>
+                                                                        <td width="9%"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td width="3%">8.</td>
+                                                                        <td width="82%"><strong>Drive & Determination</strong></td>
+                                                                        <td colspan="2" align="center"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Exceptionally akeen and energetic; always work hard </td>
+                                                                        <td><input type="radio" name="dd5" ng-model="dd" value="dd5" id="dd5" />5</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Has drive and determination</td>
+                                                                        <td><input type="radio" name="dd4" ng-model="dd" value="dd4"  id="dd4" />4</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Usually work hard, but could apply himself/herself better</td>
+                                                                        <td><input type="radio" name="dd3" ng-model="dd" value="dd3"  id="dd3" />3</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Wastes time;easily discouraged</td>
+                                                                        <td><input type="radio" name="dd2" ng-model="dd" value="dd2" id="dd2" />2</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>&nbsp;</td>
+                                                                        <td>* Easily distracted;not attentive</td>
+                                                                        <td><input type="radio" name="dd1" ng-model="dd" value="dd1" id="dd1" />1</td>
+                                                                    </tr>
+
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="sub_step23">
+                                                        <div class="tab-pane fade active in" id="agreement_information">
+
+                                                            <table width="100%" border="1">
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td width="9%"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="3%">9.</td>
+                                                                    <td width="82%"><strong>Acceptance of instructions</strong></td>
+                                                                    <td colspan="2" align="center"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Readily accepts and promptly carries out instructions at all times</td>
+                                                                    <td><input type="radio" name="aoi1" ng-model="aoi" value="aoi5" id="aoi1" />5</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Accepts and promptly carries out instructions</td>
+                                                                    <td><input type="radio" name="aoi2" ng-model="aoi" value="aoi4"  id="aoi2" />4</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Generally accepts and promptly carries out instructions</td>
+                                                                    <td><input type="radio" name="aoi3" ng-model="aoi" value="aoi3"  id="aoi3" />3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Tends to give excuses for not accepting instructions or tends to grumble/complain when given instructions</td>
+                                                                    <td><input type="radio" name="aoi4" ng-model="aoi" value="aoi2" id="aoi4" />2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Get things done only when asked to do so</td>
+                                                                    <td><input type="radio" name="aoi5" ng-model="aoi" value="aoi1" id="aoi5" />1</td>
+                                                                </tr>
+
+                                                            </table>
+
+                                                            <table width="100%" border="1">
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td width="9%"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="3%">10.</td>
+                                                                    <td width="82%"><strong>Puctuality & Abesenteeism</strong></td>
+                                                                    <td colspan="2" align="center"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>*Always punctual and has not been absent for work</td>
+                                                                    <td><input type="radio" name="paa1" ng-model="paa" value="paa5" id="paa1" />5</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Arrives punctually most of the time</td>
+                                                                    <td><input type="radio" name="paa2" ng-model="paa" value="paa4"  id="paa2" />4</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>*Occasionally arrives late, but good reasons given</td>
+                                                                    <td><input type="radio" name="paa3" ng-model="paa" value="paa3"  id="paa3" />3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Occasionally arrives late, no excuse or doubtful reasons given</td>
+                                                                    <td><input type="radio" name="paa4" ng-model="paa" value="paa2" id="paa4" />2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Habitual late-corner</td>
+                                                                    <td><input type="radio" name="paa5" ng-model="paa" value="paa1" id="paa5" />1</td>
+                                                                </tr>
+
+                                                            </table>
+
+
+                                                            <table width="100%" border="1">
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td width="9%"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="3%">11.</td>
+                                                                    <td width="82%"><strong>Stabilty in Stressful Situation</strong></td>
+                                                                    <td colspan="2" align="center"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Continous to be very stable and productive under pressure</td>
+                                                                    <td><input type="radio" name="sss1" ng-model="sss" value="sss5" id="sss1" />5</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Works well under pressure</td>
+                                                                    <td><input type="radio" name="sss2" ng-model="sss" value="sss4"  id="sss2" />4</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Just manages to withstand pressure</td>
+                                                                    <td><input type="radio" name="sss3" ng-model="sss" value="sss3"  id="sss3" />3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Occasionally fails to withstand pressure</td>
+                                                                    <td><input type="radio" name="sss4" ng-model="sss" value="sss2" id="sss4" />2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* wilts under pressure</td>
+                                                                    <td><input type="radio" name="sss5" ng-model="sss" value="sss1" id="sss5" />1</td>
+                                                                </tr>
+
+                                                            </table>
+
+                                                            <table width="100%" border="1">
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td width="9%"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="3%">12.</td>
+                                                                    <td width="82%"><strong>Personality Traits</strong></td>
+                                                                    <td colspan="2" align="center"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Thorougly dependable</td>
+                                                                    <td><input type="radio" name="pts1" ng-model="pts" value="pts5" id="pts1" />5</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Mosts dependable and loyal</td>
+                                                                    <td><input type="radio" name="pts2" ng-model="pts" value="pts4"  id="pts2" />4</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Generally dependable and promotes company's image</td>
+                                                                    <td><input type="radio" name="pts3" ng-model="pts" value="pts3"  id="pts3" />3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Response not always predictable</td>
+                                                                    <td><input type="radio" name="pts4" ng-model="pts" value="pts2" id="pts4" />2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Self-interest uppermost; destructive criticism of company</td>
+                                                                    <td><input type="radio" name="pts5" ng-model="pts" value="pts1" id="pts5" />1</td>
+                                                                </tr>
+
+                                                            </table>
+
+                                                            <table width="100%" border="1">
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td width="9%"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="3%">13.</td>
+                                                                    <td width="82%"><strong>Human Relations</strong></td>
+                                                                    <td colspan="2" align="center"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Excellent behavior, well-like by all associates and extremely co-operative</td>
+                                                                    <td><input type="radio" name="hrs1" ng-model="hrs" value="hrs5" id="hrs1" />5</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Always gets along with all associates and works very well with others</td>
+                                                                    <td><input type="radio" name="hrs2" ng-model="hrs" value="hrs4"  id="hrs2" />4</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Generally gets along along well with most people and is a willing member of the team</td>
+                                                                    <td><input type="radio" name="hrs3" ng-model="hrs" value="hrs3"  id="hrs3" />3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Does not give all possible co-operation; temperamental</td>
+                                                                    <td><input type="radio" name="hrs4" ng-model="hrs" value="hrs2" id="hrs4" />2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Unsatisfatory/disturbs harmony</td>
+                                                                    <td><input type="radio" name="hrs5" ng-model="hrs" value="hrs1" id="hrs5" />1</td>
+                                                                </tr>
+
+                                                            </table>
+
+
+                                                            <table width="100%" border="1">
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td width="9%"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="3%">14.</td>
+                                                                    <td width="82%"><strong>Adaptability</strong></td>
+                                                                    <td colspan="2" align="center"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Exceptionally able to cope with new situatuions</td>
+                                                                    <td><input type="radio" name="adapt1" ng-model="adapt" value="adapt5" id="adapt1" />5</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Learns quickly and adapts to change and job enlargement</td>
+                                                                    <td><input type="radio" name="adapt2" ng-model="adapt" value="adapt4"  id="adapt2" />4</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Accepts adjustments in reasonable time</td>
+                                                                    <td><input type="radio" name="adapt3" ng-model="adapt" value="adapt3"  id="adapt3" />3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Slow/ difficult to adjust; needs extra coaching</td>
+                                                                    <td><input type="radio" name="adapt4" ng-model="adapt" value="adapt2" id="adapt4" />2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Does not adjust, has difficulty breaking old habits; dislikes changes</td>
+                                                                    <td><input type="radio" name="adapt5" ng-model="adapt" value="adapt1" id="adapt5" />1</td>
+                                                                </tr>
+
+                                                            </table>
+
+
+                                                            <table width="100%" border="1">
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td width="9%"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="3%">15.</td>
+                                                                    <td width="82%"><strong>Expression - Oral & Written</strong></td>
+                                                                    <td colspan="2" align="center"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Outstanding ability to express thoughts and ideas</td>
+                                                                    <td><input type="radio" name="eow1" ng-model="eow" value="eow5" id="eow1" />5</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>*Good powers of expression</td>
+                                                                    <td><input type="radio" name="eow2" ng-model="eow" value="eow4"  id="eow2" />4</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Fair abilty to express thoughts and ideas </td>
+                                                                    <td><input type="radio" name="eow3" ng-model="eow" value="eow3"  id="eow3" />3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Less than average skill in speaking and writing</td>
+                                                                    <td><input type="radio" name="eow4" ng-model="eow" value="eow2" id="eow4" />2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Unsatisfactory ability in expressing self</td>
+                                                                    <td><input type="radio" name="eow5" ng-model="eow" value="eow1" id="eow5" />1</td>
+                                                                </tr>
+
+                                                            </table>
+
+
+                                                            <table width="100%" border="1">
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td width="9%"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="3%">16.</td>
+                                                                    <td width="82%"><strong>Commitment</strong></td>
+                                                                    <td colspan="2" align="center"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Always higly Motivated and dedicated to job and demonstrates to strong sense of responsibility</td>
+                                                                    <td><input type="radio" name="commit1" ng-model="commit" value="eow5" id="commit1" />5</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Usually dedicated and motivated to job and demonstrates sense and responsibilty</td>
+                                                                    <td><input type="radio" name="commit2" ng-model="commit" value="eow4"  id="commit2" />4</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Sometimes motivated and attempts to show dedication to job with some sense of resonsibility </td>
+                                                                    <td><input type="radio" name="commit3" ng-model="commit" value="eow3"  id="commit3" />3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Needs to be motivated, lacks dedication to job with sense of responsibility</td>
+                                                                    <td><input type="radio" name="commit4" ng-model="commit" value="eow2" id="commit4" />2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Not dedicated to job and shows no sense of responsibility</td>
+                                                                    <td><input type="radio" name="commit5" ng-model="commit" value="eow1" id="commit5" />1</td>
+                                                                </tr>
+
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="sub_step24">
+                                                        <div class="tab-pane fade active in" id="agreement_information">
+
+
+                                                            <table width="100%" border="1">
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td width="9%"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="3%">17.</td>
+                                                                    <td width="82%"><strong>Communication</strong></td>
+                                                                    <td colspan="2" align="center"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Effictively communicates with all levels of people in written and verbal forms</td>
+                                                                    <td><input type="radio" name="comm1" ng-model="comm" value="comm5" id="comm1" />5</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Able to communicate with all levels of people in both written and verbal forms satisfactorily</td>
+                                                                    <td><input type="radio" name="comm2" ng-model="comm" value="comm4"  id="comm2" />4</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Communicates with all levels of people in both written and verbal forms satisfactorily only under guidance </td>
+                                                                    <td><input type="radio" name="comm3" ng-model="comm" value="comm3"  id="comm3" />3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Able to communicate with all levels of people only either verbally or in written form </td>
+                                                                    <td><input type="radio" name="comm4" ng-model="comm" value="comm2" id="comm4" />2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Lacks communication skill</td>
+                                                                    <td><input type="radio" name="comm5" ng-model="comm" value="comm1" id="comm5" />1</td>
+                                                                </tr>
+
+                                                            </table>
+
+
+                                                            <table width="100%" border="1">
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td width="9%"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="3%">18.</td>
+                                                                    <td width="82%"><strong>Asertiveness</strong></td>
+                                                                    <td colspan="2" align="center"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Highly assertive, always not afraid to speak out his/her mind</td>
+                                                                    <td><input type="radio" name="assert1" ng-model="asserts" value="assert5" id="assert1" />5</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Fairly assertive, usually not afraid to speak out his/her mind</td>
+                                                                    <td><input type="radio" name="assert2" ng-model="asserts" value="assert4"  id="assert2" />4</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Average, sometimes not afraid to speak out his/her mind</td>
+                                                                    <td><input type="radio" name="assert3" ng-model="asserts" value="assert3"  id="assert3" />3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Assertive only when he/she is very sure the party is in the wrong </td>
+                                                                    <td><input type="radio" name="assert4" ng-model="asserts" value="assert2" id="assert4" />2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Not assertive at all - afraid to speak out his/her mind and tries to avoid the issue </td>
+                                                                    <td><input type="radio" name="assert5" ng-model="asserts" value="assert1" id="assert5" />1</td>
+                                                                </tr>
+
+                                                            </table>
+
+                                                            <table width="100%" border="1">
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td width="9%"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="3%">19.</td>
+                                                                    <td width="82%"><strong>Problem-Solving</strong></td>
+                                                                    <td colspan="2" align="center"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Strong analytical skills and ability to recommend effective solutions</td>
+                                                                    <td><input type="radio" name="psl1" ng-model="psl" value="psl5" id="psl1" />5</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Good Analytical skills and usually able to recommend effective solutions </td>
+                                                                    <td><input type="radio" name="psl2" ng-model="psl" value="psl4"  id="psl2" />4</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Able to identify causes of problems and provide solutions only with the help of others </td>
+                                                                    <td><input type="radio" name="psl3" ng-model="psl" value="psl3"  id="psl3" />3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Unable to identify the causes of problems</td>
+                                                                    <td><input type="radio" name="psl4" ng-model="psl" value="psl2" id="psl4" />2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Avoids problems by not taking any risks or pushing them on to others </td>
+                                                                    <td><input type="radio" name="psl5" ng-model="psl" value="psl1" id="psl5" />1</td>
+                                                                </tr>
+
+                                                            </table>
+
+                                                            <table width="100%" border="1">
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td width="9%"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="3%">20.</td>
+                                                                    <td width="82%"><strong>Setting Objectives</strong></td>
+                                                                    <td colspan="2" align="center"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Always sets consistently high standards for department</td>
+                                                                    <td><input type="radio" name="sos1" ng-model="sos" value="sos5" id="sos1" />5</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Usually sets high standards for department </td>
+                                                                    <td><input type="radio" name="sos2" ng-model="sos" value="sos4"  id="sos2" />4</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Sometimes sets high standards for department</td>
+                                                                    <td><input type="radio" name="sos3" ng-model="sos" value="sos3"  id="sos3" />3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Needs to reminded about departmental standards</td>
+                                                                    <td><input type="radio" name="sos4" ng-model="sos" value="sos2" id="sos4" />2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Makes no efforts in maintaining standards required for the dapartment </td>
+                                                                    <td><input type="radio" name="sos5" ng-model="sos" value="sos1" id="sos5" />1</td>
+                                                                </tr>
+
+                                                            </table>
+
+
+                                                            <table width="100%" border="1">
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td width="9%"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="3%">21.</td>
+                                                                    <td width="82%"><strong>Leadership</strong></td>
+                                                                    <td colspan="2" align="center"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Outstanding leader who inspires others to excel beyond their capabilities</td>
+                                                                    <td><input type="radio" name="leader1" ng-model="leader" value="leader5" id="leader1" />5</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Good leader who promotes self-development in others </td>
+                                                                    <td><input type="radio" name="leader2" ng-model="leader" value="leader4"  id="leader2" />4</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Capable and coompetent leader</td>
+                                                                    <td><input type="radio" name="leader3" ng-model="leader" value="leader3"  id="leader3" />3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* can only lead or control a group under guidence</td>
+                                                                    <td><input type="radio" name="leader4" ng-model="leader" value="leader2" id="leader4" />2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Lacks leadership qualities </td>
+                                                                    <td><input type="radio" name="leader5" ng-model="leader" value="leader1" id="leader5" />1</td>
+                                                                </tr>
+
+                                                            </table>
+
+
+                                                            <table width="100%" border="1">
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td width="9%"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="3%">22.</td>
+                                                                    <td width="82%"><strong>Team Building</strong></td>
+                                                                    <td colspan="2" align="center"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Effectively leads,motivates and works closely with the team</td>
+                                                                    <td><input type="radio" name="tbg1" ng-model="tbg" value="tbg5" id="tbg1" />5</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Able to lead, motivate and work closely with the team </td>
+                                                                    <td><input type="radio" name="tbg2" ng-model="tbg" value="tbg4"  id="tbg2" />4</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Generally capable of leading, motivating and working with the team</td>
+                                                                    <td><input type="radio" name="tbg3" ng-model="tbg" value="tbg3"  id="tbg3" />3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* can only lead and work with the team under guidance</td>
+                                                                    <td><input type="radio" name="tbg4" ng-model="tbg" value="tbg2" id="tbg4" />2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Unable to lead, motivate and work together with any team </td>
+                                                                    <td><input type="radio" name="tbg5" ng-model="tbg" value="tbg1" id="tbg5" />1</td>
+                                                                </tr>
+
+                                                            </table>
+
+
+                                                            <table width="100%" border="1">
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td width="9%"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="3%">23.</td>
+                                                                    <td width="82%"><strong>Delegation</strong></td>
+                                                                    <td colspan="2" align="center"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Effectively delegates to subordinates with clear directives and guidelines</td>
+                                                                    <td><input type="radio" name="deleg1" ng-model="deleg" value="deleg5" id="deleg1" />5</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Able to delegate to subordinates with clear diectives and guidelines </td>
+                                                                    <td><input type="radio" name="deleg2" ng-model="deleg" value="deleg4"  id="deleg2" />4</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Can only delegate to subordinates with appropriate directives and guidelines under guidance</td>
+                                                                    <td><input type="radio" name="deleg3" ng-model="deleg" value="deleg3"  id="deleg3" />3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Delegates to subordinates without giving clear directives and guidelines</td>
+                                                                    <td><input type="radio" name="deleg4" ng-model="deleg" value="deleg2" id="deleg4" />2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Unable to delegate to subordinates </td>
+                                                                    <td><input type="radio" name="deleg5" ng-model="deleg" value="deleg1" id="deleg5" />1</td>
+                                                                </tr>
+
+                                                            </table>
+
+
+
+
+
+
+
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="sub_step25">
+                                                        <div class="tab-pane fade active in" id="agreement_information">
+
+
+
+                                                            <table width="100%" border="1">
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td width="9%"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="3%">24.</td>
+                                                                    <td width="82%"><strong>Developing Subordinates</strong></td>
+                                                                    <td colspan="2" align="center"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Constantly discusses with career interests, provide advice and feedback to staff and inspires them to strive for the best</td>
+                                                                    <td><input type="radio" name="dss1" ng-model="dss" value="dss5" id="dss1" />5</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Occassionally holds discussion with staff and encourages self-development of staff </td>
+                                                                    <td><input type="radio" name="dss2" ng-model="dss" value="dss4"  id="dss2" />4</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Attempts to communicate with staff and identify their development needs</td>
+                                                                    <td><input type="radio" name="dss3" ng-model="dss" value="dss3"  id="dss3" />3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Only communicates with self and motivates them when necessary</td>
+                                                                    <td><input type="radio" name="dss4" ng-model="dss" value="dss2" id="dss4" />2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Makes no effort to understand staff and identify their development needs</td>
+                                                                    <td><input type="radio" name="dss5" ng-model="dss" value="dss1" id="dss5" />1</td>
+                                                                </tr>
+
+                                                            </table>
+
+
+                                                            <table width="100%" border="1">
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td width="9%"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="3%">25.</td>
+                                                                    <td width="82%"><strong>Planning</strong></td>
+                                                                    <td colspan="2" align="center"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Always plans and sets realistic goals and achieve</td>
+                                                                    <td><input type="radio" name="plan1" ng-model="plan" value="plan5" id="plan1" />5</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Usually plans and sets realistic goals and achieve </td>
+                                                                    <td><input type="radio" name="plan2" ng-model="plan" value="plan4"  id="plan2" />4</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Sometimes plans and sets goals to achieve</td>
+                                                                    <td><input type="radio" name="plan3" ng-model="plan" value="plan3"  id="plan3" />3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Needs to be told to plan and set realistic goals</td>
+                                                                    <td><input type="radio" name="plan4" ng-model="plan" value="plan2" id="plan4" />2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Makes no effort in planning and setting goals</td>
+                                                                    <td><input type="radio" name="plan" ng-model="plan" value="plan1" id="plan5" />1</td>
+                                                                </tr>
+
+                                                            </table>
+
+
+                                                            <table width="100%" border="1">
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>&nbsp;</td>
+                                                                    <td width="9%"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="3%">26.</td>
+                                                                    <td width="82%"><strong>Organizing</strong></td>
+                                                                    <td colspan="2" align="center"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Independently Plans and carries out work in proper order</td>
+                                                                    <td><input type="radio" name="org1" ng-model="org" value="org5" id="org1" />5</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Plans and carries out work according to expectations  </td>
+                                                                    <td><input type="radio" name="org2" ng-model="org" value="org4"  id="org2" />4</td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Systematic in carrying out instructions</td>
+                                                                    <td><input type="radio" name="org3" ng-model="org" value="org3"  id="org3" />3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* sometimes requires director</td>
+                                                                    <td><input type="radio" name="org4" ng-model="org" value="org2" id="org4" />2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>&nbsp;</td>
+                                                                    <td>* Very disorganized</td>
+                                                                    <td><input type="radio" name="org5" ng-model="org" value="org1" id="org5" />1</td>
+                                                                </tr>
+
+                                                            </table>
+
+
+
+
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="tab-pane fade " id="sub_step26">
+                                                        <div class="fixed-table-container">
+                                                            <div class="table_wrapfixed-table-container-inner">
+                                                                <div class="header-background"></div>
+                                                                <div class="col-md-6">
+                                                                    <!--<h4 class="col-md-4 control-label"-->
+                                                                        <!--style="color:#337ab7" ;>PART IV-QUALITIES & PERSONAL DEV</h4>-->
+                                                                    <h4 style="color:#337ab7">&nbsp;&nbsp;PART IV-QUALITIES & PERSONAL DEV</h4>
+
+                                                                    <div class="form-group">
+
+                                                                        <P class="col-md-4 control-label" for="">Strength (Current knowledge, skills and abilities etc</P>
+                                                                        <div class="col-md-6" style="position:relative;">
+                                                                            <strong>
+                                                                                <textarea id="strength" name="strength"
+                                                                                       type="text"
+                                                                                       ng-model="strength" alpha-with-space
+                                                                                          class="form-control input-md" ></textarea>
+                                                                            </strong>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <P class="col-md-4 col-sm-4 control-label" for="">Recommendation for Enhancement-(Short term - job assignments for him/her to be promoted/transferred to. Indicate term)</P>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <textarea id="enhancement" name="enhancement"
+                                                                                   type="text"
+                                                                                   ng-model="enhancement" maxlength="125"
+                                                                                      class="form-control input-md" autocomplete="off" ></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <P class="col-md-4 col-sm-4 control-label" for="">Weakness - (Current Knowledge,skills and abilities etc)</P>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <textarea id="weakness" name="weakness"
+                                                                                   type="text"
+                                                                                   ng-model="weakness" maxlength="125"
+                                                                                      class="form-control input-md" autocomplete="off" ></textarea>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <P class="col-md-4 col-sm-4 control-label" for="">Recommended Development Programme - (State specific actions planned to assist him/her to achieve goals/improve.)</P>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <textarea id="programme" name="programme"
+                                                                                   type="text"
+                                                                                   ng-model="programme" maxlength="125"
+                                                                                      class="form-control input-md" autocomplete="off" ></textarea>
+                                                                        </div>
+                                                                    </div>
+
+                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade " id="sub_step27">
+                                                        <div class="fixed-table-container">
+                                                            <div class="table_wrapfixed-table-container-inner">
+                                                                <div class="header-background"></div>
+                                                                <div class="col-md-6">
+                                                                    <!--<h4 class="col-md-4 control-label"-->
+                                                                        <!--style="color:#337ab7" ;>PART V-EDUCATION, TRAINING & DEV</h4>-->
+                                                                    <h4 style="color:#337ab7">&nbsp;&nbsp;PART V-EDUCATION, TRAINING & DEV</h4>
+
+
+                                                                    <table id="sarList" class="table table-bordered table-striped" style="padding: 0 20px;" ng-su>
+                                                                        <thead>
+                                                                        <tr style="background: #FFFFFF;">
+                                                                            <td colspan="4" style="text-align: center;">Actual Programmes/Courses Attended</td>
+
+                                                                        </tr>
+                                                                        <tr style="background: #FFFFFF;">
+                                                                            <td><span style="color: black;text-align: center;">Courses attended</span></td>
+                                                                            <td><span style="color: black;text-align: center;">Place where courses was done</span> </td>
+                                                                            <td><span style="color: black;text-align: center;">Period of course</span></td>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody class="coursesattend">
+
+                                                                        <tr id="admission2"  ng-repeat="course in coursedetails">
+                                                                            <td>
+                                                                                <input type="text" ng-model="course.attended" value="" name="attended[]">
+                                                                            </td>
+                                                                            <td>
+                                                                                <input type="text" ng-model="course.place" value="" name="place[]">
+                                                                            </td>
+                                                                            <td>
+                                                                                <input type="text" ng-model="course.period" value="" maxlength="255" name="period[]">
+                                                                                <button type="button" ng-click="remove()" class="btn btn-danger remove"  >X</button>
+
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+
+                                                                    </table>
+
+                                                                    <div style="padding: 0 20px;">
+                                                                        <input type="button" value="Add New" class="btn btn-default mb-20" ng-click="addNewformDetails()">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <P class="col-md-4 col-sm-4 control-label" for="">Recommended/proposed programmes/courses</P>
+                                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <textarea id="proposed" name="proposed"
+                                                                                      type="text"
+                                                                                      ng-model="proposed" maxlength="125"
+                                                                                      class="form-control input-md" autocomplete="off" ></textarea>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade " id="sub_step28">
+                                                        <div class="fixed-table-container">
+                                                            <div class="table_wrapfixed-table-container-inner">
+                                                                <div class="header-background"></div>
+                                                                <div class="col-md-6">
+                                                                    <!--<h4 class="col-md-4 control-label"-->
+                                                                        <!--style="color:#337ab7" ;>PART VI-EMPLOYEE'S FEEDBACK(To be completed by the Employee during interview)</h4>-->
+                                                                    <h4 style="color:#337ab7">&nbsp;&nbsp;PART VI-EMPLOYEE'S FEEDBACK(To be completed by the Employee during interview)</h4>
+                                                                    <div class="form-group">
+                                                                        <P class="col-md-4 control-label" for="">Have you encountered any major difficulties in carrying out your work?if yes,please elaborate</P>
+                                                                        <div class="col-md-6" style="position:relative;">
+                                                                            <strong>
+                                                                                <textarea id="encountered" name="encountered"
+                                                                                          type="text"
+                                                                                          ng-model="encountered" alpha-with-space
+                                                                                          class="form-control input-md" ></textarea>
+                                                                            </strong>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <P class="col-md-4 col-sm-4 control-label" for="">Please provide any suggestions for you, your peers/supervisors which will ensure effective and efficient team work and to avoid/minimize the difficulties in item #1</P>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <textarea id="efficient" name="efficient"
+                                                                                      type="text"
+                                                                                      ng-model="efficient" maxlength="125"
+                                                                                      class="form-control input-md" autocomplete="off" ></textarea>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade " id="sub_step29">
+                                                        <div class="fixed-table-container">
+                                                            <div class="table_wrapfixed-table-container-inner">
+                                                                <div class="header-background"></div>
+                                                                <div class="col-md-6">
+                                                                    <!--<h4 class="col-md-4 control-label"-->
+                                                                        <!--style="color:#337ab7" ;>PART VII-GOALS/OBJECTIVES FOR NEXT REVIEW(this should discussed with employee concerned)</h4>-->
+                                                                    <h4 style="color:#337ab7">&nbsp;&nbsp;PART VII-GOALS/OBJECTIVES FOR NEXT REVIEW(this should discussed with employee concerned)</h4>
+                                                                    <div class="form-group">
+                                                                        <P class="col-md-4 control-label" for="">Employee's agreement and improvement plans promises.</P>
+                                                                        <div class="col-md-6" style="position:relative;">
+                                                                            <strong>
+                                                                                <textarea id="agreement" name="agreement"
+                                                                                          type="text"
+                                                                                          ng-model="agreement" alpha-with-space
+                                                                                          class="form-control input-md" ></textarea>
+                                                                            </strong>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade " id="sub_step30">
+                                                        <div class="fixed-table-container">
+                                                            <div class="table_wrapfixed-table-container-inner">
+                                                                <div class="header-background"></div>
+                                                                <div class="col-md-6">
+                                                                    <!--<h4 class="col-md-4 control-label"-->
+                                                                        <!--style="color:#337ab7" ;>PART VIII-APPRAISAL INTERVIEW & REVIEW</h4>-->
+                                                                    <h4 style="color:#337ab7">&nbsp;&nbsp;PART VIII-APPRAISAL INTERVIEW & REVIEW</h4>
+                                                                    <div class="form-group">
+                                                                        <P class="col-md-4 control-label" for="">Employee's Comments (reaction to this appraisal)</P>
+                                                                        <div class="col-md-6" style="position:relative;">
+                                                                            <strong>
+                                                                                <textarea id="reaction" name="reaction"
+                                                                                          type="text"
+                                                                                          ng-model="reaction" alpha-with-space
+                                                                                          class="form-control input-md" ></textarea>
+                                                                            </strong>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">Signature</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <textarea id="signature" name="signature"
+                                                                                      type="text"
+                                                                                      ng-model="signature"
+                                                                                      class="form-control input-md" autocomplete="off" ></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">Name</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <textarea id="ename" name="ename"
+                                                                                      type="text"
+                                                                                      ng-model="ename"
+                                                                                      class="form-control input-md" autocomplete="off" ></textarea>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 col-sm-4 control-label" for="">Interview Date</label>
+                                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                                            <p class="input-group">
+                                                                                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="interview" is-open="popup2.opened" datepicker-options="dateOptions" ng-="true" close-text="Close" readonly alt-input-formats="altInputFormats" />
+                                                                                <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                </div>
+                                            </fieldset>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer" style="border:none !important;">
+                                <a class="btn btn-primary back" id="back1" href="javascript:void(0)"
+                                   ng-click="back_wizardEdit()" data-toggle="tab" data-step="2">Back</a>
+                                <a class="btn btn-primary hi_btn next" id="next" href="javascript:void(0)"
+                                   ng-click="next_wizardEdit();" data-toggle="tab"
+                                   data-step="2" style="color:#D5ECFF">Next</a>
+                                <a class="btn btn-primary hi_btn next" id="next1" href="javascript:void(0)"
+                                   ng-click="next_wizardEdit1();" data-toggle="tab"
+                                   data-step="2" style="color:#D5ECFF" >Next</a>
+                                <a class="btn btn-primary hi_btn next" id="next2" href="javascript:void(0)"
+                                   ng-click="next_wizardEdit2();" data-toggle="tab"
+                                   data-step="2" style="color:#D5ECFF" >Next</a>
+                                <a class="btn btn-primary hi_btn next" id="next3" href="javascript:void(0)"
+                                   ng-click="next_wizardEdit3();" data-toggle="tab"
+                                   data-step="2" style="color:#D5ECFF" >Next</a>
+                                <a class="btn btn-primary hi_btn next" id="next4" href="javascript:void(0)"
+                                   ng-click="next_wizardEdit4();" data-toggle="tab"
+                                   data-step="2" style="color:#D5ECFF" >Next</a>
+                                <a class="btn btn-primary hi_btn next" id="next5" href="javascript:void(0)"
+                                   ng-click="next_wizardEdit5();" data-toggle="tab"
+                                   data-step="2" style="color:#D5ECFF" >Next</a>
+                                <a class="btn btn-primary hi_btn next" id="next6" href="javascript:void(0)"
+                                   ng-click="next_wizardEdit6();" data-toggle="tab"
+                                   data-step="2" style="color:#D5ECFF" >Next</a>
+                                <a class="btn btn-primary back" id="back" href="javascript:void(0)"
+                                   ng-click="back_wizardEdit1()" data-toggle="tab" data-step="2" ng-hide="id='sub_step12'">Back</a>
+
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal"
+                                        id="saveId"  ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-click="saveEmployeesar()">Save
+                                </button>
+                                <button type="button" class="btn btn-primary hi_btn" data-dismiss="modal"
+                                        ng-click="removeSarDetails()"> Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <script>
+            $('body').delegate('.remove','click',function()
+            {
+                $(this).parent().parent().remove();
+            });
+
+            $("#sameas").click(function () {
+
+                if($(this).prop("checked") == true){
+
+                    $("#samecorrespended").hide();
+                }else{
+
+                    $("#samecorrespended").show();
+
+                }
+
+
+
+            })
+            function removereadonly(id,clicksid) {
+
+                if($("#"+clicksid).prop("checked") == true){
+
+                    $('#'+id).prop('readonly', false);
+                }else{
+
+                    $('#'+id).prop('readonly', true);
+
+                }
+
+            }
+            $("#next1").hide();
+            $("#next2").hide();
+            $("#next3").hide();
+            $("#next4").hide();
+            $("#next5").hide();
+            $("#next6").hide();
+            $("#saveId").hide();
+            $("#back1").hide();
+
+
+
+        </script>

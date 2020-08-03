@@ -1,0 +1,1340 @@
+<style>
+    .form-horizontal .control-label {
+        padding-top: 7px;
+        margin-bottom: 0;
+        text-align: left !important;
+        padding: 10px 0 0 10px !important;
+    }
+
+    .modal-footer .btn + .btn {
+        margin-bottom: 0;
+        margin-left: 4px !important;
+        margin-right: 0px !important;
+    }
+
+    .modal-title {
+        margin: 0;
+        line-height: -31.571429 !important;
+    }
+
+    .form-horizontal .form-group {
+        margin-right: -5px;
+        margin-left: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 5px;
+    }
+
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .modal-footer {
+        padding: 23px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 100;
+    }
+
+    .btn btn-primary back {
+        padding: 5px;
+    }
+
+    table>tbody>tr>td {
+    text-align: left !important;
+    }
+
+
+</style>
+<div class="container-fluid">
+    <div class="container cus_main_row">
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Admission</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel-body" style="height: 65px;">
+                            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                                <form class="form-horizontal ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <p class="input-group" style="display: block;">
+                                                <input id="search_academic" name="textinput" type="text"
+                                                       placeholder="Search" ng-model="searchText" class="form-control input-md"
+                                                       ng-keyup="$event.keyCode == 13 ? getAdmissionList(searchText) : null"/>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-7">
+
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addNewAdmission()">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="fixed-table-container">
+                        <div class="table_wrapfixed-table-container-inner">
+                            <div class="header-background"></div>
+                            <table data-toggle="table" data-cache="false" data-height="299" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                                <thead>
+                                <tr>
+                                    <th data-field="cntryname">
+                                        <div class="th-inner">Admin. No</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Image</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Student Name</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">DOB</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Class</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Gender</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Nationality</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner">Actions</div></th>
+
+                                </tr>
+                                </thead>
+                                <tbody id="parentTable">
+                                <input type="hidden" ng-model="studentId" value="{{admissionList.studentId}}"/>
+                                <tr ng-repeat="student in admissionList|filter:searchText">
+                                    <th>{{$index+1}}</th>
+                                    <td><img class="image-preview"
+                                             style="width:50px;height:50px; margin-left: 39px;" src={{student.studentPhoto}}></td>
+                                    <td>{{student.studentName}}</td>
+                                    <td>{{student.dateofbirth}}</td>
+                                    <td>{{student.className}}</td>
+                                    <td>{{student.gender}}</td>
+                                    <td>{{student.nationality}}</td>
+
+                                    <td>
+                                        <button type="button" class="btn btn-primary hi_btn"
+                                                ng-click="editAdmission(student)">Edit
+                                        </button>
+
+                                        <button type="button" class="btn btn-primary hi_btn"
+                                                ng-click="viewAdmission(student)">View
+                                        </button>
+                                        <button type="button" class="btn btn-primary hi_btn"
+                                                ng-click="addNewFee(student.acdYearId,student.gradeId,student)">Fee Details
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr ng-if="searchText!=''&&(admissionList|filter:searchText).length==0">
+                                    <td colspan="5" style="color: red; font-weight: bold">No Records Found</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-sm-12 pagination_">
+                            <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"
+                                    ng-disabled="first"
+                                    ng-click="getAdmissionList('firstPage')" ng-model="first">First
+                            </button>
+                            <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"
+                                    ng-disabled="prev"
+                                    ng-click="getAdmissionList('prevPage')" ng-model="prev">Prev
+                            </button>
+                            <button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"
+                                    ng-click="getAdmissionList('nextPage')" value="next"
+                                    ng-class="{'diabled-class': next}" ng-model="next">Next
+                            </button>
+                            <button type="button" class="btn btn-default hi_btn"
+                                    ng-click="getAdmissionList('lastPage')" ng-class="{'diabled-class': last}"
+                                    ng-disabled="last"
+                                    ng-model="last">Last
+                            </button>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="modal fade Student" tabindex="-1" id="add_new_fee_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-lg" style="width: 1000px !important;">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close"
+                                        data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true" ng-click="removeAdmissioDetails()">&times;</span></button>
+                                <h4 id="fee-title" class="modal-title" style="color:red;" align="center">
+                                    Fee Detials</h4>
+                            </div>
+                            <div class="table_wrapfixed-table-container-inner">
+                                <label class="col-md-4 control-label" for="currency"
+                                       style="color:#337ab7" ;>Fee Configuration</label>
+                                <div class="header-background"></div>
+                                <table data-toggle="table" data-cache="false"
+                                       data-height="299"
+                                       class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th class="th-inner" data-field="edit"
+                                            style="width: 25%;height: 10% ;font-size: 10px!important;"
+                                            data-field="cntryname">
+                                            <div class="th-inner">Fee Name</div>
+                                        </th>
+                                        <th class="th-inner" data-field="edit"
+                                            style="width: 11%;height: 10%;font-size: 10px !important;"
+                                            data-field="edit">
+                                            <div class="th-inner">Fee Amount</div>
+                                        </th>
+                                        <th class="th-inner" data-field="edit"
+                                            style="width: 10px ;height: 10%;font-size: 10px!important;"
+                                            data-field="edit">
+                                            <div class="th-inner">Discount</div>
+                                        </th>
+                                        <th class="th-inner" data-field="edit"
+                                            style="width: 20% ;height: 10%;font-size: 10px!important;"
+                                            data-field="edit">
+                                            <div class="th-inner">Discount Type</div>
+                                        </th>
+                                        <th class="th-inner" data-field="edit"
+                                            style="height: 10px ;font-size: 10px!important;"
+                                            data-field="edit">
+                                            <div class="th-inner">Payable</div>
+                                        </th>
+                                        <th class="th-inner" data-field="edit"
+                                            style="height: 10px ;font-size: 10px!important;"
+                                            data-field="edit" data-field="edit">
+                                            <div class="th-inner">Installments</div>
+                                        </th>
+                                        <th class="th-inner" data-field="edit"
+                                            style="width: 8px;height: 10%;font-size: 10px !important;"
+                                            data-field="edit">
+                                            <div class="th-inner">Instalments Amount
+                                            </div>
+                                        </th>
+                                        <th class="th-inner" data-field="edit"
+                                            style="width: 29%;height: 10%;font-size: 10px !important;"
+                                            data-field="edit">
+                                            <div class="th-inner">Due Date</div>
+                                        </th>
+                                        <th class="th-inner" data-field="edit"
+                                            style="width: 15px;height: 10%;font-size: 10px !important;"
+                                            data-field="edit">
+                                            <div class="th-inner">Remarks</div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="parentTable"
+                                           ng-repeat="student in selectedFeeList"
+                                           class="studentList"
+                                           ng-init="sectionIndex = $index">
+                                    <tr>
+                                        <td>
+                                            <div><input id="checkBox" type="checkBox"
+                                                        ng-model="student.checkBox"
+                                                        ng-disabled="student.paidAmt>0||student.feeTypeStatus==false"
+                                                        ng-change="getTotal(student.checkbox)"/>
+                                            </div>
+                                        </td>
+                                        <!--<td hidden>{{student.studentId}}</td>-->
+                                        <td colspan="1"
+                                            style="width: 15%;height: 10% !important;text-align: left">
+                                            {{student.feeTypeName}}
+                                        </td>
+                                        <td colspan="1"
+                                            style="width: 10%;height: 10% !important;text-align: right">
+                                            {{student.feeAmount|number:0}}
+                                        </td>
+                                        <td ng-show="student.checkBox===true"><input
+                                                type="text" style="text-align:right"
+                                                ng-change="configDiscount(student.discount,$index)"
+                                                ng-model-options="{debounce: 1000}"
+                                                placeholder="Discount" num-with-space
+                                                maxlength="9"
+                                                ng-model="student.discount"
+                                                ng-disabled="student.paidAmt>0">
+                                        </td>
+                                        <td ng-show="student.checkBox===false"
+                                            style="text-align: right">
+                                            {{student.discount}}
+                                        </td>
+                                        <td><select id="discountId" name="discountId"
+                                                    ng-model="student.discountType"
+                                                    ng-disabled="student.paidAmt>0" ng-options="discount.discountType as
+											                                          discount.discountType for discount in discountTypeList"
+                                                    class="form-control input-md">
+                                            <option value="">Select</option>
+                                        </select>
+                                        </td>
+                                        <td colspan="1"
+                                            style="width: 10%;height: 10% !important;text-align: right">
+                                            {{student.payingFee|number:0}}
+                                        </td>
+                                        <td ng-show="student.value==='true'&&student.checkBox===true">
+                                            <input style="text-align:right" type="text"
+                                                   ng-change="configDiscount(student.discount,$index)"
+                                                   placeholder="No.Of Inst"
+                                                   num-with-space maxlength="9"
+                                                   ng-model="student.installments"
+                                                   ng-disabled="student.paidAmt>0"/>
+                                        </td>
+                                        <td ng-show="student.value==='false'||student.checkBox===false"
+                                            colspan="1"
+                                            style="width: 10% ;height: 10%!important;text-align: right">
+                                            {{student.installments}}
+                                        </td>
+                                        <td ng-show="student.value==='true'&&student.checkBox===true">
+                                            <input type="text" style="text-align: right"
+                                                   placeholder="InstallmentAmount"
+                                                   num-with-space maxlength="9"
+                                                   ng-change="editSelectedFeeList(student,$index,0)"
+                                                   ng-model="student.installmentsPojosList[0].installmentsAmount"
+                                                   ng-disabled="student.paidAmt>0">
+                                        </td>
+                                        <td ng-show="student.value==='false'||student.checkBox===false"
+                                            style="text-align: right">
+                                            {{student.installmentsPojosList[0].installmentsAmount|number:0}}
+                                        </td>
+                                        <td ng-show="student.checkBox===true">
+                                            <div style="position:relative;">
+                                                <p class="input-group">
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           ng-disabled="student.paidAmt>0"
+                                                           uib-datepicker-popup="{{format}}"
+                                                           ng-change="editSelectedFeeList(student,$index,0)"
+                                                           ng-model="student.installmentsPojosList[0].dueDate"
+                                                           is-open="$parent.opened[$index]"
+                                                           datepicker-options="dateOptions"
+                                                           ng-required="false"
+                                                           close-text="Close"/>
+                                                    <span class="input-group-btn">
+                                                                    <button type="button" class="btn btn-default"
+                                                                            ng-click="openCustom($event, $index)"
+                                                                            ng-disabled="student.paidAmt>0">
+                                                                    <i class="glyphicon glyphicon-calendar"></i>
+                                                                    </button>
+                                                                    </span>
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td ng-show="student.checkBox===false">
+                                            {{student.installmentsPojosList[0].dueDate|date:'dd/MM/yyyy'}}
+                                        </td>
+                                        <td ng-show="student.checkBox===true"><textarea
+                                                type="text"
+                                                ng-model="student.installmentsPojosList[0].discountRemarks"
+                                                maxlength="500"
+                                                ng-disabled="student.paidAmt>0"></textarea>
+                                        </td>
+                                        <td ng-show="student.checkBox===false"><textarea
+                                                type="text"
+                                                ng-model="student.discountRemarks"
+                                                maxlength="500" readonly></textarea>
+                                        </td>
+                                    </tr>
+
+                                    <tr ng-repeat-start="installment in student.installmentsPojosList"
+                                        ng-show="!$first">
+                                        <td colspan="7"></td>
+                                        <td ng-show="student.checkBox===true"><input
+                                                type="text" style="text-align: right"
+                                                ng-change="editSelectedFeeList(student,sectionIndex,$index)"
+                                                num-with-space
+                                                placeholder="InstallmentAmount"
+                                                maxlength="9"
+                                                ng-model="installment.installmentsAmount"
+                                                ng-disabled="student.paidAmt>0">
+                                        </td>
+                                        <td ng-show="student.checkBox===false">
+                                            {{installment.installmentsAmount}}
+                                        </td>
+                                        <td ng-show="student.checkBox===true">
+                                            <div style="position:relative;">
+                                                <p class="input-group">
+                                                    <input type="text"
+                                                           ng-disabled="student.paidAmt>0"
+                                                           class="form-control"
+                                                           uib-datepicker-popup="{{format}}"
+                                                           ng-model="installment.dueDate"
+                                                           is-open="student.installmentsPojosList[$index].opened"
+                                                           datepicker-options="dateOptions"
+                                                           ng-required="false"
+                                                           close-text="Close"/>
+                                                    <span class="input-group-btn">
+                                                                    <button type="button" class="btn btn-default"
+                                                                            ng-click="open($event,installment)">
+                                                                    <i class="glyphicon glyphicon-calendar"></i></button>
+                                                                    </span>
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td><textarea
+                                                type="text"
+                                                ng-model="installment.discountRemarks"
+                                                maxlength="500" ng-disabled="student.paidAmt>0"></textarea>
+                                        </td>
+                                        <td ng-show="student.checkBox===false">
+                                            {{installment.dueDate|date:'dd/MM/yyyy'}}
+                                        </td>
+                                        <td></td>
+                                    <tr ng-repeat-end></tr>
+                                    </tr>
+                                    </tbody>
+                                    <td><strong>Total</strong></td>
+                                    <td></td>
+                                    <td style="text-align: right"><strong>{{totalFeeValue|number:0}}</strong>
+                                    </td>
+                                    <td style="text-align: right"><strong>{{totalDiscountAmt|number:0}}</strong>
+                                    </td>
+                                    <td></td>
+                                    <td style="text-align: right"><strong>{{totalPayableAmt|number:0}}</strong>
+                                    </td>
+                                    <td style="text-align: right"><strong></strong></td>
+                                    <td style="text-align: right">
+                                        <strong>{{totalInstallmentsAmt|number:0}}</strong>
+                                    </td>
+                                    <td></td>
+                                    <td> </td>
+
+                                </table>
+                                </div>
+                            <div class="modal-footer" style="border:none !important;">
+                                <button type="button"  data-toggle="modal" class="btn btn-success pull-right" ng-click="saveAdmission()">Save</button>
+
+
+                            </div>
+
+                            </div>
+
+
+                    </div>
+
+
+                </div>
+                <add-new-admission></add-new-admission>
+
+                <div class="modal fade Student" tabindex="-1" id="lessionPlanMain_row" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-lg" style="width: 1000px !important;background-color: white !important;">
+                        <div align="center">
+                            <div class="recipt" style="width: 100%;">
+                                <img src={{logo}} style="width:10%;"/>
+                            </div>
+                            <b>
+                                <u>
+                                    <h2 style="font-family: fantasy">{{name}}</h2>
+                                </u>
+                            </b>
+                            <h4>{{Address}}</h4>
+                            <h4>{{organizationEmail}}</h4>
+                            <h4>{{gst}}</h4>
+                            <!--<h4>www.mountsafa.com</h4>-->
+
+<!--                            <div id="passport_photo" style="width: 150px;height: 150px;border:1px solid #ccc; margin:30px 0px; padding:30px 10px; background-color: #FFF;">-->
+<!--                                Pasport(2 Keping)  Passport Photo(2copies)-->
+<!--                            </div>-->
+                            <br/>
+                            <br/>
+                            <button type="button" id="printbuttonbtn" class="btn btn-primary hi_btn" style="left: -610px !important;" ng-click="admissionprintDivA5('lessionPlanMain_row')"
+                                    data-dismiss="modal">Print
+                            </button>
+                            <button type="button" id="closebtn" class="btn btn-primary hi_btn" style="left: -610px !important;" ng-click="removeIhes()"
+                                    data-dismiss="modal">Close
+                            </button>
+                            <div class="row">
+                                <div class="col-lg-12 admission_border">
+                                    <table class="admission_table_1 table">
+                                        <tbody>
+                                        <tr>
+                                            <td colspan="2" style="padding-left: 20px;">
+                                                <p>For office use only</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">Registration No </span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half">6-2018</span>
+                                            </td>
+
+                                            <td>
+                                                <span class="adm_title_half">Level</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half">{{gradeName}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">Class</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half">{{className}}</span>
+                                            </td>
+
+                                            <td>
+                                                <span class="adm_title_half">Semester</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half">{{semester}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td >
+                                                <span class="adm_title_half">Admission Date</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half">{{admindt|date:'dd/MM/yyyy'}}</span>
+                                            </td>
+
+                                            <td>&nbsp;
+
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 admission_border pt-10" style="padding-left: 80px;">
+                                    <p style="margin-left: -30px;">1. Please submit with this form following.</p>
+                                    <p style="margin-bottom: 2px;"><span><i class="fa fa-square" aria-hidden="true"></i> Not Submitted</span> <span class="border_left_10px">Attach the photos of anyone whom you authorize to </span><br/><span style="margin-left:111px;"> pick up your child from BSIS</span></p>
+                                    <p><span><i class="fa fa-square" aria-hidden="true"></i> Not Submitted</span> <span class="border_left_10px">Copy of Birth Certificate and translation (if not in  English )</span></p>
+                                    <p><span><i class="fa fa-square" aria-hidden="true"></i> Not Submitted</span> <span class="border_left_10px">Copy of Identity Card or Passport of the Student</span></p>
+                                    <p><span><i class="fa fa-square" aria-hidden="true"></i> Not Submitted</span> <span class="border_left_10px">Copy of Identity Card or Passport of the Parent</span></p>
+                                    <p><span><i class="fa fa-square" aria-hidden="true"></i> Not Submitted</span> <span class="border_left_10px">Copy of Marriage Certificate (Foreign Parents only; for visa purposes)</span></p>
+                                    <p><span><i class="fa fa-square" aria-hidden="true"></i> Not Submitted</span> <span class="border_left_10px">Copy of Previous School Leaving Certificate</span></p>
+                                    <p><span><i class="fa fa-square" aria-hidden="true"></i> Not Submitted</span> <span class="border_left_10px">Other relevant document</span></p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 admission_border">
+
+                                    <table class="admission_table_1 table">
+                                        <tbody>
+                                        <tr>
+                                            <td colspan="2" style="padding-left: 20px;">
+                                                <p>A. STUDENT PARTICULARS</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">1. Full Name <small>(as stated in Birth Certicate / I.C /Passport)</small> </span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{stdname}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">2. Birth Certificate No </span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{birthcertificateText}}</span>
+
+                                                <span class="adm_title_half" style="width: 38%;margin-left: 17px;">Passport No</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{PassportNoNameText}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">3. Date of Birth</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{dateofbirth|date:'dd/MM/yyyy'}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>
+                                                <span class="adm_title_half">4. Age</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{age}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">5. Place of Birth</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{placeOfBirth}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+
+                                            <td>
+                                                <span class="adm_title_half">6. Gender</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{genderText}}</span>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">7. Nationality</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{nationality}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+
+                                            <td>
+                                                <span class="adm_title_half">8. Tel.No</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{fatherMobileNo}}</span>
+                                            </td>
+                                        </tr>
+
+
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">9. Email</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{emailid}}</span>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">10. Corresspondence Address</span>
+                                                <span class="adm_colon">:</span>
+
+                                                <span class="adm_val_half" style="width: 56%;" ng-show="corresponding.correshouseno || corresponding.corresstreet ||corresponding.correspostal">{{corresponding.correshouseno}} , {{corresponding.corresstreet}} , {{corresponding.correspostal}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">11. Permanent Address</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;"ng-show="permanent.phouseno||permanent.pstreet||permanent.ppostal">{{permanent.phouseno}} , {{permanent.pstreet}} , {{permanent.ppostal}}</span>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">12. Previous School Attended:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;"></span>
+                                            </td>
+                                        </tr>
+
+
+
+
+                                        <table class="table">                                                <tr>
+
+                                            <td>
+                                                <span style="color: black">No</span>
+                                            </td>
+                                            <td><span style="color: black"> Sekolah/School</span> </td>
+                                            <td><span style="color: black"> Tahun/Year</span></td>
+                                            <td><span style="color: black">Gred/Grade</span></td>
+                                        </tr>
+                                            <tbody>
+                                            <tr ng-repeat="prev in previousSchoolsDetails">
+                                                <td>{{prev.schoolno}}</td>
+                                                <td>{{prev.schoolName}}</td>
+                                                <td>{{prev.schoolYear}}</td>
+                                                <td>{{prev.schoolGrade}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                <div class="col-lg-12 admission_border">
+                                    <table class="admission_table_1 table">
+                                        <tbody>
+
+                                        <tr>
+                                            <td colspan="2" style="padding-left: 20px;">
+                                                <p>B. SIBLINGS INFORTMATION:</p>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="2">
+                                                <table class="table" >
+                                                    <tr>
+                                                        <td>Registration No.</td>
+                                                        <td>Sibling's name </td>
+                                                        <td>Date of birth</td>
+                                                        <td>School</td></tr>
+
+                                                    <tbody>
+                                                    <tr ng-repeat="sb in sbillingDetailsList">
+                                                        <td>{{sb.sbilladminNo}}</td>
+                                                        <td>{{sb.sbillName}}</td>
+                                                        <td>{{sb.sbillDOB}}</td>
+                                                        <td>{{sb.sbillPrevSchool}}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+
+
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+
+                                <div class="col-lg-12 admission_border">
+                                    <table class="admission_table_1 table">
+                                        <tbody>
+                                        <tr>
+                                            <td style="padding-left: 20px;">
+                                                <p>D. PARENT'S INFORMATION:</p>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">1. Father Name</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{fatherName}}</span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">2. Passport No</span>
+                                                <span class="adm_colon">:</span> <span class="adm_val_full" style="width: 56%;"> {{fatherPassNo}}</span>
+                                                <br/>
+                                                <span class="adm_title_half" style="width: 38%;margin-left: 17px;">I.C No </span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{fatherICNO}}</span>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">3. Nationality</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{fathernationality}}</span>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">4. Date of Birth:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{fatherDOB|date:'dd/MM/yyyy'}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">5. Highest Education</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{fathereducation}}</span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">6. Occupation</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{fatherBusiness}}</span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">7. Income</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{fatherincome}}</span>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">8. Employer</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{fatherEmployer}}</span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">9. Nature of Business</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{fatherBusiness}}</span>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">10. Office Address</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{fatherOfficeAddress.fatherofficeHNO}} , {{fatherOfficeAddress.fatherofficeAddr}} , {{fatherOfficeAddress.fatherofficePostal}}</span>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">11. Tel.No</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{fatherTelNo}}</span>
+                                                <br/>
+                                                <span class="adm_title_half" style="width: 37%;margin-left: 25px;">Fax:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{fatherFax}}</span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">12. Mobile Number</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{fatherMobileNo}}</span>
+                                                <br/>
+                                                <span class="adm_title_half" style="width: 37%;margin-left: 25px;">Email:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{fatherEmail}}</span>
+                                            </td>
+
+
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+
+                                <div class="col-lg-12 admission_border">
+                                    <table class="admission_table_1 table">
+                                        <tbody>
+                                        <tr>
+                                            <td colspan="2" style="padding-left: 20px;">
+                                                <p>E. MOTHER'S INFORMATION:</p>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">1. Mother Name</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{motherName}}</span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">2. Passport No</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;"> {{motherPassNo}}</span>
+                                                <br/>
+                                                <span class="adm_title_half" style="width: 38%;margin-left: 17px;">I.C No</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{motherICNO}}</span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">3. Nationality</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{mothernationality}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">4. Date of Birth:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{motherDOB|date:'dd/MM/yyyy'}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">5. Highest Education</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{mothereducation}}</span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">6. Occupation</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{motheroccupation}}</span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">7. Income</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{motherincome}}</span>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">8. Employer</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{motherEmployer}}</span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">9. Nature of Business</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{motherBusiness}}</span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">10. Office Address</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{motherOfficeAddress.motherHouseNo}} , {{motherOfficeAddress.motherofficeAddr}} , {{motherOfficeAddress.motherpostalcode}}</span>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">11. Tel.No</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{motherTelNo}}</span>
+                                                <br/>
+                                                <span class="adm_title_half" style="width: 37%;margin-left: 25px;">Fax</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{motherFax}}</span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">12. Mobile Number</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{motherMobileNo}}</span>
+                                                <br/>
+                                                <span class="adm_title_half" style="width: 37%;margin-left: 25px;">Email</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{motherEmail}}</span>
+                                            </td>
+
+
+                                        </tr>
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+
+                                <div class="col-lg-12 admission_border">
+                                    <table class="admission_table_1 table">
+                                        <tbody>
+
+                                        <tr>
+                                            <td style="padding-left: 20px;">
+                                                <p>F. GUARDIAN'S INFORMATION::</p>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">1. Name</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{guardianName}}</span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">2. Passport No</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{guardianPassNo}}</span>
+                                                <span class="adm_title_half" style="width: 38%;margin-left: 17px;">I.C No</span>
+                                                <span class="adm_colon">:</span>
+                                                <span style="width: 56%;">{{guardianICNO}}</span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">3. Nationality</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{guardiannationality}}</span>
+                                            </td>
+
+                                        </tr>
+
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">4. Occupation</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{guardianoccupation}}</span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">5. Employer</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{guardianEmployer}}</span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">6. Corresspondence Address</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{guardCorrAddress.guardiancorreshouseno}}, {{guardCorrAddress.guardiancorresstreetaddr}} , {{guardCorrAddress.guardiancorrespostalcode}}</span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">7. Permanent Address</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{guardPerAddress.guardianpermhouseno}} , {{guardPerAddress.guardianpermstreetaddr}} , {{guardPerAddress.guardianpermpostalcode}}</span>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">8. Telephone Number:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{guardianTelNo}}</span>
+                                            </td>
+
+                                        </tr>
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+
+                                <div class="col-lg-12 admission_border">
+                                    <table class="admission_table_1 table">
+                                        <tbody>
+
+                                        <tr>
+                                            <td colspan="2" style="padding-left: 20px;">
+                                                <p>G. AGREEMENT & DECLARATION:</p>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td colspan="2">
+                                                I Understand and agree to the points below.
+                                                1) 2months notice must be served before withdrawal or the deposit will be forfeited.
+                                                2) Any outstanding payment will be deducted from deposit                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half"> Name </span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half"> {{stdname}}</span>
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">Date</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half">{{dateofbirth|date:'dd/MM/yyyy'}}</span>
+                                            </td>
+                                            <td>
+                                                <span  class="adm_title_half"> Signature</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half"> ----------------------</span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade Student"  tabindex="-1" id="add_view" style="z-index: 1070 !important; display: none" role="dialog" data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <!--<h4 id = "visit-title" class="modal-title">Add Appointments</h4>-->
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="student">
+                                            <div>
+
+                                                <style>
+                                                    table, th, td {
+                                                        border: 1px solid black;
+                                                    }
+
+                                                    .modal-content {
+                                                        width: 1000px;
+                                                    }
+
+                                                    .form-control {
+                                                        display: block;
+                                                        width: 170px;
+                                                        height: 34px;
+                                                        padding: 6px 12px;
+                                                        font-size: 14px;
+                                                        line-height: 1.42857143;
+                                                        color: #555;
+
+                                                        background-color: #fff;
+                                                        background-image: none;
+                                                        border: 1px solid #ccc;
+                                                        border-radius: 4px;
+                                                        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+                                                        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+                                                        -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+                                                        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+                                                        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+                                                    }
+                                                </style>
+                                                <div class="table_02" style="margin-top: 10px;">
+                                                    <div class="recipt" style="width: 100%;">
+                                                        <img src={{logo}} style="width:10%;"/>
+                                                    </div>
+                                                    <table style="border: 1px solid #000; border-collapse: collapse;" border="1" width="715px;">
+                                                        <div style="width: 500;">
+                                                            <span>{{name}}</span><br>
+                                                            <span>{{Address}}</span><br>
+                                                            <span>{{organizationEmail}}</span><br>
+                                                            <span>{{gst}}</span><br>
+                                                        </div>
+                                                    </table>
+                                                    <table style="border: 1px solid #ccc; border-collapse: collapse;" border="1">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <span><b>Customer Information:</b></span><br><br>
+                                                                <table style="border: 1px solid #ccc; border-collapse: collapse;"
+                                                                       border="1">
+                                                                    <tbody>
+                                                                    <tr style="height: 40px;">
+                                                                        <!--<td style="width: 40px;"><b>Token No</b></td>-->
+                                                                        <td style="width: 40px;"><b>Uhid</b></td>
+                                                                        <td style="width: 117px;"><b>Name</b></td>
+                                                                        <td style="width: 117px;"><b>Email</b></td>
+                                                                        <td style="width: 117px;"><b>city</b></td>
+                                                                        <td style="width: 117px;"><b>Zipcode</b></td>
+                                                                        <td style="width: 117px;"><b>Address</b></td>
+                                                                        <td style="width: 117px;"><b>phoneNumber</b></td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td style="width: 117px;">{{uhid}}</td>
+                                                                        <td style="width: 117px;">{{firstname}}</td>
+                                                                        <td style="width: 117px;">{{emailId}}</td>
+                                                                        <td style="width: 117px;">{{city}}</td>
+                                                                        <td style="width: 117px;">{{zipCode}}</td>
+                                                                        <td style="width: 117px;">{{address}}</td>
+                                                                        <td style="width: 117px;">{{PhoneNumber}}</td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>
+                                                                <span><b>Service Information:</b></span><br><br>
+
+
+                                                                <table style="border: 1px solid #ccc; border-collapse: collapse;"
+                                                                       border="1">
+                                                                    <tbody>
+                                                                    <tr style="height: 40px;">
+                                                                        <td style="width: 40px;"><b>Sr.No</b></td>
+                                                                        <td style="width: 117px;"><b>Service</b></td>
+                                                                        <td style="width: 117px;"><b>UnitPrice</b></td>
+                                                                        <td style="width: 117px;"><b>Qty</b></td>
+                                                                        <td style="width: 117px;"><b>Amount</b></td>
+                                                                        <td style="width: 117px;"><b>Discount Value</b></td>
+                                                                        <td style="width: 117px;"><b>DiscountAmt</b></td>
+                                                                        <td style="width: 117px;"><b>TotalAmt</b></td>
+
+
+                                                                    </tr>
+
+                                                                    <tr style="height: 37px;"
+                                                                        ng-repeat="serviceDetail in serviceInvoiceList">
+                                                                        <td style="width: 40px;">{{$index+1}}</td>
+                                                                        <td style="width: 117px;">
+                                                                            {{serviceDetail.serviceName}}
+                                                                        </td>
+                                                                        <td style="width: 117px;">
+                                                                            {{serviceDetail.unitPrice|number:2}}
+                                                                        </td>
+                                                                        <td style="width: 117px;">
+                                                                            {{serviceDetail.qty|number:2}}
+                                                                        </td>
+                                                                        <td style="width: 117px;">
+                                                                            {{serviceDetail.amount|number:2}}
+                                                                        </td>
+                                                                        <td style="width: 117px;">
+                                                                            {{serviceDetail.discountConfigAmt |number:2}}
+                                                                        </td>
+                                                                        <td style="width: 117px;">
+                                                                            {{serviceDetail.discountAmt|number:2}}
+                                                                        </td>
+                                                                        <td style="width: 117px;">
+                                                                            {{serviceDetail.totalamt|number:2}}
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+
+                                                            </td>
+                                                        </tr>
+
+
+                                                        </tbody>
+
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" ng-click="remove()"
+                                        data-dismiss="modal">Close
+                                </button>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+<script>
+    $('body').delegate('.remove','click',function()
+    {
+        $(this).parent().parent().remove();
+    });
+
+    $("#sameas").click(function () {
+
+        if($(this).prop("checked") == true){
+
+            $("#samecorrespended").hide();
+        }else{
+
+            $("#samecorrespended").show();
+
+        }
+
+
+
+    })
+function removereadonly(id,clicksid) {
+
+    if($("#"+clicksid).prop("checked") == true){
+
+        $('#'+id).prop('readonly', false);
+    }else{
+
+        $('#'+id).prop('readonly', true);
+
+    }
+
+}
+$("#next1").hide();
+    $("#next2").hide();
+    $("#3").hide();
+    $("#saveId").hide();
+    $("#back1").hide();
+
+
+
+</script>

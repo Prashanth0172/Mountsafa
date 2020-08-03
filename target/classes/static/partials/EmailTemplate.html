@@ -1,0 +1,253 @@
+<style>
+    .modal-content{
+        width:696px;
+    }
+
+    .modal-footer {
+        padding: 5px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    fieldset {
+        min-width: 0;
+        padding: 10px;
+        margin: 0;
+        border: 0;
+    }
+    .control-label {
+        position: relative;
+        min-height: 1px;
+        padding-right: 8px;
+        padding-left: 11px;
+    }
+
+    .form-control {
+        display: block;
+        width: 264px;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+
+
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row" >
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Email Template</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel-body" style="height: 65px;">
+                            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                                <form class="form-horizontal ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <p class="input-group" style="display: block;">
+                                                <input id="search_academic" name="textinput" type="text"
+                                                       placeholder="Search" ng-model="searchText" class="form-control input-md"
+                                                       ng-keyup="$event.keyCode == 13 ? getEmailPaginatedList(searchText) : null"/>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-7">
+
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addEmailTemp()">Add</button>
+                                    </div>
+                                    <div class="col-lg-2 col-md-3 col-sm-4">
+                                        <button type="submit" id="colButn" class="btn btn-default" data-toggle="modal"
+                                                ng-model="inactiveStatus" data-target=".print-me"
+                                                ng-click="inactiveEmail()">{{ButtonStatus}}
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="fixed-table-container">
+                    <div class="table_wrapfixed-table-container-inner">
+                        <div class="header-background"></div>
+                        <table data-toggle="table" data-cache="false" data-height="299" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                            <thead>
+                            <tr>
+                                <th data-field="cntryname">
+                                    <div class="th-inner" align="center">Email Name</div>
+                                </th>
+                                <th data-field="edit">
+                                    <div class="th-inner" align="center">Email Description</div>
+                                </th>
+                                <th data-field="edit">
+                                    <div class="th-inner" align="center">Status</div>
+                                </th>
+
+                                <th data-field="edit">
+                                    <div class="th-inner" align="center">Actions</div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody id="parentTable">
+                            <input type="hidden" ng-model="emailId" value="{{EmailList.emailId}}"/>
+                            <tr ng-repeat="email in EmailList|filter:searchText">
+                                <td>{{email.emailName}}</td>
+                                <td>{{email.emailDescription}}</td>
+                                <td>{{email.emailStatus}}</td>
+
+                                <td><button type="button" class="btn btn-primary hi_btn"  ng-click="EditEmail(email)">Edit</button>
+                                <button type="button" class="btn btn-primary hi_btn"  ng-click="DeleteEmail(email)">Delete</button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12 pagination_">
+
+                            <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"
+                                    ng-disabled="first"
+                                    ng-click="getEmailPaginatedList('firstPage')" ng-model="first">First
+                            </button>
+                            <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"
+                                    ng-disabled="prev"
+                                    ng-click="getEmailPaginatedList('prevPage')" ng-model="prev">Prev
+                            </button>
+                            <button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"
+                                    ng-click="getEmailPaginatedList('nextPage')" value="next"
+                                    ng-class="{'diabled-class': next}" ng-model="next">Next
+                            </button>
+                            <button type="button" class="btn btn-default hi_btn"
+                                    ng-click="getEmailPaginatedList('lastPage')" ng-class="{'diabled-class': last}"
+                                    ng-disabled="last"
+                                    ng-model="last">Last
+                            </button>
+                        </div>
+                        <div align="center"><span style="color: red;"></span></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal fade Student" tabindex="-1" id="add_Email_master" role="dialog" data-backdrop="static"
+                 aria-labelledby="mySmallModalLabel">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content checkout" width="696px">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 id = "student-title" class="modal-title">Add Email</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <form class="form-horizontal" name="student">
+                                        <fieldset>
+                                            <div class="tab-content">
+                                                <div class="tab-pane fade in active" id="sub_step12">
+                                                    <div class="col-md-6">
+
+                                                        <div class="form-group">
+                                                            <label class="col-md-6 col-sm-6 control-label" for="">Branch</label>
+                                                            <div class="col-md-6" style="position:relative;">
+                                                                <select name="Status" id="Status" ng-model="branchName" class="form-control input-md" required
+                                                                        ng-options="branches.branchesId as branches.branchName for branches in bran">
+                                                                <option value="">Select</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-6 control-label" for="">Email Name<span style="color:red;">*</span></label>
+                                                            <div class="col-md-6" style="position:relative;">
+                                                                <input id="emailName" name="emailName"  maxlength="30"
+                                                                       type="text" placeholder="EmailName"
+                                                                       ng-model="emailName" alpha-with-space
+                                                                       class="form-control input-md" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-6 control-label" for=""> Subject Name</label>
+                                                            <div class="col-md-6" style="position:relative;">
+                                                                <input id="emailSubject" name="emailSubject"  maxlength="150"
+                                                                       type="text" placeholder="Subject Name"
+                                                                       ng-model="emailSubject" alphanum-with-space
+                                                                       class="form-control input-md" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-md-6 control-label" for=""> Description<span style="color:red;">*</span></label>
+                                                            <div class="col-md-6" style="position:relative;">
+                                                                <input id="description" name="description"  maxlength="150"
+                                                                       type="text" placeholder="Description"
+                                                                       ng-model="description"
+                                                                       class="form-control input-md" required>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <div class="form-group">
+                                                            <label class="col-md-6 col-sm-6 control-label" for="">Status</label>
+                                                            <div class="col-md-6 col-sm-6">
+                                                                <select name="status" id="status"
+                                                                        ng-model="statusText" class="form-control input-md"
+                                                                        required>
+                                                                    <option value="Active">Active</option>
+                                                                    <option value="InActive">InActive</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </fieldset>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" ng-click="saveEmail()" ng-disabled="isDisabled">Save</button>
+                            <button type="button" class="btn btn-primary" ng-click="removeEmail()" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

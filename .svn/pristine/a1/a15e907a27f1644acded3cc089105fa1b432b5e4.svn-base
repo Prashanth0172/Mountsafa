@@ -1,0 +1,291 @@
+/**
+ * Created by sahera on 18/3/19.
+ */
+
+
+app.directive("addNewAssSubmisssion", function ($http, Notification) {
+    return {
+        restrict: 'E',
+        templateUrl: "partials/assesmentSubmissionDirective.html",
+        link: function ($scope, $timeout, $location, $filter) {
+            $scope.bshimServerURL = "/bs";
+            $scope.operation = 'Create';
+            $scope.inactiveStatus = "Active";
+            $scope.word = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+            $scope.saveAssSub = function (type) {
+                if($scope.lessonPlanValueId === ''||$scope.lessonPlanValueId==null||angular.isUndefined($scope.lessonPlanValueId)){
+                    $scope.lessonPlanValueId="";
+                }
+                var saveDetails;
+                saveDetails = {
+                    asId:$scope.asId,
+                    level:$scope.level,
+                    classId:$scope.classId,
+                    subject:$scope.subject,
+                    chapter:$scope.chapter,
+                    term:$scope.term,
+                    component:$scope.component,
+                    subComponent:$scope.subComponent,
+                    studentsName:angular.toJson($scope.studentsName),
+                    mapValue: $scope.topicList,
+                    flag: type,
+                };
+                $http.post($scope.bshimServerURL + '/saveAssSub?id=' + $scope.lessonPlanValueId, angular.toJson(saveDetails)).then(function (response) {
+                    var data = response.data;
+                    if (data == "") {
+                        Notification.error({message: 'Already exists', positionX: 'center', delay: 2000});
+                    }
+                    else {
+                        $scope.removeAssSub();
+                        $scope.getAssesmentSubList();
+                        $("#add_new_AS_modal").modal('hide');
+                        if (!angular.isUndefined(data) && data !== null) {
+                            $scope.searchText = "";
+                        }
+                        Notification.success({
+                            message: ' Created  successfully',
+                            positionX: 'center',
+                            delay: 2000
+                        });
+                    }
+                }, function (error) {
+                    Notification.error({
+                        message: 'Something went wrong, please try again',
+                        positionX: 'center',
+                        delay: 2000
+                    });
+                });
+            }
+            $scope.getSubjectList = function (val) {
+                if (angular.isUndefined(val)) {
+                    val = "";
+                }
+
+                $(".loader").css("display", "block");
+                $http.post($scope.bshimServerURL  + '/getSubjectList?searchText=' + val).then(function (response) {
+                    var data = response.data;
+                    $scope.subjectList= data;
+                    $scope.searchText = val;
+
+                }, function (error) {
+                    Notification.error({
+                        message: 'Something went wrong, please try again',
+                        positionX: 'center',
+                        delay: 2000
+                    });
+                })
+
+            };
+            $scope.removeAssSub = function () {
+                $scope.level="";
+                $scope.classId="";
+                $scope.subject = "";
+                $scope.chapter = "";
+                $scope.term = "";
+                $scope.component = "";
+                $scope.studentsName = "";
+                $scope.lastList=[];
+
+            };
+            $scope.getComponentList = function (val) {
+                if (angular.isUndefined(val)) {
+                    val = "";
+                }
+                $(".loader").css("display", "block");
+                $http.post($scope.bshimServerURL  + '/getComponentList?searchText=' + val).then(function (response) {
+                    var data = response.data;
+                    $scope.componentList= data;
+                    $scope.searchText = val;
+
+                }, function (error) {
+                    Notification.error({
+                        message: 'Something went wrong, please try again',
+                        positionX: 'center',
+                        delay: 2000
+                    });
+                })
+
+            };
+            $scope.getComponentList();
+
+            $scope.chapTopic = function (name) {
+                $http.post($scope.bshimServerURL + "/getchapTopic?chapTopic="+name).then(function (response) {
+                    var data = response.data;
+                    $scope.planList1=data;
+                })
+            };
+
+
+            $scope.addAssSub = function () {
+                $scope.ASSList=[];
+                $scope.subComponentList=[];
+                $(".loader").css("display", "block");
+                $('#modelName').text("Add AssesmentSubmission");
+                $("#submit").text("Save");
+
+
+                $("#add_new_AS_modal").modal('show');
+            };
+            $scope.compSubComp = function (componentId) {
+                var url = "/bs/getSubCompBasedOnComp?componentId=" + componentId;
+                $http.post(url).then(function (response) {
+                    var data = response.data;
+                    $scope.subComponentList = angular.copy(data);
+                    $scope.subbcomps = [];
+                    angular.forEach($scope.subComponentList, function (val, key) {
+                        if (val.status == "Active") {
+                            $scope.subbcomps.push(val);
+                        }
+
+                    })
+
+                })
+
+            }
+
+
+            $scope.getGradeList = function () {
+                $http.post($scope.bshimServerURL + '/getGradeListNormal').then(function (response) {
+                    var data = response.data.object;
+                    $scope.gradeList = data;
+                }, function (error) {
+                    Notification.error({
+                        message: 'Something went wrong, please try again',
+                        positionX: 'center',
+                        delay: 2000
+                    });
+                });
+            };
+            $scope.getGradeList();
+            $scope.getAssesmentSubList = function () {
+                $http.post($scope.bshimServerURL + '/getAssesmentSubList').then(function (response) {
+                    var data = response.data;
+                    $scope.assesmentSubList = data;
+                }, function (error) {
+                    Notification.error({
+                        message: 'Something went wrong, please try again',
+                        positionX: 'center',
+                        delay: 2000
+                    });
+                });
+            };
+            $scope.getAssesmentSubList();
+            $scope.levelClass = function(gradeId){
+                var url = "/bs/getClassLevel?levelId=" + gradeId;
+                $http.post(url).then(function (response) {
+                    var data = response.data;
+                    $scope.classList = angular.copy(data);
+                })
+            }
+            $scope.selectedStudents = [];
+            $scope.pushSelectedStudents = function (name) {
+                var index = $scope.selectedStudents.indexOf(name);
+                if (parseInt(index) >= 0) {
+                    $scope.selectedStudents.splice(index, 1);
+                }else {
+                    $scope.selectedStudents.push(name);
+                }
+                $scope.studentsName=$scope.selectedStudents;
+                $scope.getMakrs($scope.chapter,name);
+            };
+            var expanded = false;
+            $scope.showCheckboxes=function() {
+                var checkboxes = document.getElementById("checkboxes");
+                if (!expanded) {
+                    checkboxes.style.display = "block";
+                    expanded = true;
+                } else {
+                    checkboxes.style.display = "none";
+                    expanded = false;
+                }
+            }
+
+
+            $scope.classSubject = function(classId){
+                if(classId==undefined){
+                    classId="";
+                }
+                var url = "/bs/getclassSubject?classId=" + classId;
+                $http.post(url).then(function (response) {
+                    var data = response.data;
+                    $scope.subjectList = angular.copy(data);
+                    $scope.subjectss=[];
+                    angular.forEach($scope.subjectList,function (val,key) {
+                        if(val.status=="Active"){
+                            $scope.subjectss.push(val);
+                        }
+
+                    })
+                })
+            }
+
+            $scope.subjectChapter = function (subjectId) {
+                if(subjectId!=null) {
+                    var url = "/bs/getChapterSubject?subjectId=" + subjectId;
+                    $http.post(url).then(function (response) {
+                        var data = response.data;
+                        $scope.chapterList = angular.copy(data);
+                    })
+                }
+            }
+            $scope.topicsList={};
+            $scope.getMakrs = function (name,studentName) {
+                $http.post($scope.bshimServerURL + "/getMarksBasedOnSimpleAssesment?name=" + name +'&subComponent=' + $scope.subComponent).then(function (response) {
+                    var data = response.data;
+                    $scope.ASSList = data;
+                    $scope.lastList=[];
+                    angular.forEach($scope.ASSList,function (val,key) {
+                        var create={};
+                        create.topic = val.topic;
+                        create.maxMarks = val.maxMarks;
+                        create.marks = val.marks;
+                        create.remarks = val.remarks;
+                        $scope.lastList.push(create);
+                    });
+                    angular.forEach($scope.studentList, function (val, key) {
+                        if(studentName==val.studentName) {
+                            if ($scope.studentsName.indexOf(val.studentName) != -1) {
+                                val.value = true;
+                                $scope.topicsList[studentName] = angular.copy($scope.lastList);
+                            } else {
+                                val.value = false;
+                                $scope.topicsList[studentName] = null;
+                            }
+                        }
+                    })
+                    $scope.topicList={};
+                    angular.forEach($scope.topicsList,function (val,key) {
+                        if(val!=null){
+                            $scope.topicList[key]=val;
+                        }
+                    })
+
+                })
+            }
+            $scope.validateMarks = function (data) {
+                if (data.maxMarks < data.marks) {
+                    Notification.error({message: 'Marks Cannot Be Greater Max Marks ', positionX: 'center', delay: 2000});
+                    data.marks =0;
+                }
+            }
+            $scope.getStudentList = function (val) {
+                val="";
+                $(".loader").css("display", "block");
+                $http.post($scope.bshimServerURL  + '/getStudentListBasedOnGrade?searchText='+val).then(function (response) {
+                    var data = response.data;
+                    $scope.studentList= data.object;
+
+                }, function (error) {
+                    Notification.error({
+                        message: 'Something went wrong, please try again',
+                        positionX: 'center',
+                        delay: 2000
+                    });
+                })
+
+            };
+
+            $scope.getStudentList();
+        }
+        }
+});

@@ -1,0 +1,489 @@
+<style>
+    .modal-content{
+        width:696px;
+    }
+    .modal-footer {
+        padding: 5px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    fieldset {
+        min-width: 0;
+        padding: 10px;
+        margin: 0;
+        border: 0;
+    }
+    .form-control {
+        display: block;
+        width: 171px;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+</style>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row" >
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Assessment Questions</div>
+            </h2>
+        </div>
+
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel-body" style="height: 65px;">
+                            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                                <form class="form-horizontal ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <p class="input-group" style="display: block;">
+                                                <input id="search_academic" name="textinput" type="text"
+                                                       placeholder="Search" ng-model="searchText" class="form-control input-md"
+                                                       ng-keyup="$event.keyCode == 13 ? getPaginatedAssessQuesList(searchText) : null"/>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-7">
+
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addAssessmentQuestions()">Add</button>
+                                    </div>
+                                    <!--</div>-->
+                                    <!--<div class="col-lg-2 col-md-3 col-sm-4">-->
+                                        <!--<button type="submit" id="colButn" class="btn btn-default" data-toggle="modal"-->
+                                                <!--ng-model="inactiveStatus" data-target=".print-me"-->
+                                                <!--ng-click="inactiveButton()">{{ButtonStatus}}-->
+                                        <!--</button>-->
+                                    <!--</div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="fixed-table-container">
+                        <div class="table_wrapfixed-table-container-inner">
+                            <div class="header-background"></div>
+                            <table data-toggle="table" data-cache="false" data-height="299" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                                <thead>
+                                <tr>
+                                    <th data-field="cntryname">
+                                        <div class="th-inner" align="center">Level Name</div></th>
+                                    <th data-field="cntryname">
+                                        <div class="th-inner" align="center">Class Name</div></th>
+                                    <th data-field="cntryname">
+                                        <div class="th-inner" align="center">Subject Name</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Chapter Name</div></th>
+                                    <!--<th data-field="edit">-->
+                                        <!--<div class="th-inner" align="center">Status</div></th>-->
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Actions</div></th>
+                                </tr>
+                                </thead>
+                                <tbody id="parentTable">
+                                <input type="hidden" ng-model="assessmentQuestionsId" value="{{assessmentList.assessmentQuestionsId}}"/>
+                                <tr ng-repeat="assessment in assessmentList|filter:searchText">
+                                    <td>{{assessment.levelName}}</td>
+                                    <td>{{assessment.className}}</td>
+                                    <td>{{assessment.subjectName}}</td>
+                                    <td>{{assessment.chapterName}}</td>
+                                    <!--<td>{{chapter.status}}</td>-->
+                                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editAssessmentQuestions(assessment)">Edit</button>
+                                      <button type="button" class="btn btn-primary hi_btn"  ng-click="deleteAssessment(assessment)">Delete</button>
+                                      </td>
+                                    <!--</td>-->
+                                </tr>
+                                <tr ng-if="searchText!=''&&(assessmentList|filter:searchText).length==0">
+                                    <td colspan="4" style="color: red; font-weight: bold">No Records Found</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12 pagination_">
+                        <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"
+                                ng-disabled="first"
+                                ng-click="getPaginatedAssessQuesList('firstPage')" ng-model="first">First
+                        </button>
+                        <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"
+                                ng-disabled="prev"
+                                ng-click="getPaginatedAssessQuesList('prevPage')" ng-model="prev">Prev
+                        </button>
+                        <button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"
+                                ng-click="getPaginatedAssessQuesList('nextPage')" value="next" ng-class="{'diabled-class': next}"
+                                ng-model="next">Next
+                        </button>
+                        <button type="button" class="btn btn-default hi_btn"
+                                ng-click="getPaginatedAssessQuesList('lastPage')" ng-class="{'diabled-class': last}" ng-disabled="last"
+                                ng-model="last">Last
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="modal fade addCustomer" tabindex="-1" id="add_new_assessment_Questions_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md" style="width:940px !important;">
+                        <div class="modal-content checkout" style="width:940px !important;">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 id="chapter-title" class="modal-title">Add Assessment Questions</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <fieldset>
+
+                                        <form class="form-horizontal" name="form">
+
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="col-lg-6">
+                                                <div class="form-group" style="">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">LevelName<span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="LevelName" name="LevelName"
+                                                                ng-model="LevelName"
+                                                                ng-change="classes(LevelName)"
+                                                                ng-options="grade.gradeId as grade.gradeName for grade in gradeList"
+                                                                class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Class<span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="classId" name="classId" ng-model="classId"
+                                                                ng-change="subjectclass(classId)"
+                                                                ng-options="class.classId as
+											class.className for class in classesList" class="form-control input-md">
+                                                            <option value="">All</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Subject<span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="subjectId" name="subjectId" ng-change="getchapterListBasedOnSubject(subjectId)" ng-model="subjectId" ng-options="subject.subjectId as
+											subject.subjectName for subject in subjectList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Chapter<span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="chapter" name="chapter"
+                                                               ng-model="chapter" ng-change="getTopicList(chapter)"
+                                                                ng-options="chapter.chapterId as chapter.chapterName for chapter in  chapterList"
+                                                               class="form-control input-md">
+                                                       <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Topic<span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="topic" name="topic"
+                                                               ng-model="topic"
+                                                                ng-options="topic.id as topic.topicName for topic in topicLists"
+                                                               class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Semester</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="semester" name="semester"
+                                                               ng-model="semesterId" ng-change="getTermListBasedOnSemester(semesterId)"
+                                                                ng-options="semester.semesterId as semester.semesterName for semester in semesterlists"
+                                                               class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Term</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="term" name="term"
+                                                                ng-model="term" ng-options="term.termId as term.termName for term in termList"
+                                                               class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Academic Year</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="academicyear" name="academicyear"
+                                                                ng-model="academicyear"
+                                                                ng-options="academicYear.acdyrId as academicYear.acdyrName for academicYear in academicYearList"
+                                                               class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="submit"
+                                                       class="btn btn-primary addnew pull-left"
+                                                       value="Add New" ng-click="addNewQuestions()">
+                                            </div>
+                                            <div class="row" ng-repeat="q in questionList">
+                                            <div class="col-lg-12">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" >Question Type</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="questiontype" name="questiontype"
+                                                                    ng-model="q.questionType"
+                                                                    class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                                <option value="description">Description</option>
+                                                                <option value="multiplechoice">MultipleChoice</option>
+                                                                <option value="trueorfalse">TrueOrFalse</option>
+                                                                <option value="rubics">Rubics</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Component Name</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="componentNm" name="componentNm" ng-model="q.componentNm" ng-change="compSubComp(q)"
+                                                                    ng-options="component.componentId as component.componentName for component in componentList" class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                            </select>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">SubComponent</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="subComponent" name="subComponent" ng-model="q.subComponent"
+                                                                    ng-options="comp.subComponentId as comp.subComponentName for comp in q.subComponentList" class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                            </select>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            </div>
+
+                                            <div class="col-lg-12">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" >Question</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <textarea id="question1" name="question1"
+                                                                  type="text"
+                                                                  ng-model="q.question"
+                                                                  class="form-control input-md">
+                                                        </textarea>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" >Max Marks</label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input id="max marks" name="maxmarks"
+                                                                   type="text" num-with-out-space
+                                                                   ng-model="q.maxMarks"
+                                                                   class="form-control input-md"/>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button id="" name="remove" ng-click="removeaaa($index)">remove</button>
+                                                </div>
+
+                                            </div>
+                                                <div class="col-md-12">
+                                                <div class="form-group" ng-show="q.questionType=='description'" >
+                                                    <label class="col-md-4 col-sm-4 control-label" >Description</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <textarea id="description" name="description"
+                                                                  type="text"
+                                                                  ng-model="q.description"
+                                                                  class="form-control input-md">
+                                                        </textarea>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12 admission_border" ng-show="q.questionType=='multiplechoice'">
+                                                    <!--<input type="text" ng-model="textentered" placeholder="please select No. of Choices" num-with-out-space ng-change="getmultipleList(textentered,q)"/>
+                                                   --> <table class="admission_table_1 table">
+                                                        <tbody>
+
+
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <table class="table" >
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <td>S.No</td>
+                                                                        <td>Option</td>
+                                                                        <td>Correct Answer</td>
+                                                                        <td><div class="form-group">
+                                                                            <input type="submit" class="btn btn-primary addnew pull-left" value="+" ng-click="getmultipleList(q)">
+                                                                        </div></td>
+
+                                                                    </tr>
+                                                                    </thead>
+                                                                        <tbody>
+                                                                        <tr ng-repeat="sb in q.multipleChoiceList">
+                                                                            <td>{{$index+1}}</td>
+                                                                            <td><textarea type="text" ng-model="sb.question"></textarea></td>
+                                                                            <td><input type="checkbox" ng-model="sb.answer"></td>
+                                                                            <td> <button type="button" class="btn btn-danger remove" ng-click="removemultiplechoice($index)">X
+                                                                            </button>
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+
+                                                <div class="form-group" ng-show="q.questionType=='trueorfalse'" >
+                                                    <label class="col-md-4 col-sm-4 control-label" >True Or False</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <input type="radio" name="trueorfalse" ng-model="q.trueorfalse" value="true" checked>True
+                                                        <input type="radio" name="trueorfalse" ng-model="q.trueorfalse" value="false">False
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12 admission_border" ng-show="q.questionType=='rubics'">
+                                                    <table class="admission_table_1 table">
+                                                        <tbody>
+
+
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <table class="table" >
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <td>S.No</td>
+                                                                        <td>Question</td>
+                                                                        <td>Max Marks</td>
+                                                                        <td> <div class="form-group">
+                                                                            <input type="submit"
+                                                                                   class="btn btn-primary addnew pull-left"
+                                                                                   value="+" ng-click="getList(q)">
+                                                                        </div></td>
+
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <tr ng-repeat="sb in q.rubicsList">
+                                                                        <td>{{$index+1}}</td>
+                                                                        <td><textarea type="text" ng-model="sb.question"></textarea></td>
+                                                                        <td><input type="text" num-with-out-space ng-model="sb.answer"></td>
+                                                                        <td> <button type="button" class="btn btn-danger remove" ng-click="removecross($index)">X
+                                                                        </button>
+                                                                        </td>
+
+                                                                    </tr>
+
+                                                                    </tbody>
+
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                                </div>
+                                            </div>
+
+
+
+
+                                        </form>
+                                    </fieldset>
+
+
+
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                        ng-click="saveAssessmentQuestions()">Save
+                                </button>
+                                <button type="button" class="btn btn-primary hi_btn" ng-click="removeChapter()"
+                                        data-dismiss="modal">Close
+                                </button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

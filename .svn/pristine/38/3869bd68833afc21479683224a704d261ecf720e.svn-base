@@ -1,0 +1,293 @@
+
+
+
+<html ng-app="myApp" ng-controller="headerCtrl">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>{{name}}</title>
+	<link href='./css/style.css' rel="stylesheet" type="text/css" />
+	<link href='./css/css/font-awesome.css' rel="stylesheet" type="text/css" />
+	<link href='./css/vendors/bootstrap-datetimepicker.min.css' rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href= './css/css/angular-ui-notification.min.css' type="text/css" />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+	<link href="css/login.css" rel="stylesheet" type="text/css" />
+	<link href='./css/vendors/bootstrap.min.css' rel="stylesheet" type="text/css" />
+	<!--<link rel="stylesheet" href="./js/controller/css/mobiscroll.javascript.min.css"/>-->
+
+	<!--<title>HiAccounts</title>-->
+</head>
+<body>
+<div class="generic-container">
+
+	<!--<h2>-->
+        <!--<img src="images/icon/LogoMS.jpg" style="width:170px;height: 50px;"></img>-->
+		<!--<ul style="float:right;">-->
+			<!--<li><a href="#!/login" id="logoutButton"  tabindex="-1" style="color: #fff !important;; font-size:14px !important;"> LogOut</a></li>-->
+		<!--</ul>-->
+	<!--</h2>-->
+	<h2>
+		<div id="logo"><a  title="Home">
+			<img src="{{logo}}" style="width:5%;"/>
+		</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{name}}
+			<a  href="#!/login" id="logoutButton" style="font-size:15px;color:white;float:right;">LOGOUT <i class="fa fa-sign-out"></i></a>
+		</div>
+
+	</h2>
+
+	<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+		<div id="nav_side_menu" class="menu_section">
+			<ul class="nav side-menu">
+				<!--<li id="General">-->
+					<!--<a id="generalLink" href="#!/general" tabindex="-1"> <i class="fa fa-envelope"  style="font-size:20px;color:#72319a;" aria-hidden="true"></i><span>General Settings</span></a>-->
+				<!--</li>-->
+				<!--<li id="Enquiry">-->
+					<!--<a id="enquiryLink" href="#!/enquiry" tabindex="-1"> <i class="fa fa-envelope"  style="font-size:20px;color:#72319a;" aria-hidden="true"></i><span>  Enquiry Form </span></a>-->
+				<!--</li>-->
+                <!--<li id="admission">-->
+                    <!--<a id="admission" href="#!/admission"  tabindex="-1"> <i class="fa fa-credit-card" style="font-size:20px;color:#72319a;" aria-hidden="true"></i><span>Admission</span></a>-->
+                <!--</li>-->
+				<!--<li id="student">-->
+					<!--<a id="studentLink" href="#!/student" tabindex="-1"> <i class="fa fa-male" style="font-size:20px;color:#72319a;" aria-hidden="true"></i><span>  Student  </span></a>-->
+				<!--</li>-->
+				<!--<li id="fee">-->
+					<!--<a id="feeLink" href="#!/fee"  tabindex="-1"> <i class="fa fa-credit-card" style="font-size:20px;color:#72319a;" aria-hidden="true"></i><span>  Fee  </span></a>-->
+				<!--</li>-->
+				<li id="academics">
+					<a id="academicslink" href="#!/academics"  tabindex="-1"> <i class="fa fa-cogs" style="font-size:20px;color:#72319a;" aria-hidden="true"></i><span>  Academics  </span></a>
+
+				</li>
+				<li id="studentAffairs">
+					<a id="studentAffairsLink" href="#!/studentAffairs"  tabindex="-1"> <i class="fa fa-cogs" style="font-size:20px;color:#72319a;" aria-hidden="true"></i><span>  Student Affairs  </span></a>
+				</li>
+				<!--<li id="configuration">-->
+					<!--<a id="configurationLink" href="#!/configuration"  tabindex="-1"> <i class="fa fa-cogs" style="font-size:20px;color:#72319a;" aria-hidden="true"></i><span>  Configuration  </span></a>-->
+				<!--</li>-->
+
+				<!--<li id="generaltransaction">-->
+					<!--<a id="generaltransactionLink" tabindex="-1">-->
+						<!--<i class="fa fa-cogs" aria-hidden="true" style="color:#72319a;"></i> <span> Academics </span>-->
+						<!--<span class="fa fa-caret-down"></span>-->
+					<!--</a>-->
+					<!--<ul id="generaltransactionNav" class="nav child_menu">-->
+						<!--<li id="expense"><a id="expenseLink" href="#!/sow" tabindex="-1"> <span> SOW  </span></a></li>-->
+						<!--<li id="receipt"><a id="receiptLink" href="#!/newLessonPlan" tabindex="-1"> <span> Lesson Plan  </span></a></li>-->
+						<!--<li id="journalentry1"><a id="journalentryLink1" href="#!/assessmentQuestions" tabindex="-1"> <span>Assesment Questions </span></a></li>-->
+						<!--<li id="journalentry2"><a id="journalentryLink2" href="#!/creator" tabindex="-1"> <span>Assesment Creator </span></a></li>-->
+						<!--<li id="journalentry3"><a id="journalentryLink3" href="#!/AssesmentSubmission" tabindex="-1"> <span>Assesment Submission </span></a></li>-->
+						<!--<li id="journalentry4"><a id="journalentryLink4" href="#!/StudentAssesmentMarks" tabindex="-1"> <span>Detail Assesment Marks Submission </span></a></li>-->
+					<!--</ul>-->
+				<!--</li>-->
+
+
+				<li id="hRPayRoll">
+					<a id="hRPayRollLink" href="#!/hRPayRoll"  tabindex="-1"> <i class="fa fa-cogs" style="font-size:20px;color:#72319a;" aria-hidden="true"></i><span> Human Resource </span></a>
+				</li>
+				<li id="generaltransaction">
+					<a id="generaltransactionLink" tabindex="-1">
+						<i class="fa fa-money" aria-hidden="true" style="color:#72319a;"></i> <span>Finance</span>
+						<span class="fa fa-caret-down"></span>
+					</a>
+					<ul id="generaltransactionNav" class="nav child_menu" style="display: none;">
+						<li id="receipt"><a id="receiptLink" href="#!/gtforsales" tabindex="-1"> <span> Receipt  </span></a></li>
+						<li id="expense"><a id="expenseLink" href="#!/gtforpurchase" tabindex="-1"> <span> Expense  </span></a></li>
+						<li id="journalentry"><a id="journalentryLink" href="#!/journalentry" tabindex="-1"> <span> Journal Entry </span></a></li>
+					</ul>
+				</li>
+				<li id="configuration">
+					<a id="configurationLink" href="#!/configuration"  tabindex="-1"> <i class="fa fa-cogs" style="font-size:20px;color:#72319a;" aria-hidden="true"></i><span>  Maintenance  </span></a>
+				</li>
+				<li id="reports">
+					<a id="reports" href="#!/reports"  tabindex="-1"> <i class="fa fa-bars" style="font-size:20px;color:#72319a;" aria-hidden="true"></i><span>  Reports  </span></a>
+				</li>
+				<li id="asset">
+					<a id="asset" href="#!/asset"  tabindex="-1"> <i class="fa fa-bars" style="font-size:20px;color:#72319a;" aria-hidden="true"></i><span>  Asset And Inventory  </span></a>
+				</li>
+				<li id="book">
+					<a id="book" href="#!/book"  tabindex="-1"> <i class="fa fa-bars" style="font-size:20px;color:#72319a;" aria-hidden="true"></i><span>  Book System  </span></a>
+				</li>
+				<li id="admin">
+					<a id="adminLink" href="#!/admin"  tabindex="-1"> <i class="fa fa-cogs" style="font-size:20px;color:#72319a;" aria-hidden="true"></i><span> Admin </span></a>
+				</li>
+				<!--<li id="pvtLtdFee">-->
+					<!--<a id="pvtLtdFeeLink" href="#!/pvtLtdFee"  tabindex="-1"> <i class="fa fa-credit-card" style="font-size:20px;color:#72319a;" aria-hidden="true"></i><span>  Pvt Ltd Fee  </span></a>-->
+				<!--</li>-->
+
+
+			</ul>
+		</div>
+	</div>
+
+
+</div>
+
+
+
+<div ng-view="true"></div>
+<script src="./js/vendors/jquery.min.js"></script>
+<!-- Jquery UI Scripts -->
+<script src="./js/vendors/jquery-ui.js"></script>
+<script src="./js/jspdf.min.js"></script>
+<script src="./js/base64.js"></script>
+<script src="./js/jquery-base64.js"></script>
+<script src="./js/sprintf.js"></script>
+<!-- Bootstrap -->
+<script src="./js/vendors/bootstrap.min.js"></script>
+<!-- JQuery -->
+<script src="./js/vendors/jquery.min.js"></script>
+<!-- Jquery UI Scripts -->
+<script src="./js/vendors/jquery-ui.js"></script>
+<script src="./js/jspdf.min.js"></script>
+<script src="./js/base64.js"></script>
+<script src="./js/jquery-base64.js"></script>
+<script src="./js/sprintf.js"></script>
+<!-- Bootstrap -->
+<script src="./js/vendors/bootstrap.min.js"></script>
+
+
+<!-- Angular js -->
+<script src="./js/vendors/angular.min.js"></script>
+<script src="./js/vendors/angular-route.js"></script>
+<script src="./js/vendors/angular-animate.min.js"></script>
+<script src="./js/vendors/angular-sanitize.min.js"></script>
+<script src="./js/vendors/select2.min.js"></script>
+<script src="./js/vendors/angular-ui-notification.min.js"></script>
+<script src="./js/vendors/angular-cookies.min.js"></script>
+<script type="text/javascript" src="./js/vendors/moment.js"></script>
+<script src="./js/vendors/bootstrap-datetimepicker.min.js"></script>
+<script src="./js/vendors/ng-table.min.js"></script>
+<script src="./js/vendors/Chart.min.js"></script>
+<script src="./js/vendors/angular-chart.js"></script>
+<script src="./js/vendors/bootbox.min.js"></script>
+<script src="./js/vendors/ui-bootstrap-tpls.min.js"></script>
+<script src="./js/vendors/angular-filter.js"></script>
+<script src="./js/vendors/angular-translate.js"></script>
+<script src="./js/vendors/angular-translate-loader-static-files.js"></script>
+<script src="./js/vendors/angular-translate-storage-cookie.js"></script>
+<script src="./js/vendors/angular-translate-storage-local.js"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="./js/main.js"></script>
+<script  src="./js/custom.js"></script>
+<script src="./js/bootstrap-wysiwyg.js"></script>
+<script src="./js/jquery.hotkeys.js"></script>
+<script src="./js/controller/login.js"></script>
+<script src="./js/controller/dashboard.js"></script>
+<script src="./js/controller/student.js"></script>
+<script src="./js/controller/fee.js"></script>
+<script src="./js/controller/pvtLtdFee.js"></script>
+<script src="./js/controller/feeDueReports.js"></script>
+<script src="./js/controller/feeCollectedReports.js"></script>
+<script src="./js/controller/feeDetailsReport.js"></script>
+<script src="./js/controller/feeReceiptNoReport.js"></script>
+<script src="./js/controller/plreport.js"></script>
+<script src="./js/controller/balanceSheetReport.js"></script>
+<script src="./js/controller/feetypemaster.js"></script>
+<script src="./js/controller/designation.js"></script>
+<script src="./js/controller/grademaster.js"></script>
+<script src="./js/image-compressor.js"></script>
+<script src="./js/controller/emailserver.js"></script>
+<script src="./js/controller/settings.js"></script>
+<script src="./js/controller/reportMailScheduler.js"></script>
+<script src="./js/controller/user.js"></script>
+<script src="./js/controller/i18nController.js"></script>
+<script src="./js/controller/academicyearmaster.js"></script>
+<script src="./js/controller/discounttype.js"></script>
+<script src="./js/controller/remainder.js"></script>
+<script src="./js/controller/timeTable.js"></script>
+<script src="./js/controller/studentschooldetails.js"></script>
+<script src="./js/controller/header.js"></script>
+<script src="./js/controller/cartMaster.js"></script>
+<script src="./js/controller/SmsServer.js"></script>
+<script src="./js/controller/country.js"></script>
+<script src="./js/controller/periods.js"></script>
+<script src="./js/controller/Doctorpanel.js"></script>
+<script src="./js/controller/TrainingModule.js"></script>
+<script src="./js/controller/EmailTemplate.js"></script>
+<script src="./js/controller/Notification.js"></script>
+<script src="./js/controller/Qualification.js"></script>
+<script src="./js/controller/state.js"></script>
+<script src="./js/controller/city.js"></script>
+<script src="./js/controller/branches.js"></script>
+<script src="./js/controller/roles.js"></script>
+<script src="./js/controller/holiday.js"></script>
+<script src="./js/controller/resourceCategory.js"></script>
+<script src="./js/controller/trainer.js"></script>
+<script src="./js/controller/Creator.js"></script>
+<script src="./js/controller/resource.js"></script>
+<script src="./js/controller/department.js"></script>
+<script src="./js/controller/leave.js"></script>
+<script src="./js/controller/leaveform.js"></script>
+<script src="./js/controller/class.js"></script>
+<script src="./js/controller/semester.js"></script>
+<script src="./js/controller/approval.js"></script>
+<script src="./js/controller/remainders.js"></script>
+<script src="./js/controller/suppliers.js"></script>
+<script src="./js/controller/assessmentQuestions.js"></script>
+<script src="./js/controller/admission.js"></script>
+<script src="./js/controller/assignment.js"></script>
+<script src="./js/controller/hr.js"></script>
+<script src="./js/controller/studentAttendance.js"></script>
+<script src="./js/controller/attendanceReport.js"></script>
+<script src="./js/controller/sowreport.js"></script>
+<script src="./js/controller/employeesar.js"></script>
+<script src="./js/controller/assessorsar.js"></script>
+<script src="./js/controller/weekday.js"></script>
+<script src="./js/controller/facilityDetails.js"></script>
+<script src="./js/controller/ihesLessonPlan.js"></script>
+<script src="./js/controller/admissionDirective.js"></script>
+<script src="./js/controller/employeeDirective.js"></script>
+<script src="./js/controller/assesmentSubmissionDirective.js"></script>
+<script src="./js/controller/marksSubmission.js"></script>
+<script src="./js/controller/AddTopic.js"></script>
+<script src="./js/controller/gradingMaster.js"></script>
+<script src="./js/controller/agegroup.js"></script>
+<script src="./js/controller/EnquiryForm.js"></script>
+<script src="./js/controller/otherContacts.js"></script>
+<script src="./js/controller/term.js"></script>
+<script src="./js/controller/subject.js"></script>
+<script src="./js/controller/chapter.js"></script>
+<script src="./js/controller/topic.js"></script>
+<script src="./js/controller/employee.js"></script>
+<script src="./js/controller/checkList.js"></script>
+<script src="./js/controller/permission.js"></script>
+<script src="./js/controller/permissionRep.js"></script>
+<script src="./js/controller/lessonPlan.js"></script>
+<script src="./js/controller/newLessonPlan.js"></script>
+<script src="./js/controller/accountType.js"></script>
+<script src="./js/controller/accountGroup.js"></script>
+<script src="./js/controller/Position.js"></script>
+<script src="./js/controller/CustomApprover.js"></script>
+<script src="./js/controller/createchartofaccount.js"></script>
+<script src="./js/controller/TeachingObservationForm.js"></script>
+<script src="./js/controller/staffChecklist.js"></script>
+<script src="./js/controller/teacherClearanceForm.js"></script>
+<script src="./js/controller/createchartofaccount.js"></script>
+<script src="./js/controller/formsetup.js"></script>
+<script src="./js/controller/paymentmethod.js"></script>
+<script src="./js/controller/bank.js"></script>
+<script src="./js/controller/visitor.js"></script>
+<script src="./js/controller/trialbalance.js"></script>
+<script src="./js/controller/viewledger.js"></script>
+<script type="text/javascript" src="./js/controller/gtforsales.js"></script>
+<script type="text/javascript" src="./js/controller/gtforpurchase.js"></script>
+<script type="text/javascript" src="./js/controller/journalentry.js"></script>
+<script src="./js/controller/ExitInterviewform.js"></script>
+<script src="./js/controller/earnings.js"></script>
+<script src="./js/controller/deduction.js"></script>
+<script src="./js/controller/component.js"></script>
+<script src="./js/controller/payroll.js"></script>
+<script src="./js/controller/attendance.js"></script>
+<script src="./js/controller/AssessmentType.js"></script>
+<script src="./js/controller/AssesmentSubmission.js"></script>
+<script src="./js/controller/studentAssesmentMarks.js"></script>
+<script src="./js/controller/Instruments.js"></script>
+<script src="./js/controller/SubComponent.js"></script>
+
+<script type="text/javascript" src="./js/controller/numberToWord.js"></script>
+<script type="text/javascript" src="./js/controller/sow.js"></script>
+<script type="text/javascript" src="./js/controller/academics.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.7.0/lodash.min.js"></script>
+
+
+</body>
+</html>

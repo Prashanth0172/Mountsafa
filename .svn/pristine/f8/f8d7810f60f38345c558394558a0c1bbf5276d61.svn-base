@@ -1,0 +1,240 @@
+<style>
+    .modal-content{
+        width:696px;
+    }
+    .modal-footer {
+        padding: 5px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    fieldset {
+        min-width: 0;
+        padding: 10px;
+        margin: 0;
+        border: 0;
+    }
+    .form-control {
+        display: block;
+        width: 171px;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+</style>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row" >
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Sub Component</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel-body" style="height: 65px;">
+                            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                                <form class="form-horizontal ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <p class="input-group" style="display: block;">
+                                                <input id="search_academic" name="textinput" type="text"
+                                                       placeholder="Search" ng-model="searchText" class="form-control input-md"
+                                                       ng-keyup="$event.keyCode == 13 ? getPaginationList(searchText) : null"/>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-7">
+
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addSubComponent()">Add</button>
+                                    </div>
+                                    <div class="col-lg-2 col-md-3 col-sm-4">
+                                        <button type="submit" id="colButn" class="btn btn-default" data-toggle="modal"
+                                                ng-model="inactiveStatus" data-target=".print-me"
+                                                ng-click="inactiveButton()">{{ButtonStatus}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="fixed-table-container">
+                        <div class="table_wrapfixed-table-container-inner">
+                            <div class="header-background"></div>
+                            <table data-toggle="table" data-cache="false" data-height="299" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                                <thead>
+                                <tr>
+                                    <th data-field="cntryname">
+                                        <div class="th-inner" align="center">Component Name</div></th>
+                                    <th data-field="cntryname">
+                                        <div class="th-inner" align="center">Name</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Status</div></th>
+                                    <!--<th data-field="edit">-->
+                                        <!--<div class="th-inner" align="center">Edit</div></th>-->
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Actions</div></th>
+                                </tr>
+                                </thead>
+                                <tbody id="parentTable">
+                                <input type="hidden" ng-model="subComponentId" value="{{subComponentList.subComponentId}}"/>
+                                <tr ng-repeat="subComponent in subComponentList|filter:searchText">
+                                    <td>{{subComponent.componentNm}}</td>
+                                    <td>{{subComponent.subComponentName}}</td>
+                                    <td>{{subComponent.status}}</td>
+                                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editSubComponent(subComponent)">Edit</button>
+                                    <button type="button" class="btn btn-primary hi_btn"  ng-click="deleteSubComponent(subComponent)">Delete</button></td>
+                                </tr>
+                                <tr ng-if="searchText!=''&&(subComponentList|filter:searchText).length==0">
+                                    <td colspan="5" style="color: red; font-weight: bold">No Records Found</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12 pagination_">
+
+                                <div class="col-sm-12 pagination_">
+                                    <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}"
+                                            ng-disabled="first"
+                                            ng-click="getPaginationList('firstPage')" ng-model="first">First
+                                    </button>
+                                    <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': prev}"
+                                            ng-disabled="prev"
+                                            ng-click="getPaginationList('prevPage')" ng-model="prev">Prev
+                                    </button>
+                                    <button type="button" class="btn btn-default hi_btn" name="next" ng-disabled="next"
+                                            ng-click="getPaginationList('nextPage')" value="next"
+                                            ng-class="{'diabled-class': next}" ng-model="next">Next
+                                    </button>
+                                    <button type="button" class="btn btn-default hi_btn"
+                                            ng-click="getPaginationList('lastPage')" ng-class="{'diabled-class': last}"
+                                            ng-disabled="last"
+                                            ng-model="last">Last
+                                    </button>
+                                </div>
+                            </div>
+                            <div align="center"><span style="color: red;"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" id="add_SubComponent_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 id="country-title" class="modal-title">Add Sub Component</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Component Name<span>*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="componentNm" name="componentNm" ng-model="componentNm" ng-click="component(componentNm)"
+                                                                ng-options="component.componentId as component.componentName for component in componentList" class="form-control input-md">
+                                                            <option value="">Select Component</option>
+                                                        </select>
+
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Name<span>*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <input id="subComponentName" name="subComponentName"
+                                                               type="text" placeholder="Name"
+                                                               ng-model="subComponentName" maxlength="40">
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" for=""> Description</label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <input id="subComponentDesc" name="subComponentDesc"
+                                                               type="text" placeholder="Description"
+                                                               ng-model="subComponentDesc" maxlength="40">
+                                                        <!--ng-value="setupobj.countryName"-->
+
+                                                        <!--<p class="error" ng-show="form.CountryName.$error.pattern">Alphabets-->
+                                                        <!--only, please.</p>-->
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" for="">Status</label>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <select name="StatusText" id="StatusText" ng-model="StatusText"
+                                                                ng-init="StatusText='Active'" class="form-control input-md">
+                                                            <option value="Active">Active</option>
+                                                            <option value="InActive">InActive</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                        ng-click="saveSubComponent('add_SubComponent_modal')">Save
+                                </button>
+                                <button type="button" class="btn btn-primary hi_btn" ng-click="removeSubComponent()"
+                                        data-dismiss="modal">Close
+                                </button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

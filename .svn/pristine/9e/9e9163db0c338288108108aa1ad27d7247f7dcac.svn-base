@@ -1,0 +1,1008 @@
+<style>
+    .form-horizontal .control-label {
+        padding-top: 7px;
+        margin-bottom: 0;
+        text-align: left !important;
+        padding: 10px 0 0 10px !important;
+    }
+
+    .modal-footer .btn + .btn {
+        margin-bottom: 0;
+        margin-left: 4px !important;
+        margin-right: 0px !important;
+    }
+
+    .modal-title {
+        margin: 0;
+        line-height: -31.571429 !important;
+    }
+
+    .form-horizontal .form-group {
+        margin-right: -5px;
+        margin-left: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 5px;
+    }
+
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .modal-footer {
+        padding: 23px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 100;
+    }
+
+    .btn btn-primary back {
+        padding: 5px;
+    }
+
+    table>tbody>tr>td {
+        text-align: left !important;
+    }
+
+
+</style>
+<div class="container-fluid">
+    <div class="container cus_main_row">
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Employee</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel-body" style="height: 65px;">
+                            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                                <form class="form-horizontal ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <p class="input-group" style="display: block;">
+                                                <input id="search_academic" name="textinput" type="text"
+                                                       placeholder="Search Employee" ng-model="searchText" class="form-control input-md"
+                                                       ng-keyup="$event.keyCode == 13 ? getEmployeeList(searchText) : null"/>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-7">
+
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addEmployee()">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="fixed-table-container">
+                        <div class="table_wrap fixed-table-container-inner">
+                            <table data-toggle="table" data-cache="false" data-height="299" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+
+                            <thead>
+
+                        <tr>
+                            <th data-field="desc">
+                                <div class="th-inner">Employee Name</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Department</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Designation</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner"> Status</div>
+                            </th>
+                            <th data-field="edit">
+                                <div class="th-inner">Actions</div>
+                            </th>
+
+                        </tr>
+                        </thead>
+                        <tbody id="parentTable">
+
+                        <tr ng-repeat="employee in employeeList| filter:searchText">
+                            <td>{{employee.employeeName}}</td>
+                            <td>{{employee.empDepartment}}</td>
+                            <td>{{employee.empDesignation}}</td>
+                            <td>{{employee.status}}</td>
+                            <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editEmployee(employee)">Edit</button>
+
+                            <button type="button" class="btn btn-primary hi_btn" ng-click="deleteEmployee(employee.employeeId)">Delete</button>
+                            <button type="button" class="btn btn-primary hi_btn"
+                                    ng-click="viewEmployee(employee)">View
+                            </button></td>
+                        </tr>
+                        <tr ng-if="searchText!=''&&(employeeList|filter:searchText).length==0">
+                            <td colspan="4" style="color: red; font-weight: bold">No Records Found</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+<add-new-employee></add-new-employee>
+
+
+                <div class="modal fade Student" tabindex="-1" id="View_Employee" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-lg" style="width: 1000px !important;background-color: white !important;">
+                        <div align="center">
+
+
+                            <br/>
+                            <br/>
+
+                            <div class="row">
+                                <div class="col-lg-12 admission_border">
+
+                                    <table class="admission_table_1 table">
+                                        <tbody>
+                                        <tr>
+                                            <td colspan="2" style="padding-left: 20px;text-align:center;
+">
+                                                <h3 >Employee Details</h3>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">1. Employee Branch </span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{empBranch}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">2. Employee Code <small>(as stated in Birth Certicate / I.C /Passport)</small> </span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{employeeCode}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">3. Employee Name* </span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{employeeName}}</span>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">4. Employee DOB</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{empDob|date:'dd/MM/yyyy'}}</span>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">5. Employee Age</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{empAge}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">6. User Type</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{userType}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>
+                                                <span class="adm_title_half">7. Department</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{empDepartment}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">8. EmployeeType</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{empType}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+
+                                            <td>
+                                                <span class="adm_title_half">9. Type Of Employee</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{typeOfEmp}}</span>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">10. Designation</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{empDesignation}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+
+                                            <td>
+                                                <span class="adm_title_half">11. Coordinator</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{empCoordinator}}</span>
+                                            </td>
+                                        </tr>
+
+
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">12. Report To</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{reportTo}}</span>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">13. Date Of Joining</span>
+                                                <span class="adm_colon">:</span>
+
+                                                <span class="adm_val_half" style="width: 56%;">{{empDoj|date:'dd/MM/yyyy'}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">14. Capability</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_half" style="width: 56%;">{{empCapability}}</span>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">15. Speciality:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{speciality}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">16. Mobile:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{mobile}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">17. Email ID*:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{emailId}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">18. Aadhar Card No:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{aadharNo}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">19. Passport No:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{passportNo}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">20. Experience:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{experience}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">21. Address Line 1:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{addressLine1}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">22.Address Line 2:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{addressLine2}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">23. Country:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{country}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">24. State:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{state}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">25. City:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{city}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">26. PostalCode:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{postalCode}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">27. UserName:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{userName}}</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">28. Password:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{password}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">29. SalEffective Date:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{salEffectiveDate|date:'dd/MM/yyyy'}}</span>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <span class="adm_title_half">30. BasicSal:</span>
+                                                <span class="adm_colon">:</span>
+                                                <span class="adm_val_full" style="width: 56%;">{{basicSal}}</span>
+                                            </td>
+                                        </tr>
+
+
+
+
+
+
+
+                                        <div class="col-lg-12 admission_border">
+                                            <table class="admission_table_1 table">
+                                                <tbody>
+
+
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <table class="table" >
+                                                            <tr>
+                                                                <td>Earning Name</td>
+                                                                <td>Earning Amount </td>
+
+
+                                                            <tbody>
+                                                            <tr ng-repeat="sb in earningList">
+                                                                <td>{{sb.earningName}}</td>
+                                                                <td>{{sb.earningAmount}}</td>
+
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+
+
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+
+
+                                        <div class="col-lg-12 admission_border">
+                                            <table class="admission_table_1 table">
+                                                <tbody>
+
+
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <table class="table" >
+                                                            <tr>
+                                                                <td>Deduction Name</td>
+                                                                <td>Deduction Amount </td>
+
+
+                                                                <tbody>
+                                                                <tr ng-repeat="sb1 in deductionList">
+                                                                    <td>{{sb1.deductionName}}</td>
+                                                                    <td>{{sb1.deductionAmount}}</td>
+
+                                                                </tr>
+                                                                </tbody>
+                                                        </table>
+                                                    </td>
+
+
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+
+                                        <button type="button" class="btn btn-primary hi_btn" data-dismiss="modal" style="padding-left: 20px"> Close
+                                        </button>
+                                        <!--<table class="table">                                                <tr>-->
+
+                                            <!--<td>-->
+                                                <!--<span style="color: black">No</span>-->
+                                            <!--</td>-->
+                                            <!--<td><span style="color: black"> Sekolah/School</span> </td>-->
+                                            <!--<td><span style="color: black"> Tahun/Year</span></td>-->
+                                            <!--<td><span style="color: black">Gred/Grade</span></td>-->
+                                        <!--</tr>-->
+                                            <!--<tbody>-->
+                                            <!--<tr ng-repeat="prev in previousSchoolsDetails">-->
+                                                <!--<td>{{prev.schoolno}}</td>-->
+                                                <!--<td>{{prev.schoolName}}</td>-->
+                                                <!--<td>{{prev.schoolYear}}</td>-->
+                                                <!--<td>{{prev.schoolGrade}}</td>-->
+                                            <!--</tr>-->
+                                            <!--</tbody>-->
+                                        <!--</table>-->
+
+
+
+                                        <!--</tbody>-->
+                                    <!--</table>-->
+
+
+
+                                <!--<div class="col-lg-12 admission_border">-->
+                                    <!--<table class="admission_table_1 table">-->
+                                        <!--<tbody>-->
+
+                                        <!--<tr>-->
+                                            <!--<td colspan="2" style="padding-left: 20px;">-->
+                                                <!--<p>B. SIBLINGS INFORTMATION:</p>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td colspan="2">-->
+                                                <!--<table class="table" >-->
+                                                    <!--<tr>-->
+                                                        <!--<td>Registration No.</td>-->
+                                                        <!--<td>Sibling's name </td>-->
+                                                        <!--<td>Date of birth</td>-->
+                                                        <!--<td>School</td></tr>-->
+
+                                                    <!--<tbody>-->
+                                                    <!--<tr ng-repeat="sb in sbillingDetailsList">-->
+                                                        <!--<td>{{sb.sbilladminNo}}</td>-->
+                                                        <!--<td>{{sb.sbillName}}</td>-->
+                                                        <!--<td>{{sb.sbillDOB}}</td>-->
+                                                        <!--<td>{{sb.sbillPrevSchool}}</td>-->
+                                                    <!--</tr>-->
+                                                    <!--</tbody>-->
+                                                <!--</table>-->
+                                            <!--</td>-->
+
+
+                                        <!--</tr>-->
+
+                                        <!--</tbody>-->
+                                    <!--</table>-->
+
+                                <!--</div>-->
+
+
+                                <!--<div class="col-lg-12 admission_border">-->
+                                    <!--<table class="admission_table_1 table">-->
+                                        <!--<tbody>-->
+                                        <!--<tr>-->
+                                            <!--<td style="padding-left: 20px;">-->
+                                                <!--<p>D. PARENT'S INFORMATION:</p>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">1. Father Name</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_full" style="width: 56%;">{{fatherName}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">2. Passport No</span>-->
+                                                <!--<span class="adm_colon">:</span> <span class="adm_val_full" style="width: 56%;"> {{fatherPassNo}}</span>-->
+                                                <!--<br/>-->
+                                                <!--<span class="adm_title_half" style="width: 38%;margin-left: 17px;">I.C No </span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_full" style="width: 56%;">{{fatherICNO}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">3. Nationality</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_full" style="width: 56%;">{{fathernationality}}</span>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">4. Date of Birth:</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_full" style="width: 56%;">{{fatherDOB}}</span>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">5. Highest Education</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_full" style="width: 56%;">{{fathereducation}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">6. Occupation</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_full" style="width: 56%;">{{fatherBusiness}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">7. Income</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_full" style="width: 56%;">{{fatherincome}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">8. Employer</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_full" style="width: 56%;">{{fatherEmployer}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">9. Nature of Business</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_full" style="width: 56%;">{{fatherBusiness}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">10. Office Address</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{fatherOfficeAddress.fatherofficeHNO}} , {{fatherOfficeAddress.fatherofficeAddr}} , {{fatherOfficeAddress.fatherofficePostal}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">11. Tel.No</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_full" style="width: 56%;">{{fatherTelNo}}</span>-->
+                                                <!--<br/>-->
+                                                <!--<span class="adm_title_half" style="width: 37%;margin-left: 25px;">Fax:</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_full" style="width: 56%;">{{fatherFax}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">12. Mobile Number</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_full" style="width: 56%;">{{fatherMobileNo}}</span>-->
+                                                <!--<br/>-->
+                                                <!--<span class="adm_title_half" style="width: 37%;margin-left: 25px;">Email:</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_full" style="width: 56%;">{{fatherEmail}}</span>-->
+                                            <!--</td>-->
+
+
+                                        <!--</tr>-->
+
+                                        <!--</tbody>-->
+                                    <!--</table>-->
+
+                                <!--</div>-->
+
+
+                                <!--<div class="col-lg-12 admission_border">-->
+                                    <!--<table class="admission_table_1 table">-->
+                                        <!--<tbody>-->
+                                        <!--<tr>-->
+                                            <!--<td colspan="2" style="padding-left: 20px;">-->
+                                                <!--<p>E. MOTHER'S INFORMATION:</p>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">1. Mother Name</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{motherName}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">2. Passport No</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;"> {{motherPassNo}}</span>-->
+                                                <!--<br/>-->
+                                                <!--<span class="adm_title_half" style="width: 38%;margin-left: 17px;">I.C No</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{motherICNO}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">3. Nationality</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{mothernationality}}</span>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">4. Date of Birth:</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{motherDOB}}</span>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">5. Highest Education</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{mothereducation}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">6. Occupation</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{motheroccupation}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">7. Income</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{motherincome}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">8. Employer</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{motherEmployer}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">9. Nature of Business</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{motherBusiness}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">10. Office Address</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{motherOfficeAddress.motherHouseNo}} , {{motherOfficeAddress.motherofficeAddr}} , {{motherOfficeAddress.motherpostalcode}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">11. Tel.No</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{motherTelNo}}</span>-->
+                                                <!--<br/>-->
+                                                <!--<span class="adm_title_half" style="width: 37%;margin-left: 25px;">Fax</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{motherFax}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">12. Mobile Number</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{motherMobileNo}}</span>-->
+                                                <!--<br/>-->
+                                                <!--<span class="adm_title_half" style="width: 37%;margin-left: 25px;">Email</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{motherEmail}}</span>-->
+                                            <!--</td>-->
+
+
+                                        <!--</tr>-->
+
+                                        <!--</tbody>-->
+
+                                    <!--</table>-->
+
+                                <!--</div>-->
+
+
+                                <!--<div class="col-lg-12 admission_border">-->
+                                    <!--<table class="admission_table_1 table">-->
+                                        <!--<tbody>-->
+
+                                        <!--<tr>-->
+                                            <!--<td style="padding-left: 20px;">-->
+                                                <!--<p>F. GUARDIAN'S INFORMATION::</p>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">1. Name</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{guardianName}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">2. Passport No</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{guardianPassNo}}</span>-->
+                                                <!--<span class="adm_title_half" style="width: 38%;margin-left: 17px;">I.C No</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span style="width: 56%;">{{guardianICNO}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">3. Nationality</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{guardiannationality}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">4. Occupation</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{guardianoccupation}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">5. Employer</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{guardianEmployer}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">6. Corresspondence Address</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{guardCorrAddress.guardiancorreshouseno}}, {{guardCorrAddress.guardiancorresstreetaddr}} , {{guardCorrAddress.guardiancorrespostalcode}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">7. Permanent Address</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{guardPerAddress.guardianpermhouseno}} , {{guardPerAddress.guardianpermstreetaddr}} , {{guardPerAddress.guardianpermpostalcode}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">8. Telephone Number:</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half" style="width: 56%;">{{guardianTelNo}}</span>-->
+                                            <!--</td>-->
+
+                                        <!--</tr>-->
+                                        <!--</tbody>-->
+
+                                    <!--</table>-->
+
+                                <!--</div>-->
+
+
+                                <!--<div class="col-lg-12 admission_border">-->
+                                    <!--<table class="admission_table_1 table">-->
+                                        <!--<tbody>-->
+
+                                        <!--<tr>-->
+                                            <!--<td colspan="2" style="padding-left: 20px;">-->
+                                                <!--<p>G. AGREEMENT & DECLARATION:</p>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+
+
+                                        <!--<tr>-->
+                                            <!--<td colspan="2">-->
+                                                <!--I Understand and agree to the points below.-->
+                                                <!--1) 2months notice must be served before withdrawal or the deposit will be forfeited.-->
+                                                <!--2) Any outstanding payment will be deducted from deposit                                            </td>-->
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half"> Name </span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half"> {{stdname}}</span>-->
+                                            <!--</td>-->
+                                            <!--<td>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+
+                                        <!--<tr>-->
+                                            <!--<td>-->
+                                                <!--<span class="adm_title_half">Date</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half"> 2018-12-03</span>-->
+                                            <!--</td>-->
+                                            <!--<td>-->
+                                                <!--<span  class="adm_title_half"> Signature</span>-->
+                                                <!--<span class="adm_colon">:</span>-->
+                                                <!--<span class="adm_val_half"> &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--</tbody>-->
+                                    <!--</table>-->
+
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+            </div>
+
+            </div>
+        </div>
+        <script>
+            $('body').delegate('.remove','click',function()
+            {
+                $(this).parent().parent().remove();
+            });
+
+            $("#sameas").click(function () {
+
+                if($(this).prop("checked") == true){
+
+                    $("#samecorrespended").hide();
+                }else{
+
+                    $("#samecorrespended").show();
+
+                }
+
+
+
+            })
+            function removereadonly(id,clicksid) {
+
+                if($("#"+clicksid).prop("checked") == true){
+
+                    $('#'+id).prop('readonly', false);
+                }else{
+
+                    $('#'+id).prop('readonly', true);
+
+                }
+
+            }
+            $("#back1").hide();
+        </script>
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

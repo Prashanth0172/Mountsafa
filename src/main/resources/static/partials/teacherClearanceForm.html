@@ -1,0 +1,704 @@
+<style>
+    .modal-content{
+        width:696px;
+    }
+
+    .modal-footer {
+        padding: 5px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    fieldset {
+        min-width: 0;
+        padding: 10px;
+        margin: 0;
+        border: 0;
+    }
+    .control-label {
+        position: relative;
+        min-height: 1px;
+        padding-right: 8px;
+        padding-left: 11px;
+    }
+
+    .form-control {
+        display: block;
+        width: 264px;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+
+
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row" >
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Teacher / Staff Clearance Form</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel-body" style="height: 65px;">
+                            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                                <form class="form-horizontal ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <p class="input-group" style="display: block;">
+                                                <input id="search_academic" name="textinput" type="text"
+                                                       placeholder="Search" ng-model="searchText" class="form-control input-md"
+                                                       ng-keyup="$event.keyCode == 13 ? getTeachingClearanceList(searchText) : null"/>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-7">
+
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addTeacherClearanceForm()">Add</button>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="fixed-table-container">
+                    <div class="table_wrapfixed-table-container-inner">
+                        <div class="header-background"></div>
+                        <table data-toggle="table" data-cache="false" data-height="299" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                            <thead>
+                            <tr>
+                                <th data-field="cntryname">
+                                    <div class="th-inner" align="center">Teacher Name</div>
+                                </th>
+                                <th data-field="cntryname">
+                                    <div class="th-inner" align="center">Employee No</div>
+                                </th>
+
+                                <!--<th data-field="edit">-->
+                                    <!--<div class="th-inner" align="center">Edit</div>-->
+                                <!--</th>-->
+                                <th data-field="edit">
+                                    <div class="th-inner" align="center">Actions</div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody id="parentTable">
+                            <input type="hidden" ng-model="teachingClearanceId" value="{{teacherClearanceList.teachingClearanceId}}"/>
+                            <tr ng-repeat="teacherMasterClearance in teacherClearanceList|filter:searchText">
+                                <td>{{teacherMasterClearance.teacherNm}}</td>
+                                <td>{{teacherMasterClearance.employeeNo}}</td>
+
+
+                                <td><button type="button" class="btn btn-primary hi_btn"  ng-click="EditTeacherClearance(teacherMasterClearance)">Edit</button>
+                                <button type="button" class="btn btn-primary hi_btn"  ng-click="DeleteTeacherClearance(teacherMasterClearance)">Delete</button></td>
+                            </tr>
+                            <tr ng-if="searchText!=''&&(teacherClearanceList|filter:searchText).length==0">
+                                <td colspan="4" style="color: red; font-weight: bold">No Records Found</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+   <div class="modal fade Student" tabindex="-1" id="add_new_Teacher_Clearance_Form_modal" role="dialog"
+     data-backdrop="static"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-lg" style="width: 1000px !important;">
+        <div class="modal-content checkout" style="width: 1000px!important;">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 id="student-title" class="modal-title" style="color:red;" align="center">
+                    Teacher/Staff Clearance Form</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <form class="form-horizontal" name="student">
+                            <fieldset>
+<!--                                <div class="tab-content">-->
+                                    <!--<div class="tab-pane fade in active" id="sub_step12">-->
+<!--                                        <h4 class="modal-title" style="color:red;" align="center">TEACHER/STAFF CLEARANCE FORM</h4>-->
+<!--                                        <div class="col-md-6">-->
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label" >Teacher Name:<span style="color:red;">*</span></label>
+                                                <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                    <select id="branchId" name="branchId" ng-model="teacherName"
+                                                            ng-change="getDetailsByName(teacherName)"
+                                                            ng-options="employee.employeeName as employee.employeeName for employee in employeeList" class="form-control input-md">
+                                                        <option value="">Select Employee</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 control-label">Employee No:<span style="color:red;">*</span></label>
+                                                <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                    <input name="employeeNo" id="employeeNo"
+                                                           class="form-control input-md"
+                                                           ng-model="employeeNo">
+                                                </div>
+                                            </div>
+
+
+
+
+                                            <div class="fixed-table-container">
+                                            <div class="table_wrapfixed-table-container-inner">
+                                                <label class="col-md-4 control-label" for="currency"
+                                                       style="color:#337ab7" ;>Teaching Resources</label>
+                                                <div class="header-background"></div>
+                                                <table style="text-align: left !important;">
+                                                    <tbody><tr> <td style="width: 544px;">
+                                                        <div class="controls">
+                                                            <!--<label><b>Students are ready:</b></label>-->
+                                                            <br>
+                                                            <label>Books
+                                                                <!--<input type="checkbox" name="immunization" value="1" id="immunization" ng-model="immunization" required="true" class="immunization"  onclick="removereadonly('immunizationState','immunization');">-->
+
+                                                                <span class="lbl"></span></label>
+                                                            <!--<input name="medicine" type="checkbox" />-->
+                                                            <!--<input type="checkbox" name="medicine" value="1" id="medicine" ng-model="medicine" required="true" class="medicine" onclick="removereadonly('medicineState','medicine');"></label>-->
+
+
+
+                                                        </div></td>
+                                                        <td>
+
+
+
+                                                            <p><input type="checkbox"  id="checkbox" name="Books" ng-model="Books"/><span style="align-content: right">Books</span>
+                                                            </p></td>
+
+
+
+
+                                                    <tr>  <td>
+
+                                                        <div class="controls" style="font-weight: normal;">
+                                                            <label>Teaching Aids / Materials
+                                                                <!--<input type="checkbox" name="immunization" value="1" id="immunization" ng-model="immunization" required="true" class="immunization"  onclick="removereadonly('immunizationState','immunization');">-->
+
+                                                                <span class="lbl"></span></label>
+                                                        </div></td>
+                                                        <td>
+
+                                                            <p><input type="checkbox"  id="checkbox" name="Teaching Materialsd" ng-model="teachingMaterials" ng-init="value = value || false"
+                                                                      ng-click="myFunction(teachingMaterials)"/>Teaching Materials<span style="align-content: right"></span>
+                                                            </p></td>
+
+                                                    <tr>  <td>
+
+                                                        <div class="controls" style="font-weight: normal;">
+                                                            <label>Stationaries
+                                                                <!--<input type="checkbox" name="food" value="1" id="food" ng-model="food" required="true" class="food"  onclick="removereadonly('foodState','food');">-->
+
+                                                                <span class="lbl"></span></label>
+                                                        </div></td>
+                                                        <td>
+
+                                                            <p><input type="checkbox"  id="checkbox" name="stationaries" ng-model="stationaries" ng-init="value = value || false"
+                                                                      ng-click="myFunction(stationaries)"/>Stationaries<span style="align-content: right"></span>
+                                                            </p></td>
+                                                    <tr>  <td>
+
+                                                        <div class="controls" style="font-weight: normal;">
+                                                            <label>Attendance Book
+                                                                <!--<input type="checkbox" name="others" value="1" id="others" ng-model="others" required="true" class="others" onclick="removereadonly('othersState','others');" >-->
+                                                                <span class="lbl"></span></label>
+                                                        </div></td>
+                                                        <td>
+
+                                                            <p><input type="checkbox"  id="checkbox" name="attendanceBook" ng-model="attendanceBook" ng-init="value = value || false"
+                                                                      ng-click="myFunction(attendanceBook)"/>Attendance Book<span style="align-content: right"></span>
+                                                            </p></td>
+                                                    <tr>  <td>
+
+                                                        <div class="form-group">
+                                                            <label class="col-md-6 control-label" for=""> Admin Executive:<span style="color:red;"></span></label>
+                                                            <div class="col-md-4" style="position:relative;">
+                                                                <input id="observationReport" name="observationReport"  maxlength="32"
+                                                                       type="text" placeholder="Admin Executive"
+                                                                       ng-model="adminExecutive"
+                                                                       class="form-control input-md" required>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                        <label class="col-md-6 col-sm-6 control-label">Date:</label>
+
+                                                        <div class="col-md-6 ">
+                                                        <p class="input-group">
+                                                        <input id="sdate" type="text" class="form-control"
+                                                        style=""
+                                                        uib-datepicker-popup="{{format}}" ng-model="Sdate" is-open="popup1.opened"
+                                                        datepicker-options="dateOptions" readonly="readonly" ng-required="true" class="form-control input-md"
+                                                        close-text="Close" alt-input-formats="altInputFormats"/>
+                                                        <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                                        class="glyphicon glyphicon-calendar"></i></button>
+                                                        </span>
+                                                        </p>
+                                                        </div>
+                                                        </div>
+
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+                                        </div>
+
+
+                                            <div class="fixed-table-container">
+                                                <div class="table_wrapfixed-table-container-inner">
+                                                    <label class="col-md-4 control-label" for="currency"
+                                                           style="color:#337ab7" ;>Academic</label>
+                                                    <div class="header-background"></div>
+                                                    <table style="text-align: left !important;">
+                                                        <tbody><tr> <td style="width: 544px;">
+                                                            <div class="controls">
+                                                                <!--<label><b>Students are ready:</b></label>-->
+                                                                <br>
+                                                                <label>Fee Submission
+                                                                    <!--<input type="checkbox" name="immunization" value="1" id="immunization" ng-model="immunization" required="true" class="immunization"  onclick="removereadonly('immunizationState','immunization');">-->
+
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+
+                                                                <p><input type="checkbox"  id="checkbox" name="feeSubmission" ng-model="feeSubmission" ng-init="value = value || false"
+                                                                          ng-click="myFunction(feeSubmission)"/>Fee Submission<span style="align-content: right"></span>
+                                                                </p></td>
+
+
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-weight: normal;">
+                                                                <label>Checkpoint Papers
+                                                                    <!--<input type="checkbox" name="immunization" value="1" id="immunization" ng-model="immunization" required="true" class="immunization"  onclick="removereadonly('immunizationState','immunization');">-->
+
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p><input type="checkbox"  id="checkbox" name="checkpointPapers" ng-model="checkpointPapers" ng-init="value = value || false"
+                                                                          ng-click="myFunction(checkpointPapers)"/>Checkpoint Papers<span style="align-content: right"></span>
+                                                                </p></td>
+
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-weight: normal;">
+                                                                <label>Lesson Plan (Hard & Soft Copy)
+                                                                    <!--<input type="checkbox" name="food" value="1" id="food" ng-model="food" required="true" class="food"  onclick="removereadonly('foodState','food');">-->
+
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p><input type="checkbox"  id="checkbox" name="lessonPlan" ng-model="lessonPlan" ng-init="value = value || false"
+                                                                          ng-click="myFunction(lessonPlan)"/>Lesson Plan<span style="align-content: right"></span>
+                                                                </p></td>
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-weight: normal;">
+                                                                <label>Project / Assignment(if any)
+                                                                    <!--<input type="checkbox" name="others" value="1" id="others" ng-model="others" required="true" class="others" onclick="removereadonly('othersState','others');" >-->
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p><input type="checkbox"  id="checkbox" name="project" ng-model="project" ng-init="value = value || false"
+                                                                          ng-click="myFunction(project)"/>Project<span style="align-content: right"></span>
+                                                                </p></td>
+                                                        <tr>  <td>
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-6 control-label" for=""> Vice Principal:<span style="color:red;"></span></label>
+                                                                <div class="col-md-4" style="position:relative;">
+                                                                    <input id="observationReport" name="observationReport"  maxlength="32"
+                                                                           type="text" placeholder="Vice Principle"
+                                                                           ng-model="vicePrinciple"
+                                                                           class="form-control input-md" required>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-6 col-sm-6 control-label">Date</label>
+
+
+                                                                <div class="col-md-6 ">
+                                                                    <p class="input-group"><input id="edate" type="text"
+                                                                                                  class="form-control"
+                                                                                                  style=""
+                                                                                                  uib-datepicker-popup="{{format}}"
+                                                                                                  ng-model="Edate"
+                                                                                                  is-open="popup2.opened"
+                                                                                                  datepicker-options="dateOptions"
+                                                                                                  readonly="readonly"
+                                                                                                  ng-required="true"
+                                                                                                  class="form-control"
+                                                                                                  close-text="Close"
+                                                                                                  alt-input-formats="altInputFormats"/>
+                                                                        <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open2()"><i
+                                             class="glyphicon glyphicon-calendar"></i></button>
+                                            </span></p>
+                                                                </div>
+                                                            </div>
+
+
+
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="fixed-table-container">
+                                                <div class="table_wrapfixed-table-container-inner">
+                                                    <label class="col-md-4 control-label" for="currency"
+                                                           style="color:#337ab7" ;>ADMINISTRATOR</label>
+                                                    <div class="header-background"></div>
+                                                    <table style="text-align: left !important;">
+                                                        <tbody><tr> <td style="width: 544px;">
+                                                            <div class="controls">
+                                                                <!--<label><b>Execution of Lesson Plan:</b></label>-->
+                                                                <br>
+                                                                <label>Access Card
+                                                                    <!--<input type="checkbox" name="immunization" value="1" id="immunization" ng-model="immunization" required="true" class="immunization"  onclick="removereadonly('immunizationState','immunization');">-->
+
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+
+                                                                <p><input type="checkbox"  id="checkbox" name="AccessCard" ng-model="AccessCard" ng-init="value = value || false"
+                                                                          ng-click="myFunction(AccessCard)"/>Access Card<span style="align-content: right"></span>
+                                                                </p></td>
+
+
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-weight: normal;">
+                                                                <label>Keys(class,cabinet,etc.)
+                                                                    <!--<input type="checkbox" name="immunization" value="1" id="immunization" ng-model="immunization" required="true" class="immunization"  onclick="removereadonly('immunizationState','immunization');">-->
+
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p><input type="checkbox"  id="checkbox" name="Keys" ng-model="Keys" ng-init="value = value || false"
+                                                                          ng-click="myFunction(Keys)"/>Keys<span style="align-content: right"></span>
+                                                                </p></td>
+
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-weight: normal;">
+                                                                <label>Tools & Equipments(if any)
+                                                                    <!--<input type="checkbox" name="food" value="1" id="food" ng-model="food" required="true" class="food"  onclick="removereadonly('foodState','food');">-->
+
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p><input type="checkbox"  id="checkbox" name="tools" ng-model="tools" ng-init="value = value || false"
+                                                                          ng-click="myFunction(tools)"/>Tools<span style="align-content: right"></span>
+                                                                </p></td>
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-weight: normal;">
+                                                                <label>Sports Equipments(if any)
+                                                                    <!--<input type="checkbox" name="food" value="1" id="food" ng-model="food" required="true" class="food"  onclick="removereadonly('foodState','food');">-->
+
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p><input type="checkbox"  id="checkbox" name="sportsEquipments" ng-model="sportsEquipments" ng-init="value = value || false"
+                                                                          ng-click="myFunction(sportsEquipments)"/>Sports Equipments<span style="align-content: right"></span>
+                                                                </p></td>
+                                                        <tr>  <td>
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-6 control-label" for=""> Administrator:<span style="color:red;"></span></label>
+                                                                <div class="col-md-4" style="position:relative;">
+                                                                    <input id="observationReport" name="observationReport"  maxlength="32"
+                                                                           type="text" placeholder="Administrator"
+                                                                           ng-model="administrator"
+                                                                           class="form-control input-md" required>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-6 col-sm-6 control-label">Date</label>
+
+
+                                                                <div class="col-md-6 ">
+                                                                    <p class="input-group"><input id="edate" type="text" class="form-control"
+                                                                                                  style=""
+                                                                                                  uib-datepicker-popup="{{format}}" ng-model="Mdate" is-open="popup3.opened"
+                                                                                                  datepicker-options="dateOptions" readonly="readonly" ng-required="true" class="form-control"
+                                                                                                  close-text="Close" alt-input-formats="altInputFormats"/>
+                                                                        <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open3()"><i
+                                             class="glyphicon glyphicon-calendar"></i></button>
+                                            </span></p>
+                                                                </div>
+                                                            </div>
+
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="fixed-table-container">
+                                                <div class="table_wrapfixed-table-container-inner">
+                                                    <label class="col-md-4 control-label" for="currency"
+                                                           style="color:#337ab7" ;>FINANCE</label>
+                                                    <div class="header-background"></div>
+                                                    <table style="text-align: left !important;">
+                                                        <tbody><tr> <td style="width: 544px;">
+                                                            <div class="controls">
+                                                                <!--<label><b>Execution of Lesson Plan:</b></label>-->
+                                                                <br>
+                                                                <label>Children's School Fees
+                                                                    <!--<input type="checkbox" name="immunization" value="1" id="immunization" ng-model="immunization" required="true" class="immunization"  onclick="removereadonly('immunizationState','immunization');">-->
+
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+
+                                                                <p><input type="checkbox"  id="checkbox" name="SchoolFee" ng-model="SchoolFee" ng-init="value = value || false"
+                                                                          ng-click="myFunction(SchoolFee)"/>School Fee<span style="align-content: right"></span>
+                                                                </p></td>
+
+
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-weight: normal;">
+                                                                <label>Children's Other Relevant Fees
+                                                                    <!--<input type="checkbox" name="immunization" value="1" id="immunization" ng-model="immunization" required="true" class="immunization"  onclick="removereadonly('immunizationState','immunization');">-->
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p><input type="checkbox"  id="checkbox" name="relevantFees" ng-model="relevantFees" ng-init="value = value || false"
+                                                                          ng-click="myFunction(relevantFees)"/>Relevant Fees<span style="align-content: right"></span>
+                                                                </p></td>
+
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-weight: normal;">
+                                                                <label>Seminar / Courses fee(if any)
+                                                                    <!--<input type="checkbox" name="food" value="1" id="food" ng-model="food" required="true" class="food"  onclick="removereadonly('foodState','food');">-->
+
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p><input type="checkbox"  id="checkbox" name="courseFee" ng-model="courseFee" ng-init="value = value || false"
+                                                                          ng-click="myFunction(courseFee)"/>Course Fee<span style="align-content: right"></span>
+                                                                </p></td>
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-weight: normal;">
+                                                                <label>Short Term Loan / Advance Salary
+                                                                    <!--<input type="checkbox" name="food" value="1" id="food" ng-model="food" required="true" class="food"  onclick="removereadonly('foodState','food');">-->
+
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p><input type="checkbox"  id="checkbox" name="advanceSalary" ng-model="advanceSalary" ng-init="value = value || false"
+                                                                          ng-click="myFunction(advanceSalary)"/>Advance Salary<span style="align-content: right"></span>
+                                                                </p></td>
+                                                        <tr>  <td>
+
+                                                            <div class="controls" style="font-weight: normal;">
+                                                                <label>Money held on behalf of the school
+                                                                    <!--<input type="checkbox" name="food" value="1" id="food" ng-model="food" required="true" class="food"  onclick="removereadonly('foodState','food');">-->
+
+                                                                    <span class="lbl"></span></label>
+                                                            </div></td>
+                                                            <td>
+
+                                                                <p><input type="checkbox"  id="checkbox" name="moneyHeld" ng-model="moneyHeld" ng-init="value = value || false"
+                                                                          ng-click="myFunction(moneyHeld)"/>Money Held<span style="align-content: right"></span>
+                                                                </p></td>
+                                                        <tr>  <td>
+
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-6 control-label" for=""> Finance Manager:<span style="color:red;"></span></label>
+                                                                <div class="col-md-4" style="position:relative;">
+                                                                    <input id="observationReport" name="observationReport"  maxlength="32"
+                                                                           type="text" placeholder="Finance Manager"
+                                                                           ng-model="financeManager"
+                                                                           class="form-control input-md" required>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-6 col-sm-6 control-label">Date</label>
+
+
+                                                                <div class="col-md-6">
+                                                                    <p class="input-group"><input id="edate" type="text" class="form-control"
+                                                                                                  style=""
+                                                                                                  uib-datepicker-popup="{{format}}" ng-model="Ldate" is-open="popup4.opened"
+                                                                                                  datepicker-options="dateOptions" readonly="readonly" ng-required="true" class="form-control"
+                                                                                                  close-text="Close" alt-input-formats="altInputFormats"/>
+                                                                        <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open4()"><i
+                                             class="glyphicon glyphicon-calendar"></i></button>
+                                            </span></p>
+                                                                </div>
+                                                            </div>
+
+                                                        </tbody>
+
+                                                    </table>
+                                                    <div class="form-group">
+                                                        <label class="col-md-6 control-label" for=""> Mudir's Approval:<span style="color:red;"></span></label>
+                                                        <div class="col-md-4" style="position:relative;">
+                                                            <input id="observationReport" name="observationReport"  maxlength="32"
+                                                                   type="text" placeholder="Mudir's Approval"
+                                                                   ng-model="mudirApproval"
+                                                                   class="form-control input-md" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-md-6 col-sm-6 control-label">Date</label>
+
+
+                                                        <div class="col-md-4 ">
+                                                            <p class="input-group"><input id="edate" type="text" class="form-control"
+                                                                                          style=""
+                                                                                          uib-datepicker-popup="{{format}}" ng-model="Udate" is-open="popup5.opened"
+                                                                                          datepicker-options="dateOptions" readonly="readonly" ng-required="true" class="form-control"
+                                                                                          close-text="Close" alt-input-formats="altInputFormats"/>
+                                                                <span class="input-group-btn">
+                                     <button type="button" class="btn btn-default" ng-click="open5()"><i
+                                             class="glyphicon glyphicon-calendar"></i></button>
+                                            </span></p>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+
+
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" ng-click="saveTeacherClearance()" ng-disabled="">Save</button>
+                                                <button type="button" class="btn btn-primary" ng-click="removeTeacherClearance()" data-dismiss="modal">Close</button>
+                                            </div>
+
+<!--                                    </div>-->
+<!--                                        </div>-->
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</div>
+<script>
+    $('body').delegate('.remove','click',function()
+    {
+        $(this).parent().parent().remove();
+    });
+
+    $("#sameas").click(function () {
+
+        if($(this).prop("checked") == true){
+
+            $("#samecorrespended").hide();
+        }else{
+
+            $("#samecorrespended").show();
+
+        }
+
+
+
+    })
+    function removereadonly(id,clicksid) {
+
+        if($("#"+clicksid).prop("checked") == true){
+
+            $('#'+id).prop('readonly', false);
+        }else{
+
+            $('#'+id).prop('readonly', true);
+
+        }
+
+    }
+    $("#next1").hide();
+    $("#next2").hide();
+    $("#next3").hide();
+    $("#saveId").hide();
+    $("#back1").hide();
+
+
+
+</script>

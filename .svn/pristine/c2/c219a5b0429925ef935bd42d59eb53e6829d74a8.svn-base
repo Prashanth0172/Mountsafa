@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row">
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div> Academic Masters</div>
+            </h2>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="feetypemasterLink" href="#!/sow" tabindex="-1"> <i
+                        class="fa fa-credit-card" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">SOW</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a id="newLessonPlan"
+                                                                  href="#!/newLessonPlan" tabindex="-1"> <i
+                        class="fa fa-calendar" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">Lesson Plan</div>
+                </div>
+                </a>
+            </div>
+
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a id="assessmentQuestions"
+                                                                  href="#!/assessmentQuestions"  tabindex="-1"> <i
+                        class="fa fa-calendar" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">Assessment Questions</div>
+                </div>
+                </a>
+            </div>
+
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="creator" href="#!/creator" tabindex="-1"> <i
+                        class="fa fa-user" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">Assesment Creator</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="AssesmentSubmission" href="#!/AssesmentSubmission" tabindex="-1"> <i
+                        class="fa fa-compass" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">Assesment Submission</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="StudentAssesmentMarks" href="#!/StudentAssesmentMarks" tabindex="-1"> <i
+                        class="fa fa-compass" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">Detail Assesment Marks Submission</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a id="ihesLessonPlan"
+                                                                  href="#!/ihesLessonPlan" tabindex="-1"> <i
+                        class="fa fa-calendar" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">IHES LessonPlan</div>
+                </div>
+                </a>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="periods" href="#!/periods" tabindex="-1"> <i
+                        class="fa fa-check-square" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">Periods</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="timetable" href="#!/timetable" tabindex="-1"> <i
+                        class="fa fa-check-square" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">TimeTable</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

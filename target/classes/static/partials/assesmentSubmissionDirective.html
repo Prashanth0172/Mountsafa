@@ -1,0 +1,260 @@
+<style>
+    .form-horizontal .control-label {
+        padding-top: 7px;
+        margin-bottom: 0;
+        text-align: left !important;
+        padding: 10px 0 0 10px !important;
+    }
+
+    .modal-footer .btn + .btn {
+        margin-bottom: 0;
+        margin-left: 4px !important;
+        margin-right: 0px !important;
+    }
+
+    .modal-title {
+        margin: 0;
+        line-height: -31.571429 !important;
+    }
+
+    .form-horizontal .form-group {
+        margin-right: -5px;
+        margin-left: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 5px;
+    }
+
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .modal-footer {
+        padding: 23px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 100;
+    }
+
+    .btn btn-primary back {
+        padding: 5px;
+    }
+
+    table>tbody>tr>td {
+        text-align: left !important;
+    }
+
+
+</style>
+<div class="modal fade addCustomer" tabindex="-1" id="add_new_AS_modal" role="dialog"
+     data-backdrop="static"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content checkout">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true" ng-click="removeAssSub()">&times;</span></button>
+                <h4 id="topic-title" class="modal-title">Add Assesment Submission</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <form class="form-horizontal" name="form">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-4 col-sm-4 control-label">Term<span
+                                            style="color:red;">*</span></label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <select id="term" name="term" ng-model="term"
+                                                ng-options="term.termId as
+											term.termName for term in termList" class="form-control input-md">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 col-sm-4 control-label">Level<span
+                                            style="color:red;">*</span></label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <select id="levelId" name="levelId" ng-model="level"
+                                                ng-change="levelClass(level)"
+                                                ng-options="lev.gradeId as
+											lev.gradeName for lev in gradeList" class="form-control input-md">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 col-sm-4 control-label">Class<span
+                                            style="color:red;">*</span></label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <select id="classId" name="classId" ng-model="classId"
+                                                ng-change="classSubject(classId);getStudentListBasedOnClass(classId)"
+                                                ng-options="cla.classId as
+											cla.className for cla in classList" class="form-control input-md">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-4 col-sm-4 control-label">SubjectName<span
+                                            style="color:red;">*</span></label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <select id="subjectId" name="subjectId" ng-model="subject"
+                                                ng-change="subjectChapter(subject)"
+                                                ng-options="sub.subjectId as
+											sub.subjectName for sub in subjectList" class="form-control input-md">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 col-sm-4 control-label">ChapterName<span
+                                            style="color:red;">*</span></label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <select id="chaptersId" name="chapterId" ng-model="chapter"
+
+                                                ng-options="sub.chapterId as
+											sub.chapterName for sub in chapterList" class="form-control input-md">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 col-sm-4 control-label">Component Name<span
+                                            style="color:red;">*</span></label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <select id="chapterId" name="chapterId" ng-model="component"
+                                                ng-change="compSubComp(component)"
+                                                ng-options="sub.componentId as
+											sub.componentName for sub in componentList" class="form-control input-md">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 col-sm-4 control-label" for="">SubComponent</label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <select id="subComponent" name="subComponent" ng-model="subComponent" ng-change="getMakrs(chapter,subComponent)"
+                                                ng-options="comp.subComponentId as comp.subComponentName for comp in subComponentList" class="form-control input-md">
+                                            <option value="">Select Component</option>
+                                        </select>
+
+
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-top: 20px;">
+                                    <label class="col-md-4 col-sm-4 control-label" for="">Student Name</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div>
+                                            <div class="wrapper">
+                                                <div class="multiselect" style="width: 98%;">
+                                                    <div class="selectBox" ng-click="showCheckboxes()">
+                                                        <select style="padding: 7px 0px; width: 100%;    ">
+                                                            <option>Select</option>
+
+                                                        </select>
+                                                        <div class="overSelect"></div>
+                                                    </div>
+                                                    <div id="checkboxes">
+                                                        <label ng-repeat="student in studentList">
+                                                            <input type="checkbox"
+                                                                   multiple="multiple"
+                                                                   ng-click="pushSelectedStudents(student.studentName)"
+                                                                   ng-model="student.value"
+                                                                   ng-value="student.studentName" style="display: inline;width: 30px"/>{{student.studentName}}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 admission_border">
+                                    <table class="admission_table_1 table">
+                                        <tbody>
+
+
+                                        <tr ng-repeat="(key, value) in topicList">
+                                            <td colspan="2">
+                                                <table class="table">
+                                                    Student Name:{{key}}
+                                                    <tr>
+                                                        <td>TopicName</td>
+                                                        <td>Max Marks</td>
+                                                        <td>Marks</td>
+                                                        <td>Remarks</td>
+
+
+                                                        <tbody>
+                                                        <tr ng-repeat="sb in value">
+                                                            <td>{{sb.topic}}</td>
+                                                            <td>{{sb.maxMarks}}</td>
+                                                            <td><input type="text" ng-model="sb.marks" ng-change="validateMarks(sb)">
+                                                            </td>
+                                                            <td><input type="text"
+                                                                       ng-model="sb.remarks"></td>
+                                                        </tr>
+                                                        </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal"
+                                            ng-disabled="isDisabled"
+                                            data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                            ng-click="saveAssSub('SimpleAssesment')">Save
+                                    </button>
+                                    <button type="button" class="btn btn-primary hi_btn" ng-click="removeAssSub()"
+                                            data-dismiss="modal">Close
+                                    </button>
+
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $('body').delegate('.remove','click',function()
+    {
+        $(this).parent().parent().remove();
+    });
+
+    function removereadonly(id,clicksid) {
+
+        if($("#"+clicksid).prop("checked") == true){
+
+            $('#'+id).prop('readonly', false);
+        }else{
+
+            $('#'+id).prop('readonly', true);
+
+        }
+
+    }
+    $("#next1").hide();
+    $("#next2").hide();
+    $("#next3").hide();
+    $("#saveId").hide();
+    $("#back1").hide();
+
+
+
+</script>

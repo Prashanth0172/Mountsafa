@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row">
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>{{'Admin Masters'|translate}}</div>
+
+            </h2>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="countryLink" href="#!/country" tabindex="-1"> <i
+                        class="fa fa-globe" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'Country'|translate}}</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="stateLink" href="#!/state" tabindex="-1"> <i
+                        class="fa fa-arrow-circle-o-down" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'State'|translate}}</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="cityLink" href="#!/city" tabindex="-1"> <i
+                        class="fa fa-map-marker" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'City'|translate}}</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="branchesLink" href="#!/branches" tabindex="-1"> <i
+                        class="fa fa-sitemap" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+
+                    <div class="rep_info">{{'Branches'|translate}}</div>
+                </div>
+
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="rolesLink" href="#!/roles" tabindex="-1"> <i
+                        class="fa fa-check" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'Roles'|translate}}</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="component" href="#!/component" tabindex="-1"> <i
+                        class="fa fa-user" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'Component'|translate}}</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="gradingMaster" href="#!/gradingMaster" tabindex="-1"> <i
+                        class="fa fa-user" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'Grading Master'|translate}}</div>
+                </div>
+            </div>
+            <!--<div class="col-md-3 rep_list_info">-->
+                <!--<div class="custom_notif">-->
+                    <!--&nbsp;&nbsp;&nbsp;<a id="resourceCategoryLink" href="#!/resourceCategory" tabindex="-1"> <i-->
+                        <!--class="fa fa-sun-o" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>-->
+                    <!--<div class="rep_info">Resource Category</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-3 rep_list_info">-->
+                <!--<div class="custom_notif">-->
+                    <!--&nbsp;&nbsp;&nbsp;<a id="resourceLink" href="#!/resource" tabindex="-1"> <i-->
+                        <!--class="fa fa-upload" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>-->
+                    <!--<div class="rep_info">Resource</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="departmentLink" href="#!/department" tabindex="-1"> <i
+                        class="fa fa-credit-card" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'Department'|translate}}</div>
+                </div>
+            </div>
+            <!--<div class="col-md-3 rep_list_info">-->
+                <!--<div class="custom_notif">-->
+                    <!--&nbsp;&nbsp;&nbsp;<a id="contactLink" href="#!/contact" tabindex="-1"> <i-->
+                        <!--class="fa fa-credit-card" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>-->
+                    <!--<div class="rep_info">Contact</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="col-md-3 rep_list_info">-->
+                <!--<div class="custom_notif">-->
+                    <!--&nbsp;&nbsp;&nbsp;<a id="agegroupLink" href="#!/agegroup" tabindex="-1"> <i-->
+                        <!--class="fa fa-inbox" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>-->
+                    <!--<div class="rep_info">Agegroup</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp; <a id="grademasterLink" href="#!/grademaster" tabindex="-1"> <i
+                        class="fa fa-star" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'Grade Master'|translate}}</div>
+                </div>
+                </a>
+            </div>
+
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    <a id="userLink"  href="#!/user"  tabindex="-1"> <i class="fa fa-users" style="font-size:60px;color:purple;" aria-hidden="true"></i></a>
+                    <div class="rep_info">&nbsp;&nbsp;&nbsp; {{'User'|translate}}</div>
+                </div>
+                </a>
+            </div>
+
+
+
+            <!--<div class="col-md-3 rep_list_info">-->
+                <!--<div class="custom_notif">-->
+                    <!--<a id="trainerLink" href="#!/trainer" tabindex="-1"> <i class="fa fa-user"-->
+                                                                      <!--style="font-size:60px;color:purple;"-->
+                                                                      <!--aria-hidden="true"></i></a>-->
+                    <!--<div class="rep_info">&nbsp;&nbsp;&nbsp; Trainer</div>-->
+                <!--</div>-->
+                <!--</a>-->
+            <!--</div>-->
+
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp; <a id="designationLink" href="#!/designation" tabindex="-1"> <i
+                        class="fa fa-eye" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'Designation'|translate}}</div>
+                </div>
+                </a>
+            </div>
+            <!--<div class="col-md-3 rep_list_info">-->
+                <!--<div class="custom_notif">-->
+                    <!--&nbsp;&nbsp;&nbsp; <a id="remainder" href="#!/remaindersss" tabindex="-1"> <i-->
+                        <!--class="fa fa-retweet" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>-->
+                    <!--<div class="rep_info">Remainder</div>-->
+                <!--</div>-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--<div class="col-md-3 rep_list_info">-->
+                <!--<div class="custom_notif">-->
+                    <!--&nbsp;&nbsp;&nbsp; <a id="supplier" href="#!/suppliers" tabindex="-1"> <i-->
+                        <!--class="fa fa-share-square" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>-->
+                    <!--<div class="rep_info">Supplier</div>-->
+                <!--</div>-->
+                <!--</a>-->
+            <!--</div>-->
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp; <a id="Class" href="#!/class" tabindex="-1"> <i
+                        class="fa fa-pencil-square" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'Class'|translate}}</div>
+                </div>
+                </a>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp; <a id="semester" href="#!/semester" tabindex="-1"> <i
+                        class="fa fa-external-link" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'Semester'|translate}}</div>
+                </div>
+                </a>
+            </div>
+            <!--<div class="col-md-3 rep_list_info">-->
+                <!--<div class="custom_notif">-->
+                    <!--<a id="Doctorpanel"  href="#!/Doctorpanel"  tabindex="-1"> <i class="fa fa-users" style="font-size:60px;color:purple;" aria-hidden="true"></i></a>-->
+                    <!--<div class="rep_info">&nbsp;&nbsp;&nbsp;Doctor panel</div>-->
+                <!--</div>-->
+                <!--</a>-->
+            <!--</div>-->
+
+            <!--<div class="col-md-3 rep_list_info">-->
+                <!--<div class="custom_notif">-->
+                    <!--<a id="TrainingModule"  href="#!/TrainingModule"  tabindex="-1"> <i class="fa fa-book" style="font-size:60px;color:purple;" aria-hidden="true"></i></a>-->
+                    <!--<div class="rep_info">&nbsp;&nbsp;&nbsp;Training Module</div>-->
+                <!--</div>-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--<div class="col-md-3 rep_list_info">-->
+                <!--<div class="custom_notif">-->
+                    <!--<a id="EmailTemplate"  href="#!/EmailTemplate"  tabindex="-1"> <i class="fa fa-users" style="font-size:60px;color:purple;" aria-hidden="true"></i></a>-->
+                    <!--<div class="rep_info">&nbsp;&nbsp;&nbsp;Email Template</div>-->
+                <!--</div>-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--<div class="col-md-3 rep_list_info">-->
+                <!--<div class="custom_notif">-->
+                    <!--<a id="Notification"  href="#!/Notification"  tabindex="-1"> <i class="fa fa-book" style="font-size:60px;color:purple;" aria-hidden="true"></i></a>-->
+                    <!--<div class="rep_info">&nbsp;&nbsp;&nbsp;Notification</div>-->
+                <!--</div>-->
+                <!--</a>-->
+            <!--</div>-->
+
+            <!--<div class="col-md-3 rep_list_info">-->
+                <!--<div class="custom_notif">-->
+                    <!--<a id="Qualification"  href="#!/Qualification"  tabindex="-1"> <i class="fa fa-users" style="font-size:60px;color:purple;" aria-hidden="true"></i></a>-->
+                    <!--<div class="rep_info">&nbsp;&nbsp;&nbsp;Qualification</div>-->
+                <!--</div>-->
+                <!--</a>-->
+            <!--</div>-->
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="termLink" href="#!/term" tabindex="-1"> <i
+                        class="fa fa-compass" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'Term'|translate}}</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="subjectLink" href="#!/subject" tabindex="-1"> <i
+                        class="fa fa-book" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'Subject'|translate}}</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="chapterLink" href="#!/chapter" tabindex="-1"> <i
+                        class="fa fa-twitter" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'Chapter'|translate}}</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="topicLink" href="#!/topic" tabindex="-1"> <i
+                        class="fa fa-floppy-o" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'Topic'|translate}}</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="DeductionLink" href="#!/deduction" tabindex="-1"> <i
+                        class="fa fa-quote-right" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'Deduction'|translate}}</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="accountTypeLink" href="#!/accountType" tabindex="-1"> <i
+                        class="fa fa-compass" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">Account Type</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="accountGroupLink" href="#!/accountGroup" tabindex="-1"> <i
+                        class="fa fa-compass" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">Account Group</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="createchartofaccountLink" href="#!/createchartofaccount" tabindex="-1"> <i
+                        class="fa fa-compass" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">Create Chart Of Accounts</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="createchecklist" href="#!/createchecklist" tabindex="-1"> <i
+                        class="fa fa-check-square" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'CheckList'|translate}}</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="formsetup" href="#!/formsetup" tabindex="-1"> <i
+                        class="fa fa-compass" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">Form SetUp</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="paymentmethod" href="#!/paymentmethod" tabindex="-1"> <i
+                        class="fa fa-compass" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">Payment Method</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="bank" href="#!/bank" tabindex="-1"> <i
+                        class="fa fa-compass" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">Bank</div>
+                </div>
+            </div>
+            <!--<div class="col-md-3 rep_list_info">-->
+                <!--<div class="custom_notif">-->
+                    <!--&nbsp;&nbsp;&nbsp;<a id="visitor" href="#!/visitor" tabindex="-1"> <i-->
+                        <!--class="fa fa-compass" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>-->
+                    <!--<div class="rep_info">Visitor</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-3 rep_list_info">-->
+                <!--<div class="custom_notif">-->
+                    <!--&nbsp;&nbsp;&nbsp;<a id="position" href="#!/Position" tabindex="-1"> <i-->
+                        <!--class="fa fa-compass" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>-->
+                    <!--<div class="rep_info">Position</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    <a id="leave"  href="#!/leave"  tabindex="-1"> <i class="fa fa-qrcode" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">&nbsp;&nbsp;&nbsp; {{'Leave Type'|translate}}</div>
+                </div>
+                </a>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="EarningsLink" href="#!/earnings" tabindex="-1"> <i
+                        class="fa fa-share-square" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'Earnings Policy'|translate}}</div>
+                </div>
+            </div>
+
+            <!--<div class="col-md-3 rep_list_info">-->
+                <!--<div class="custom_notif">-->
+                    <!--&nbsp;&nbsp;&nbsp;<a id="approval" href="#!/approval" tabindex="-1"> <i-->
+                        <!--class="fa fa-upload" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>-->
+                    <!--<div class="rep_info">Approval WorkFlow</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-3 rep_list_info">-->
+                <!--<div class="custom_notif">-->
+                    <!--&nbsp;&nbsp;&nbsp;<a id="position" href="#!/CustomApprover" tabindex="-1"> <i-->
+                        <!--class="fa fa-compass" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>-->
+                    <!--<div class="rep_info">Custom Approver</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="weekdayLink" href="#!/weekday" tabindex="-1"> <i
+                        class="fa fa-gift" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">{{'Workdays'|translate}}</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    <a id="holidayLink" href="#!/holiday" tabindex="-1"> <i class="fa fa-home"
+                                                                            style="font-size:60px;color:purple;"
+                                                                            aria-hidden="true"></i></a>
+                    <div class="rep_info">&nbsp;&nbsp;&nbsp; {{'Holiday'|translate}}</div>
+                </div>
+                </a>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    <a id="assessmentLink" href="#!/AssessmentType" tabindex="-1"> <i class="fa fa-home"
+                                                                            style="font-size:60px;color:purple;"
+                                                                            aria-hidden="true"></i></a>
+                    <div class="rep_info">&nbsp;&nbsp;&nbsp;{{'Assessment Type'|translate}}</div>
+                </div>
+                </a>
+            </div>
+
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    <a id="instrumentsLink" href="#!/Instruments" tabindex="-1"> <i class="fa fa-home"
+                                                                                      style="font-size:60px;color:purple;"
+                                                                                      aria-hidden="true"></i></a>
+                    <div class="rep_info">&nbsp;&nbsp;&nbsp; {{'Instruments'|translate}}</div>
+                </div>
+                </a>
+            </div>
+
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    <a id="subComponentLink" href="#!/SubComponent" tabindex="-1"> <i class="fa fa-share-square"
+                                                                                    style="font-size:60px;color:purple;"
+                                                                                    aria-hidden="true"></i></a>
+                    <div class="rep_info">&nbsp;&nbsp;&nbsp; {{'SubComponent'|translate}}</div>
+                </div>
+                </a>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="permission" href="#!/permission" tabindex="-1"> <i
+                        class="fa fa-check-square" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">Permission</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="permissionrep" href="#!/permissionrep" tabindex="-1"> <i
+                        class="fa fa-check-square" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">Permission Report</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="periods" href="#!/periods" tabindex="-1"> <i
+                        class="fa fa-check-square" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">Periods</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="facilityDetails" href="#!/facilityDetails" tabindex="-1"> <i
+                        class="fa fa-check-square" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">Facility Details</div>
+                </div>
+            </div>
+            <div class="col-md-3 rep_list_info">
+                <div class="custom_notif">
+                    &nbsp;&nbsp;&nbsp;<a id="timetable" href="#!/timetable" tabindex="-1"> <i
+                        class="fa fa-check-square" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>
+                    <div class="rep_info">TimeTable</div>
+                </div>
+            </div>
+            <!--<div class="col-md-3 rep_list_info">-->
+                <!--<div class="custom_notif">-->
+                    <!--&nbsp;&nbsp;&nbsp;<a id="assignment" href="#!/Assignment" tabindex="-1"> <i-->
+                        <!--class="fa fa-compass" style="font-size:60px;color:#72319a;" aria-hidden="true"></i></a>-->
+                    <!--<div class="rep_info">Assignment</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

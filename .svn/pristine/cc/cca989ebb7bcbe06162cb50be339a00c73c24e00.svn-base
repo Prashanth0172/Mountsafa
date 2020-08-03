@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row" >
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Bank</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="panel">
+        <div class="panel-body" style="height: 65px;">
+            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                <form class="form-horizontal ng-pristine ng-valid">
+                    <div class="form-group">
+                        <div class="col-sm-12" ng-show="userPermission.search_bank_name!='InActive'">
+                            <p class="input-group" style="display: block;">
+                                <input id="search_bank_name" name="textinput"  type="text"
+                                       placeholder="Search Bank Name" ng-model="bankSearchText" class="form-control input-md"
+                                       ng-keyup="$event.keyCode == 13 ? getBankList() : null" />
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-9 col-lg-7 col-sm-9 col-xs-7">
+                <div class="form-group">
+                    <div class="col-sm-2" ng-show="userPermission.add_bank!='InActive'">
+                        <button id="add_bank" type="button" class="btn btn-default hi_btn"  ng-click="addNewbankPopulate()">Add</button>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4">
+                        <button ng-if="ButtonStatus=='InActive'" type="submit" id="bank_inactive_button"
+                                class="btn btn-default" data-toggle="modal"
+                                ng-model="inactiveStatus" data-target=".print-me" ng-click="inactiveBank()"
+                                ng-show="userPermission.bank_inactive_button!='InActive'">
+                            InActive
+                        </button>
+                        <button ng-if="ButtonStatus!='InActive'" type="submit" id="bank_active_button"
+                                class="btn btn-default" data-toggle="modal"
+                                ng-model="inactiveStatus" data-target=".print-me" ng-click="inactiveBank()"
+                                ng-show="userPermission.bank_active_button!='InActive'">
+                            Active
+                        </button>
+                    </div>
+                    <div class="col-lg-3 col-md-2 col-sm-2" ng-show="userPermission.select_type_bank!='InActive'">
+                        <span class="custom-dropdown custom-dropdown--white">
+                            <select id="select_type_bank" ng-model="exportsType" class="form-control">
+                                <option value=""> Select Type</option>
+                                <option value="pdf"> Pdf</option>
+                                <option value="excel"> Excel</option>
+                            </select>
+                        </span>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        <div ng-if="exportsType"> <a href="/pos/bankExport?val={{bankSearchText}}&type={{exportsType}}&statustype={{inactiveStatus}}">
+                            <button id="export_bank" type="button" class="btn btn-default hi_btn"
+                                    ng-show="userPermission.export_bank!='InActive'">Export</button></a>
+                    </div>
+                    <div ng-if="!exportsType">
+                        <button  type="button" class="btn btn-default hi_btn"
+                                ng-show="userPermission.export_bank!='InActive'">Export</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="fixed-table-container">
+            <div class="table_wrap fixed-table-container-inner">
+                <div class="header-background"></div>
+                <table data-toggle="table" data-cache="false" data-height="299"  style="margin-bottom: 0px;" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                    <thead>
+                    <tr>
+                        <th data-field="cntryname">
+                            <div class="th-inner">Bank Name</div>
+                        </th>
+                        <th data-field="cntryname">
+                            <div class="th-inner">Account No</div>
+                        </th>
+                        <th data-field="cntryname">
+                            <div class="th-inner">Branch Name</div>
+                        </th>
+                        <th data-field="cntryname">
+                            <div class="th-inner">Email</div>
+                        </th>
+                        <th data-field="cntryname">
+                            <div class="th-inner">Phone No</div>
+                        </th>
+                        <th id="edit_bank" data-field="edit">
+                            <div class="th-inner">Action</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id="parentTable">
+                        <tr ng-repeat="bank in bankList| filter:searchText" >
+                        <td>{{bank.bankName}}</td>
+                        <td>{{bank.bankAccountNo}}</td>
+                        <td>{{bank.branchName}}</td>
+                        <td>{{bank.bankEmail}}</td>
+                        <td>{{bank.bankPhoneNo}}</td>
+                            <td ng-show="userPermission.edit_bank!='InActive'"><button type="button" class="btn btn-primary hi_btn"  ng-click="editbankPopulate(bank.bankName)">Edit</button></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <div class="form-group">
+        <div class="col-sm-12 pagination_">
+
+            <button type="button" class="btn btn-default hi_btn" ng-class="{'diabled-class': first}" ng-disabled="first"
+                    ng-click="getBankList('','firstPage')"  ng-model="first">First
+            </button>
+            <button type="button" class="btn btn-default hi_btn"  ng-class="{'diabled-class': prev}" ng-disabled="prev"
+                    ng-click="getBankList('','prevPage')"   ng-model="prev">Prev
+            </button>
+            <button type="button" class="btn btn-default hi_btn"  name="next" ng-disabled="next"
+                    ng-click="getBankList('','nextPage')"  value="next"  ng-class="{'diabled-class': next}" ng-model="next">Next
+            </button>
+            <button type="button" class="btn btn-default hi_btn"
+                    ng-click="getBankList('','lastPage')"   ng-class="{'diabled-class': last}" ng-disabled="last"
+                    ng-model="last">Last
+            </button>
+        </div>
+        <div align="center"><span style="color: red;"></span></div>
+    </div>
+</div>
+
+
+<div class="modal fade ExchangeRate" tabindex="-1" id="add_new_Bank_modal" role="dialog" data-backdrop="static"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content checkout">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 id="bank-title" class="modal-title">Add Bank</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <form name="addBank" class="form-horizontal">
+                            <fieldset>
+                                <div class="form-group" ng-show="userPermission.account_no!='InActive'">
+                                    <input type="hidden" ng-model="setupobj.bankId"
+                                           value="{{setupobj.bankId}}"/>
+                                    <label class="col-md-4 col-sm-4 control-label" for="">Account No <span>*</span></label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <input id="account_no" name="accountNo" alphanum-without-space maxlength="25"
+                                               type="text" placeholder="Account No"
+                                               ng-model="accountNoText"
+                                               ng-readonly="operation === 'Edit' "
+                                               ng-blur="hideAutoComplete()"
+                                               class="form-control input-md" autocomplete="off" required>
+                                        <span style="color:red" ng-show="addBank.AccountNo.$error.pattern">Minimum length should be 5 Digits</span>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-show="userPermission.bank_name!='InActive'">
+                                    <label class="col-md-4 col-sm-4 control-label" for="">Bank Name <span>*</span></label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <input id="bank_name" name="bankName" alphanum-with-space maxlength="25"
+                                               allowpattern="[a-zA-Z]"
+                                               type="text" placeholder="Bank Name"
+                                               ng-model="bankNameText" alpha-with-space=""
+                                               ng-readonly="operation === 'Edit' "
+                                               ng-blur="hideAutoComplete()"
+                                               class="form-control input-md" autocomplete="off" required>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-show="userPermission.branch_name!='InActive'">
+                                    <label class="col-md-4 col-sm-4 control-label" for="">Branch Name</label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <input id="branch_name" name="branchName" maxlength="25"
+                                               allowpattern="[a-z]"
+                                               type="text" placeholder="Branch Name" alphanum-with-space
+                                               ng-model="BranchNameText"
+                                               ng-blur="hideAutoComplete()"
+                                               class="form-control input-md" autocomplete="off" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group"  ng-show="userPermission.bank_address!='InActive'">
+                                    <label class="col-md-4 col-sm-4 control-label" for="">Address</label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                <textarea id="bank_address" name="Address" maxlength="255"
+                                          allowpattern="[a-z]"
+                                          type="text" placeholder="Address"
+                                          ng-model="AddressText"
+                                          ng-model-options="{ debounce: 1000 }"
+                                          ng-blur="hideAutoComplete()"
+                                          class="form-control input-md"> </textarea>
+                                   </div>
+                                </div>
+
+                                <div class="form-group" ng-show="userPermission.phone_no!='InActive'">
+                                    <label class="col-md-4 col-sm-4 control-label" for="PhoneNo">Phone No</label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <input id="phone_no" name="PhoneNo"
+                                               type="text" placeholder="Phone No"
+                                               ng-model="PhoneNoText" Num-with-space
+                                               maxlength="13"
+                                               class="form-control input-md" autocomplete="off" required>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-show="userPermission.bank_email!='InActive'">
+                                    <label class="col-md-4 col-sm-4 control-label" for="Email">Email</label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <input id="bank_email" name="Email"
+                                               type="text" placeholder="Email"
+                                               ng-model="EmailText"
+                                               ng-pattern="word" maxlength="250"
+                                               ng-blur="hideAutoComplete()"
+                                               class="form-control input-md" autocomplete="off" required>
+                                        <p class="error" ng-show="addBank.Email.$error.pattern">Enter Valid MailID</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-show="userPermission.ifsc_code!='InActive'">
+                                    <label class="col-md-4 col-sm-4 control-label" for="">IFSC Code</label>
+                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                        <input id="ifsc_code" name="IFSCCode"
+                                               allowpattern="[a-z]" alphanum-with-space
+                                               onkeyup="this.value = this.value.replace(/[^a-zA-Z 0-9\n\r.]+/g, '');"
+                                               type="text" placeholder="IFSC Code"
+                                               ng-model="IFSCCodeText" maxlength="20"
+                                               ng-blur="hideAutoComplete()"
+                                               class="form-control input-md" autocomplete="off" required>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-show="userPermission.status_bank!='InActive'">
+                                    <label class="col-md-4 col-sm-4 control-label" for="">Status</label>
+                                    <div class="col-md-6 col-sm-6" >
+                                        <select name="bankStatus" id="status_bank" ng-model="bankStatusText" class="form-control input-md" required>
+                                            <option value="Active">Active</option>
+                                            <option value="InActive">InActive</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button ng-show="userPermission.save!='InActive'" type="submit" class="btn btn-default" data-toggle="modal" ng-disabled="isDisabled" id="submit"
+                        data-target=".print-me" ng-click="saveNewBank()">Save
+                </button>
+                <button ng-show="userPermission.close!='InActive'" type="button" class="btn btn-default"  ng-click="removeBankDetails()"data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+</body>
+</html>

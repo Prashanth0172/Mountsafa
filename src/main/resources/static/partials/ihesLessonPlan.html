@@ -1,0 +1,1165 @@
+<style>
+    .modal-content {
+        width: 696px;
+    }
+
+    .modal-footer {
+        padding: 5px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+
+    .modal-header {
+        padding: 5px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    fieldset {
+        min-width: 0;
+        padding: 10px;
+        margin: 0;
+        border: 0;
+    }
+
+    .form-control {
+        display: block;
+        width: 171px;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    }
+
+
+     .overSelect {
+         position: absolute;
+         left: 0;
+         right: 0;
+         top: 0;
+         bottom: 0;
+     }
+ .overSelect1 {
+         position: absolute;
+         left: 0;
+         right: 0;
+         top: 0;
+         bottom: 0;
+     }
+    .overSelect2 {
+         position: absolute;
+         left: 0;
+         right: 0;
+         top: 0;
+         bottom: 0;
+     }
+.overSelect3 {
+         position: absolute;
+         left: 0;
+         right: 0;
+         top: 0;
+         bottom: 0;
+     }
+.overSelect4 {
+         position: absolute;
+         left: 0;
+         right: 0;
+         top: 0;
+         bottom: 0;
+     }
+.overSelect5 {
+         position: absolute;
+         left: 0;
+         right: 0;
+         top: 0;
+         bottom: 0;
+     }
+.overSelect6 {
+         position: absolute;
+         left: 0;
+         right: 0;
+         top: 0;
+         bottom: 0;
+     }
+
+    #checkboxes {
+        display: none;
+        border: 1px #dadada solid;
+    }
+
+    #checkboxes label {
+        display: block;
+    }
+
+    #checkboxes label:hover {
+        background-color: #1e90ff;
+    }#checkboxes1 {
+        display: none;
+        border: 1px #dadada solid;
+    }
+
+    #checkboxes1 label {
+        display: block;
+    }
+
+    #checkboxes1 label:hover {
+        background-color: #1e90ff;
+    }
+    #checkboxes2 {
+        display: none;
+        border: 1px #dadada solid;
+    }
+
+    #checkboxes2 label {
+        display: block;
+    }
+
+    #checkboxes2 label:hover {
+        background-color: #1e90ff;
+    }
+    #checkboxes3 {
+        display: none;
+        border: 1px #dadada solid;
+    }
+
+    #checkboxes3 label {
+        display: block;
+    }
+
+    #checkboxes3 label:hover {
+        background-color: #1e90ff;
+    }
+    #checkboxes4 {
+        display: none;
+        border: 1px #dadada solid;
+    }
+
+    #checkboxes4 label {
+        display: block;
+    }
+
+    #checkboxes4 label:hover {
+        background-color: #1e90ff;
+    }
+    #checkboxes5 {
+        display: none;
+        border: 1px #dadada solid;
+    }
+
+    #checkboxes5 label {
+        display: block;
+    }
+
+    #checkboxes5 label:hover {
+        background-color: #1e90ff;
+    }
+    #checkboxes6 {
+        display: none;
+        border: 1px #dadada solid;
+    }
+
+    #checkboxes6 label {
+        display: block;
+    }
+
+    #checkboxes6 label:hover {
+        background-color: #1e90ff;
+    }
+    input[type=checkbox] {
+        display: inline !important;
+    }
+</style>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row">
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>IHES LessonPlan</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel-body" style="height: 65px;">
+                            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                                <form class="form-horizontal ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <p class="input-group" style="display: block;">
+                                                <input id="search_academic" name="textinput" type="text"
+                                                       placeholder="Search" ng-model="searchText"
+                                                       class="form-control input-md"
+                                                       ng-keyup="$event.keyCode == 13 ? getIhesPlanList(searchText) : null"/>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                            <!--<div class="col-md-9 col-lg-9 col-sm-9 col-xs-7">-->
+
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary hi_btn" ng-click="addIhes()">
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="fixed-table-container">
+                        <div class="table_wrapfixed-table-container-inner">
+                            <div class="header-background"></div>
+                            <table data-toggle="table" data-cache="false" data-height="299"
+                                   class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                                <thead>
+                                <tr>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Level</div>
+                                    </th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Class</div>
+                                    </th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Subject</div>
+                                    </th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Chapter</div>
+                                    </th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Actions</div>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody id="parentTable">
+                                <input type="hidden" ng-model="iheslessonId" value="{{ihesList.iheslessonId}}"/>
+                                <tr ng-repeat="ihes in ihesList|filter:searchText">
+                                    <td>{{ihes.level}}</td>
+                                    <td>{{ihes.classes}}</td>
+                                    <td>{{ihes.subject}}</td>
+                                    <td>{{ihes.chapter}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary hi_btn"
+                                                ng-click="editIhes(ihes)">Edit
+                                        </button>
+                                        <button type="button" class="btn btn-primary hi_btn"
+                                                ng-click="deleteIhes(ihes)">Delete
+                                        </button>
+                                        <button type="button" class="btn btn-primary hi_btn"
+                                                ng-click="iheseditMarks(ihes)">Edit Mark
+                                        </button> <button type="button" class="btn btn-primary hi_btn"
+                                                ng-click="ihesViewMarks(ihes)">View Mark
+                                        </button>
+                                    </td>
+
+                                </tr>
+                                <tr ng-if="searchText!=''&&(ihesList|filter:searchText).length==0">
+                                    <td colspan="5" style="color: red; font-weight: bold">No Records Found</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" style="left: -624px !important;" id="add_edit_Marks" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout" style="width: 1200px !important;">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 id="country-title" class="modal-title">Lesson Plan Marks</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+                                                <label for="level">Level</label>
+                                                <input id="topic" name="topic"
+                                                       type="text" readonly
+                                                       ng-model="level"
+                                                       class="form-control input-md">
+                                            </fieldset>
+                                    </div>
+                                        <div class="col-md-2 col">
+                                            <fieldset>
+                                                <label for="classes">Class</label>
+                                                <input id="classes" name="topic"
+                                                       type="text" readonly
+                                                       ng-model="class"
+                                                       class="form-control input-md">
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-md-2 col">
+                                            <fieldset>
+                                                <label for="classes">Subject</label>
+                                                <input id="topic" name="topic"
+                                                       type="text" readonly
+                                                       ng-model="subject"
+                                                       class="form-control input-md">
+                                            </fieldset></div>
+                                        <div class="col-md-3">
+                                            <fieldset>
+                                                <label for="level">Chapters</label>
+                                                <input id="topic" name="topic"
+                                                       type="text" readonly
+                                                       ng-model="chapter"
+                                                       class="form-control input-md">
+                                            </fieldset></div>
+                                        <div class="col-md-3">
+                                            <fieldset>
+                                                <label for="level">Topics</label>
+                                                <input id="topic" name="topic"
+                                                       type="text" readonly
+                                                       ng-model="topic"
+                                                       class="form-control input-md">
+                                            </fieldset></div>
+                                    </div>
+                                    <br>
+                                    <div class="row ">
+                                        <div class="col-md-12">
+                                            <table class="table table-bordered table-striped">
+
+
+
+                                                <thead>
+                                                <tr>
+                                                    <td style="padding: 0px;">
+                                                        <span style="color: black"><h6>APPROCH\PROCESS</h6></span>
+                                                    </td>
+                                                    <td style="padding: 0px;">
+                                                        <span style="color: black"><h6>TEACHING &amp; LEARNING</h6></span>
+                                                    </td>
+                                                    <td style="padding: 0px;">
+                                                        <span style="color: black"><h6>COACHING &amp; LEARNING</h6></span>
+                                                    </td>
+
+                                                    <td style="padding: 0px;">
+                                                        <span style="color: black"><h6>TRAINING &amp; LEARNING</h6></span>
+                                                    </td>
+                                                    <td style="padding: 0px;">
+                                                        <span style="color: black"><h6>ADVISORY &amp; LEARNING</h6></span>
+                                                    </td>
+                                                    <td style="padding: 0px;">
+                                                        <span style="color: black"><h6>CONSULTANCY &amp; LEARNING</h6></span>
+                                                    </td>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td style="padding: 0px;"><h6><b>INSTRUCTIONAL</b></h6></td>
+                                                    <td style="padding: 0px;">
+
+                                                        <p><input type="text" class="form-control" ng-model="instructional.teachingLearing" name="remarks1" placeholder="A1" ></p>
+                                                        <p><input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="instructional.teachingLearingDate" is-open="popup1.opened"
+                                                                  datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>
+                                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                             </span></p>
+                                                    </td>
+                                                    <td style="padding: 0px;">
+                                                        <p><input type="text" class="form-control" ng-model="instructional.coachingLearing" name="remarks2" placeholder="A2" value=""></p>
+                                                        <p>
+                                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="instructional.coachingLearingDate" is-open="popup2.opened"
+                                                                   datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>
+                                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                             </span>        </p>
+                                                    </td>
+                                                    <td style="padding: 0px;">
+                                                        <p><input type="text" class="form-control" ng-model="instructional.trainingLearing" name="remarks3" placeholder="A3" value=""></p>
+                                                        <p>
+                                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="instructional.trainingLearingDate" is-open="popup3.opened"
+                                                                   datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>
+                                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open3()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                             </span>
+                                                        </p>
+                                                    </td>
+                                                    <td style="padding: 0px;">
+                                                        <p><input type="text" class="form-control" ng-model="instructional.advisioryLearning" name="remarks4" placeholder="A4" value=""></p>
+                                                        <p> <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="instructional.advisioryLearningDate" is-open="popup4.opened"
+                                                                   datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>
+                                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open4()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                             </span></p>
+                                                    </td>
+                                                    <td style="padding: 0px;">
+                                                        <p><input type="text" class="form-control" ng-model="instructional.consultancyLearing" name="remarks5" placeholder="A5" value=""></p>
+                                                        <p> <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="instructional.consultancyLearingDate" is-open="popup5.opened"
+                                                                   datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>
+                                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open5()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                             </span></p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 0px;"><h6><b>INVESTIGATIONAL</b></h6></td>
+                                                    <td style="padding: 0px;">
+                                                        <p><input type="text" class="form-control" name="remarks6" placeholder="A6" ng-model="investigational.teachingLearing" value=""></p>
+                                                        <p><input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="investigational.teachingLearingDate" is-open="popup6.opened"
+                                                                  datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>
+                                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open6()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                             </span></p>
+                                                    </td>
+                                                    <td style="padding: 0px;">
+                                                        <p><input type="text" class="form-control" name="remarks7" placeholder="A7" ng-model="investigational.coachingLearing" value=""></p>
+                                                        <p><input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="investigational.coachingLearingDate" is-open="popup7.opened"
+                                                                  datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>
+                                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open7()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                             </span></p>
+                                                    </td>
+                                                    <td style="padding: 0px;">
+                                                        <p><input type="text" class="form-control" name="remarks8" placeholder="A8" ng-model="investigational.trainingLearing" value=""></p>
+                                                        <p><input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="investigational.trainingLearingDate" is-open="popup8.opened"
+                                                                  datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>
+                                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open8()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                             </span></p>
+                                                    </td>
+                                                    <td style="padding: 0px;">
+                                                        <p><input type="text" class="form-control" name="remarks9" placeholder="A9" ng-model="investigational.advisioryLearning" value=""></p>
+                                                        <p><input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="investigational.advisioryLearningDate" is-open="popup9.opened"
+                                                                  datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>
+                                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open9()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                             </span></p>
+                                                    </td>
+                                                    <td style="padding: 0px;">
+                                                        <p><input type="text" class="form-control" name="remarks10" placeholder="A10" ng-model="investigational.consultancyLearing" value=""></p>
+                                                        <p><input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="investigational.consultancyLearingDate" is-open="popup10.opened"
+                                                                  datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>
+                                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open10()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                             </span></p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 0px;"><h6><b>IMMERSION</b></h6></td>
+                                                    <td style="padding: 0px;">
+                                                        <p><input type="text" class="form-control" name="remarks11" placeholder="A11" ng-model="immersion.teachingLearing" value=""></p>
+                                                        <p><input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="immersion.teachingLearingDate" is-open="popup11.opened"
+                                                                  datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>
+                                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open11()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                             </span></p>
+                                                    </td>
+                                                    <td style="padding: 0px;">
+                                                        <p><input type="text" class="form-control" name="remarks12" placeholder="A12" ng-model="immersion.coachingLearing" value=""></p>
+                                                        <p><input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="immersion.coachingLearingDate" is-open="popup12.opened"
+                                                                  datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>
+                                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open12()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                             </span></p>
+                                                    </td>
+                                                    <td style="padding: 0px;">
+                                                        <p><input type="text" class="form-control" name="remarks13" placeholder="A13" ng-model="immersion.trainingLearing" value=""></p>
+                                                        <p><input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="immersion.trainingLearingDate" is-open="popup13.opened"
+                                                                  datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>
+                                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open13()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                             </span></p>
+                                                    </td>
+                                                    <td style="padding: 0px;">
+                                                        <p><input type="text" class="form-control" name="remarks14" placeholder="A14" ng-model="immersion.advisioryLearning" value=""></p>
+                                                        <p><input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="immersion.advisioryLearningDate" is-open="popup14.opened"
+                                                                  datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>
+                                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open14()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                             </span></p>
+                                                    </td>
+                                                    <td style="padding: 0px;">
+                                                        <p><input type="text" class="form-control" name="remarks15" placeholder="A15" ng-model="immersion.consultancyLearing" value=""></p>
+                                                        <p><input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="immersion.consultancyLearingDate" is-open="popup15.opened"
+                                                                  datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>
+                                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open15()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                             </span></p>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-primary" ng-click="saveIhesEditMarks()" >Submit</button>
+                                            <button type="button" class="btn btn-primary hi_btn" ng-click="removeIhes()"
+                                                    data-dismiss="modal">Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" style="left:-625px !important;" id="add_ihes_veiw_Marks" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout" style="width: 1200px !important;">
+                            <p class="western" lang="en-MY"><br><br></p>
+                            <center>
+                                <table style="height: 137px; width: 898px; margin-left: auto; margin-right: auto;"
+                                       border="1" cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                    <tr style="height: 45px;">
+                                        <td style="width: 225px; height: 153px;" rowspan="3" valign="top">
+                                            <p class="western" lang="en-MY">&nbsp;</p>
+                                            <p class="western" lang="en-MY">&nbsp;</p>
+                                            <p class="western" lang="en-MY"><img
+                                                    src="https://brainystars.com/malaysia//assets/img/adnilogo.png"
+                                                    alt="" width="195" height="34"></p>
+                                        </td>
+                                        <td style="width: 225px; height: 45px;" valign="top">
+                                            <p class="western" lang="en-MY"><span
+                                                    style="font-family: Calibri, serif;"><span
+                                                    style="font-size: medium;"><em><strong>IHES LESSON PLAN</strong></em></span></span>
+                                            </p>
+                                        </td>
+                                        <td style="width: 117px; height: 45px;" bgcolor="#d9d9d9">
+                                            <p class="western" lang="en-MY" align="right"><span
+                                                    style="font-family: Calibri, serif;"><span
+                                                    style="font-size: small;"><em><strong>WEEK NO.</strong></em></span></span>
+                                            </p>
+                                        </td>
+                                        <td style="width: 186px; height: 45px;" bgcolor="#ffffff">&nbsp;</td>
+                                        <td style="width: 224px; height: 45px;" bgcolor="#d9d9d9">
+                                            <p class="western" lang="en-MY" style="text-align: right;" align="right">
+                                                <span style="font-family: Calibri, serif;"><span
+                                                        style="font-size: small;"><em><strong>SUBJECT</strong></em></span></span>
+                                            </p>
+                                        </td>
+                                        <td style="width: 134px; height: 45px;" bgcolor="#ffffff">{{subject}}</td>
+                                    </tr>
+                                    <tr style="height: 73px;">
+                                        <td style="width: 225px; height: 73px;" valign="top">
+                                            <p class="western" lang="en-MY"><span
+                                                    style="font-family: Calibri, serif;"><span
+                                                    style="font-size: medium;"><em><strong>2019</strong></em></span></span>
+                                            </p>
+                                        </td>
+                                        <td style="width: 117px; height: 73px;" bgcolor="#d9d9d9">
+                                            <p class="western" lang="en-MY" align="right"><span
+                                                    style="font-family: Calibri, serif;"><span
+                                                    style="font-size: small;"><em><strong>DAY</strong></em></span></span>
+                                            </p>
+                                        </td>
+                                        <td style="width: 186px; height: 73px;" bgcolor="#ffffff">
+                                            <p class="western" lang="en-MY">&nbsp;</p>
+                                        </td>
+                                        <td style="width: 224px; height: 73px;" bgcolor="#d9d9d9">
+                                            <p class="western" lang="en-MY" align="right"><span
+                                                    style="font-family: Calibri, serif;"><span
+                                                    style="font-size: small;"><em><strong>DATE</strong></em></span></span>
+                                            </p>
+                                        </td>
+                                        <td style="width: 134px; height: 73px;" bgcolor="#ffffff">
+                                            <p class="western" lang="en-MY">&nbsp;</p>
+                                        </td>
+                                    </tr>
+                                    <tr style="height: 35px;">
+                                        <td style="width: 225px; height: 35px;" valign="top">
+                                            <p class="western" lang="en-MY">&nbsp;Level</p>
+                                        </td>
+                                        <td style="width: 186px; height: 35px;" bgcolor="#ffffff">{{level}}</td>
+                                        <td style="width: 117px; height: 35px;" bgcolor="#d9d9d9">
+                                            <p class="western" lang="en-MY" align="right"><span
+                                                    style="font-family: Calibri, serif;"><span
+                                                    style="font-size: small;"><em><strong>CLASS</strong></em></span></span>
+                                            </p>
+                                        </td>
+                                        <td style="width: 186px; height: 35px;" bgcolor="#ffffff">{{class}}</td>
+                                        <td style="width: 224px; height: 35px;" bgcolor="#d9d9d9">
+                                            <p class="western" lang="en-MY" align="right"><span
+                                                    style="font-family: Calibri, serif;"><span
+                                                    style="font-size: small;"><em><strong>TIME &amp; DURATION</strong></em></span></span>
+                                            </p>
+                                        </td>
+                                        <td style="width: 134px; height: 35px;" bgcolor="#ffffff">
+                                            <p class="western" lang="en-MY">&nbsp;</p>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <p>&nbsp;</p>
+                            </center>
+                            <center>
+                                <table style="margin-left: auto; margin-right: auto;" border="1" width="916"
+                                       cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                    <tr>
+                                        <td bgcolor="#d9d9d9" width="77" height="8">
+                                            <p class="western" lang="en-MY" align="right"><span
+                                                    style="font-family: Calibri, serif;"><span
+                                                    style="font-size: small;"><em><strong>TOPIC</strong></em></span></span>
+                                            </p>
+                                        </td>
+                                        <td colspan="7" bgcolor="#ffffff" width="445">{{topic}}</td>
+                                        <td colspan="2" bgcolor="#d9d9d9" width="115">
+                                            <p class="western" lang="en-MY" align="right"><span
+                                                    style="font-family: Calibri, serif;"><span
+                                                    style="font-size: small;"><em><strong>THEME</strong></em></span></span>
+                                            </p>
+                                        </td>
+                                        <td colspan="3" valign="top" bgcolor="#ffffff" width="222">
+                                            <p class="western" lang="en-MY">&nbsp;</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#d9d9d9" width="150" height="20">
+                                            <p class="western" lang="en-MY" align="left"><span
+                                                    style="font-family: Calibri, serif;"><span
+                                                    style="font-size: small;"><em><strong>TEXTBOOK</strong></em></span></span>
+                                            </p>
+                                            <p class="western" lang="en-MY" align="left"><span
+                                                    style="font-family: Calibri, serif;"><span
+                                                    style="font-size: small;"><em><strong>CHAPTER NO.</strong></em></span></span>
+                                            </p>
+                                        </td>
+                                        <td colspan="2" bgcolor="#ffffff" width="156">{{textbookChapter}}</td>
+                                        <td colspan="2" bgcolor="#d9d9d9" width="150">
+                                            <p class="western" lang="en-MY" align="left"><span
+                                                    style="font-family: Calibri, serif;"><span
+                                                    style="font-size: small;"><em><strong>WORKBOOK / REFERENCE(S)</strong></em></span></span>
+                                            </p>
+                                        </td>
+                                        <td bgcolor="#ffffff" width="156">
+                                            <p class="western" lang="en-MY" align="left">{{workbook}}</p>
+                                        </td>
+                                        <td bgcolor="#d9d9d9" width="150">
+                                            <p class="western" lang="en-MY">&nbsp;</p>
+                                            <p class="western" lang="en-MY"><span
+                                                    style="font-family: Calibri, serif;"><span
+                                                    style="font-size: small;"><em><strong>OBJECTIVES</strong></em></span></span>
+                                            </p>
+                                            <p class="western" lang="en-MY">&nbsp;</p>
+                                        </td>
+                                        <td colspan="6" bgcolor="#ffffff" width="156">
+                                            <p class="western" lang="en-MY"><span style="font-family: Calibri, serif;">{{objectives}}</span>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="13" bgcolor="#d9d9d9" width="900" height="9">
+                                            <p class="western" lang="en-MY" align="center"><span
+                                                    style="font-size: small;"><em><strong>LEARNING OUTCOMES</strong></em></span><span
+                                                    style="font-size: small;"><em> (Please tick box and refer to KOM code where applicable)</em></span>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#d9d9d9" width="77" height="27">
+                                            <p class="western" lang="en-MY" align="right"><span
+                                                    style="font-size: small;"><em><strong>Immersion of Knowledge</strong></em></span>
+                                            </p>
+                                        </td>
+                                        <td bgcolor="#ffffff" width="84" ng-show="immersionKnowledge!='true'">
+                                            <p class="western" lang="en-MY" align="center" ><span
+                                                    class="glyphicon glyphicon-ok"></span></p></td>
+                                        <td colspan="2" bgcolor="#d9d9d9" width="60">
+                                            <p class="western" lang="en-MY" align="right"><span
+                                                    style="font-size: small;"><em><strong>Character Building</strong></em></span>
+                                            </p>
+                                        </td>
+                                        <td bgcolor="#ffffff" width="87" ng-show="chapterBuilding!='true'">
+                                            <p class="western" lang="en-MY" align="center" >
+                                                <span class="glyphicon glyphicon-ok"></span></p>
+                                        </td>
+                                        <td bgcolor="#d9d9d9" width="73">
+                                            <p class="western" lang="en-MY" align="right"><span
+                                                    style="font-size: small;"><em><strong>Skills and Competency</strong></em></span>
+                                            </p>
+                                        </td>
+                                        <td bgcolor="#ffffff" width="84" ng-show="skillsCompetency!='true'">
+                                            <p class="western" lang="en-MY" align="center"><span
+                                                    class="glyphicon glyphicon-ok"></span></p>
+                                        </td>
+                                        <td colspan="2" bgcolor="#d9d9d9" width="85">
+                                            <p class="western" lang="en-MY" align="right"><span
+                                                    style="font-size: small;"><em><strong>Academic Achievement</strong></em></span>
+                                            </p>
+                                        </td>
+                                        <td colspan="2" bgcolor="#ffffff" width="86" ng-show="academicAchievement!='true'">
+                                            <p class="western" lang="en-MY" align="center"><span
+                                                    class="glyphicon glyphicon-ok"></span></p>
+                                        </td>
+                                        <td bgcolor="#d9d9d9" width="64">
+                                            <p class="western" lang="en-MY" align="right"><span
+                                                    style="font-size: small;"><em><strong>Application <br>in Life</strong></em></span>
+                                            </p>
+                                        </td>
+                                        <td bgcolor="#ffffff" width="74" ng-show="applicationLife!='true'">
+                                            <p class="western" lang="en-MY" align="center"><span
+                                                    class="glyphicon glyphicon-ok"></span></p>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <p>&nbsp;</p>
+                                <table style="height: 232px; width: 921px; border-color: black; margin-left: auto; margin-right: auto;"
+                                       border="1" cellpadding="0">
+                                    <tbody>
+                                    <tr>
+                                        <td style="width: 142px;"><em><h6><b>APPROCH\ PROCESS</b></h6></em></td>
+                                        <td style="width: 144px;"><em><h6><b>TEACHING &amp; LEARNING</b></h6></em></td>
+                                        <td style="width: 147px;"><em><h6><b>COACHING &amp; LEARNING</b></h6></em></td>
+                                        <td style="width: 148px;"><em><h6><b>TRAINING &amp; LEARNING</b></h6></em></td>
+                                        <td style="width: 146px;"><em><h6><b>ADVISORY &amp; LEARNING</b></h6></em></td>
+                                        <td style="width: 160px;"><em><h6><b>CONSULTANCY &amp; LEARNING</b></h6></em>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 142px;"><em><h6><b>INSTRUCTIONAL</b></h6></em></td>
+                                        <td style="width: 144px;">
+                                            <p><em></em></p><h6><em>{{instructional.teachingLearing}}</em></h6>
+                                            <p></p>
+                                            <p><em></em></p><h6></h6>
+                                            <p></p>
+
+                                        </td>
+                                        <td style="width: 147px;">
+                                            <p><em></em></p><h6><em>{{instructional.coachingLearing}}</em></h6>
+                                            <p></p>
+                                            <p><em></em></p><h6></h6>
+                                            <p></p>
+
+
+                                        </td>
+                                        <td style="width: 148px;">
+                                            <p><em></em></p><h6><em>{{instructional.trainingLearing}}</em></h6>
+                                            <p></p>
+                                            <p><em></em></p><h6></h6>
+                                            <p></p>
+
+                                        </td>
+                                        <td style="width: 146px;">
+                                            <p><em></em></p><h6><em>{{instructional.advisioryLearning }}</em></h6>
+                                            <p></p>
+                                            <p><em></em></p><h6></h6>
+                                            <p></p>
+
+                                        </td>
+                                        <td style="width: 160px;">
+                                            <p><em></em></p><h6><em>{{instructional.consultancyLearing}}</em></h6>
+                                            <p></p>
+                                            <p><em></em></p><h6></h6>
+                                            <p></p>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 142px;"><em><h6><b>INVESTIGATIONAL</b></h6></em></td>
+                                        <td style="width: 144px;">
+                                            <p><em></em></p><h6><em>{{investigational.teachingLearing}}</em></h6>
+                                            <p></p>
+                                            <p><em></em></p><h6></h6>
+                                            <p></p>
+
+                                        </td>
+                                        <td style="width: 147px;">
+                                            <p><em></em></p><h6><em>{{investigational.coachingLearing}}</em></h6>
+                                            <p></p>
+                                            <p><em></em></p><h6></h6>
+                                            <p></p>
+
+                                        </td>
+                                        <td style="width: 148px;">
+                                            <p><em></em></p><h6><em>{{investigational.trainingLearing}}</em></h6>
+                                            <p></p>
+                                            <p><em></em></p><h6></h6>
+                                            <p></p>
+
+                                        </td>
+                                        <td style="width: 146px;">
+                                            <p><em></em></p><h6><em>{{investigational.advisioryLearning }}</em></h6>
+                                            <p></p>
+                                            <p><em></em></p><h6></h6>
+                                            <p></p>
+
+                                        </td>
+                                        <td style="width: 160px;">
+                                            <p><em></em></p><h6><em>{{investigational.consultancyLearing}}</em></h6>
+                                            <p></p>
+                                            <p><em></em></p><h6></h6>
+                                            <p></p>
+
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 142px;"><em><h6><b>IMMERSION</b></h6></em></td>
+                                        <td style="width: 144px;">
+                                            <p><em></em></p><h6><em>{{immersion.teachingLearing}}</em></h6>
+                                            <p></p>
+                                            <p><em></em></p><h6></h6>
+                                            <p></p>
+
+
+                                        </td>
+                                        <td style="width: 147px;">
+                                            <p><em></em></p><h6><em>{{immersion.coachingLearing}}</em></h6>
+                                            <p></p>
+                                            <p><em></em></p><h6></h6>
+                                            <p></p>
+
+
+                                        </td>
+                                        <td style="width: 148px;">
+                                            <p><em></em></p><h6><em>{{immersion.trainingLearing}}</em></h6>
+                                            <p></p>
+                                            <p><em></em></p><h6></h6>
+                                            <p></p>
+
+
+                                        </td>
+                                        <td style="width: 146px;">
+                                            <p><em></em></p><h6><em>{{immersion.advisioryLearning }}</em></h6>
+                                            <p></p>
+                                            <p><em></em></p><h6></h6>
+                                            <p></p>
+
+
+                                        </td>
+                                        <td style="width: 160px;">
+                                            <p><em></em></p><h6><em>{{immersion.consultancyLearing}}</em></h6>
+                                            <p></p>
+                                            <p><em></em></p><h6></h6>
+                                            <p></p>
+
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </center>
+                            <p class="western" lang="en-MY">&nbsp;</p>
+                            <center>
+                                <table style="margin-left: auto; margin-right: auto;" border="1" width="918"
+                                       cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                    <tr>
+                                        <td bgcolor="#d9d9d9" width="49" height="21">
+                                            <p class="western" lang="en-MY" align="center"><span
+                                                    style="font-size: small;"><em><strong>LESSON REMARKS</strong></em></span>
+                                            </p>
+                                        </td>
+                                        <td bgcolor="#ffffff" width="108">
+                                            <p class="western" lang="en-MY">&nbsp;</p>
+                                        </td>
+                                        <td bgcolor="#d9d9d9" width="92">
+                                            <p class="western" lang="en-MY" align="center"><span
+                                                    style="font-size: small;"><em><strong>PREPARED BY</strong></em></span>
+                                            </p>
+                                            <p class="western" lang="en-MY" align="center"><span
+                                                    style="font-size: small;"><em>( Name &amp; <br>Date Prepared)</em></span>
+                                            </p>
+                                        </td>
+                                        <td bgcolor="#ffffff" width="108">
+                                            <p class="western" lang="en-MY" align="center"><span><span
+                                                    style="font-size: small;"></span></span></p>
+                                            <p class="western" lang="en-MY" align="center"></p>
+                                        </td>
+                                        <td bgcolor="#d9d9d9" width="75">
+                                            <p class="western" lang="en-MY" align="center"><span
+                                                    style="font-size: small;"><em><strong>INSPECTOR’S COMMENTS</strong></em></span>
+                                            </p>
+                                        </td>
+                                        <td valign="top" width="163">
+                                            <p class="western" lang="en-MY" align="center">&nbsp;</p>
+                                        </td>
+                                        <td bgcolor="#d9d9d9" width="71">
+                                            <p class="western" lang="en-MY" align="center"><span
+                                                    style="font-size: small;"><em><strong>INSPECTED BY</strong></em></span>
+                                            </p>
+                                            <p class="western" lang="en-MY" align="center"><span
+                                                    style="font-size: small;"><em>(Signature &amp; <br>Date Checked)</em></span>
+                                            </p>
+                                        </td>
+                                        <td valign="top" width="138">
+                                            <p class="western" lang="en-MY" align="center">&nbsp;</p>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </center>
+                            <p lang="en-MY"><span style="color: #000000;"><span style="font-size: xx-small;"><span
+                                    lang="en-US"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;KEY :</strong></span></span></span>
+                            </p>
+                            <p lang="en-MY"><span style="color: #000000;"><span style="font-size: xx-small;"><span
+                                    lang="en-US"><em><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [IND]</strong></em></span></span></span><span
+                                    style="color: #000000;"><span style="font-size: xx-small;"><span lang="en-US"> : Induction </span></span></span><span
+                                    style="color: #000000;"><span style="font-size: xx-small;"><span
+                                    lang="en-US"><em><strong>[ACT]</strong></em></span></span></span><span
+                                    style="color: #000000;"><span style="font-size: xx-small;"><span lang="en-US"> : Activation Tools</span></span></span>
+                            </p>
+                            <p lang="en-MY"><span style="color: #000000;"><span style="font-size: xx-small;"><span
+                                    lang="en-US"><em><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [CPL]</strong></em></span></span></span><span
+                                    style="color: #000000;"><span style="font-size: xx-small;"><span lang="en-US"> : Cooperative Learning </span></span></span><span
+                                    style="color: #000000;"><span style="font-size: xx-small;"><span
+                                    lang="en-US"><em><strong>[CAT]</strong></em></span></span></span><span
+                                    style="color: #000000;"><span style="font-size: xx-small;"><span lang="en-US"> : Classroom Assessment Technique</span></span></span>
+                            </p>
+                            <p class="western" lang="en-MY"><span id="Frame3" dir="ltr"></span><br><br></p>
+                            <button type="button" class="btn btn-primary hi_btn" style="left: -610px !important;" ng-click="removeIhes()"
+                                    data-dismiss="modal">Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade addCustomer" tabindex="-1" style="left: -610px !important;" id="add_new_ihes_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout" style="width: 1200px !important;">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true" ng-click="removeIhes()">&times;</span></button>
+                                <h4 id="topic-title" class="modal-title">Add IHES LessonPlan</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+                                                <div class="col-md-6">
+                                                <div class="form-group" style="">
+                                                    <label class="col-md-6 col-sm-4 control-label" for="">LevelName<span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="LevelName" name="LevelName"
+                                                                ng-model="LevelName"
+                                                                ng-change="classes(LevelName)"
+                                                                ng-options="grade.gradeId as grade.gradeName for grade in gradeList"
+                                                                class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-6 col-sm-4 control-label" >Class<span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="classId" name="classId" ng-model="classId"
+                                                                ng-change="subjectclass(classId)"
+                                                                ng-options="class.classId as
+											class.className for class in classesList" class="form-control input-md">
+                                                            <option value="">All</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-6 col-sm-4 control-label" >Subject<span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="subjectId" name="subjectId" ng-change="getchapterListBasedOnSubject(subjectId)" ng-model="subjectId" ng-options="subject.subjectId as
+											subject.subjectName for subject in subjectList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-6 col-sm-4 control-label" >Chapter<span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="chapter" name="chapter"
+                                                                ng-model="chapter" ng-change="getTopicList(chapter)"
+                                                                ng-options="chapter.chapterId as chapter.chapterName for chapter in  chapterList"
+                                                                class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-6 col-sm-4 control-label" >Topic<span style="color:red;">*</span></label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <select id="topic" name="topic"
+                                                        ng-model="topic"
+                                                        ng-options="topic.id as topic.topicName for topic in topicLists"
+                                                        class="form-control input-md">
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-md-6 col-sm-4 control-label" for="">Description
+                                                <span style="color:red;">*</span></label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <textarea id="description" name="description" alpha-with-space
+                                                       ng-pattern="/[aA-zZ\s]$/"
+                                                       type="text" placeholder="Description"
+                                                       ng-model="descText" maxlength="125"
+                                                          class="form-control input-md" autocomplete="off" required></textarea>
+                                            </div>
+
+                                        </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                        <div class="form-group">
+
+                                            <label class="col-md-6 col-sm-4 control-label">BOOK CHAPTER NO <input type="checkbox" name="textbook" value="1" id="textbook" ng-model="textbook" required="true" class="textbook" onclick="removereadonly('textbookChapter','textbook');"></label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+
+                                                <input type="text" name="textbookChapter" value="" id="textbookChapter" ng-model="textbookChapter" required="true" class="textbookChapter form-control" readonly>
+
+                                            </div>
+
+
+                                        </div>
+                                                </div>
+
+
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+
+                                                        <label class="col-md-6 col-sm-4 control-label">WORKBOOK / REFERENCE(S)  &nbsp;<input type="checkbox" name="workbook" value="1" id="workbook" style="display: inline" ng-model="workbook" required="true" class="workbook" onclick="removereadonly('workbookRef','workbook');"></label>
+
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+
+                                                            <input type="text" name="workbookRef" value="" id="workbookRef" ng-model="workbookRef" required="true" class="workbookRef form-control" readonly>
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+
+                                                        <label class="col-md-6 col-sm-4 control-label">OBJECTIVES <input type="checkbox" name="objectives" value="1" id="objectives" ng-model="objectives" required="true" class="objectives" onclick="removereadonly('objectivesText','objectives');"></label>
+
+
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <input type="text" name="objectivesText" value="" id="objectivesText" ng-model="objectivesText" required="true" class="objectivesText form-control" readonly>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-6 col-sm-4 control-label" >Immersion of Knowledge	</label>
+                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                            <input  id="immersion" type="checkbox"  ng-model="immersion">
+                                        </div>
+                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                <div class="form-group">
+                                        <label class="col-md-6 col-sm-4 control-label" >Character Building	</label>
+                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                            <input  id="character" type="checkbox"  ng-model="character">
+                                        </div>
+                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                <div class="form-group">
+                                        <label class="col-md-6 col-sm-4 control-label" >Skills and Competency</label>
+                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                            <input  id="skillsCompetency" type="checkbox"  ng-model="skillsCompetency">
+                                        </div>
+                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                <div class="form-group">
+                                        <label class="col-md-6 col-sm-4 control-label" >Academic Achievement</label>
+                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                            <input  id="academic" type="checkbox"  ng-model="academic">
+                                        </div>
+                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                <div class="form-group">
+                                        <label class="col-md-6 col-sm-4 control-label" >Application in Life</label>
+                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                            <input  id="application" type="checkbox"  ng-model="application">
+                                        </div>
+                                    </div>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal"
+                                                            ng-disabled="isDisabled"
+                                                            data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                                            ng-click="saveIhes('add_new_ihes_modal')">Save
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary hi_btn" style="left : -610px" ng-click="removeIhes()"
+                                                            data-dismiss="modal">Close
+                                                    </button>
+
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $('body').delegate('.remove','click',function()
+    {
+        $(this).parent().parent().remove();
+    });
+
+    function removereadonly(id,clicksid) {
+
+        if($("#"+clicksid).prop("checked") == true){
+
+            $('#'+id).prop('readonly', false);
+        }else{
+
+            $('#'+id).prop('readonly', true);
+
+        }
+
+    }
+
+</script>

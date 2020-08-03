@@ -1,0 +1,467 @@
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+    <div class="container cus_main_row">
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>Leave Application Form</div>
+            </h2>
+        </div>
+
+        <!--// TO ADD GOLD//-->
+        <div class="col-md-2 col-sm-5 col-xs-5">
+            <input id="textinput" name="textinput" type="text"
+                   placeholder="Search For Employee" ng-model="searchText" class="form-control input-md"
+                   ng-keyup="$event.keyCode == 13 ? getLeaveFormList(searchText) : null"/>
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <button type="button" class="btn btn-default hi_btn"
+                    ng-click="addLeaveForm()" style="width: 100%;">Add
+            </button>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="fixed-table-container">
+                <div class="table_wrap fixed-table-container-inner">
+                    <table class=" hi_table table table_option2 table-hover table-striped table-fixed-header list_table"
+                           id="" style="margin-bottom: 0;">
+                        <thead>
+
+                        <tr>
+                            <th data-field="desc">
+                                <div class="th-inner">Name</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Position</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Staff No</div>
+                            </th>
+                            <th data-field="desc">
+                                <div class="th-inner">Action</div>
+                            </th>
+                            <!--<th data-field="desc">-->
+                                <!--<div class="th-inner">Delete</div>-->
+                            <!--</th>-->
+                        </tr>
+                        </thead>
+                        <tbody id="parentTable">
+
+                        <tr ng-repeat="leaveForm in LeaveFormList| filter:searchText">
+                            <td>{{leaveForm.name}}</td>
+                            <td>{{leaveForm.position}}</td>
+                            <td>{{leaveForm.staffNo}}</td>
+                            <td>
+                            <button type="button" class="btn btn-primary hi_btn"
+                                    ng-click="editLeaveForm(leaveForm)">Edit
+                            </button></td>
+                            <!--<td><button type="button" class="btn btn-primary hi_btn" ng-click="deleteLeaveform(leaveForm.leaveFormId)">Delete</button></td>-->
+
+                        </tr>
+                        <tr ng-if="searchText!=''&&(LeaveFormList|filter:searchText).length==0">
+                            <td colspan="4" style="color: red; font-weight: bold">No Records Found</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="modal fade Add Desig" tabindex="-1" id="add_new_leaveForm_modal" role="dialog"
+             data-backdrop="static"
+             aria-labelledby="mySmallModalLabel">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content checkout" style="width: 1000px!important;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="modelName"></h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12" >
+                                <form class="form-horizontal">
+                                    <fieldset>
+                                        <input type="hidden" ng-model="DesId"
+                                               value="{{designationId}}">
+
+                                        <!--<div class="form-group" style="margin-top: 20px;">-->
+                                            <!--<label class="col-md-4 col-sm-4 control-label" for="">Type of Leave</label>-->
+                                            <!--<div class="col-md-6 col-sm-6" style="position:relative;">-->
+                                                <!--<select id="type" name="type"-->
+                                                        <!--ng-model="typeOfLeave"-->
+                                                        <!--ng-options="leave.leaveId as leave.leaveType for leave in leaveList"-->
+                                                        <!--class="form-control input-md">-->
+                                                    <!--<option value="">Select</option>-->
+                                                <!--</select>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+
+                                        <!--<div class="form-group">-->
+                                            <!--<label class="col-md-4 col-sm-4 control-label">Name</label>-->
+                                            <!--<div class="col-md-6 col-sm-6" style="position:relative;">-->
+                                                <!--<input name="name" id="name" alpha-with-space-->
+                                                       <!--class="form-control input-md"-->
+                                                       <!--ng-model="name">-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <!---->
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" >Employee<span style="color:red;">*</span></label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <select id="name" name="name"
+                                                        ng-model="name"
+                                                        ng-change="getDetailByName(name)"
+                                                        ng-options="employee.employeeName as employee.employeeName for employee in employeeList"
+                                                        class="form-control input-md">
+                                                    <option value="">Select Employee</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Staff Number<span style="color:red;">*</span></label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="staffNo" id="staffNo"
+                                                       class="form-control input-md"
+                                                       ng-model="staffNo">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Position<span style="color:red;">*</span></label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="position" id="position"
+                                                       class="form-control input-md"
+                                                       ng-model="position">
+                                            </div>
+                                        </div>
+
+                                        <!--<div class="form-group">-->
+                                            <!--<label class="col-md-6 control-label" for=""-->
+                                                   <!--style="padding-left: 61px; text-align: left;">From Date</label>-->
+                                            <!--<div class="col-md-6" style="padding-left: 0px;">-->
+                                                <!--<p class="input-group">-->
+                                                    <!--<input type="text" id="AppointmentDate"-->
+                                                           <!--ng-model="dateApply" class="form-control"-->
+                                                           <!--uib-datepicker-popup="{{format}}"-->
+                                                           <!--is-open="popup1.opened"-->
+                                                           <!--datepicker-options="dateOptions"-->
+                                                           <!--close-text="Close"-->
+                                                           <!--alt-input-formats="altInputFormats"/>-->
+                                                    <!--<span class="input-group-btn">-->
+                                                                     <!--<button type="button" class="btn btn-default"-->
+                                                                             <!--ng-click="open1()">-->
+                                                                         <!--<i class="glyphicon glyphicon-calendar"></i></button>-->
+                                                                     <!--</span>-->
+                                                <!--</p>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+
+
+                                        <!--<div class="form-group">-->
+                                            <!--<label class="col-md-6 control-label" for=""-->
+                                                   <!--style="padding-left: 61px; text-align: left;">To Date</label>-->
+                                            <!--<div class="col-md-6" style="padding-left: 0px;">-->
+                                            <!--<label class="control-label col-sm-4" for=""> Date Apply:</label>-->
+                                            <!--<div class="col-md-6 col-sm-6">-->
+                                                <!--<p class="input-group">-->
+                                                    <!--<input type="text" id="AppointmentDate"-->
+                                                           <!--ng-model="date1" class="form-control"-->
+                                                           <!--ng-change="calculateAge(dateApply,date1)"-->
+                                                           <!--uib-datepicker-popup="{{format}}"-->
+                                                           <!--is-open="popup2.opened"-->
+                                                           <!--datepicker-options="dateOptions"-->
+                                                           <!--close-text="Close"-->
+                                                           <!--alt-input-formats="altInputFormats"/>-->
+                                                    <!--<span class="input-group-btn">-->
+                                                                     <!--<button type="button" class="btn btn-default"-->
+                                                                             <!--ng-click="open2()">-->
+                                                                         <!--<i class="glyphicon glyphicon-calendar"></i></button>-->
+                                                                     <!--</span>-->
+                                                <!--</p>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <table id="admissionlist" class="table table-bordered table-striped" style="padding: 0 20px;" ng-su>
+                                            <thead>
+                                            <tr style="background: #FFFFFF;">
+                                                <td><span style="color: black;text-align: center;">From Date</span></td>
+                                                <td><span style="color: black;text-align: center;">To Date</span> </td>
+                                                <td><span style="color: black;text-align: center;">Differnce Days</span></td>
+                                                <td><span style="color: black;text-align: center;">Reason</span></td>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="prevschoolattend">
+
+                                            <tr id="admission2"  ng-repeat="leaveform in leaveformdetails">
+                                                <td>
+                                                    <input type="text" id="AppointmentDate"
+                                                    ng-model="leaveform.fromDate" class="form-control"
+                                                    uib-datepicker-popup="{{format}}"
+                                                    is-open="leaveform.openedFrom"
+                                                    datepicker-options="dateOptions"
+                                                    close-text="Close"
+                                                    alt-input-formats="altInputFormats" readonly/>
+                                                    <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default"
+                                                    ng-click="open1($event,leaveform)">
+                                                    <i class="glyphicon glyphicon-calendar"></i></button>
+                                                    </span>
+                                                    <!--<input type="text" ng-model="leaveform.fromDate" value="" name="fromDate[]">-->
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="AppointmentDate"
+                                                    ng-model="leaveform.toDate" class="form-control" ng-change="calculateAge(leaveform.fromDate,leaveform.toDate,$index)"
+                                                    uib-datepicker-popup="{{format}}"
+                                                    is-open="leaveform.openedTo"
+                                                    datepicker-options="dateOptions"
+                                                    close-text="Close"
+                                                    alt-input-formats="altInputFormats" readonly/>
+                                                    <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default"
+                                                    ng-click="open2($event,leaveform)">
+                                                    <i class="glyphicon glyphicon-calendar"></i></button>
+                                                    </span>
+                                                    <!--<input type="text" ng-model="leaveform.toDate" value="" name="toDates[]">-->
+                                                </td>
+                                                <td>
+                                                    <input id="age" name="age" maxlength="3"
+                                                    type="text" placeholder="Day Difference"
+                                                    ng-model="leaveform.totalDays" readonly
+                                                    class="form-control input-md">
+                                                    <!--<input type="text" ng-model="leaveform.totalDays" value="" maxlength="255" name="totalDays[]" >-->
+                                                </td>
+                                                <td>
+                                                    <input type="text" ng-model="leaveform.reason"  class="form-control"value="" maxlength="255" name="reason[]">&nbsp;&nbsp;
+                                                    <button type="button" ng-click="removecross($index)" class="btn btn-danger remove"  >X</button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+
+                                        </table>
+                                        <div style="padding: 0 20px;">
+                                        <input type="button" value="Add New" class="btn btn-default mb-20" ng-click="addNewformDetails()">
+                                        </div>
+
+
+
+                                        <!--<div class="form-group">-->
+                                            <!--<label class="col-md-6 control-label" for="">Day Difference :</label>-->
+                                            <!--<div class="col-md-6"-->
+                                                 <!--style="position:relative;">-->
+
+                                                <!--<input id="age" name="age" maxlength="3"-->
+                                                       <!--type="text" placeholder="Day Differenc"-->
+                                                       <!--ng-model="dateDiff" readonly-->
+                                                       <!--class="form-control input-md">-->
+                                            <!--</div>-->
+                                        <!--<div style="padding: 0 20px;">-->
+                                            <!--<input type="button" value="Add New" class="btn btn-default mb-20" ng-click="addNewformDetails()">-->
+                                        <!--</div>-->
+
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Where can we reach you during your leave?</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <textarea name="reach" id="reach"
+                                                       class="form-control input-md"
+                                                          ng-model="reach"></textarea>
+                                            </div>
+                                        </div>
+
+                                             <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Telephone Number</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="phone" id="telephoneNo"
+                                                       class="form-control input-md"
+                                                          ng-model="telephoneNo">
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Supervisor</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="supervisor" id="supervisor"
+                                                       class="form-control input-md"
+                                                          ng-model="supervisor">
+                                            </div>
+                                        </div>
+
+                                             <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Relief Staff</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="reliefStaff" id="reliefStaff"
+                                                       class="form-control input-md"
+                                                          ng-model="reliefStaff">
+                                            </div>
+                                        </div>
+
+
+                                            <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Note</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <textarea name="note" id="note"
+                                                       class="form-control input-md"
+                                                          ng-model="note"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Status</label>
+                                            <div class="col-md-6 col-sm-6" >
+                                                <select name="status" id="status" ng-model="status" ng-init="StatusText='Active'"class="form-control input-md">
+                                                    <option value="Active">Active</option>
+                                                    <option value="InActive">InActive</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Approved</label>
+                                            <div class="col-md-6 col-sm-6" >
+                                                <input type="checkbox"  name="approved" id="approved" ng-model="approved" class="form-control input-md">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Not-Approved</label>
+                                            <div class="col-md-6 col-sm-6" >
+                                                <input type="checkbox"  name="notApproved" id="notApproved" ng-model="notApproved" class="form-control input-md">
+
+                                            </div>
+                                        </div>
+
+
+                                        <table id="admissionlist" class="table table-bordered table-striped" style="padding: 0 20px;" ng-su>
+                                            <thead>
+                                            <tr style="background: #FFFFFF;">
+                                                <td><span style="color: black;text-align: center;"></span></td>
+                                                <td><span style="color: black;text-align: center;">Leave Type</span> </td>
+                                                <td><span style="color: black;text-align: center;">No of days Required</span></td>
+                                                <td><span style="color: black;text-align: center;">Total Days</span></td>
+                                                <td><span style="color: black;text-align: center;">Balance</span></td>
+                                                <td><span style="color: black;text-align: center;">leave For</span></td>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="prevschoolattend">
+
+                                            <tr id="admission2"  ng-repeat="leaveform in leaveList">
+                                                <td>
+                                                    <input type="checkbox" name="checkval" value="checkval" class="checkval form-control" id="checkval" ng-model="leaveform.fromDate" required="true"></label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="leavetype" class="leavetype form-control" ng-model="leaveform.leaveType" value=" " readonly>
+                                                </td>
+                                                <td>
+                                                    <input type="number" id="leavesrequired" class="leavesrequired form-control" ng-model="leaveform.daysreqired" value="" ng-change="calculatedays(leaveform,$index)" ng-disabled="!leaveform.fromDate">
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="leavedays" class="leavedays form-control" ng-model="leaveform.days" value="" readonly>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="balance" class="leavedays form-control" ng-model="leaveform.balance" value="" readonly>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="leavefor" class="leavefor form-control" ng-model="leaveform.leaveFor" value="" maxlength="255" readonly>
+                                                </td>
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Note</label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <textarea name="adminNote" id="adminNote" class="form-control input-md" ng-model="adminNote"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Admin</label>
+                                            <div class="col-md-6 col-sm-6">
+                                            <textarea name="admin" id="admin" class="form-control input-md" ng-model="admin"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Approved</label>
+                                            <div class="col-md-6 col-sm-6" >
+                                                <input type="radio" name="approveStatus" ng-model="approveStatus" value="approve" id="approveStatus" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label" for="">Not-Approved</label>
+                                            <div class="col-md-6 col-sm-6" >
+                                                <input type="radio" name="NotApprovedStatus" ng-model="NotApprovedStatus" value="NotApproved" id="NotApprovedStatus" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">note</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <textarea name="note" id="note"
+                                                       class="form-control input-md"
+                                                          ng-model="note"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Mudir's Signature</label>
+                                            <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                <input name="murdissign" id="murdissign"
+                                                       class="form-control input-md"
+                                                          ng-model="murdissign"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">Date</label>
+                                            <div class="col-md-6" >
+                                                <p class="input-group">
+                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="signdate" is-open="popup3.opened"
+                                                   datepicker-options="dateOptions" ng-="true" close-text="Close" alt-input-formats="altInputFormats" readonly/>
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open3()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                             </span>
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" id="submit"
+                                                    ng-click="saveLeaveForm()">Save
+                                            </button>
+                                            <button type="button" class="btn btn-default" ng-click="removeLeaveForm()"data-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </div>
+
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $('body').delegate('.remove','click',function()
+    {
+        $(this).parent().parent().remove();
+    });
+
+    $("#sameas").click(function () {
+
+        if($(this).prop("checked") == true){
+
+            $("#samecorrespended").hide();
+        }else{
+
+            $("#samecorrespended").show();
+
+        }
+
+
+
+    })
+
+</script>

@@ -1,0 +1,464 @@
+<style>
+    fieldset {
+        min-width: 0;
+        padding: 10px;
+        margin: 0;
+        border: 0;
+    }
+    .form-control {
+        display: block;
+        width: 171px;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+</style>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<div class="container-fluid">
+    <div class="container cus_main_row" >
+
+        <div class="row">
+            <h2 class="pos-header-new">
+                <div>TimeTable</div>
+            </h2>
+        </div>
+        <div class="row inner_row_bg">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="panel-body" style="height: 65px;">
+                            <div class="col-md-4 col-lg-3 col-sm-5 col-xs-5">
+                                <form class="form-horizontal ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <p class="input-group" style="display: block;">
+                                                <input id="search_academic" name="textinput" type="text"
+                                                       placeholder="Search" ng-model="searchText" class="form-control input-md"
+                                                       ng-keyup="$event.keyCode == 13 ? getTimetable(searchText) : null"/>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-9 col-lg-9 col-sm-9 col-xs-7">
+
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addTimetable()">Add</button>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addClassTable()">Class Timetable</button>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addTeacherTable()">Teacher Timetable</button>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button type="button" class="btn btn-primary hi_btn"  ng-click="addMasterTable()">Master Timetable</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="fixed-table-container">
+                        <div class="table_wrapfixed-table-container-inner">
+                            <div class="header-background"></div>
+                            <table data-toggle="table" data-cache="false" data-height="299" class="hi_table table table-hover table-bordered table-striped table-fixed-header">
+                                <thead>
+                                <tr>
+                                    <th data-field="cntryname">
+                                        <div class="th-inner" align="center">Level</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Class</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Subject</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Teacher</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Weekday</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Period</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Facility</div></th>
+                                    <th data-field="edit">
+                                        <div class="th-inner" align="center">Actions</div></th>
+                                </tr>
+                                </thead>
+                                <tbody id="parentTable">
+                                <input type="hidden" ng-model="topicId" value="{{tableList.topicId}}"/>
+                                <tr ng-repeat="table in tableList|filter:searchText">
+                                    <td>{{table.levelName}}</td>
+                                    <td>{{table.clsName}}</td>
+                                    <td>{{table.subName}}</td>
+                                    <td>{{table.teacherName}}</td>
+                                    <td>{{table.chooseDay}}</td>
+                                    <td>{{table.periodName}}</td>
+                                    <td>{{table.facilityName}}</td>
+                                    <td><button type="button" class="btn btn-primary hi_btn"  ng-click="editTimetable(table)">Edit</button>
+                                    <button type="button" class="btn btn-primary hi_btn"  ng-click="deleteTT(table)">Delete</button></td>
+                                </tr>
+                                <tr ng-if="searchText!=''&&(topicList|filter:searchText).length==0">
+                                    <td colspan="5" style="color: red; font-weight: bold">No Records Found</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" id="add_new_tt_modal" style="left: -235px !important;" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout" style="width: 847px !important;">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true" ng-click="removeTT()">&times;</span></button>
+                                <h4 id="topic-title" class="modal-title">Add TimeTable</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Level<span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="levelId" name="levelId" ng-model="level"
+                                                                ng-change="levelClass(level)"
+                                                                ng-options="lev.gradeId as
+											lev.gradeName for lev in gradeList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4 col-sm-4 control-label" >Class<span style="color:red;">*</span></label>
+                                                    <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                        <select id="classId" name="classId" ng-model="className"
+                                                                ng-change="classSubject(className)"
+                                                                ng-options="cla.classId as
+											cla.className for cla in classList" class="form-control input-md">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+
+                                                <table id="ttList" class="table table-bordered table-striped" style="padding: 0 20px;" >
+                                                    <thead>
+                                                    <tr style="background: #FFFFFF;">
+                                                        <td colspan="5" style="text-align: center;">TimeTable</td>
+
+                                                    </tr>
+                                                    <tr style="background: #FFFFFF;">
+                                                        <td><span style="color: black;text-align: center;">Subject Name</span></td>
+                                                        <td><span style="color: black;text-align: center;">ChooseDay</span> </td>
+                                                        <td><span style="color: black;text-align: center;">Period</span></td>
+                                                        <td><span style="color: black;text-align: center;">Teacher</span></td>
+                                                        <td><span style="color: black;text-align: center;">Facility</span></td>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody class="prevschoolattend">
+
+                                                    <tr id="admission2"  ng-repeat="previoustopic in previoustopicDetails">
+                                                        <td>
+                                                            <select style="width: 135px" id="previous_chapter_Id" name="previous_subject_name" ng-model="previoustopic.subject" ng-options="sub.subjectId as
+											sub.subjectName for sub in subjectList" class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select style="width: 135px" name="prev_day_name" id="prev_day_Id" ng-model="previoustopic.chooseDay"class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                                <option value="Sunday">Sunday</option>
+                                                                <option value="Monday">Monday</option>
+                                                                <option value="Tuesday">Tuesday</option>
+                                                                <option value="Wednesday">Wednesday</option>
+                                                                <option value="Thursday">Thursday</option>
+                                                                <option value="Friday">Friday</option>
+                                                                <option value="Saturday">Saturday</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select style="width: 135px" id="previous_period_Id"
+                                                                    name="previous_period_name"
+                                                                    ng-model="previoustopic.period"
+                                                                    ng-options="per.periodId as
+											per.periodName for per in list" class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+
+                                                            <select style="width: 135px" id="prev__Id"
+                                                                    name="prev_teacher_Id"
+                                                                    ng-model="previoustopic.teacher" ng-options="emp.employeeId as
+											emp.employeeName for emp in employeeList" class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+
+                                                            <select style="width: 135px" id="prev_facility_Id" name="prev_assignment_Id" ng-model="previoustopic.facility" ng-options="facility.facilityId as
+											facility.facilityName for facility in facilityList" class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </td>
+
+                                                        <td> <button type="button" class="btn btn-danger remove" ng-click="removecross($index)">X
+                                                        </button>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div style="padding: 0 20px;">
+                                                    <input type="button" value="Add New" class="btn btn-default mb-20" ng-click="addNewTimetable()" ng-hide="operation=='Edit'" ng-disabled="isDisabled">
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal"
+                                        data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                        ng-click="saveTimeTable('add_new_tt_modal')">Save
+                                </button>
+                                <button type="button" class="btn btn-primary hi_btn" ng-click="removeTT()"
+                                        data-dismiss="modal">Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" id="add_class_table_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <h4 id="class-title" class="modal-title">Class TimeTable</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+                                                <fieldset>
+                                                    <div class="form-group" style="">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">LevelName<span style="color:red;">*</span></label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="LevelName" name="LevelName"
+                                                                    ng-model="LevelName"
+                                                                    ng-change="classes(LevelName)"
+                                                                    ng-options="grade.gradeId as grade.gradeName for grade in gradeList"
+                                                                    class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-4 col-sm-4 control-label" >Class<span style="color:red;">*</span></label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="classId" name="classId" ng-model="classId"
+                                                                    ng-options="class.classId as
+											class.className for class in classesList" class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                        ng-click="GenerateReport(LevelName,classId)">Generate Report
+                                </button>
+                                <button type="button" class="btn btn-primary hi_btn" ng-click="removeTT()"
+                                        data-dismiss="modal">Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" id="add_teacher_table_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <h4 id="tchr-title" class="modal-title">Teacher TimeTable</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+                                                <fieldset>
+                                                    <div class="form-group" style="">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Teacher<span style="color:red;">*</span></label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select id="teacherName" name="teacherName"
+                                                                    ng-model="teacherName"
+                                                                    ng-options="emp.employeeId as emp.employeeName for emp in employeeList"
+                                                                    class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                        ng-click="generateTeacherReport(teacherName)">Generate Report
+                                </button>
+                                <button type="button" class="btn btn-primary hi_btn" ng-click="removeTT()"
+                                        data-dismiss="modal">Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" id="add_master_table_modal" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <h4 id="master-title" class="modal-title">Master TimeTable</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <form class="form-horizontal" name="form">
+                                            <fieldset>
+                                                <fieldset>
+                                                    <div class="form-group" style="">
+                                                        <label class="col-md-4 col-sm-4 control-label" for="">Weekday<span style="color:red;">*</span></label>
+                                                        <div class="col-md-6 col-sm-6" style="position:relative;">
+                                                            <select style="width: 135px" name="weekday" id="weekday" ng-model="weekday" class="form-control input-md">
+                                                                <option value="">Select</option>
+                                                                <option value="Sunday">Sunday</option>
+                                                                <option value="Monday">Monday</option>
+                                                                <option value="Tuesday">Tuesday</option>
+                                                                <option value="Wednesday">Wednesday</option>
+                                                                <option value="Thursday">Thursday</option>
+                                                                <option value="Friday">Friday</option>
+                                                                <option value="Saturday">Saturday</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary hi_btn" data-toggle="modal" ng-disabled="isDisabled"
+                                        data-target=".print-me" ng-disabled="!form.$valid" id="submit"
+                                        ng-click="generateMasterReport(weekday)">Generate Report
+                                </button>
+                                <button type="button" class="btn btn-primary hi_btn" ng-click="removeTT()"
+                                        data-dismiss="modal">Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade addCustomer" tabindex="-1" id="generate_report" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Class Time Table</h4>
+                            </div>
+                            <div class="modal-body" id="reportbody">
+
+                            </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary hi_btn" ng-click="removeTT()"
+                                            data-dismiss="modal">Close
+                                    </button>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" id="generate_teacher_report" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Teacher Time Table</h4>
+                            </div>
+                            <div class="modal-body" id="reportteacherbody">
+
+                            </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary hi_btn" ng-click="removeTT()"
+                                            data-dismiss="modal">Close
+                                    </button>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade addCustomer" tabindex="-1" id="generate_master_report" role="dialog"
+                     data-backdrop="static"
+                     aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content checkout">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Master Time Table</h4>
+                            </div>
+                            <div class="modal-body" id="reportmasterbody">
+
+                            </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary hi_btn" ng-click="removeTT()"
+                                            data-dismiss="modal">Close
+                                    </button>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
